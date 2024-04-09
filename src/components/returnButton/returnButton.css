@@ -2,4 +2,9 @@ button {
   width: 138px;
   height: 58px;
   border-radius: 100px 0 0 100px;
+  margin-right: 20px;
+}
+
+p {
+  font-weight: bold;
 }
