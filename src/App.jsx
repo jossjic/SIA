@@ -10,6 +10,7 @@ function App() {
   return (
     <>
       <CadCheckCounter unit="test" amount="1" />
+      <CadCheckCounter unit="test2" amount="21323" />
     </>
   );
 }
