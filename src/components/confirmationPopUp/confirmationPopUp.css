@@ -1,0 +1,38 @@
+.confPopUp {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1vw;
+    border: 1px solid black;
+    width: 25%;
+    border-radius: 10px;
+  }
+  
+  .confPopUp p {
+    text-align: center; 
+    font-size: large;
+    font-weight: normal;
+  }
+
+  .buttonContainer {
+    display: flex; 
+    justify-content: center; /* Centrar horizontalmente */
+  }
+  
+  .buttonContainer button {
+    margin-right: 10px; /* Espacio entre los botones */
+    border-radius: 20px; 
+    border: transparent;
+    font-size: medium;
+  }
+
+  .buttonContainer button.cancel {
+    background-color: #5982C0;
+    color: white; 
+  }
+  
+  .buttonContainer button.delete {
+    background-color: red;
+    color: white; 
+  }
