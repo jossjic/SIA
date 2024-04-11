@@ -4,6 +4,7 @@ import viteLogo from "/vite.svg";
 import { CadCheckCounter } from "./components/cadCheckCounter";
 import { ReturnButton } from "./components/returnButton";
 import { ConfirmationPopUp } from "./components/confirmationPopUp";
+import { GeneralButton } from "./components/button";
 import "./App.css";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <ReturnButton textElement="" />
       <ReturnButton textElement="Agregar Producto Existente" />
       <ConfirmationPopUp message = "¿Está seguro de que quiere eliminar estos alimentos?" answer1="Cancelar" answer2="Eliminar"/>
+      <GeneralButton textElement="Agregar" />
     </div>
   );
 }
