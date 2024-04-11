@@ -24,15 +24,21 @@
     margin-right: 10px; /* Espacio entre los botones */
     border-radius: 20px; 
     border: transparent;
-    font-size: medium;
+    font-size: medium; 
+    cursor: pointer; 
   }
 
-  .buttonContainer button.cancel {
+  .buttonContainer button.answer1 {
     background-color: #5982C0;
     color: white; 
   }
   
-  .buttonContainer button.delete {
+  .buttonContainer button.answer2 {
     background-color: red;
+    color: white; 
+  }
+
+  .buttonContainer button:hover {
+    background-color: #3c6382; 
     color: white; 
   }

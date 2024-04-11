@@ -15,7 +15,7 @@ function App() {
       <CadCheckCounter unit="test2" amount="21323" />
       <ReturnButton textElement="" />
       <ReturnButton textElement="Agregar Producto Existente" />
-      <ConfirmationPopUp message = "¿Está seguro de que quiere eliminar estos alimentos?" />
+      <ConfirmationPopUp message = "¿Está seguro de que quiere eliminar estos alimentos?" answer1="Cancelar" answer2="Eliminar"/>
     </div>
   );
 }
