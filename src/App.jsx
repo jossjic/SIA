@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
-import { Login } from "./screens/login"
-import { Components } from "./screens/components"
+import { Login } from "./screens/login";
+import { Layout } from "./screens/layout";
 import { NavBar } from "./components/navBar";
 
 function App() {
@@ -11,11 +11,10 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
-          <Route path="/login" element = {<Login/>}/>
-          <Route path="/components" element = {<Components/>}/>
+          <Route path="/login" element={<Login />} />
+          <Route path="/layout" element={<Layout />} />
         </Routes>
       </Router>
-
     </div>
   );
 }
