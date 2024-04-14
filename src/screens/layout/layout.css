@@ -5,5 +5,5 @@ div {
 }
 
 div > * {
-  margin-bottom: 20px; /* Aplica un margen inferior a todos los hijos directos */
+  margin-bottom: 40px; /* Aplica un margen inferior a todos los hijos directos */
 }
