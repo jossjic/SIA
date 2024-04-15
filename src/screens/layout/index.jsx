@@ -5,6 +5,7 @@ import { ReturnButton } from "../../components/returnButton";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { GeneralButton } from "../../components/button";
 import { LogInput } from "../../components/logInput";
+import { Ordenamiento } from "../../components/ordenamiento";
 
 export const Layout = () => {
   return (
@@ -19,7 +20,10 @@ export const Layout = () => {
         answer2="Eliminar"
       />
       <GeneralButton textElement="Agregar" />
+      <Ordenamiento />
       <LogInput></LogInput>
+      
+
     </div>
   );
 };
