@@ -1,28 +1,22 @@
-import { DatePicker } from '@mui/x-date-pickers'
-import React from 'react';
-import { TextField } from '@mui/material'
-import "./calendar.css";
+import React from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
 
-export const Calendar = () => {
-    const [dataForm, setDataForm] = React.useState<{
-          date: Date | null,
-      }>({
-        date: new Date(),
-      })
-
-    return (
+function Calendar(){
+    const [selectedDate, setSelectedDate] = useState(null);
+    handleDateChange = (date) => {
+        setSelectedDate(date);
+    }
+    return(
         <div>
+            <h1>Calendar</h1>
             <DatePicker
-                disableFuture
-                label='Responsive'
-                openTo='year'
-                views={['year', 'month', 'day']}
-                value={dataForm.date}
-                onChange={(newValue) => {
-                    setDataForm({...dataForm, date: newValue })
-                }}
-                renderInput = {(params) => <TextField {...params} />}
+                selected={selectedDate}
+                onChange={handleDateChange}
+                dateFormat="MM/DD/YYYY"
             />
         </div>
     )
 }
+export default Calendar;
