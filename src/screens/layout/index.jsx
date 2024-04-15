@@ -5,7 +5,6 @@ import { ReturnButton } from "../../components/returnButton";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { GeneralButton } from "../../components/button";
 import { LogInput } from "../../components/logInput";
-import {Calendar} from "../../components/calendar";
 
 export const Layout = () => {
   return (
@@ -21,7 +20,6 @@ export const Layout = () => {
       />
       <GeneralButton textElement="Agregar" />
       <LogInput></LogInput>
-      <Calendar></Calendar>
     </div>
   );
 };
