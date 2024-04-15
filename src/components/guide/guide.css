@@ -1,0 +1,31 @@
+.info-banner {
+    display: flex;
+    justify-content: center; /* Añadido para centrar horizontalmente */
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 50px;
+    height: 150px;
+    padding: 0 50px; /* Añadido para separar el texto del borde */
+  }
+  
+  .info-icon {
+    margin-right: 25px; 
+    color: #555;
+  }
+  
+  .info-icon .icon-placeholder {
+    display: inline-block;
+    width: 140px;
+    height: 140px; 
+    background-image: url('humano.png');
+    background-size: contain; /* Cambiado de cover a contain */
+    background-repeat: no-repeat;
+    background-position: center; 
+    border-radius: 200%; 
+  }
+  
+  .info-message {
+    color: #333;
+    font-size: 30px; 
+  }
+  
