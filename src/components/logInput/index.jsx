@@ -8,7 +8,6 @@ export function LogInput() {
         <input type="text" />
         <p>Contraseña</p>
         <input type="password" />
-        <GeneralButton textElement="Iniciar sesión"></GeneralButton>
       </div>
     );
   }

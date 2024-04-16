@@ -20,7 +20,6 @@ export const Layout = () => {
         answer1="Cancelar"
         answer2="Eliminar"
       />
-      <GeneralButton textElement="Agregar" />
       <Ordenamiento />
       <LogInput></LogInput>
       <CalendarInput></CalendarInput>

@@ -5,6 +5,8 @@ import { Login } from "./screens/login";
 import { Layout } from "./screens/layout";
 import { NavBar } from "./components/navBar";
 import { TestScreen } from "./screens/testScreen";
+import { MainPage } from "./screens/mainPage";
+import { UserPage } from "./screens/adminUserPage";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/layout" element={<Layout />} />
           <Route path="/testscreen" element={<TestScreen />} />
+          <Route path="/mainPage" element={<MainPage />} />
+          <Route path="/adminUserPage" element={<UserPage />} />
         </Routes>
       </Router>
     </div>

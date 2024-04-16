@@ -1,0 +1,35 @@
+.userPage {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 40px;
+}
+
+.buttonContainer {
+    display: flex; 
+    justify-content: center; /* Centrar horizontalmente */
+}
+
+.square {
+    width: 100%;
+    padding-top: 50%; 
+    background-color: #D9D9D9;
+    margin: 0 auto; /* Centrar horizontalmente */
+}
+
+@media screen and (max-width: 768px) {
+    .square {
+        width: 80%; /* Reducir el ancho del cuadrado en pantallas más pequeñas */
+        padding-top: 80%; /* Reducir la altura del cuadrado en pantallas más pequeñas */
+    }
+}
+
+.buttonTopLeft {
+    position: absolute;
+    top: 10px; /* Ajusta esta propiedad según sea necesario */
+    left: 10px; /* Ajusta esta propiedad según sea necesario */
+}

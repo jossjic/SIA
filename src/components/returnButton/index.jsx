@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import "./returnButton.css";
 import returnImage from "../../assets/img/returnImage.png";
+import { useNavigate } from "react-router-dom";
 
 export function ReturnButton({ textElement }) {
   const [color, setColor] = useState("#D9D9D9");
-
-  const cambiarColor = () => {
-    const nuevoColor = color === "#D9D9D9" ? "red" : "#D9D9D9";
-    setColor(nuevoColor);
-  };
+  let navigate = useNavigate();
 
   return (
     <div>
       <button
         className="returnButton"
-        onClick={cambiarColor}
+        onClick={() => navigate(-1)}
         style={{
           backgroundColor: color,
           color: "white",
