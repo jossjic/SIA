@@ -1,13 +1,28 @@
 .rectangulo-azul {
-    width: 200px; 
-    height: 50px; 
-    background-color: blue;
-    display: inline-block;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    width: 400px; 
+    padding-top: 5px;
+    padding-left: 8px;
+    height: 40px; 
+    background-color: rgb(22, 22, 150);
+    display: flex;
+    justify-content: space-between;
   }
   
   .hipervinculo {
     color: white;  
     font-size: 20px; 
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
   } 
+
+.circulo{
+  background: rgb(190, 190, 190);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 8px; /* Ajusta el círculo al borde derecho */
+    top: 0%; 
+    transform: translateY(-25%);
+}
