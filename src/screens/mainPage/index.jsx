@@ -11,7 +11,7 @@ export const MainPage = () => {
       <div className="buttonContainer">
         <GeneralButton textElement="Administrar alimentos" path="/adminPage" />
         <GeneralButton textElement="Administrar usuarios" path="/adminUserPage" />
-        <GeneralButton textElement="Cerrar sesión" path="/login" color='red' />
+        <GeneralButton textElement="Cerrar sesión" path="/layout" color='red' />
       </div>
     </div>
   );

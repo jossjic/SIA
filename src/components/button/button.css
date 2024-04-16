@@ -9,7 +9,8 @@
     text-decoration: none;
     display: inline-block;
     font-weight: normal;
-    width: 200px;
+    max-width: 200px; 
+    width: auto; 
     cursor: pointer;
 }
 

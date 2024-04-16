@@ -9,11 +9,6 @@
     gap: 40px;
 }
 
-.buttonContainer {
-    display: flex; 
-    justify-content: center; /* Centrar horizontalmente */
-}
-
 .square {
     width: 100%;
     padding-top: 50%; 

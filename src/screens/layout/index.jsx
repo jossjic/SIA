@@ -19,6 +19,8 @@ export const Layout = () => {
         message="¿Está seguro de que quiere eliminar estos alimentos?"
         answer1="Cancelar"
         answer2="Eliminar"
+        path1="/layout"
+        path2="/layout"
       />
       <Ordenamiento />
       <LogInput></LogInput>

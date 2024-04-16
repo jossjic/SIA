@@ -1,12 +1,13 @@
+import { GeneralButton } from "../button";
 import "./confirmationPopUp.css";
 
-export function ConfirmationPopUp({ message, answer1, answer2 }) {
+export function ConfirmationPopUp({ message, answer1, answer2, path1, path2 }) {
   return (
     <div className="confPopUp">
       <p>{message}</p>
       <div className="buttonContainer">
-        <button className="answer1"> {answer1} </button>
-        <button className = "answer2"> {answer2} </button>
+        <GeneralButton textElement = {answer1} path = {path1} />
+        <GeneralButton textElement = {answer2} path = {path2} color='red'S/>
       </div>
     </div>
   );
