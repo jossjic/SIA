@@ -26,7 +26,10 @@ export function CalendarInput() {
   };
 
   const isValidDate = (inputValue) => {
-    return true;
+    // Implement your validation logic here
+    // For example, you could use regular expressions
+    // to check if the input string matches the expected format
+    return /^\d{4}\/\d{2}\/\d{2}$/.test(inputValue);
   };
 
   const toggleCalendar = () => {
