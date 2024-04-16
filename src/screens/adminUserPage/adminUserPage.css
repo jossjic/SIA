@@ -1,30 +1,45 @@
 .userPage {
     display: flex;
     flex-direction: column;
-    position: absolute;
     align-items: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     gap: 40px;
+    padding: 20px;
 }
 
-.square {
+.userTable {
     width: 100%;
-    padding-top: 50%; 
-    background-color: #D9D9D9;
-    margin: 0 auto; /* Centrar horizontalmente */
+    border-collapse: collapse;
+}
+
+.userTable th, .userTable td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.userTable th {
+    background-color: #f2f2f2;
+}
+
+/* Estilos para los botones dentro de la tabla */
+.userTable .add {
+    margin: 0 5px;
 }
 
 @media screen and (max-width: 768px) {
-    .square {
-        width: 80%; /* Reducir el ancho del cuadrado en pantallas más pequeñas */
-        padding-top: 80%; /* Reducir la altura del cuadrado en pantallas más pequeñas */
+    .userTable, .userTable th, .userTable td {
+        display: block;
+    }
+    .userTable th {
+        text-align: right;
+    }
+    .userTable td {
+        text-align: right;
     }
 }
 
 .buttonTopLeft {
-    position: absolute;
-    top: 10px; /* Ajusta esta propiedad según sea necesario */
-    left: 10px; /* Ajusta esta propiedad según sea necesario */
+    position: fixed;
+    top: 10px;
+    left: 10px;
 }
