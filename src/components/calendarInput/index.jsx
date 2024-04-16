@@ -59,6 +59,7 @@ export function CalendarInput() {
 
       {showCalendar && (
         <Calendar
+          locale="es"
           onChange={handleDateChange}
           value={date}
           className="calendar-popup"

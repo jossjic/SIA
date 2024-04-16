@@ -1,0 +1,14 @@
+.rowAdminPage {
+  align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 100%;
+}
+
+.checkBox {
+  /* Ajusta el tamaño de la casilla de verificación */
+  width: 20px;
+  height: 20px;
+}
