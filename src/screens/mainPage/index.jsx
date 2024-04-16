@@ -9,7 +9,7 @@ export const MainPage = () => {
       <InfoBanner message="Bienvenid@ Estos alimentos son los próximos a caducar." />
       <div className="square"></div>
       <div className="buttonContainer">
-        <GeneralButton textElement="Administrar alimentos" path="/layout" />
+        <GeneralButton textElement="Administrar alimentos" path="/adminPage" />
         <GeneralButton textElement="Administrar usuarios" path="/adminUserPage" />
         <GeneralButton textElement="Cerrar sesión" path="/login" color='red' />
       </div>
