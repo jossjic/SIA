@@ -4,6 +4,7 @@ import "./App.css";
 import { Login } from "./screens/login";
 import { Layout } from "./screens/layout";
 import { NavBar } from "./components/navBar";
+import { TestScreen } from "./screens/testScreen";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/layout" element={<Layout />} />
+          <Route path="/testscreen" element={<TestScreen />} />
         </Routes>
       </Router>
     </div>

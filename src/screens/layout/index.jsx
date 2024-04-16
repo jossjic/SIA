@@ -6,10 +6,11 @@ import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { GeneralButton } from "../../components/button";
 import { LogInput } from "../../components/logInput";
 import { Ordenamiento } from "../../components/ordenamiento";
+import { CalendarInput } from "../../components/calendarInput";
 
 export const Layout = () => {
   return (
-    <div>
+    <div className="layOut">
       <CadCheckCounter unit="test" amount="1" />
       <CadCheckCounter unit="test2" amount="21323" />
       <ReturnButton textElement="" />
@@ -22,8 +23,7 @@ export const Layout = () => {
       <GeneralButton textElement="Agregar" />
       <Ordenamiento />
       <LogInput></LogInput>
-      
-
+      <CalendarInput></CalendarInput>
     </div>
   );
 };

@@ -13,6 +13,7 @@ export function ReturnButton({ textElement }) {
   return (
     <div>
       <button
+        className="returnButton"
         onClick={cambiarColor}
         style={{
           backgroundColor: color,
@@ -24,7 +25,7 @@ export function ReturnButton({ textElement }) {
       >
         <img src={returnImage} />
       </button>
-      <p>{textElement}</p>
+      <p className="returnP">{textElement}</p>
     </div>
   );
 }

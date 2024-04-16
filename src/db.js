@@ -1,7 +1,7 @@
-const mysql = require("mysql");
+import mysql from "mysql";
 
-const connection = mysql.createConnection({
-  host: "http://database-sia.cn6ciymc8chd.us-east-2.rds.amazonaws.com/",
+export const connection = mysql.createConnection({
+  host: "database-sia.cn6ciymc8chd.us-east-2.rds.amazonaws.com",
   user: "admin",
   password: "AdminSIA10042024JJLACV",
   database: "SIA_albergue",
@@ -14,5 +14,3 @@ connection.connect((err) => {
   }
   console.log("Conectado a la base de datos MySQL");
 });
-
-module.exports = connection;
