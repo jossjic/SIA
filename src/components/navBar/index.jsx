@@ -11,6 +11,10 @@ const links = [
     name: "Layout",
     href: "layout",
   },
+  {
+    name: "TestScreen",
+    href: "testscreen",
+  },
 ];
 
 export function NavBar() {

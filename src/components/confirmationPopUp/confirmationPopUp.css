@@ -1,44 +1,32 @@
 .confPopUp {
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1vw;
-    border: 1px solid black;
-    width: 25%;
-    border-radius: 10px;
-  }
-  
-  .confPopUp p {
-    text-align: center; 
-    font-size: large;
-    font-weight: normal;
-  }
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1vw;
+  border: 1px solid black;
+  width: 25%;
+  border-radius: 10px;
+}
 
-  .buttonContainer {
-    display: flex; 
-    justify-content: center; /* Centrar horizontalmente */
-  }
-  
-  .buttonContainer button {
-    margin-right: 10px; /* Espacio entre los botones */
-    border-radius: 20px; 
-    border: transparent;
-    font-size: medium; 
-    cursor: pointer; 
-  }
+.confPopUp p {
+  text-align: center; 
+  font-size: large;
+  font-weight: normal;
+}
 
-  .buttonContainer button.answer1 {
-    background-color: #5982C0;
-    color: white; 
-  }
-  
-  .buttonContainer button.answer2 {
-    background-color: red;
-    color: white; 
-  }
+.buttonContainer {
+  display: flex; 
+  justify-content: center; /* Centrar horizontalmente */
+}
 
-  .buttonContainer button:hover {
-    background-color: #3c6382; 
-    color: white; 
-  }
+.buttonContainer button {
+  margin-right: 20px; 
+}
+  
+.buttonContainer GeneralButton {
+  margin-right: 10px; /* Espacio entre los botones */
+  border: transparent;
+  font-size: medium; 
+  cursor: pointer; 
+}

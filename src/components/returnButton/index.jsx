@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import "./returnButton.css";
 import returnImage from "../../assets/img/returnImage.png";
+import { useNavigate } from "react-router-dom";
 
 export function ReturnButton({ textElement }) {
   const [color, setColor] = useState("#D9D9D9");
-
-  const cambiarColor = () => {
-    const nuevoColor = color === "#D9D9D9" ? "red" : "#D9D9D9";
-    setColor(nuevoColor);
-  };
+  let navigate = useNavigate();
 
   return (
     <div>
       <button
-        onClick={cambiarColor}
+        className="returnButton"
+        onClick={() => navigate(-1)}
         style={{
           backgroundColor: color,
           color: "white",
@@ -24,7 +22,7 @@ export function ReturnButton({ textElement }) {
       >
         <img src={returnImage} />
       </button>
-      <p>{textElement}</p>
+      <p className="returnP">{textElement}</p>
     </div>
   );
 }

@@ -5,10 +5,12 @@ import { ReturnButton } from "../../components/returnButton";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { GeneralButton } from "../../components/button";
 import { LogInput } from "../../components/logInput";
+import { Ordenamiento } from "../../components/ordenamiento";
+import { CalendarInput } from "../../components/calendarInput";
 
 export const Layout = () => {
   return (
-    <div>
+    <div className="layOut">
       <CadCheckCounter unit="test" amount="1" />
       <CadCheckCounter unit="test2" amount="21323" />
       <ReturnButton textElement="" />
@@ -17,9 +19,12 @@ export const Layout = () => {
         message="¿Está seguro de que quiere eliminar estos alimentos?"
         answer1="Cancelar"
         answer2="Eliminar"
+        path1="/layout"
+        path2="/layout"
       />
-      <GeneralButton textElement="Agregar" />
+      <Ordenamiento />
       <LogInput></LogInput>
+      <CalendarInput></CalendarInput>
     </div>
   );
 };

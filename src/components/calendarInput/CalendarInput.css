@@ -1,0 +1,14 @@
+.calendar-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendar-input {
+  width: 383px;
+  height: 48px;
+  border: none;
+  background-image: url("../../assets/img/calendarIcon.png");
+  background-repeat: no-repeat;
+  background-position: right center;
+}

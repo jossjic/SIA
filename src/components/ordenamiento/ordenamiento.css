@@ -1,0 +1,13 @@
+.rectangulo-azul {
+    width: 200px; 
+    height: 50px; 
+    background-color: blue;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hipervinculo {
+    color: white;  
+    font-size: 20px; 
+  } 
