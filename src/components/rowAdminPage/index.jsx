@@ -1,48 +1,45 @@
 import React, { useState } from "react";
+import { StockBar } from "../stockBar";
 import "./RowAdminPage.css";
 
-export function RowAdminPage({ product, amount, unit, brand, stock, cadDate }) {
-  const quantity = amount + " " + unit;
-  // Declarar el estado inicial
-  const [currentStock, setCurrentStock] = useState(parseInt(stock));
+export function RowAdminPage({
+  id,
+  product,
+  amount,
+  unit,
+  brand,
+  stock,
+  cadDate,
+}) {
+  const fecha = new Date(cadDate);
+  const [isChecked, setIsChecked] = useState(false);
 
-  const handleChange = (event) => {
-    // Obtener el valor del input
-    const value = event.target.value;
+  const year = fecha.getFullYear();
+  const month = fecha.getMonth() + 1; // getMonth returns month index starting from 0
+  const day = fecha.getDate();
 
-    // Actualizar el estado usando setCurrentStock
-    if (value === "") {
-      // Si la cadena está vacía, establecer el stock en 0
-      setCurrentStock(0);
-    } else {
-      // Convertir el valor a un número y establecer el stock
-      setCurrentStock(parseInt(value));
-    }
-  };
+  // Format the date in YYYY/MM/DD
+  const formattedDate = `${year}/${month.toString().padStart(2, "0")}/${day
+    .toString()
+    .padStart(2, "0")}`;
 
-  const changeStock = (logic) => {
-    // Actualizar el estado usando setCurrentStock
-    if (logic && currentStock + 1 >= 0) {
-      setCurrentStock(currentStock + 1);
-    } else if (!logic && currentStock - 1 >= 0) {
-      setCurrentStock(currentStock - 1);
-    }
-  };
+  const quantity = `${amount} ${unit}`;
+
+  const rowClass = isChecked ? "rowAdminPage rowChecked" : "rowAdminPage";
 
   return (
-    <div className="rowAdminPage">
-      <input className="checkBox" type="checkbox"></input>
-      <p>{product}</p>
-      <p>{quantity}</p>
-      <p>{brand}</p>
-      <div className="stockBar">
-        {/* Pasamos una función callback para onClick */}
-        <button onClick={() => changeStock(false)}>-</button>
-        <input type="text" value={currentStock} onChange={handleChange}></input>
-        {/* Pasamos una función callback para onClick */}
-        <button onClick={() => changeStock(true)}>+</button>
-      </div>
-      <p>{cadDate}</p>
+    <div className={rowClass}>
+      <input
+        className="checkBox"
+        type="checkbox"
+        checked={isChecked}
+        onChange={(e) => setIsChecked(e.target.checked)}
+      />
+      <p className="product">{product}</p>
+      <p className="quantity">{quantity}</p>
+      <p className="brand">{brand}</p>
+      <StockBar stock={stock} isDisabled={isChecked} />
+      <p className="cadDate">{formattedDate}</p>
     </div>
   );
 }

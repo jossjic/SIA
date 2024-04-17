@@ -5,10 +5,47 @@
   justify-content: space-around;
   flex-direction: row;
   width: 100%;
+  text-align: center;
+  font-weight: 400;
 }
 
-.checkBox {
-  /* Ajusta el tamaño de la casilla de verificación */
+.rowChecked {
+  color: #e14040;
+}
+
+.rowAdminPage .checkBox {
   width: 20px;
   height: 20px;
+}
+
+.rowAdminPage .product {
+  width: 20%;
+  text-align: initial;
+}
+
+.rowAdminPage .quantity {
+  width: 10%;
+}
+
+.rowAdminPage .brand {
+  width: 10%;
+}
+
+.rowAdminPage .stockBar {
+  width: 6%;
+}
+
+.rowChecked .stockBar input {
+  background: none;
+  color: #e14040;
+  border: none;
+  width: 100%;
+}
+
+.rowChecked .stockBar button {
+  display: none;
+}
+
+.rowAdminPage .cadDate {
+  width: 12%;
 }
