@@ -26,6 +26,14 @@
     margin: 0 5px;
 }
 
+/* Checkbox más grande */
+input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    margin-right: 10px; /* Añadir espacio entre el checkbox y el texto */
+  }
+
 @media screen and (max-width: 768px) {
     .userTable, .userTable th, .userTable td {
         display: block;
@@ -43,3 +51,12 @@
     top: 10px;
     left: 10px;
 }
+
+/* .tableContainer {
+    width: 100%;
+}
+
+.square {
+    width: 30%;
+    padding: 4 8px;
+} */
