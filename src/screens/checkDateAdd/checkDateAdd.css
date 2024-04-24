@@ -21,18 +21,18 @@
     margin-top: 3px;
 }
 
-/*
+
 .cuadrado{
     width: 82%;
     padding-top: 48%; 
     background-color: #D9D9D9;
     margin: 0px auto; 
-    align-items: center;
+    
+    
 }
-*/
+
 
 .cuadrado p{
-    position: absolute;
      /* Ajusta el círculo al borde derecho */
     top: 47%; 
     left: 37%;
@@ -44,24 +44,24 @@
 .tableContainerAdd{
     /* Elimina position: absolute; */
     /* position: absolute; */
-    top: 70%; 
     margin: 30px auto; /* Centrar horizontalmente */
     font-size: 20px;
     text-align: center;
     width: auto; /* Ajustar automáticamente al tamaño de los datos */
     display: table;
     background: #D9D9D9;
-    padding-left: 180px;
-    padding-right: 180px;
 }
 
 .userTableAdd th{
-    background: #D9D9D9;
-}
-
-.userTableAdd th, .userTableAdd td {
     padding: 8px;
     border-bottom: 1px solid #D9D9D9;
     text-align: center;
+    background: #D9D9D9;
+}
+
+.userTableAdd td {
+    padding: 8px;
+    border-bottom: 1px solid #D9D9D9;
+    text-align: left;
     background: #D9D9D9;
 }
