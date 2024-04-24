@@ -1,16 +1,17 @@
 .acc {
     background-color: #5982C0;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     font-size: medium;
-    padding: 0.5rem 1rem;
+    padding: 0rem 1rem;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-weight: normal;
-    width: 150px; 
+    width: 160px; 
     cursor: pointer;
+    height: 30px;
 }
 
 .acc:hover {

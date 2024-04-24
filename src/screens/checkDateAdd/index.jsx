@@ -7,9 +7,9 @@ import { GeneralButton } from '../../components/button';
 
 export const CheckDateAdd = () => {
     const products = [
-        {id: 1, nombre:"Apocosipa12345aaaaaaaaaa", marca:"A", cantidad: 250, unidad:"g"},
-        {id: 2, nombre:"B", marca:"B", cantidad: 500, unidad:"g"},
-        {id: 3, nombre:"Shifu", marca:"C", cantidad: 300, unidad:"g"}
+        {id: 1, nombre:"Apocosipa12345aaaaaaaaaa", marca:"NA", cantidad: 250, unidad:"g"},
+        {id: 2, nombre:"B", marca:"La Costeña", cantidad: 500, unidad:"g"},
+        {id: 3, nombre:"Shifu", marca:"Del Valle", cantidad: 300, unidad:"g"}
     ];
     
     return (
@@ -45,7 +45,7 @@ export const CheckDateAdd = () => {
                         </tbody>
                     </table>
                     <div className="botonesAdd">
-                        <GeneralButton className="boton1" textElement="Cancelar" path="" color="#5982C0"/>
+                        <GeneralButton textElement="Cancelar" path="" color="#5982C0"/>
                         <GeneralButton textElement="Agregar" path="" color="#74E140"/>
                     </div>
                 </div>

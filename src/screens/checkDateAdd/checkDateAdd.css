@@ -20,6 +20,7 @@
 
 .buttonBackAdd .titulo{
     margin-top: 3px;
+    margin-bottom: 0px;
 }
 
 .cuadrado{
@@ -32,10 +33,9 @@
 
 .cuadrado p{
      /* Ajusta el círculo al borde derecho */
-    top: 47%; 
     left: 37%;
     margin: 0px auto;
-    font-size: 18px;
+    font-size: 20px;
     text-align: center;
 }
 
@@ -43,11 +43,16 @@
     /* Elimina position: absolute; */
     /* position: absolute; */
     margin: 30px auto; /* Centrar horizontalmente */
-    font-size: 20px;
+    font-size: 22px;
     text-align: center;
     width: auto; /* Ajustar automáticamente al tamaño de los datos */
     display: table;
     background: #D9D9D9;
+}
+
+.userTableAdd{
+    border-spacing: 0;
+    border-collapse: collapse;
 }
 
 .userTableAdd th{
@@ -55,16 +60,25 @@
     border-bottom: 1px solid #D9D9D9;
     text-align: center;
     background: #D9D9D9;
+    padding-right: 40px;
+    padding-left: 40px;
 }
 
 .userTableAdd td {
-    padding: 8px;
     border-bottom: 1px solid #D9D9D9;
     text-align: left;
     background: #D9D9D9;
+    padding-right: 40px;
+    padding-left: 40px;
 }
 
 .botonesAdd{
-    margin-top: 50px;
+    margin-top: 140px;
+    margin-bottom: 20px;
+    
 }
 
+.botonesAdd button{
+    margin-right: 20px;
+    padding: 15px 25px;
+}
