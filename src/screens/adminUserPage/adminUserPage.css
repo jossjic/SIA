@@ -13,7 +13,7 @@
 
 .userTable th, .userTable td {
     text-align: left;
-    padding: 8px;
+    padding: 20px;
     border-bottom: 1px solid #ddd;
 }
 
@@ -25,6 +25,7 @@
 .userTable .add {
     margin: 0 5px;
 }
+
 
 /* Checkbox más grande */
 input[type="checkbox"] {
@@ -52,11 +53,23 @@ input[type="checkbox"] {
     left: 10px;
 }
 
-/* .tableContainer {
-    width: 100%;
+.tableContainer {
+    width: 50%;
+    max-height: 500px;
+    overflow-y: auto;
 }
 
-.square {
+.generalButton {
+    /* Otros estilos del botón */
+    transition: transform 0.3s ease; /* Transición suave para el efecto hover */
+}
+
+.generalButton:hover {
+    transform: scale(1.05); /* Aumentar ligeramente el tamaño al pasar el cursor */
+}
+
+
+/* .square {
     width: 30%;
     padding: 4 8px;
 } */
