@@ -11,6 +11,7 @@ export const Login = () => {
       <InfoBanner message="Bienvenid@ Por favor inicia sesión" />
       <LogInput />
       <GeneralButton textElement="Iniciar sesión" path="/mainPage" />
+      <GeneralButton textElement="CheckDate Add" path="/checkDateAdd" />
     </div>
   );
 };

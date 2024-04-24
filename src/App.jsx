@@ -8,6 +8,7 @@ import { TestScreen } from "./screens/testScreen";
 import { MainPage } from "./screens/mainPage";
 import { UserPage } from "./screens/adminUserPage";
 import { AdminPage } from "./screens/adminPage";
+import { CheckDateAdd } from "./screens/checkDateAdd";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/mainPage" element={<MainPage />} />
           <Route path="/adminUserPage" element={<UserPage />} />
           <Route path="/adminPage" element={<AdminPage />} />
+          <Route path="/checkDateAdd" element={<CheckDateAdd/>}/>
         </Routes>
       </Router>
     </div>
