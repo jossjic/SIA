@@ -4,11 +4,12 @@
     gap: 40px;
     padding: 10px 5px;
     margin: 0px 0px;
-    
 }
 
 .mensaje{
-    align-items: center; /* Aplica align-items solo a los elementos con la clase .mensaje */
+    align-items: center;
+    display: flex;
+    flex-direction: column; 
 }
 
 .buttonBackAdd {
@@ -21,16 +22,13 @@
     margin-top: 3px;
 }
 
-
 .cuadrado{
     width: 82%;
-    padding-top: 48%; 
+    height: auto;
+    padding-top: 3%; 
     background-color: #D9D9D9;
     margin: 0px auto; 
-    
-    
 }
-
 
 .cuadrado p{
      /* Ajusta el círculo al borde derecho */
@@ -65,3 +63,8 @@
     text-align: left;
     background: #D9D9D9;
 }
+
+.botonesAdd{
+    margin-top: 50px;
+}
+
