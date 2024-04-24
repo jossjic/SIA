@@ -6,7 +6,7 @@ export const TestScreen = () => {
   const [alimentos, setAlimentos] = useState([]);
 
   useEffect(() => {
-    fetch("http://18.191.224.71:3000/alimentos")
+    fetch("http://18.191.224.71:3000/alimentos/join/marca")
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -30,9 +30,10 @@ export const TestScreen = () => {
           product={alimento.a_nombre}
           amount={alimento.a_cantidad}
           unit={alimento.um_id}
-          brand={alimento.m_id}
+          brand={alimento.m_nombre}
           stock={alimento.a_stock}
           cadDate={alimento.a_fechaCaducidad}
+          key={alimento.a_id}
         />
       ))}
     </div>

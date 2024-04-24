@@ -23,6 +23,8 @@ export function StockBar({ stock, isDisabled }) {
 
   return (
     <>
+      <img src="../../assets/img/calendarIcon.png" alt="Imagen" />
+      <div class="texto-encima">{stock}</div>
       <div className="stockBar">
         <button onClick={() => changeStock(false)} disabled={isDisabled}>
           -
