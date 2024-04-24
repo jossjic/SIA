@@ -12,6 +12,7 @@ export const Login = () => {
       <LogInput />
       <GeneralButton textElement="Iniciar sesión" path="/mainPage" />
       <GeneralButton textElement="CheckDate Add" path="/checkDateAdd" />
+      <GeneralButton textElement="CheckDate Delete" path="/checkDateDelete" />
     </div>
   );
 };
