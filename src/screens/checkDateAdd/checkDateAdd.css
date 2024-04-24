@@ -1,58 +1,67 @@
 .dateAdd {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; 
     gap: 40px;
-    padding: 20px;
-}
-
-.buttonTopLeft {
-    top: 200px;
-    left: 130px;
-    display: flex;
+    padding: 10px 5px;
+    margin: 0px 0px;
     
 }
 
-.buttonTopLeft .titulo{
-    margin-top: 5px;
+.mensaje{
+    align-items: center; /* Aplica align-items solo a los elementos con la clase .mensaje */
 }
 
+.buttonBackAdd {
+    display: flex;
+    margin-left: 9%;
+    align-items: flex-start; /* Ajusta el comportamiento de align-items para .buttonBackAdd */
+}
+
+.buttonBackAdd .titulo{
+    margin-top: 3px;
+}
+
+/*
 .cuadrado{
     width: 82%;
-    padding-top: 50%; 
+    padding-top: 48%; 
     background-color: #D9D9D9;
-    margin: 80px auto; /* Centrar horizontalmente */
-    /*position: relative;*/
-    /*display: flex;*/
-    /*justify-content: space-between;*/
+    margin: 0px auto; 
     align-items: center;
 }
+*/
 
 .cuadrado p{
     position: absolute;
      /* Ajusta el círculo al borde derecho */
-    top: 50%; 
+    top: 47%; 
     left: 37%;
-    margin-top: 0px;
+    margin: 0px auto;
     font-size: 18px;
     text-align: center;
 }
 
-.tableContainer{
-    position: absolute;
-    top: 58%; 
-    left: 34%;
-    margin-top: 0px;
+.tableContainerAdd{
+    /* Elimina position: absolute; */
+    /* position: absolute; */
+    top: 70%; 
+    margin: 30px auto; /* Centrar horizontalmente */
     font-size: 20px;
     text-align: center;
+    width: auto; /* Ajustar automáticamente al tamaño de los datos */
+    display: table;
+    background: #D9D9D9;
+    padding-left: 180px;
+    padding-right: 180px;
 }
 
-.userTable th{
+.userTableAdd th{
     background: #D9D9D9;
 }
 
-.userTable th, .userTable td {
-    text-align: left;
+.userTableAdd th, .userTableAdd td {
     padding: 8px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #D9D9D9;
+    text-align: center;
+    background: #D9D9D9;
 }
