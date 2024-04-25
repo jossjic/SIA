@@ -47,9 +47,9 @@ export const UserPage = () => {
                   <td>{user.username}</td>
                   <td>{user.email}</td>
                   <td>
-                    <GeneralButton textElement="Ver" color="#28A745" />
-                    <GeneralButton textElement="Editar" color="#17A2B8" />
-                    <GeneralButton textElement="Eliminar" color="#DC3545" onClick={() => handleDelete(user.id)} />
+                    <GeneralButton textElement=" Ver  " color="#28A745" className="generalButton"/>
+                    <GeneralButton textElement="  Editar  " color="#19739A" className="generalButton"/>
+                    <GeneralButton textElement="  Eliminar  " color="#DC3545" className="generalButton" onClick={() => handleDelete(user.id)} />
                   </td>
                 </tr>
               ))}

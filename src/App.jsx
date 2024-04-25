@@ -8,8 +8,12 @@ import { TestScreen } from "./screens/testScreen";
 import { MainPage } from "./screens/mainPage";
 import { UserPage } from "./screens/adminUserPage";
 import { AdminPage } from "./screens/adminPage";
+
 import { CheckDateAdd } from "./screens/checkDateAdd";
 import { CheckDateDelete } from "./screens/checkDateDelete";
+
+import { CreateUser } from "./screens/createUser";
+
 
 function App() {
   return (
@@ -25,6 +29,8 @@ function App() {
           <Route path="/adminPage" element={<AdminPage />} />
           <Route path="/checkDateAdd" element={<CheckDateAdd/>}/>
           <Route path="/checkDateDelete" element={<CheckDateDelete/>}/>
+          <Route path="/createUser" element={<CreateUser/>}/>
+
         </Routes>
       </Router>
     </div>
