@@ -15,6 +15,10 @@ const links = [
     name: "TestScreen",
     href: "testscreen",
   },
+  {
+    name: "CreateUser",
+    href: "createuser",
+  },
 ];
 
 export function NavBar() {
