@@ -8,10 +8,8 @@ import { TestScreen } from "./screens/testScreen";
 import { MainPage } from "./screens/mainPage";
 import { UserPage } from "./screens/adminUserPage";
 import { AdminPage } from "./screens/adminPage";
-
 import { CheckDateAdd } from "./screens/checkDateAdd";
 import { CheckDateDelete } from "./screens/checkDateDelete";
-
 import { CreateUser } from "./screens/createUser";
 
 
