@@ -8,10 +8,10 @@ export function InfoBanner({ message, size }) {
   // Calcula los estilos en función del tamaño proporcionado o del tamaño por defecto
   const bannerHeight = size || defaultSize;
   const iconSize = bannerHeight * 0.9; // Ajusta el tamaño del icono 
-  const messageFontSize = bannerHeight * 0.15; // Ajusta el tamaño del mensaje 
+  const messageFontSize = bannerHeight * 0.3  ; // Ajusta el tamaño del mensaje 
 
   return (
-    <div className="info-banner" style={{ height: bannerHeight }}>
+    <div className="info-banner" style={{ height: bannerHeight, width: '100%' }}>
       <div className="info-icon" style={{ marginRight: iconSize * 0.18 }}>
         <i className="icon-placeholder" style={{ width: iconSize, height: iconSize }}></i>
       </div>
@@ -22,6 +22,8 @@ export function InfoBanner({ message, size }) {
     </div>
   );
 }
+
 InfoBanner.propTypes = {
-  message: PropTypes.string.isRequired
+  message: PropTypes.string.isRequired,
+  size: PropTypes.number // Añade PropTypes para el tamaño si lo necesitas
 };
