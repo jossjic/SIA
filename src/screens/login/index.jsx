@@ -7,7 +7,7 @@ import { GeneralButton } from "../../components/button";
 export const Login = () => {
   return (
     <div className="login">
-      <InfoBanner message="Bienvenid@ Por favor inicia sesión" />
+      <Guide message="Bienvenid@ Por favor inicia sesión" />
       <LogInput />
       <GeneralButton textElement="Iniciar sesión" path="/mainPage" />
     </div>

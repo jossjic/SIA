@@ -46,7 +46,7 @@ export const UserPage = () => {
       <div className="buttonTopLeft">
         <ReturnButton />
       </div>
-      <InfoBanner
+      <Guide
         message="Bienvenid@ administrador, en esta ventana podrá administrar a los usuarios del sistema, 
       use las cajas al la izquierda del nombre de usuario para eliminar múltiples usuarios."
         size={100}
