@@ -8,6 +8,7 @@ import { LogInput } from "../../components/logInput";
 import { Ordenamiento } from "../../components/ordenamiento";
 import { CalendarInput } from "../../components/calendarInput";
 import { ButtonSquare } from "../../components/buttonSquare";
+import { SelectDate } from "../../components/selectDate";
 
 export const Layout = () => {
   return (
@@ -27,6 +28,7 @@ export const Layout = () => {
       <LogInput></LogInput>
       <CalendarInput></CalendarInput>
       <ButtonSquare></ButtonSquare>
+      <SelectDate></SelectDate>
     </div>
   );
 };
