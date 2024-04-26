@@ -11,11 +11,12 @@ import { AdminPage } from "./screens/adminPage";
 import { CheckDateAdd } from "./screens/checkDateAdd";
 import { CheckDateDelete } from "./screens/checkDateDelete";
 import { CreateUser } from "./screens/createUser";
+import { AddProduct } from "./screens/addProduct";
 
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <Router>
         <NavBar />
         <Routes>
@@ -28,6 +29,8 @@ function App() {
           <Route path="/checkDateAdd" element={<CheckDateAdd/>}/>
           <Route path="/checkDateDelete" element={<CheckDateDelete/>}/>
           <Route path="/createUser" element={<CreateUser/>}/>
+          <Route path="/createUser" element={<CreateUser />} />
+          <Route path="/addProduct" element={<AddProduct />} />
 
         </Routes>
       </Router>

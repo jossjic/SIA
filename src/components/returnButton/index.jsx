@@ -8,7 +8,7 @@ export function ReturnButton({ textElement }) {
   let navigate = useNavigate();
 
   return (
-    <div>
+    <div className="returnButtonContainer">
       <button
         className="returnButton"
         onClick={() => navigate(-1)}
