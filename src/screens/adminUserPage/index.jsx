@@ -8,7 +8,7 @@ export const UserPage = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/usuarios") // Replace with your actual API endpoint
+    fetch("http://3.20.237.82:3000/usuarios") // Replace with your actual API endpoint
       .then((response) => {
         if (response.ok) {
           console.log(response);
@@ -26,7 +26,7 @@ export const UserPage = () => {
 
   const handleDelete = (userId) => {
     // Call the delete API endpoint
-    fetch(`http://localhost:3000/usuarios/${userId}`, {
+    fetch(`http://3.20.237.82:3000/usuarios/${userId}`, {
       method: "DELETE",
     })
       .then((response) => {
