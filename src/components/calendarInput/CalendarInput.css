@@ -32,9 +32,7 @@
 
 .calendar-popup-container {
   position: absolute;
-  top: calc(
-    100% + 10px
-  ); /* Ajusta la distancia vertical entre el input y el pop-up */
+  bottom: 100%; /* Ajusta la distancia vertical entre el input y el pop-up */
   left: 50%;
   transform: translateX(-50%); /* Centra horizontalmente el pop-up */
   z-index: 999; /* Asegúrate de que el pop-up esté encima de otros elementos */

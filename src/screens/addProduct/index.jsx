@@ -13,9 +13,9 @@ export function AddProduct() {
     a_nombre: "",
     a_cantidad: "",
     a_stock: "",
-    a_fechaSalida: "",
+    a_fechaSalida: null,
     a_fechaEntrada: formatDate(new Date()),
-    a_fechaCaducidad: "",
+    a_fechaCaducidad: null,
     um_id: "g",
     m_id: 0,
   });
@@ -31,7 +31,7 @@ export function AddProduct() {
   const handleSubmit = async () => {
     try {
       console.log(formData);
-      const response = await fetch("http://localhost:3000/alimentos", {
+      const response = await fetch("http://3.20.237.82:3000/alimentos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export function AddProduct() {
         <div className="inputContainer">
           <TextInput
             label="Nombre del producto"
-            placeholder="Ej. Papas"
+            placeholder="Ej. Lata de Atún"
             name="a_nombre"
             value={formData.a_nombre}
             onChange={handleChange}
@@ -76,16 +76,6 @@ export function AddProduct() {
             optional={true}
           />
 
-          <DropDown
-            title="Unidad de medida"
-            name="um_id"
-            value={formData.um_id}
-            onChange={handleChange}
-            tableName="unidades-medida"
-            label="um_nombre"
-            key={2}
-          />
-
           <TextInput
             label="Stock"
             placeholder="Ej. 10"
@@ -94,18 +84,28 @@ export function AddProduct() {
             onChange={handleChange}
           />
 
+          <CalendarInput
+            name="a_fechaCaducidad"
+            value={formData.a_fechaCaducidad}
+            onChange={handleChange}
+          />
+
           <TextInput
             label="Cantidad"
-            placeholder="Ej. 10"
+            placeholder="Ej. 200"
             name="a_cantidad"
             value={formData.a_cantidad}
             onChange={handleChange}
           />
 
-          <CalendarInput
-            name="a_fechaCaducidad"
-            value={formData.a_fechaCaducidad}
+          <DropDown
+            title="Unidad de medida (para cantidad)"
+            name="um_id"
+            value={formData.um_id}
             onChange={handleChange}
+            tableName="unidades-medida"
+            label="um_nombre"
+            key={2}
           />
         </div>
 

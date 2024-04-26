@@ -54,7 +54,7 @@ export function CalendarInput({ name, value, onChange }) {
         name={name}
         type="text"
         className="calendar-input"
-        placeholder="aaaa/mm/dd"
+        placeholder="aaaa-mm-dd"
         onChange={handleInputChange}
         onBlur={handleBlur}
         onClick={toggleCalendar}
