@@ -1,6 +1,6 @@
 import React from 'react';
 import "./barrabusqueda.css";
-import searchIcon from './search-icon.png';
+/*import searchIcon from './search-icon.png';*/
 
 export function barraBusqueda() {
     return (
