@@ -16,8 +16,25 @@ const links = [
     href: "testscreen",
   },
   {
+<<<<<<< HEAD
     name: "CreateUser",
     href: "createuser",
+=======
+    name: "MainPage",
+    href: "mainPage",
+  },
+  {
+    name: "UserPage",
+    href: "adminUserPage",
+  },
+  {
+    name: "AdminPage",
+    href: "adminPage",
+  },
+  {
+    name: "AddProduct",
+    href: "addProduct",
+>>>>>>> joss_adminPage_checkdate_add_checkdate_delete_addProduct
   },
 ];
 

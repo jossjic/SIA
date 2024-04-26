@@ -1,4 +1,4 @@
-.textInput {
+.dropDownContainer {
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   width: 50%;
 }
 
-.textInput label {
+.dropDownContainer label {
   font-weight: normal;
   font-size: large;
   background-color: #d9d9d9;
@@ -14,13 +14,18 @@
   padding-bottom: 5px;
 }
 
-.textInput input {
+.dropDownContainer select {
   background-color: white;
   color: blue;
   height: 40px;
   border: none;
 }
 
-.textInput input:focus {
-  outline-color: blue;
+.dropDownContainer select:focus {
+  outline: solid 2px blue;
+  background-color: #f9f9f9;
+}
+
+.dropDownContainer select:hover {
+  cursor: pointer;
 }
