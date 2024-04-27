@@ -18,7 +18,6 @@ export const CheckDateAdd = () => {
 
     // Función que se ejecutará cuando se haga clic en el botón cuadrado
     const handleButtonClick = () => {
-        console.log('Botón cuadrado clickeado!');
         setShowSelectDate(true);
     };
     
@@ -63,7 +62,13 @@ export const CheckDateAdd = () => {
                     </div>
                 </div>
             </div>
-            {showSelectDate && <SelectDate />}
+            {showSelectDate && (
+                <div className="modalOverlay">
+                    <div className="modalContent">
+                        <SelectDate />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
