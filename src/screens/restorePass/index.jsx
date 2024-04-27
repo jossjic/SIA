@@ -8,7 +8,9 @@ export const RestorePass = () => {
 
   return (
     <div className="login">
-      <InfoBanner message="Bienvenid@ Introduce el correo elctrónico de la cuenta para recuperarla" size={180}/>
+      <div className="mensaje"> 
+        <InfoBanner message="Bienvenid@ Introduce el correo elctrónico de la cuenta para recuperarla" size={150}/>      
+      </div>
       <div className='login-container'>
         <LogInput />
         <div className='buttonContainer'>

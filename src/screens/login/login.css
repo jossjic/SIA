@@ -17,7 +17,15 @@
     align-items: center;
     padding: 20px; 
     border-radius: 8px;
+    width: 100%; 
     gap: 20px;
+}
+
+.mensaje{
+    align-items: center;
+    display: flex;
+    flex-direction: column; 
+    width: 80%;
 }
 
 .forgotPassword {

@@ -10,8 +10,10 @@ export const Login = () => {
   const handleClick = () => navigate('/restorePass'); 
 
   return (
-    <div className="login">
-      <InfoBanner message="Bienvenid@ Por favor inicia sesión" size={100}/>
+    <div className='login'>
+      <div className="mensaje">
+        <InfoBanner message="Bienvenid@ Por favor inicia sesión." size={130} />
+      </div>
       <div className='login-container'>
         <LogInput />
         <p className="forgotPassword" onClick={handleClick}>¿Olvidaste la contraseña?</p>

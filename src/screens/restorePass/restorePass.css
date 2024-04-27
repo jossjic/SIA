@@ -15,10 +15,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px; 
+    justify-content: center; 
     border-radius: 8px; 
     width: 90%;
-    gap: 20px;
+    height: 50vh; /* Cambiar el valor según sea necesario */
   }
 
 .buttonContainer {
@@ -28,4 +28,11 @@
 
 .buttonContainer button {
     margin-right: 20px; 
+}
+
+.mensaje{
+    align-items: center;
+    display: flex;
+    flex-direction: column; 
+    width: 80%;
 }
