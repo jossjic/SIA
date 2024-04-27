@@ -15,6 +15,26 @@ const links = [
     name: "TestScreen",
     href: "testscreen",
   },
+  {
+    name: "CreateUser",
+    href: "createuser",
+  },
+  {
+    name: "MainPage",
+    href: "mainPage",
+  },
+  {
+    name: "UserPage",
+    href: "adminUserPage",
+  },
+  {
+    name: "AdminPage",
+    href: "adminPage",
+  },
+  {
+    name: "AddProduct",
+    href: "addProduct",
+  },
 ];
 
 export function NavBar() {

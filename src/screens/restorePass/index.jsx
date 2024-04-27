@@ -1,7 +1,7 @@
 import React from 'react';
 import "./restorePass.css";
 import { LogInput } from '../../components/logInput';
-import { InfoBanner } from '../../components/guide';
+import { Guide } from '../../components/guide';
 import { GeneralButton } from '../../components/button';
 
 export const RestorePass = () => {
@@ -9,7 +9,7 @@ export const RestorePass = () => {
   return (
     <div className="login">
       <div className="mensaje"> 
-        <InfoBanner message="Bienvenid@ Introduce el correo elctrónico de la cuenta para recuperarla" size={150}/>      
+        <Guide message="Bienvenid@ Introduce el correo elctrónico de la cuenta para recuperarla" size={130}/>      
       </div>
       <div className='login-container'>
         <LogInput />

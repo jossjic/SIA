@@ -1,4 +1,3 @@
-import { GeneralButton } from "../button";
 import "./logInput.css";
 
 export function LogInput() {

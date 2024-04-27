@@ -6,7 +6,7 @@ export const TestScreen = () => {
   const [alimentos, setAlimentos] = useState([]);
 
   useEffect(() => {
-    fetch("http://18.191.224.71:3000/alimentos/join/marca")
+    fetch("http://3.20.237.82:3000/alimentos/join/marca")
       .then((response) => {
         if (response.ok) {
           return response.json();

@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import "./login.css";
 import { LogInput } from '../../components/logInput';
-import { InfoBanner } from '../../components/guide';
+import { Guide } from '../../components/guide';
 import { GeneralButton } from '../../components/button';
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +12,7 @@ export const Login = () => {
   return (
     <div className='login'>
       <div className="mensaje">
-        <InfoBanner message="Bienvenid@ Por favor inicia sesión." size={130} />
+        <Guide message="Bienvenid@ Por favor inicia sesión." size={130} />
       </div>
       <div className='login-container'>
         <LogInput />

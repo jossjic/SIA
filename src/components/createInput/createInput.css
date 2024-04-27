@@ -1,18 +1,17 @@
-.logInput {
-    background-color: transparent;
+.createInput {
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: left;
     width: 50%;
-    gap: 20px;
-}
- 
-.logInput p {
-    font-weight: normal;
-    font-size: large;
 }
 
-.logInput input {
+.createInput p {
+    font-weight: normal;
+    font-size: large;    
+}
+
+.createInput input {
     background-color: #D9D9D9; 
     color: blue;
     border: none;

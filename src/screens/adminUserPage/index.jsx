@@ -1,61 +1,98 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import "./adminUserPage.css";
-import { GeneralButton } from '../../components/button';
-import { InfoBanner } from '../../components/guide';
-import { ReturnButton } from '../../components/returnButton';
+import { GeneralButton } from "../../components/button";
+import { Guide } from "../../components/guide";
+import { ReturnButton } from "../../components/returnButton";
 
 export const UserPage = () => {
-  const users = [
-    { id: 1, username: 'LuigiMaster32', email: 'luigi@master.com' },
-  { id: 2, username: 'CristianConH2', email: 'cristian@conh.com' },
-  { id: 3, username: 'Vanech20', email: 'vanech@gmail.com' },
-  { id: 4, username: 'jossijc', email: 'jossijc_03@hotmail.com' },
-  { id: 5, username: 'augustusGloop03', email: 'augustus@gloop.com' },
-  { id: 6, username: 'doñaPatricia420', email: 'doña@paty.com' },
-  { id: 7, username: 'JosechuLeton', email: 'josechu@leton.com' },
-  { id: 8, username: 'LACG', email: 'lac@gmail.com' },
-  { id: 9, username: 'ChrisEvil52', email: 'chris@evil.com' },
-  { id: 10, username: 'JacquieVA20', email: 'jacquie@va.com' },
-  ];
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch("http://3.20.237.82:3000/usuarios") // Replace with your actual API endpoint
+      .then((response) => {
+        if (response.ok) {
+          console.log(response);
+          return response.json();
+        }
+        throw new Error("Error al obtener los usuarios");
+      })
+      .then((data) => {
+        setUsers(data.map((user) => ({ id: user.u_id, email: user.u_email })));
+      })
+      .catch((error) => {
+        console.error("Error:", error.message);
+      });
+  }, []); // This effect runs only once when the component is mounted
 
   const handleDelete = (userId) => {
-    console.log("Eliminar usuario", userId);
-    // Aquí agregarías la lógica para eliminar el usuario
+    // Call the delete API endpoint
+    fetch(`http://3.20.237.82:3000/usuarios/${userId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        // Remove the user from the state to update the UI
+        setUsers(users.filter((user) => user.id !== userId));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
-    <div className='userPage'>
-      <div className='buttonTopLeft'>
+    <div className="userPage">
+      <div className="buttonTopLeft">
         <ReturnButton />
       </div>
-      <InfoBanner message="Bienvenid@ administrador, en esta ventana podrá administrar a los usuarios del sistema, 
-      use las cajas al la izquierda del nombre de usuario para eliminar múltiples usuarios." size={100}/>
-        <div className="tableContainer">
-          <table className="userTable square">
-            <thead>
-              <tr>
-                <th></th> {/* Espacio para los checkboxes */}
-                <th>Usuario</th>
-                <th>Correo</th>
-                <th>Acciones</th>
+      <Guide
+        message="Bienvenid@ administrador, en esta ventana podrá administrar a los usuarios del sistema, 
+      use las cajas al la izquierda del nombre de usuario para eliminar múltiples usuarios."
+        size={100}
+      />
+      <div className="tableContainer">
+        <table className="userTable square">
+          <thead>
+            <tr>
+              <th></th> {/* Space for checkboxes */}
+              <th>Usuario</th>
+              <th>Correo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.id}>
+                <td>
+                  <input type="checkbox" className="checkboxLarge" />
+                </td>
+                <td>{user.id}</td>{" "}
+                {/* Assuming you want to display the user's ID as the username */}
+                <td>{user.email}</td>
+                <td>
+                  <GeneralButton
+                    textElement=" Ver  "
+                    color="#28A745"
+                    className="generalButton"
+                  />
+                  <GeneralButton
+                    textElement="  Editar  "
+                    color="#19739A"
+                    className="generalButton"
+                  />
+                  <GeneralButton
+                    textElement="  Eliminar  "
+                    color="#DC3545"
+                    className="generalButton"
+                    onClick={() => handleDelete(user.id)}
+                  />
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {users.map(user => (
-                <tr key={user.id}>
-                  <td><input type="checkbox" className="checkboxLarge" /></td>
-                  <td>{user.username}</td>
-                  <td>{user.email}</td>
-                  <td>
-                    <GeneralButton textElement="Ver" color="#28A745" />
-                    <GeneralButton textElement="Editar" color="#17A2B8" />
-                    <GeneralButton textElement="Eliminar" color="#DC3545" onClick={() => handleDelete(user.id)} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
