@@ -2,11 +2,12 @@ import "./selectDate.css";
 import { CadCheckCounter } from "../../components/cadCheckCounter";
 import { GeneralButton } from "../../components/button";
 import { barraBusqueda } from "../../components/barraBusqueda";
+import { StockBar } from "../../components/stockBar";
 
 export function SelectDate({ unit, amount }) {
   const dates = [
-    {id: 1, caducidad:"01/05/2002", cantidad:"NA"},
-    {id: 2, caducidad:"08/07/2024", cantidad: 500}
+    {id: 1, caducidad:"01/05/2002", stock:"NA"},
+    {id: 2, caducidad:"08/07/2024", stock: 500}
 ];
 
   return (
@@ -22,7 +23,6 @@ export function SelectDate({ unit, amount }) {
           <tr>
             <GeneralButton textElement="Cancelar" path="" color="#E14040"></GeneralButton>
           </tr>
-          <tr></tr>
           <tr>
             <GeneralButton textElement="Agregar Caducidad" path="" color="#5982C0"></GeneralButton> 
           </tr>
@@ -37,7 +37,7 @@ export function SelectDate({ unit, amount }) {
                         {dates.map(date => (
                             <tr key={date.id}>
                             <td>{date.caducidad}</td>
-                            <td>{date.cantidad}</td>
+                            <td><StockBar stock={date.stock}></StockBar></td>
                             </tr>
                         ))}
                         </tbody>

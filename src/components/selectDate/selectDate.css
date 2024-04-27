@@ -5,15 +5,31 @@
     width: 850px;
     height: 450px;
     border-radius: 10px;
+    display: flex;
   }
   
-  .checkCard_selectDate button{
+.checkCard_selectDate button{
     padding: 13px 25px;
     margin-top: 20px;
 }
 
 .generalTable{
-    border: 2px solid black;
+    /*border: 2px solid black;*/
     text-align: center;
-    width: 300px;
+    width: 800px;
+    margin-left: 50px;
+    margin-top: 20px;
 }
+
+.generalTable td{
+  padding: 0px 5px;
+}
+
+.productsTable{
+  margin-left: 50px;
+}
+.productsTable th{
+  font-weight: bold;
+  padding-bottom: 13px;
+}
+
