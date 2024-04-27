@@ -35,6 +35,14 @@ const links = [
     name: "AddProduct",
     href: "addProduct",
   },
+  {
+    name: "CheckDate Add",
+    href: "checkDateAdd",
+  },
+  {
+    name: "CheckDate Delete",
+    href: "checkDateDelete",
+  }
 ];
 
 export function NavBar() {

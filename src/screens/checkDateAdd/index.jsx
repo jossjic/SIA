@@ -1,6 +1,6 @@
 import React from "react";
 import "./checkDateAdd.css";
-import { InfoBanner } from '../../components/guide';
+import { Guide } from '../../components/guide';
 import { ReturnButton } from "../../components/returnButton";
 import { ButtonSquare } from "../../components/buttonSquare";
 import { GeneralButton } from '../../components/button';
@@ -15,7 +15,7 @@ export const CheckDateAdd = () => {
     return (
         <div className="dateAdd">
             <div className="mensaje">
-                <InfoBanner message="Estas a punto de agregar una lista de productos, recuerda verificar la fecha de caducidad de los productos que deseas agregar." size={100} />
+                <Guide message="Estas a punto de agregar una lista de productos, recuerda verificar la fecha de caducidad de los productos que deseas agregar." size={100} />
             </div>
             <div className="buttonBackAdd">
                 <ReturnButton />

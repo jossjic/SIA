@@ -1,6 +1,6 @@
 import React from "react";
 import "./checkDateDelete.css";
-import { InfoBanner } from '../../components/guide';
+import { Guide } from '../../components/guide';
 import { ReturnButton } from "../../components/returnButton";
 import { ButtonSquare } from "../../components/buttonSquare";
 import { GeneralButton } from '../../components/button';
@@ -15,7 +15,7 @@ export const CheckDateDelete = () => {
     return (
         <div className="dateDelete">
             <div className="mensajeD">
-                <InfoBanner message="Estas a punto de elimnar una lista de productos, recuerda verificar la fecha de caducidad de los productos que deseas eliminar." size={100} />
+                <Guide message="Estas a punto de eliminar una lista de productos, recuerda verificar la fecha de caducidad de los productos que deseas eliminar." size={100} />
             </div>
             <div className="buttonBackDelete">
                 <ReturnButton />
