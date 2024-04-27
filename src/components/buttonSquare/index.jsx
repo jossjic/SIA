@@ -1,14 +1,13 @@
+import React from "react";
 import "./buttonSquare.css";
-import { useNavigate } from "react-router-dom";
 
-export function ButtonSquare({ textElement, path, color = "#5982C0" }) {
-    const navigate = useNavigate();
-    const handleClick = () => navigate(path); 
+export function ButtonSquare({ textElement, onClick, color = "#5982C0" }) {
     const buttonStyle = {
         backgroundColor: color
     };
+
     return (
-        <button className="acc" style={buttonStyle} onClick={handleClick}>
+        <button className="acc" style={buttonStyle} onClick={onClick}>
             {textElement}
         </button>
     );

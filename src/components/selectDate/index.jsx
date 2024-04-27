@@ -1,8 +1,8 @@
 import "./selectDate.css";
-import { CadCheckCounter } from "../../components/cadCheckCounter";
-import { GeneralButton } from "../../components/button";
-import { barraBusqueda } from "../../components/barraBusqueda";
-import { StockBar } from "../../components/stockBar";
+import { CadCheckCounter } from "../cadCheckCounter";
+import { GeneralButton } from "../button";
+import { barraBusqueda } from "../barraBusqueda";
+import { StockBar } from "../stockBar";
 
 export function SelectDate({ unit, amount }) {
   const dates = [
