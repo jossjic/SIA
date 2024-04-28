@@ -20,6 +20,10 @@ export const CheckDateAdd = () => {
     const handleButtonClick = () => {
         setShowSelectDate(true);
     };
+
+    const handleCancelSelectDate = () => {
+        setShowSelectDate(false);
+    };
     
     return (
         <div className="dateAdd">
@@ -65,7 +69,7 @@ export const CheckDateAdd = () => {
             {showSelectDate && (
                 <div className="modalOverlay">
                     <div className="modalContent">
-                        <SelectDate />
+                        <SelectDate onCancel={handleCancelSelectDate}/>
                     </div>
                 </div>
             )}

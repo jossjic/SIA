@@ -1,10 +1,11 @@
+import React from "react";
 import "./selectDate.css";
 import { CadCheckCounter } from "../cadCheckCounter";
 import { GeneralButton } from "../button";
 import { barraBusqueda } from "../barraBusqueda";
 import { StockBar } from "../stockBar";
 
-export function SelectDate({ unit, amount }) {
+export function SelectDate({ unit, amount, onCancel }) {
   const dates = [
     {id: 1, caducidad:"01/05/2002", stock:"NA"},
     {id: 2, caducidad:"08/07/2024", stock: 500}
@@ -21,7 +22,7 @@ export function SelectDate({ unit, amount }) {
             <GeneralButton textElement="Confirmar" path="" color="#4FA725"></GeneralButton>
           </tr>
           <tr>
-            <GeneralButton textElement="Cancelar" path="" color="#E14040"></GeneralButton>
+            <GeneralButton textElement="Cancelar" onClick={onCancel} color="#E14040"></GeneralButton>
           </tr>
           <tr>
             <GeneralButton textElement="Agregar Caducidad" path="" color="#5982C0"></GeneralButton> 
