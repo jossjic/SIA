@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import "./checkDateDelete.css";
 import { Guide } from '../../components/guide';
 import { ReturnButton } from "../../components/returnButton";
 import { ButtonSquare } from "../../components/buttonSquare";
 import { GeneralButton } from '../../components/button';
+import { SelectDate } from '../../components/selectDate';
 
 export const CheckDateDelete = () => {
     const products = [
@@ -11,6 +12,14 @@ export const CheckDateDelete = () => {
         {id: 2, nombre:"B", marca:"La Costeña", cantidad: 500, unidad:"g"},
         {id: 3, nombre:"Shifu", marca:"Del Valle", cantidad: 300, unidad:"g"}
     ];
+
+    // Función que se ejecutará cuando se haga clic en el botón cuadrado
+    const [showSelectDateD, setShowSelectDateD] = useState(false);
+
+    // Función que se ejecutará cuando se haga clic en el botón cuadrado
+    const handleButtonClickD = () => {
+        setShowSelectDateD(true);
+    };
     
     return (
         <div className="dateDelete">
@@ -38,7 +47,7 @@ export const CheckDateDelete = () => {
                             <td>{product.cantidad+' '+product.unidad}</td>
                             <td>{product.marca}</td>
                             <td>
-                                <ButtonSquare textElement="v" color="#74E140" />
+                                <ButtonSquare textElement="v" color="#74E140" onClick={handleButtonClickD}/>
                             </td>
                             </tr>
                         ))}
@@ -50,6 +59,13 @@ export const CheckDateDelete = () => {
                     </div>
                 </div>
             </div>
+            {showSelectDateD && (
+                <div className="modalOverlay">
+                    <div className="modalContent">
+                        <SelectDate />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
