@@ -4,7 +4,7 @@ import { Guide } from '../../components/guide';
 import { ReturnButton } from "../../components/returnButton";
 import { ButtonSquare } from "../../components/buttonSquare";
 import { GeneralButton } from '../../components/button';
-import { SelectDate } from '../../components/selectDate';
+import { SelectDateDelete } from '../../components/selectDateDelete';
 
 export const CheckDateDelete = () => {
     const products = [
@@ -62,7 +62,7 @@ export const CheckDateDelete = () => {
             {showSelectDateD && (
                 <div className="modalOverlay">
                     <div className="modalContent">
-                        <SelectDate />
+                        <SelectDateDelete />
                     </div>
                 </div>
             )}
