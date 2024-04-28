@@ -38,7 +38,7 @@ export const CheckDateDelete = () => {
                             <th>Nombre</th>
                             <th>Cantidad</th>
                             <th>Marca</th>
-                            <th>Verificacion</th>
+                            <th>Verificación</th>
                         </thead>
                         <tbody>
                         {products.map(product => (
