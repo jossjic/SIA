@@ -8,7 +8,7 @@ export const UserPage = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://3.20.237.82:3000/usuarios") // Replace with your actual API endpoint
+    fetch("http://3.20.237.82:3000/usuarios") // Replace with our actual API endpoint
       .then((response) => {
         if (response.ok) {
           console.log(response);
@@ -68,7 +68,6 @@ export const UserPage = () => {
                   <input type="checkbox" className="checkboxLarge" />
                 </td>
                 <td>{user.id}</td>{" "}
-                {/* Assuming you want to display the user's ID as the username */}
                 <td>{user.email}</td>
                 <td>
                   <GeneralButton
