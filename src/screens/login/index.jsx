@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 export const Login = () => {
   const navigate = useNavigate();
   const handleClick = () => navigate('/restorePass'); 
-
   return (
     <div className='login'>
       <div className="mensaje">

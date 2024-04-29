@@ -3,6 +3,8 @@ import "./mainPage.css";
 import { Guide } from "../../components/guide";
 import { GeneralButton } from "../../components/button";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 
 export const MainPage = () => {
   const [alimentos, setAlimentos] = useState([]);
@@ -71,6 +73,10 @@ export const MainPage = () => {
     return `${className}`;
   };
   
+  const navigate = useNavigate();
+  const handleClick = () => navigate('/restorePass'); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="main">
       <div className="mensaje">
@@ -104,7 +110,8 @@ export const MainPage = () => {
           textElement="Administrar usuarios"
           path="/adminUserPage"
         />
-        <GeneralButton textElement="Cerrar sesión" path="/login" color="red" />
+        <GeneralButton textElement="Cerrar sesión" onClick={() => setIsModalOpen(true)} color="red" />
+        <ConfirmationPopUp message = "¿Seguro que quieres cerrar sesión?" answer1 = "Si" answer2 = "No" path1 = "/login" isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
       </div>
     </div>
   );
