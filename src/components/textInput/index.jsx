@@ -1,5 +1,5 @@
 import React from "react";
-import "./TextInput.css";
+import "./textInput.css";
 
 export function TextInput({ label, placeholder, onChange, name, value }) {
   return (

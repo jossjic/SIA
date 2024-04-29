@@ -38,6 +38,10 @@ const links = [
   {
     name: "EditProduct",
     href: "editProduct",
+  },
+  {
+    name: "CheckDate Delete",
+    href: "checkDateDelete",
   }
 ];
 

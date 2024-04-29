@@ -7,6 +7,9 @@ import { GeneralButton } from "../../components/button";
 import { LogInput } from "../../components/logInput";
 import { Ordenamiento } from "../../components/ordenamiento";
 import { CalendarInput } from "../../components/calendarInput";
+import { ButtonSquare } from "../../components/buttonSquare";
+import { SelectDate } from "../../components/selectDate";
+import { SelectDateDelete } from "../../components/selectDateDelete";
 
 export const Layout = () => {
   return (
@@ -25,6 +28,9 @@ export const Layout = () => {
       <Ordenamiento />
       <LogInput></LogInput>
       <CalendarInput></CalendarInput>
+      <ButtonSquare></ButtonSquare>
+      <SelectDate></SelectDate>
+      <SelectDateDelete></SelectDateDelete>
     </div>
   );
 };
