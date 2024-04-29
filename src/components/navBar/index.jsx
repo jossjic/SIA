@@ -40,6 +40,10 @@ const links = [
     href: "editProduct",
   },
   {
+    name: "CheckDate Add",
+    href: "checkDateAdd",
+  },
+  {
     name: "CheckDate Delete",
     href: "checkDateDelete",
   }
