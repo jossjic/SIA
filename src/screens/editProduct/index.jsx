@@ -74,7 +74,7 @@ export function EditProduct({ productId }) {
     <div className="editProduct">
       <div className="editProductTitle">
         <Guide message="Asegúrate de rellenar todos los campos. <3"></Guide>
-        <ReturnButton textElement="Editar Producto"></ReturnButton>
+        <ReturnButton textElement="Editar Producto Existente"></ReturnButton>
       </div>
 
       <div className="editProductContainer">

@@ -38,30 +38,15 @@
     justify-content: space-around;
     width: 100%;
   }
-  
-  .editProductContainer input[type="text"],
-  .editProductContainer input[type="number"] {
-    flex-basis: calc(49% - 10px);
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+
+  .inputContainer > * {
+    width: 40%;
+    margin: 1%;
   }
-  
-  .editProductContainer select {
-    flex-basis: calc(49% - 10px);
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .editProductContainer input[type="date"] {
-    flex-basis: calc(49% - 10px);
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+
+  input,
+  select {
+    max-width: 100%;
   }
   
   .editProductContainer .generalButton {
