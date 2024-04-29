@@ -35,6 +35,10 @@ const links = [
     name: "AddProduct",
     href: "addProduct",
   },
+  {
+    name: "EditProduct",
+    href: "editProduct",
+  }
 ];
 
 export function NavBar() {

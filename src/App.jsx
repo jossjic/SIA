@@ -10,6 +10,7 @@ import { UserPage } from "./screens/adminUserPage";
 import { AdminPage } from "./screens/adminPage";
 import { CreateUser } from "./screens/createUser";
 import { AddProduct } from "./screens/addProduct";
+import { EditProduct } from "./screens/editProduct";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/adminPage" element={<AdminPage />} />
           <Route path="/createUser" element={<CreateUser />} />
           <Route path="/addProduct" element={<AddProduct />} />
+          <Route path="/editProduct" element={<EditProduct />} />
         </Routes>
       </Router>
     </div>
