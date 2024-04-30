@@ -28,8 +28,13 @@
 .productsTable{
   margin-left: 50px;
 }
+
 .productsTable th{
   font-weight: bold;
   padding-bottom: 13px;
+  padding-left: 20px;
 }
 
+.productsTable td{
+  padding-left: 20px;
+}

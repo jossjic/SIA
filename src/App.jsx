@@ -13,6 +13,7 @@ import { CheckDateDelete } from "./screens/checkDateDelete";
 import { RestorePass } from "./screens/restorePass";
 import { CreateUser } from "./screens/createUser";
 import { AddProduct } from "./screens/addProduct";
+import { EditProduct } from "./screens/editProduct";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
           <Route path="/restorePass" element={<RestorePass />} />
           <Route path="/createUser" element={<CreateUser />} />
           <Route path="/addProduct" element={<AddProduct />} />
-
+          <Route path="/editProduct" element={<EditProduct />} />
         </Routes>
       </Router>
     </div>

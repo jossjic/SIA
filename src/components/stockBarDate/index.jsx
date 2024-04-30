@@ -1,9 +1,8 @@
-import "./StockBar.css";
+import "./stockBarDate.css";
 import { useState } from "react";
-import calendarIcon from "../../assets/img/calendarIcon.png";
 
 
-export function StockBar({ stock, isDisabled }) {
+export function StockBarDate({ stock, isDisabled }) {
   const [currentStock, setCurrentStock] = useState(parseInt(stock));
 
   const handleChange = (event) => {
@@ -25,8 +24,6 @@ export function StockBar({ stock, isDisabled }) {
 
   return (
     <>
-      <img src={calendarIcon} alt="Imagen" />
-      <div class="texto-encima">{stock}</div>
       <div className="stockBar">
         <button onClick={() => changeStock(false)} disabled={isDisabled}>
           -
