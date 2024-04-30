@@ -8,10 +8,12 @@ import { SelectDate } from '../../components/selectDate';
 
 export const CheckDateAdd = () => {
     const products = [
-        {id: 1, nombre:"Lata de Atún", marca:"NA", cantidad: 250, unidad:"g"},
+        {id: 1, nombre:"Lata de Atún", marca:"NA", cantidad: 200, unidad:"g"},
         {id: 2, nombre:"Bolsa de Arroz", marca:"La Costeña", cantidad: 500, unidad:"g"},
         {id: 3, nombre:"Jugo de Uva", marca:"Del Valle", cantidad: 300, unidad:"g"}
     ];
+
+    const [buttonColor, setButtonColor] = useState("#E14040"); // Estado para el color del botón
 
     // Función que se ejecutará cuando se haga clic en el botón cuadrado
     const [showSelectDate, setShowSelectDate] = useState(false);
@@ -25,6 +27,10 @@ export const CheckDateAdd = () => {
         setShowSelectDate(false);
     };
     
+    const handleConfirmButtonClick = () => {
+        setButtonColor("#4FA725"); // Cambiar el color del botón a verde
+    };
+
     return (
         <div className="dateAdd">
             <div className="mensajeA">
@@ -54,7 +60,7 @@ export const CheckDateAdd = () => {
                                     <td>{product.marca}</td>
                                     <td>
                                         {/* Pasando la función handleButtonClick como prop */}
-                                        <ButtonSquare textElement="v" color="#74E140" onClick={handleButtonClick}/>
+                                        <ButtonSquare textElement="v" color="#E14040" onClick={handleButtonClick}/>
                                     </td>
                                 </tr>
                             ))}
@@ -62,14 +68,14 @@ export const CheckDateAdd = () => {
                     </table>
                     <div className="botonesAdd">
                         <GeneralButton textElement="Cancelar" path="" color="#5982C0" />
-                        <GeneralButton textElement="Agregar" path="" color="#74E140" />
+                        <GeneralButton textElement="Agregar" path="" color="#8F938D" />
                     </div>
                 </div>
             </div>
             {showSelectDate && (
                 <div className="modalOverlay">
                     <div className="modalContent">
-                        <SelectDate onCancel={handleCancelSelectDate}/>
+                        <SelectDate onCancel={handleCancelSelectDate} onConfirm={handleConfirmButtonClick}/>
                     </div>
                 </div>
             )}
