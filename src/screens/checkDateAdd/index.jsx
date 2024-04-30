@@ -27,7 +27,7 @@ export const CheckDateAdd = () => {
     
     return (
         <div className="dateAdd">
-            <div className="mensaje">
+            <div className="mensajeA">
                 <Guide message="Estás a punto de agregar una lista de productos. Recuerda verificar la fecha de caducidad de los productos que deseas agregar." size={100} />
             </div>
             <div className="buttonBackAdd">
