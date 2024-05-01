@@ -39,7 +39,7 @@ export function SelectDate({ unit, amount, onCancel, onConfirm }) {
             <CadCheckCounter unit={unit} amount={amount}></CadCheckCounter>
           </tr>
           <tr>
-            <GeneralButton textElement="Confirmar" path="" color="#4FA725" onClick={onConfirm}></GeneralButton>
+            <GeneralButton textElement="Confirmar" onClick={onConfirm} color="#4FA725"></GeneralButton>
           </tr>
           <tr>
             <GeneralButton textElement="Cancelar" onClick={onCancel} color="#E14040"></GeneralButton>
