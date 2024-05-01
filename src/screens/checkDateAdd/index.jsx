@@ -8,9 +8,9 @@ import { SelectDate } from '../../components/selectDate';
 
 export const CheckDateAdd = () => {
     const products = [
-        {id: 1, nombre:"Apocosipa12345aaaaaaaaaa", marca:"NA", cantidad: 250, unidad:"g"},
-        {id: 2, nombre:"B", marca:"La Costeña", cantidad: 500, unidad:"g"},
-        {id: 3, nombre:"Shifu", marca:"Del Valle", cantidad: 300, unidad:"g"}
+        {id: 1, nombre:"Lata de Atún", marca:"NA", cantidad: 250, unidad:"g"},
+        {id: 2, nombre:"Bolsa de Arroz", marca:"La Costeña", cantidad: 500, unidad:"g"},
+        {id: 3, nombre:"Jugo de Uva", marca:"Del Valle", cantidad: 300, unidad:"g"}
     ];
 
     // Función que se ejecutará cuando se haga clic en el botón cuadrado
@@ -27,7 +27,7 @@ export const CheckDateAdd = () => {
     
     return (
         <div className="dateAdd">
-            <div className="mensaje">
+            <div className="mensajeA">
                 <Guide message="Estás a punto de agregar una lista de productos. Recuerda verificar la fecha de caducidad de los productos que deseas agregar." size={100} />
             </div>
             <div className="buttonBackAdd">

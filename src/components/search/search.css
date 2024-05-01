@@ -1,0 +1,33 @@
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 5px;
+    border-radius: 5px;
+    width: 300px;
+  }
+  
+  .search-bar input {
+    flex-grow: 1;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .search-bar .icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px 10px;
+  }
+  
+  .search-bar .icon-button.active-add {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+  
+  .search-bar .icon-button.active-delete {
+    background-color: #F44336; /* Red */
+    color: white;
+  }  

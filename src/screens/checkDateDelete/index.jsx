@@ -8,9 +8,9 @@ import { SelectDateDelete } from '../../components/selectDateDelete';
 
 export const CheckDateDelete = () => {
     const products = [
-        {id: 1, nombre:"Apocosipa12345aaaaaaaaaa", marca:"NA", cantidad: 250, unidad:"g"},
-        {id: 2, nombre:"B", marca:"La Costeña", cantidad: 500, unidad:"g"},
-        {id: 3, nombre:"Shifu", marca:"Del Valle", cantidad: 300, unidad:"g"}
+        {id: 1, nombre:"Lata de Frijol", marca:"NA", cantidad: 250, unidad:"g"},
+        {id: 2, nombre:"Sopa do coditos", marca:"La Costeña", cantidad: 500, unidad:"g"},
+        {id: 3, nombre:"Lata de Atún", marca:"Del Valle", cantidad: 300, unidad:"g"}
     ];
 
     // Función que se ejecutará cuando se haga clic en el botón cuadrado

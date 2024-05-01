@@ -10,6 +10,7 @@ import { CalendarInput } from "../../components/calendarInput";
 import { ButtonSquare } from "../../components/buttonSquare";
 import { SelectDate } from "../../components/selectDate";
 import { SelectDateDelete } from "../../components/selectDateDelete";
+// import { SearchBar } from "../../components/search";
 
 export const Layout = () => {
   return (
@@ -31,6 +32,7 @@ export const Layout = () => {
       <ButtonSquare></ButtonSquare>
       <SelectDate></SelectDate>
       <SelectDateDelete></SelectDateDelete>
+      {/* <SearchBar></SearchBar> */}
     </div>
   );
 };
