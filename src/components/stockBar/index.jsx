@@ -1,10 +1,14 @@
 import "./StockBar.css";
-import { useState } from "react";
-import calendarIcon from "../../assets/img/calendarIcon.png";
-
+import { useState, useEffect } from "react";
+import cloudIcon from "../../assets/img/cloudIcon.png";
 
 export function StockBar({ stock, isDisabled }) {
   const [currentStock, setCurrentStock] = useState(parseInt(stock));
+  const [stockChanged, setStockChanged] = useState(false);
+
+  useEffect(() => {
+    stockCheck();
+  }, [currentStock]); // Se ejecutará cada vez que currentStock cambie
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -23,24 +27,39 @@ export function StockBar({ stock, isDisabled }) {
     }
   };
 
+  const stockCheck = () => {
+    if (currentStock === parseInt(stock)) {
+      setStockChanged(false);
+    } else {
+      setStockChanged(true);
+    }
+  };
+
   return (
-    <>
-      <img src={calendarIcon} alt="Imagen" />
-      <div class="texto-encima">{stock}</div>
-      <div className="stockBar">
-        <button onClick={() => changeStock(false)} disabled={isDisabled}>
-          -
-        </button>
-        <input
-          type="text"
-          value={currentStock}
-          onChange={handleChange}
+    <div className="stockBar">
+      <div className={"cloud" + (stockChanged && !isDisabled ? "" : " hide")}>
+        <img
+          className="cloudIcon"
+          src={cloudIcon}
+          alt="cloudIcon"
           disabled={isDisabled}
         />
-        <button onClick={() => changeStock(true)} disabled={isDisabled}>
-          +
-        </button>
+        <p className="cloudText" disabled={isDisabled}>
+          {stock}
+        </p>
       </div>
-    </>
+      <button onClick={() => changeStock(false)} disabled={isDisabled}>
+        -
+      </button>
+      <input
+        type="text"
+        value={isDisabled ? stock : currentStock}
+        onChange={handleChange}
+        disabled={isDisabled}
+      />
+      <button onClick={() => changeStock(true)} disabled={isDisabled}>
+        +
+      </button>
+    </div>
   );
 }

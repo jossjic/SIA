@@ -1,15 +1,13 @@
 .navbar {
   position: fixed; /* Establece la posición fija para que flote */
-  top: 0; /* Lo posiciona en la parte superior de la ventana */
-  right: 0; /* Lo alinea a la derecha */
-  background-color: #007bff;
-  padding: 10px 20px;
   z-index: 999; /* Asegura que esté por encima de otros elementos */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-link {
-  margin: 0 3px;
-  padding: 10px 20px;
   text-decoration: none;
   border-radius: 20px;
   background-color: #007bff;
@@ -18,4 +16,21 @@
 
 .nav-link:hover {
   background-color: #0056b3;
+}
+
+.navbar.hidden {
+  display: none;
+}
+
+.hideButton {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  z-index: 999;
+  cursor: pointer;
 }

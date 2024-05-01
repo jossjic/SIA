@@ -12,8 +12,8 @@ const links = [
     href: "layout",
   },
   {
-    name: "TestScreen",
-    href: "testscreen",
+    name: "AdminPage",
+    href: "adminPage",
   },
   {
     name: "CreateUser",
@@ -46,17 +46,29 @@ const links = [
   {
     name: "CheckDate Delete",
     href: "checkDateDelete",
-  }
+  },
 ];
 
 export function NavBar() {
+  const handleClick = () => {
+    setHidden(!hidden);
+  };
+
+  const [hidden, setHidden] = React.useState(false);
   return (
-    <div className="navbar">
-      {links.map((x, index) => (
-        <Link key={index} to={x.href} className="nav-link">
-          {x.name}
-        </Link>
-      ))}
-    </div>
+    <>
+      <div className={`navbar${hidden ? " hidden" : ""}`}>
+        <div className="links">
+          {links.map((x, index) => (
+            <Link key={index} to={x.href} className="nav-link">
+              {x.name}
+            </Link>
+          ))}
+        </div>
+      </div>
+      <button className="hideButton" onClick={handleClick}>
+        Click me
+      </button>
+    </>
   );
 }
