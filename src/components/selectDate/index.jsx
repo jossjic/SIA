@@ -5,31 +5,14 @@ import { GeneralButton } from "../button";
 import { barraBusqueda } from "../barraBusqueda";
 import { StockBarDate } from "../stockBarDate";
 
-export function SelectDate({ unit, amount, onCancel, onConfirm }) {
-  const [dates, setDates] = useState([]);
+export function SelectDate({ unit, amount, onCancel, onConfirm, productId }) {
+  //const [dates, setDates] = useState([]);
 
-  useEffect(() => {
-    fetch("http://3.20.237.82:3000/alimentos/atun")
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Error al obtener las fechas");
-      })
-      .then((data) => {
-        console.log("Alimentos:", data);
-        setDates(data);
-      })
-      .catch((error) => {
-        console.error("Error:", error.message);
-      });
-  }, []); // Este efecto se ejecuta solo una vez al montar el componente
-
-  /*
+  
   const dates = [
     {id: 1, caducidad:"01/05/2002", stock:"NA"},
     {id: 2, caducidad:"08/07/2024", stock: 500}
-];*/
+];
 
   return (
     <div className="checkCard_selectDate">
@@ -56,9 +39,9 @@ export function SelectDate({ unit, amount, onCancel, onConfirm }) {
                         </thead>
                         <tbody>
                         {dates.map((date) => (
-                            <tr key={date.a_id}>
-                            <td>{date.a_fechaCaducidad.substring(0,10)}</td>
-                            <td><StockBarDate stock={date.a_stock}></StockBarDate></td>
+                            <tr key={date.id}>
+                            <td>{date.caducidad.substring(0,10)}</td>
+                            <td><StockBarDate stock={date.stock}></StockBarDate></td>
                             </tr>
                         ))}
                         </tbody>
