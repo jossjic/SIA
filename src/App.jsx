@@ -15,6 +15,7 @@ import { AddProduct } from "./screens/addProduct";
 import { EditProduct } from "./screens/editProduct";
 import { CodePage } from "./screens/codePage";
 import { NewPass } from "./screens/newPass";
+import { EditUser } from "./screens/editUser";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/editProduct" element={<EditProduct />} />
           <Route path="/codePage" element={<CodePage />} />
           <Route path="/newPass" element={<NewPass />} />
+          <Route path="/editUser" element={<EditUser />} />
         </Routes>
       </Router>
     </div>
