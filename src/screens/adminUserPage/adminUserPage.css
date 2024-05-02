@@ -1,3 +1,10 @@
+.tableContainer {
+    width: 82%;
+    max-height: 600px;
+    overflow-y: scroll;
+    background-color: #d9d9d9;
+}
+
 .userPage {
     display: flex;
     flex-direction: column;
@@ -10,16 +17,18 @@
 .userTable {
     width: 100%;
     border-collapse: collapse;
+    background-color: #f2f2f2;
 }
 
 .userTable th, .userTable td {
-    text-align: left;
+    text-align: center;
     padding: 20px;
     border-bottom: 1px solid #ddd;
 }
 
 .userTable th {
-    background-color: #f2f2f2;
+    background-color: #f2f2f234;
+    font-weight: bold;
 }
 
 /* Estilos para los botones dentro de la tabla */
@@ -30,10 +39,11 @@
 
 /* Checkbox más grande */
 input[type="checkbox"] {
-    width: 24px;
-    height: 24px;
+    width: 38px;
+    height: 38px;
     cursor: pointer;
-    margin-right: 10px; /* Añadir espacio entre el checkbox y el texto */
+    margin-right: 8px; /* Añadir espacio entre el checkbox y el texto */
+    border: none;
   }
 
 @media screen and (max-width: 768px) {
@@ -54,20 +64,23 @@ input[type="checkbox"] {
     left: 10px;
 }
 
-.tableContainer {
-    width: 70%;
-    max-height: 800px;
-    overflow-y: scroll;
-}
-
 .generalButton {
-    /* Otros estilos del botón */
-    transition: transform 0.3s ease; /* Transición suave para el efecto hover */
+    /* Asegúrate de que los colores y los estilos sean consistentes */
+    padding: 10px 20px; /* Ajusta el padding según lo necesario */
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
 }
 
 .generalButton:hover {
     transform: scale(1.05); /* Aumentar ligeramente el tamaño al pasar el cursor */
 }
+
+.generalButton.Ver { background-color: #28A745; }
+.generalButton.Editar { background-color: #19739A; }
+.generalButton.Eliminar { background-color: #DC3545; }
 
 .actionsContainer {
     display: flex;
@@ -76,7 +89,14 @@ input[type="checkbox"] {
     gap: 20px; /* Adjust the gap as needed */
   }
 
-/* .square {
-    width: 30%;
-    padding: 4 8px;
-} */
+  .modalOverlayConf {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -59,6 +59,10 @@ const links = [
     name: "New Pass",
     href: "newPass",
   },
+  {
+    name: "EditUser",
+    href: "editUser",
+  },
 ];
 
 export function NavBar() {
