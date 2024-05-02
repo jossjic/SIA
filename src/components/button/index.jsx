@@ -10,9 +10,12 @@ export function GeneralButton({
 }) {
   const navigate = useNavigate();
   const handleClick = () => {
-    if (onClick && !path) {
+    // Ejecutar primero la función onClick si existe
+    if (onClick) {
       onClick();
-    } else {
+    }
+    // Luego, si hay un path definido, navegar a ese path
+    if (path) {
       navigate(path);
     }
   };
