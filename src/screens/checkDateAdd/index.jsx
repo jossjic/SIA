@@ -10,7 +10,7 @@ export const CheckDateAdd = () => {
     const [showSelectDate, setShowSelectDate] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState(null); // Nuevo estado para el ID del producto seleccionado
     const [products, setProducts] = useState([]);
-    const [dates, setDates] = useState([]); // Nuevo estado para las fechas
+    const [dates, setDates] = useState({}); // Estado para guardar las fechas por producto
 
     const ids = [1, 44, 2]; // Tu arreglo de IDs
 
@@ -49,30 +49,26 @@ export const CheckDateAdd = () => {
     
     // Nuevo efecto para obtener las fechas
     useEffect(() => {
-        if (selectedProductId !== null) {
-            fetch(`http://3.20.237.82:3000/alimentos/atun/${selectedProductId}`)
-                .then((response) => {
-                    console.log("Response status:", response.status);
-                    if (response.ok) {
-                        console.log("Response data:", response);
-                        return response.json();
-                    }
-                    throw new Error("Error al obtener las fechas");
-                })
-                .then((data) => {
-                    console.log("Data:", data);
-                    setDates(data);
-                })
-                .catch((error) => {
-                    console.error("Error:", error.message);
-                });
-        }
-    }, [selectedProductId]); // Este efecto se ejecuta solo cuando selectedProductId cambia
+        const fetchDates = async () => {
+          const promises = ids.map((id) => {
+            return fetch(`http://3.20.237.82:3000/alimentos/atun/${id}`)
+             .then((response) => response.json())
+             .then((data) => ({ [id]: data }));
+          });
+      
+          const datesByProduct = await Promise.all(promises);
+          const datesObject = datesByProduct.reduce((acc, current) => ({...acc,...current }), {});
+      
+          setDates(datesObject);
+        };
+      
+        fetchDates();
+      }, []); // Dependencia vacía, solo se ejecuta una vez
 
-    const handleButtonClick = (product) => {
-        setSelectedProductId(product.a_id); // Guarda el ID del producto seleccionado
+      const handleButtonClick = (product) => {
+        setSelectedProductId(product.a_id);
         setShowSelectDate(true);
-    };
+      };
 
     const handleCancelSelectDate = () => {
         setShowSelectDate(false);
@@ -113,7 +109,7 @@ export const CheckDateAdd = () => {
                                 <tr key={product.a_id}>
                                     <td>{product.a_nombre}</td>
                                     <td>{product.a_cantidad+' '+product.um_id}</td>
-                                    <td>{product.marca}</td>
+                                    <td>{product.m_id}</td>
                                     <td>
                                         <ButtonSquare textElement="v" color={product.estado ? "#00FF00" : "#E14040"} onClick={() => handleButtonClick(product)} disabled={product.estado}/>
 
@@ -132,7 +128,7 @@ export const CheckDateAdd = () => {
                 <div className="modalOverlay">
                     <div className="modalContent">
                         {/* Pasa las fechas al componente SelectDate */}
-                        <SelectDate dates={dates} onCancel={handleCancelSelectDate} onConfirm={handleConfirmButtonClick}/>
+                        <SelectDate dates={dates[selectedProductId]} onCancel={handleCancelSelectDate} onConfirm={handleConfirmButtonClick}/>
                     </div>
                 </div>
             )}
