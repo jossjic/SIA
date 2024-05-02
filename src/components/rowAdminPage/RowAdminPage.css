@@ -1,5 +1,4 @@
 .rowAdminPage {
-  margin-top: 4%;
   align-items: center;
   display: flex;
   align-items: center;
@@ -15,8 +14,8 @@
 }
 
 .rowAdminPage .checkBox {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
 }
 
 .rowAdminPage .checkBox:disabled {
@@ -53,4 +52,9 @@
 
 .rowAdminPage .cadDate {
   width: 12%;
+}
+
+.rowAdminPage p {
+  font-weight: 600;
+  font-size: 1.2em;
 }
