@@ -47,6 +47,18 @@ const links = [
     name: "CheckDate Delete",
     href: "checkDateDelete",
   },
+  {
+    name: "Code Page",
+    href: "codePage",
+  },
+  {
+    name: "Restore Pass",
+    href: "restorePass",
+  },
+  {
+    name: "New Pass",
+    href: "newPass",
+  },
 ];
 
 export function NavBar() {

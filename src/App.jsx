@@ -13,6 +13,8 @@ import { RestorePass } from "./screens/restorePass";
 import { CreateUser } from "./screens/createUser";
 import { AddProduct } from "./screens/addProduct";
 import { EditProduct } from "./screens/editProduct";
+import { CodePage } from "./screens/codePage";
+import { NewPass } from "./screens/newPass";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route path="/createUser" element={<CreateUser />} />
           <Route path="/addProduct" element={<AddProduct />} />
           <Route path="/editProduct" element={<EditProduct />} />
+          <Route path="/codePage" element={<CodePage />} />
+          <Route path="/newPass" element={<NewPass />} />
         </Routes>
       </Router>
     </div>
