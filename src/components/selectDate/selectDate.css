@@ -10,7 +10,11 @@
   
 .checkCard_selectDate button{
     padding: 13px 30px;
-    margin-top: 20px;
+    margin-top: 15px;
+}
+
+.generalTable .calendarID{
+  margin-top: 15px;
 }
 
 .generalTable{
@@ -26,7 +30,7 @@
 }
 
 .productsTable{
-  margin-left: 50px;
+  margin-left: 10px;
 }
 
 .productsTable th{

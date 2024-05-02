@@ -2,10 +2,19 @@ import React from "react";
 import "./selectDate.css";
 import { CadCheckCounter } from "../cadCheckCounter";
 import { GeneralButton } from "../button";
+import { CalendarInputDate } from "../../components/calendarInputDate";
 import { barraBusqueda } from "../barraBusqueda";
 import { StockBarDate } from "../stockBarDate";
 
 export function SelectDate({ unit, amount, dates, onCancel, onConfirm }) {
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   return (
     <div className="checkCard_selectDate">
@@ -19,6 +28,15 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm }) {
           </tr>
           <tr>
             <GeneralButton textElement="Cancelar" onClick={onCancel} color="#E14040"></GeneralButton>
+          </tr>
+          <tr>
+            <div className="calendarID">
+              <CalendarInputDate
+                name="a_fechaCaducidad"
+                //value={formData.a_fechaCaducidad}
+                onChange={handleChange}
+              />
+            </div>
           </tr>
           <tr>
             <GeneralButton textElement="Agregar Caducidad" path="" color="#5982C0"></GeneralButton> 
