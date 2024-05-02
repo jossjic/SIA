@@ -8,3 +8,42 @@
     transform: translate(-50%, -50%);
     gap: 20px;
 }
+
+.createUser-container {
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px; 
+    border-radius: 8px;
+    width: 100%; 
+    gap: 20px;
+}
+
+.mensaje{
+    align-items: center;
+    display: flex;
+    flex-direction: column; 
+    width: 70%;
+}
+
+
+.createInput {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 50%;
+}
+
+.createInput p {
+    font-weight: normal;
+    font-size: large;    
+}
+
+.createInput input {
+    background-color: transparent; 
+    color: blue;
+    border: none;
+    height: 40px;
+}
