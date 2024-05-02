@@ -10,6 +10,8 @@ export const CheckDateAdd = () => {
     const [showSelectDate, setShowSelectDate] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState(null); // Nuevo estado para el ID del producto seleccionado
     const [products, setProducts] = useState([]);
+    const [dates, setDates] = useState([]); // Nuevo estado para las fechas
+
     const ids = [1, 44, 2]; // Tu arreglo de IDs
 
      useEffect(() => {
@@ -45,7 +47,27 @@ export const CheckDateAdd = () => {
         });
     };
     
-      
+    // Nuevo efecto para obtener las fechas
+    useEffect(() => {
+        if (selectedProductId !== null) {
+            fetch(`http://3.20.237.82:3000/alimentos/atun/${selectedProductId}`)
+                .then((response) => {
+                    console.log("Response status:", response.status);
+                    if (response.ok) {
+                        console.log("Response data:", response);
+                        return response.json();
+                    }
+                    throw new Error("Error al obtener las fechas");
+                })
+                .then((data) => {
+                    console.log("Data:", data);
+                    setDates(data);
+                })
+                .catch((error) => {
+                    console.error("Error:", error.message);
+                });
+        }
+    }, [selectedProductId]); // Este efecto se ejecuta solo cuando selectedProductId cambia
 
     const handleButtonClick = (product) => {
         setSelectedProductId(product.a_id); // Guarda el ID del producto seleccionado
@@ -109,8 +131,8 @@ export const CheckDateAdd = () => {
             {showSelectDate && (
                 <div className="modalOverlay">
                     <div className="modalContent">
-                        {/* Pasa el ID del producto al componente SelectDate */}
-                        <SelectDate productId={selectedProductId} onCancel={handleCancelSelectDate} onConfirm={handleConfirmButtonClick}/>
+                        {/* Pasa las fechas al componente SelectDate */}
+                        <SelectDate dates={dates} onCancel={handleCancelSelectDate} onConfirm={handleConfirmButtonClick}/>
                     </div>
                 </div>
             )}
