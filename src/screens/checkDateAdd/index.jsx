@@ -8,22 +8,10 @@ import { SelectDate } from '../../components/selectDate';
 
 export const CheckDateAdd = () => {
     const [showSelectDate, setShowSelectDate] = useState(false);
-    const [productId, setProductId] = useState(null);
-
-    /*
-    const [products, setProducts] = useState([
-        { id: 1, nombre: "Lata de Atún", marca: "NA", cantidad: 200, unidad: "g", estado: false },
-        { id: 2, nombre: "Bolsa de Arroz", marca: "La Costeña", cantidad: 500, unidad: "g", estado: false },
-        { id: 3, nombre: "Jugo de Uva", marca: "Del Valle", cantidad: 300, unidad: "g", estado: false }
-    ]);
-    */
-
     const [products, setProducts] = useState([]);
+    const ids = [1, 2]; // Tu arreglo de IDs
 
-    // Arreglo temporal de IDs para consulta
-    const ids = [44];
-    
-    useEffect(() => {
+     useEffect(() => {
         const params = new URLSearchParams();
         ids.forEach((id) => {
           params.append('ids', id);
@@ -45,8 +33,7 @@ export const CheckDateAdd = () => {
       }, [ids]); // Agregué ids como dependencia del efecto
     
 
-      const handleButtonClick = (productId) => {
-        setProductId(productId.a_id);
+    const handleButtonClick = (productId) => {
         setShowSelectDate(true);
     };
 
@@ -55,13 +42,7 @@ export const CheckDateAdd = () => {
     };
 
     const handleConfirmButtonClick = () => {
-        // Actualiza el estado de "verificación" del producto a true
-        setProducts(prevProducts => prevProducts.map(p => {
-            if (p.a_id === productId) {
-                return { ...p, estado: true };
-            }
-            return p;
-        }));
+        // Aquí puedes realizar cualquier acción adicional después de confirmar la fecha
         setShowSelectDate(false);
     };
 
@@ -94,10 +75,10 @@ export const CheckDateAdd = () => {
                             {products.map(product => (
                                 <tr key={product.a_id}>
                                     <td>{product.a_nombre}</td>
-                                    <td>{product.a_cantidad + ' ' + product.um_id}</td>
-                                    <td>{product.m_id}</td>
+                                    <td>{product.a_cantidad}</td>
+                                    <td>{product.marca}</td>
                                     <td>
-                                        <ButtonSquare textElement="v" color={product.estado ? "#00FF00" : "#E14040"} onClick={() => handleButtonClick(product)}/>
+                                        <ButtonSquare textElement="v" color={product.estado ? "#00FF00" : "#E14040"} onClick={() => handleButtonClick(product.id)}/>
                                     </td>
                                 </tr>
                             ))}
@@ -112,7 +93,7 @@ export const CheckDateAdd = () => {
             {showSelectDate && (
                 <div className="modalOverlay">
                     <div className="modalContent">
-                        <SelectDate onCancel={handleCancelSelectDate} onConfirm={() => handleConfirmButtonClick(productId)} productId={productId}/>
+                        <SelectDate onCancel={handleCancelSelectDate} onConfirm={handleConfirmButtonClick}/>
                     </div>
                 </div>
             )}
