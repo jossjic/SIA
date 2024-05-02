@@ -10,7 +10,7 @@ export const CheckDateAdd = () => {
     const [showSelectDate, setShowSelectDate] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState(null); // Nuevo estado para el ID del producto seleccionado
     const [products, setProducts] = useState([]);
-    const ids = [44, 2]; // Tu arreglo de IDs
+    const ids = [1, 44, 2]; // Tu arreglo de IDs
 
      useEffect(() => {
         const params = new URLSearchParams();
@@ -33,10 +33,23 @@ export const CheckDateAdd = () => {
           });
       }, [ids]); // Agregué ids como dependencia del efecto
     
+      const updateProductState = (productId, newState) => {
+        console.log("Updating product state for product ID:", productId, "with new state:", newState);
+        setProducts(prevProducts => {
+            return prevProducts.map(product => {
+                if (product.a_id === productId) {
+                    return { ...product, estado: newState };
+                }
+                return product;
+            });
+        });
+    };
+    
+      
 
     const handleButtonClick = (product) => {
-        setShowSelectDate(true);
         setSelectedProductId(product.a_id); // Guarda el ID del producto seleccionado
+        setShowSelectDate(true);
     };
 
     const handleCancelSelectDate = () => {
@@ -44,7 +57,7 @@ export const CheckDateAdd = () => {
     };
 
     const handleConfirmButtonClick = () => {
-        // Aquí puedes realizar cualquier acción adicional después de confirmar la fecha
+        updateProductState(selectedProductId, true);
         setShowSelectDate(false);
     };
 
@@ -80,8 +93,8 @@ export const CheckDateAdd = () => {
                                     <td>{product.a_cantidad+' '+product.um_id}</td>
                                     <td>{product.marca}</td>
                                     <td>
-                                        <ButtonSquare textElement="v" color={product.estado ? "#00FF00" : "#E14040"} onClick={() => handleButtonClick(product)}/>
-                                        
+                                        <ButtonSquare textElement="v" color={product.estado ? "#00FF00" : "#E14040"} onClick={() => handleButtonClick(product)} disabled={product.estado}/>
+
                                     </td>
                                 </tr>
                             ))}
