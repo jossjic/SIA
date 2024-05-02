@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './searchBar.css';
+import './search.css';
 
 export function SearchBar() {
   const [inputText, setInputText] = useState('');
@@ -8,6 +8,7 @@ export function SearchBar() {
 
   const handleInputChange = (e) => {
     setInputText(e.target.value);
+    onSearch(e.target.value);
   };
 
   return (
