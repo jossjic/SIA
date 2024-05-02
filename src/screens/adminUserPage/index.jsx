@@ -3,9 +3,11 @@ import "./adminUserPage.css";
 import { GeneralButton } from "../../components/button";
 import { Guide } from "../../components/guide";
 import { ReturnButton } from "../../components/returnButton";
+import { SearchBar } from "../../components/search";
 
 export const UserPage = () => {
   const [users, setUsers] = useState([]);
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     fetch("http://3.20.237.82:3000/usuarios") // Replace with our actual API endpoint
@@ -41,6 +43,12 @@ export const UserPage = () => {
       });
   };
 
+  const handleSearch = (searchTerm) => {
+    setFilter(searchTerm.toLowerCase());
+  };
+
+  const filteredUsers = users.filter(user => user.id.toLowerCase().includes(filter));
+
   return (
     <div className="userPage">
       <div className="buttonTopLeft">
@@ -51,6 +59,7 @@ export const UserPage = () => {
       use las cajas al la izquierda del nombre de usuario para eliminar múltiples usuarios."
         size={100}
       />
+      <SearchBar onSearch={handleSearch}/>
       <div className="tableContainer">
         <table className="userTable square">
           <thead>
@@ -62,7 +71,7 @@ export const UserPage = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {filteredUsers.map((user) => (
               <tr key={user.id}>
                 <td>
                   <input type="checkbox" className="checkboxLarge" />
