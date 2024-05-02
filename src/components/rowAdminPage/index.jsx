@@ -34,6 +34,7 @@ export function RowAdminPage({
         type="checkbox"
         checked={isChecked}
         onChange={(e) => setIsChecked(e.target.checked)}
+        disabled={stock === 0 || stock === "0" ? true : false}
       />
       <p className="product">{product}</p>
       <p className="quantity">{quantity}</p>

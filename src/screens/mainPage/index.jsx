@@ -5,6 +5,7 @@ import { GeneralButton } from "../../components/button";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
+import {SlidingSideBar} from "../../components/slidingSideBar";
 
 export const MainPage = () => {
   const [alimentos, setAlimentos] = useState([]);
@@ -79,6 +80,7 @@ export const MainPage = () => {
 
   return (
     <div className="main">
+      <SlidingSideBar />
       <div className="mensaje">
         <Guide message="Bienvenid@ Estos alimentos son los próximos a caducar." size={130}/>
       </div> 
@@ -93,14 +95,14 @@ export const MainPage = () => {
               </tr>
             </thead>
             <tbody>
-              {alimentos.map((alimento) => (
-                <tr key={alimento.id}>
-                  <td>{alimento.a_nombre}</td>{" "}
-                  <td>{alimento.m_nombre}</td>
-                  <td className={getClassForEstatus(alimento.estatus)}>{alimento.estatus}</td>
-                  <td>{formatDate(alimento.a_fechaCaducidad)}</td>
-                </tr>
-              ))}
+            {alimentos.map((alimento) => (
+              <tr key={alimento.id}>
+                <td>{alimento.a_nombre}</td>{" "}
+                <td>{alimento.m_nombre || "Sin marca"}</td>
+                <td className={getClassForEstatus(alimento.estatus)}>{alimento.estatus}</td>
+                <td>{formatDate(alimento.a_fechaCaducidad)}</td>
+              </tr>
+            ))}
             </tbody>
           </table>
       </div>
@@ -111,8 +113,12 @@ export const MainPage = () => {
           path="/adminUserPage"
         />
         <GeneralButton textElement="Cerrar sesión" onClick={() => setIsModalOpen(true)} color="red" />
-        <ConfirmationPopUp message = "¿Seguro que quieres cerrar sesión?" answer1 = "Si" answer2 = "No" path1 = "/login" isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
       </div>
+      {isModalOpen && (
+      <div className="modalOverlayConf">
+          <ConfirmationPopUp message = "¿Seguro que quieres cerrar sesión?" answer1 = "Si" answer2 = "No" path1 = "/login" isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
+      </div>
+      )}
     </div>
   );
 };

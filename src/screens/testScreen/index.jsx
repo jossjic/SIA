@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./TestScreen.css";
+import "./AdminPage.css";
 import { RowAdminPage } from "../../components/rowAdminPage";
 
 export const TestScreen = () => {
@@ -22,20 +22,5 @@ export const TestScreen = () => {
       });
   }, []); // Este efecto se ejecuta solo una vez al montar el componente
 
-  return (
-    <div className="testScreen">
-      {alimentos.map((alimento) => (
-        <RowAdminPage
-          id={alimento.a_id}
-          product={alimento.a_nombre}
-          amount={alimento.a_cantidad}
-          unit={alimento.um_id}
-          brand={alimento.m_nombre}
-          stock={alimento.a_stock}
-          cadDate={alimento.a_fechaCaducidad}
-          key={alimento.a_id}
-        />
-      ))}
-    </div>
-  );
+  return <></>;
 };

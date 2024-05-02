@@ -10,9 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/crypto-js": "^4.2.2",
     "body-parser": "^1.20.2",
+    "crypto-js": "^4.2.0",
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.10",
+    "emailjs": "^4.0.3",
+    "emailjs-com": "^3.2.0",
     "express": "^4.19.2",
     "mysql": "^2.18.1",
     "nodemon": "^3.1.0",

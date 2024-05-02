@@ -3,7 +3,7 @@ import "./selectDateDelete.css";
 import { CadCheckCounter } from "../cadCheckCounter";
 import { GeneralButton } from "../button";
 import { barraBusqueda } from "../barraBusqueda";
-import { StockBar } from "../stockBar";
+import { StockBarDate } from "../stockBarDate";
 
 export function SelectDateDelete({ unit, amount, onCancel }) {
   const dates = [
@@ -42,7 +42,7 @@ export function SelectDateDelete({ unit, amount, onCancel }) {
                                 <td><input type="checkbox" className="checkboxLargeD" /></td>
                                 <td>{date.caducidad}</td>
                                 <td>{date.stock}</td>
-                                <td><StockBar stock={date.stock}></StockBar></td>
+                                <td><StockBarDate stock={date.stock}></StockBarDate></td>
                             </tr>
                         ))}
                         </tbody>

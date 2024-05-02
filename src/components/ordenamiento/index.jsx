@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ordenamiento.css';
 
-export function Ordenamiento() {
+export function Ordenamiento({message}) {
   const [circleColor, setCircleColor] = useState(false);
 
   const handleClick = () => {
@@ -10,14 +10,11 @@ export function Ordenamiento() {
 
   return (
     <div className="rectangulo-azul">
-      <a href="#" className="hipervinculo">Fecha de caducidad</a>
+      <a href="#" className="hipervinculo" onClick={handleClick}>{message}</a>
       <p
         className="circulo"
-        style={{ backgroundColor: circleColor ? 'green' : 'rgb(190, 190, 190)', cursor: "pointer"}}
-        onClick={handleClick}
+        style={{ backgroundColor: circleColor ? 'green' : 'rgb(190, 190, 190)'}}
       ></p>
     </div>
   );
 }
-
-

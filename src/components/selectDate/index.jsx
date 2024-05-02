@@ -3,7 +3,7 @@ import "./selectDate.css";
 import { CadCheckCounter } from "../cadCheckCounter";
 import { GeneralButton } from "../button";
 import { barraBusqueda } from "../barraBusqueda";
-import { StockBar } from "../stockBar";
+import { StockBarDate } from "../stockBarDate";
 
 export function SelectDate({ unit, amount, onCancel }) {
   const dates = [
@@ -38,7 +38,7 @@ export function SelectDate({ unit, amount, onCancel }) {
                         {dates.map(date => (
                             <tr key={date.id}>
                             <td>{date.caducidad}</td>
-                            <td><StockBar stock={date.stock}></StockBar></td>
+                            <td><StockBarDate stock={date.stock}></StockBarDate></td>
                             </tr>
                         ))}
                         </tbody>
