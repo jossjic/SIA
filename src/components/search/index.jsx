@@ -23,7 +23,7 @@ export function SearchBar() {
       </button>
       <input 
         type="text" 
-        placeholder="Navegador YVES..." 
+        placeholder="Buscar..." 
         value={inputText} 
         onChange={handleInputChange} 
       />
