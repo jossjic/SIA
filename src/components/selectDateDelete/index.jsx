@@ -24,9 +24,6 @@ export function SelectDateDelete({ unit, amount, onCancel }) {
           <tr>
             <GeneralButton textElement="Cancelar" onClick={onCancel} color="#E14040"></GeneralButton>
           </tr>
-          <tr>
-            <GeneralButton textElement="Agregar Caducidad" path="" color="#5982C0"></GeneralButton> 
-          </tr>
         </td>
         <td>
           <table className="productsTableD">
