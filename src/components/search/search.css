@@ -1,26 +1,51 @@
 .search-bar {
     display: flex;
     align-items: center;
-    background-color: #f0f0f0;
-    padding: 5px;
-    border-radius: 5px;
-    width: 100%;
+    padding: 20px 40px;
+    border-radius: 10px;
+    width: 80%;
+    gap: 13px;
   }
   
   .search-bar input {
     flex-grow: 1;
     border: none;
-    padding: 10px;
-    font-size: 16px;
+    padding: 20px 40px;
+    font-size: 25px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    margin: 0 15px;
   }
-  
-  .search-bar .icon-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    padding: 5px 10px;
-  }
+
+  /* Estilos para el botón de añadir */
+.search-bar .icon-button.add {
+  border-radius: 100px 0 0 100px; 
+  width: 90px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  font-size: 40px;
+  padding: 0;
+}
+
+/* Estilos para el botón de eliminar */
+.search-bar .icon-button.delete {
+  border-radius: 0 100px 100px 0; 
+  width: 90px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  font-size: 40px;
+  padding: 0;
+}
   
   .search-bar .icon-button.active-add {
     background-color: #4CAF50; /* Green */
