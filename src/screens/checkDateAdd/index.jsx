@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./checkDateAdd.css";
 import { Guide } from '../../components/guide';
 import { ReturnButton } from "../../components/returnButton";
-import { ButtonSquare } from "../../components/buttonSquare";
+import { ButtonSquare, ButtonCircle } from "../../components/buttonSquare";
 import { GeneralButton } from '../../components/button';
 import { SelectDate } from '../../components/selectDate';
 
@@ -11,6 +11,10 @@ export const CheckDateAdd = () => {
     const [selectedProductId, setSelectedProductId] = useState(null); // Nuevo estado para el ID del producto seleccionado
     const [products, setProducts] = useState([]);
     const [dates, setDates] = useState({}); // Estado para guardar las fechas por producto
+
+    const [buttonSquareColor, setButtonSquareColor] = useState("#E14040"); 
+    // Mantén un estado para los colores de los botones cuadrados
+    const [buttonColors, setButtonColors] = useState({});
 
     const [productsWithStock, setProductsWithStock] = useState([]);
 
@@ -83,6 +87,15 @@ export const CheckDateAdd = () => {
         setShowSelectDate(true);
       };
 
+
+      const handleButtonClickSquare = (productId) => {
+        // Actualiza el color del botón cuadrado correspondiente al producto seleccionado
+        setButtonColors(prevColors => ({
+            ...prevColors,
+            [productId]: "#00FF00" // Cambia el color a verde
+        }));
+    };
+
     const handleCancelSelectDate = () => {
         setShowSelectDate(false);
     };
@@ -93,8 +106,10 @@ export const CheckDateAdd = () => {
     };
 
     const allProductsVerified = () => {
-        return products.every(product => product.estado);
+        // Verifica si todos los ButtonSquare están en verde
+        return Object.values(buttonColors).every(color => color === "#00FF00");
     };
+    
 
     return (
         <div className="dateAdd">
@@ -114,7 +129,10 @@ export const CheckDateAdd = () => {
                                 <th>Nombre</th>
                                 <th>Cantidad</th>
                                 <th>Marca</th>
+                                <th>Stock</th>
+                                <th>Fecha Caducidad</th>
                                 <th>Verificación</th>
+                                <th>Agregar fecha</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -122,10 +140,18 @@ export const CheckDateAdd = () => {
                                 <tr key={product.a_id}>
                                     <td>{product.a_nombre}</td>
                                     <td>{product.a_cantidad+' '+product.um_id}</td>
-                                    <td>{product.marca_nombre}</td>
+                                    <td>{product.m_id}</td>
+                                    <td>{product.a_stock}</td>
+                                    <td>{product.a_fechaCaducidad.substring(0,10)}</td>
                                     <td>
-                                        <ButtonSquare textElement="v" color={product.estado ? "#00FF00" : "#E14040"} onClick={() => handleButtonClick(product)} disabled={product.estado}/>
-
+                                        <ButtonSquare 
+                                            textElement="v" 
+                                            color={buttonColors[product.a_id] || "#E14040"} // Usa el color del estado o el color predeterminado
+                                            onClick={() => handleButtonClickSquare(product.a_id)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <ButtonCircle textElement="+" color="#5982C0" onClick={() => handleButtonClick(product)} disabled={product.estado}/>
                                     </td>
                                 </tr>
                             ))}
