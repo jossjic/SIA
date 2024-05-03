@@ -5,7 +5,6 @@ import { GeneralButton } from "../../components/button";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
-import { SlidingSideBar } from "../../components/slidingSideBar";
 
 export const MainPage = () => {
   const [alimentos, setAlimentos] = useState([]);
@@ -79,7 +78,7 @@ export const MainPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="main">
+    <div className="mainP">
       <div className="mensaje">
         <Guide
           message="Bienvenid@ Estos alimentos son los próximos a caducar."

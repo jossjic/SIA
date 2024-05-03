@@ -4,6 +4,7 @@ import { Guide } from '../../components/guide';
 import { GeneralButton } from '../../components/button';
 import emailjs from 'emailjs-com';
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
+import { useNavigate } from 'react-router-dom';
 
 export const RestorePass = () => {
   const [email, setEmail] = useState('');
@@ -11,6 +12,11 @@ export const RestorePass = () => {
   const [code, setCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const handleOkClick = () => {
+    setIsModalOpen(false);
+    navigate("/codePage"); 
+  };
 
   // función para generar un código aleatorio de 5 dígitos
   const generateRandomCode = () => {
@@ -71,7 +77,7 @@ export const RestorePass = () => {
       </div>
       {isModalOpen && (
         <div className="modalOverlayConf">
-          <ConfirmationPopUp message="Correo enviado con éxito." answer1="Ok" isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
+          <ConfirmationPopUp message="Correo enviado con éxito." answer1="Ok" isOpen={isModalOpen} closeModal={handleOkClick} />
         </div>
       )}
     </div>
