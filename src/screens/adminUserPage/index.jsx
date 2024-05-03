@@ -51,7 +51,11 @@ export const UserPage = () => {
     setFilter(searchTerm.toLowerCase());
   };
 
-  const filteredUsers = users.filter(user => user.id.toLowerCase().includes(filter));
+  const filteredUsers = users.filter(user => 
+    user.id.toLowerCase().includes(filter) ||
+    user.email.toLowerCase().includes(filter) ||
+    (user.otherField && user.otherField.toLowerCase().includes(filter)) // Example for additional fields
+  );
 
   return (
     <div className="userPage">
