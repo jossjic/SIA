@@ -5,7 +5,6 @@ import { GeneralButton } from "../../components/button";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
-import { SlidingSideBar } from "../../components/slidingSideBar";
 
 export const MainPage = () => {
   const [alimentos, setAlimentos] = useState([]);
