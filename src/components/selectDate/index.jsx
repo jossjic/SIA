@@ -1,31 +1,99 @@
-import React from "react";
+import React, {useState} from "react";
 import "./selectDate.css";
+import { SuccessPopupDate } from "../../components/successPopupDate";
 import { CadCheckCounter } from "../cadCheckCounter";
 import { GeneralButton } from "../button";
+import { CalendarInputDate } from "../../components/calendarInputDate";
 import { barraBusqueda } from "../barraBusqueda";
 import { StockBarDate } from "../stockBarDate";
+import { formatDate } from "../../generalFunctions";
 
-export function SelectDate({ unit, amount, onCancel }) {
-  const dates = [
-    {id: 1, caducidad:"01/05/2002", stock:"NA"},
-    {id: 2, caducidad:"08/07/2024", stock: 500}
-];
+export function SelectDate({ unit, amount, dates, onCancel, onConfirm, onUpdateStock, productStock }) {
+
+  const [formData, setFormData] = useState({
+    a_nombre: dates[0].a_nombre,
+    a_cantidad: dates[0].a_cantidad,
+    a_stock: 0,
+    a_fechaSalida: null,
+    a_fechaEntrada: formatDate(new Date()),
+    a_fechaCaducidad: null,
+    um_id: dates[0].um_id,
+    m_id: dates[0].m_id,
+  });
+
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [updatedStock, setUpdatedStock] = useState(productStock);
+
+  const handleStockChange = (newStock) => {
+    setFormData((prevFormData) => ({...prevFormData, a_stock: newStock }));
+    onUpdateStock(newStock);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    setUpdatedStock(parseInt(value)); // update the local state variable
+    onUpdateStock(parseInt(value)); // update the parent component's state variable
+  };
+
+  const handleSubmit = async () => {
+    try {
+      console.log(formData);
+      const response = await fetch("http://3.20.237.82:3000/alimentos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error("Error al agregar el alimento");
+      }
+      // Manejar el éxito de la inserción
+      setShowSuccessPopup(true); // Mostrar el Popup de éxito
+      console.log("Alimento agregado correctamente");
+    } catch (error) {
+      console.error("Error al agregar el alimento:", error);
+    }
+  };
+
+  const handlePopupClose = () => {
+    setShowSuccessPopup(false); // Ocultar el Popup de éxito
+    window.location.reload(); // Actualizar la página
+  };
+
+  // Modify the onConfirm function to include the updated stock value as a token
+  const handleConfirm = () => {
+    onConfirm({ ...formData, a_stock: updatedStock }); // include the updated stock value as a token
+  };
 
   return (
     <div className="checkCard_selectDate">
       <table className="generalTable">
         <td>
           <tr>
-            <CadCheckCounter unit="test" amount="1"></CadCheckCounter>
+            <CadCheckCounter unit={unit} amount={amount}></CadCheckCounter>
           </tr>
           <tr>
-            <GeneralButton textElement="Confirmar" path="" color="#4FA725"></GeneralButton>
+            <GeneralButton textElement="Confirmar" onClick={handleConfirm} color="#4FA725"></GeneralButton>
           </tr>
           <tr>
             <GeneralButton textElement="Cancelar" onClick={onCancel} color="#E14040"></GeneralButton>
           </tr>
           <tr>
-            <GeneralButton textElement="Agregar Caducidad" path="" color="#5982C0"></GeneralButton> 
+            <div className="calendarID">
+              <CalendarInputDate
+                name="a_fechaCaducidad"
+                value={formData.a_fechaCaducidad}
+                onChange={handleChange}
+              />
+            </div>
+          </tr>
+          <tr>
+            <GeneralButton textElement="Agregar Caducidad" onClick={handleSubmit} color="#5982C0"></GeneralButton> 
           </tr>
         </td>
         <td>
@@ -36,15 +104,27 @@ export function SelectDate({ unit, amount, onCancel }) {
                         </thead>
                         <tbody>
                         {dates.map(date => (
-                            <tr key={date.id}>
-                            <td>{date.caducidad}</td>
-                            <td><StockBarDate stock={date.stock}></StockBarDate></td>
+                            <tr key={date.a_id}>
+                            <td>{date.a_fechaCaducidad.substring(0,10)}</td>
+                            <td><StockBarDate
+                                  productStock={date.a_stock} // Replace with the correct a_stock value for the selected date
+                                  isDisabled={!dates.length}
+                                  onStockChange={handleStockChange}
+                                />
+                                  </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
         </td>
-      </table>  
+      </table>
+      
+          {showSuccessPopup && 
+          <div className="modalOverlay">
+          <div className="modalContent">
+            <SuccessPopupDate onClose={handlePopupClose} />
+          </div>
+          </div>}  
     </div>
   );
 }
