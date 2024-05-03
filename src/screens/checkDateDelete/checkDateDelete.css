@@ -39,7 +39,7 @@
 
 .buttonBackDelete {
     display: flex;
-    margin-left: 0%;
+    margin-left: 10%;
     align-items: flex-start; /* Ajusta el comportamiento de align-items para .buttonBackAdd */
 }
 
@@ -51,7 +51,7 @@
 }
 
 .cuadradoD{
-    width: 100%;
+    width: 80%;
     height: auto;
     padding-top: 3%; 
     background-color: #D9D9D9;
