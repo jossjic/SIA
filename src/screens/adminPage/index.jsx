@@ -8,13 +8,44 @@ import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { SearchBar } from "../../components/search";
 import { SlidingSideBar } from "../../components/slidingSideBar";
 import "./AdminPage.css";
+import { set } from "date-fns";
 
 export const AdminPage = () => {
-  const [alimentos, setAlimentos] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const pageSize = 10;
   const [inputPage, setInputPage] = useState(String(currentPage));
+  const [filteredAlimentos, setFilteredAlimentos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [originalAlimentos, setOriginalAlimentos] = useState([]);
+  const [originalTotalPages, setOriginalTotalPages] = useState(1);
+
+  // Función para manejar la búsqueda
+  const handleSearch = (searchTerm) => {
+    setSearchTerm(searchTerm);
+
+    // Si el término de búsqueda es una cadena vacía, restaura los alimentos y la paginación originales
+    if (searchTerm === "") {
+      setFilteredAlimentos(originalAlimentos);
+      setTotalPages(originalTotalPages);
+      return;
+    }
+
+    // Realizar la lógica de búsqueda aquí
+    const filtered = originalAlimentos.filter((alimento) => {
+      return (
+        alimento.a_nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        alimento.um_id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (alimento.m_nombre &&
+          alimento.m_nombre.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        alimento.a_stock.toString().includes(searchTerm) ||
+        alimento.a_fechaCaducidad.includes(searchTerm)
+      );
+    });
+
+    setFilteredAlimentos(filtered);
+    setTotalPages(Math.ceil(filtered.length / pageSize));
+  };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [options, setOptions] = useState({
@@ -51,7 +82,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -68,7 +100,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -84,7 +117,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -100,7 +134,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -116,7 +151,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -132,7 +168,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -148,7 +185,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -164,7 +202,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -180,7 +219,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -196,7 +236,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -212,7 +253,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -228,7 +270,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -244,7 +287,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -260,7 +304,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -276,7 +321,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -292,7 +338,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -308,7 +355,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -324,7 +372,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -340,7 +389,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -356,7 +406,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -372,7 +423,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -395,7 +447,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -418,7 +471,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -441,7 +495,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -464,7 +519,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -486,7 +542,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -508,7 +565,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -530,7 +588,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -552,7 +611,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -574,7 +634,8 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setAlimentos(data);
+          setOriginalAlimentos(data);
+          setFilteredAlimentos(data);
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -594,7 +655,7 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setTotalPages(Math.ceil(data.total / pageSize));
+          setOriginalTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -608,7 +669,7 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setTotalPages(Math.ceil(data.total / pageSize));
+          setOriginalTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -622,7 +683,7 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setTotalPages(Math.ceil(data.total / pageSize));
+          setOriginalTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -636,7 +697,7 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setTotalPages(Math.ceil(data.total / pageSize));
+          setOriginalTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -650,7 +711,7 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          setTotalPages(Math.ceil(data.total / pageSize));
+          setOriginalTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -710,10 +771,10 @@ export const AdminPage = () => {
         size={100}
         className="guide"
       />
-      <SearchBar />
+      <SearchBar onSearch={handleSearch} />
       <SlidingSideBar options={options} setOptions={setOptions} />
       <div className="alimentosBox">
-        {alimentos.map((alimento) => (
+        {filteredAlimentos.map((alimento) => (
           <div className="divRow" key={alimento.a_id}>
             <RowAdminPage
               id={alimento.a_id}
