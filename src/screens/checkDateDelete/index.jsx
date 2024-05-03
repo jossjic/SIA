@@ -126,7 +126,6 @@ export const CheckDateDelete = () => {
                             <th>Stock</th>
                             <th>Fecha Caducidad</th>
                             <th>Verificación</th>
-                            <th>Agregar fecha</th>
                         </thead>
                         <tbody>
                             {products.map(product => (
@@ -140,9 +139,6 @@ export const CheckDateDelete = () => {
                                         <ButtonSquare textElement="v" 
                                             color={buttonColors[product.a_id] || "#E14040"} // Usa el color del estado o el color predeterminado
                                             onClick={() => handleButtonClickSquare(product.a_id)}/>
-                                    </td>
-                                    <td>
-                                        <ButtonCircle textElement="+" color="#5982C0" onClick={() => handleButtonClick(product)} disabled={product.estado}></ButtonCircle>
                                     </td>
                                 </tr>
                         ))}
