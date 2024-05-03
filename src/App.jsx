@@ -44,7 +44,10 @@ function App() {
             path="/checkDateAdd"
             element={<CheckDateAdd selectedIds={selectedIds} />}
           />
-          <Route path="/checkDateDelete" element={<CheckDateDelete />} />
+          <Route
+            path="/checkDateDelete"
+            element={<CheckDateDelete selectedIds={selectedIds} />}
+          />
           <Route path="/createUser" element={<CreateUser />} />
           <Route path="/restorePass" element={<RestorePass />} />
           <Route path="/createUser" element={<CreateUser />} />
