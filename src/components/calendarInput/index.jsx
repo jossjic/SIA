@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import { formatDate } from "../../generalFunctions";
 import "react-calendar/dist/Calendar.css";
@@ -8,6 +8,13 @@ export function CalendarInput({ name, value, onChange }) {
   const [date, setDate] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
   const [inputText, setInputText] = useState("");
+
+  useEffect(() => {
+    if (value) {
+      setDate(new Date(value));
+      setInputText(formatDate(new Date(value)));
+    }
+  }, [value]);
 
   const handleDateChange = (date) => {
     setDate(date);
