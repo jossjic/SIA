@@ -8,8 +8,11 @@ import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 
 export const UserPage = () => {
   const [users, setUsers] = useState([]);
+  const [selectedUserIds, setSelectedUserIds] = useState([]);
   const [filter, setFilter] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(null);
+  const [deleteActive, setDeleteActive] = useState(false);
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
 
 
   useEffect(() => {
@@ -28,6 +31,24 @@ export const UserPage = () => {
         console.error("Error:", error.message);
       });
   }, []); // This effect runs only once when the component is mounted
+
+  const handleCheckboxChange = (event, id) => {
+    const isChecked = event.target.checked;
+    setSelectedUserIds(prev => isChecked ? [...prev, id] : prev.filter(uid => uid !== id));
+    setDeleteActive(selectedUserIds.length > 0);
+  };
+
+  const handleDeleteSelected = () => {
+    Promise.all(selectedUserIds.map(id => 
+      fetch(`http://3.20.237.82:3000/usuarios/${id}`, { method: "DELETE" })
+    )).then(() => {
+      setUsers(users.filter(user => !selectedUserIds.includes(user.id)));
+      setSelectedUserIds([]);
+      setConfirmDeleteOpen(false);
+    }).catch(error => {
+      console.error("Error:", error);
+    });
+  };
 
   const handleDelete = (userId) => {
     // Call the delete API endpoint
@@ -67,7 +88,22 @@ export const UserPage = () => {
       use las cajas al la izquierda del nombre de usuario para eliminar múltiples usuarios."
         size={100}
       />
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} 
+      addCartNumber={0} 
+      deleteCartNumber={selectedUserIds.length}
+      deleteActive={selectedUserIds.length > 0}
+      onDeleteSelected={() => setConfirmDeleteOpen(true)}
+      />
+      {confirmDeleteOpen && (
+        <ConfirmationPopUp
+          message="¿Está seguro que desea eliminar a los usuarios seleccionados permanentemente?"
+          answer1="Si"
+          answer2="No"
+          funct={handleDeleteSelected}
+          isOpen={confirmDeleteOpen}
+          closeModal={() => setConfirmDeleteOpen(false)}
+        />
+      )}
       <div className="tableContainer">
         <table className="userTable square">
           <thead>
@@ -82,7 +118,9 @@ export const UserPage = () => {
           {filteredUsers.map((user) => (
               <tr key={user.id}>
                 <td>
-                  <input type="checkbox" className="checkboxLarge" />
+                  <input type="checkbox" checked={selectedUserIds.includes(user.id)}
+                    onChange={(e) => handleCheckboxChange(e, user.id)} 
+                    className="checkboxLarge" />
                 </td>
                 <td>{user.id}</td>{" "}
                 <td>{user.email}</td>

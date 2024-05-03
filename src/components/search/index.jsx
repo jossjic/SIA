@@ -7,6 +7,7 @@ export function SearchBar({
   deleteCartNumber,
   addActive,
   deleteActive,
+  onDeleteSelected
 }) {
   const [inputText, setInputText] = useState("");
 
@@ -41,6 +42,7 @@ export function SearchBar({
           className={`icon-button delete ${
             deleteActive ? "active-delete" : ""
           }`}
+          onClick={onDeleteSelected}
         >
           🗑️
         </button>
