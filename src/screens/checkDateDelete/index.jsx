@@ -116,7 +116,7 @@ export const CheckDateDelete = () => {
                                 <tr key={product.a_id}>
                                     <td>{product.a_nombre}</td>
                                     <td>{product.a_cantidad+' '+product.um_id}</td>
-                                    <td>{product.m_id}</td>
+                                    <td>{product.marca_nombre}</td>
                                     <td>
                                     <ButtonSquare textElement="v" color={product.estado ? "#00FF00" : "#E14040"} onClick={() => handleButtonClick(product)} disabled={product.estado}/>
                                     </td>
