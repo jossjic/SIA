@@ -5,13 +5,24 @@
   width: 100%;
 }
 
+.adminPage .returnButton {
+  position: fixed;
+  left: 1%;
+  top: 1%;
+}
+
+.adminPage .sidebar {
+  top: 14%;
+  left: 1%;
+  height: 80%;
+}
+
 .alimentosBox {
   display: flex;
   flex-direction: column;
   width: 80%;
-  height: 80vh;
+  height: 60vh;
   background-color: #f0f0f0;
-  margin: 20px 0;
 }
 .divRow {
   width: 100%;

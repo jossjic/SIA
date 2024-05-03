@@ -1,58 +1,48 @@
 .search-bar {
-    display: flex;
-    align-items: center;
-    padding: 20px 40px;
-    border-radius: 10px;
-    width: 80%;
-    gap: 13px;
-  }
-  
-  .search-bar input {
-    flex-grow: 1;
-    border: none;
-    padding: 20px 40px;
-    font-size: 25px;
-    background-color: #e0e0e0;
-    border-radius: 10px;
-    margin: 0 15px;
-  }
+  display: flex;
+  align-items: center;
+  width: 80%;
+  height: 40px;
+  margin: 20px 0;
+}
 
-  /* Estilos para el botón de añadir */
-.search-bar .icon-button.add {
-  border-radius: 100px 0 0 100px; 
-  width: 90px;
-  height: 70px;
+.search-bar input {
+  border: none;
+  height: 95%;
+  width: 80%; /* Modificado para que el input ocupe el 80% del ancho */
+  font-size: 16px; /* Modificado para que sea más legible */
+  background-color: #e0e0e0;
+  margin: 0 2%;
+}
+
+.search-bar .icon-button {
+  width: 10%; /* Modificado para que todos los botones tengan el mismo ancho */
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   background-color: #e0e0e0;
   cursor: pointer;
-  font-size: 40px;
-  padding: 0;
+  font-size: 20px; /* Modificado para que sea más legible */
+}
+
+/* Estilos para el botón de añadir */
+.search-bar .icon-button.add {
+  border-radius: 100px 0 0 100px;
 }
 
 /* Estilos para el botón de eliminar */
 .search-bar .icon-button.delete {
-  border-radius: 0 100px 100px 0; 
-  width: 90px;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background-color: #e0e0e0;
-  cursor: pointer;
-  font-size: 40px;
-  padding: 0;
+  border-radius: 0 100px 100px 0;
 }
-  
-  .search-bar .icon-button.active-add {
-    background-color: #4CAF50; /* Green */
-    color: white;
-  }
-  
-  .search-bar .icon-button.active-delete {
-    background-color: #F44336; /* Red */
-    color: white;
-  }  
+
+.search-bar .icon-button.active-add {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.search-bar .icon-button.active-delete {
+  background-color: #f44336; /* Red */
+  color: white;
+}

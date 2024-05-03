@@ -24,10 +24,6 @@
   justify-content: center; /* Centrar horizontalmente */
 }
 
-.buttonContainer button {
-  margin-right: 20px;
-}
-
 .mensaje {
   align-items: center;
   display: flex;

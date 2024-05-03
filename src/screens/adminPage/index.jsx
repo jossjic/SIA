@@ -5,6 +5,8 @@ import { RowAdminPage } from "../../components/rowAdminPage";
 import backButton from "../../assets/img/backPageIcon.svg";
 import frontButton from "../../assets/img/frontPageIcon.svg";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
+import { SearchBar } from "../../components/search";
+import { SlidingSideBar } from "../../components/slidingSideBar";
 import "./AdminPage.css";
 
 export const AdminPage = () => {
@@ -98,11 +100,12 @@ export const AdminPage = () => {
     <div className="adminPage">
       <ReturnButton />
       <Guide
-        message="Estás viendo los alimentos relacionados a este usuario, puedes agregar, eliminar, editar y crear nuevos alimentos desde esta ventana."
-        size={80}
+        message="Saludos a todos, bienvenidos al sistema de administración del albergue, el día de hoy centrense en comprenderlo :) "
+        size={100}
         className="guide"
       />
-
+      <SearchBar />
+      <SlidingSideBar />
       <div className="alimentosBox">
         {alimentos.map((alimento) => (
           <div className="divRow" key={alimento.a_id}>
