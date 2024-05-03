@@ -9,8 +9,10 @@ import { formatDate } from "../../generalFunctions";
 import { DropDown } from "../../components/dropDown";
 import "./EditProduct.css";
 import { CalendarInputDate } from "../../components/calendarInputDate";
+import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 
 export function EditProduct() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const {a_id} = useParams();
   const [formData, setFormData] = useState({
     a_nombre: "",
@@ -69,6 +71,7 @@ export function EditProduct() {
       }
       // Manejar el éxito de la edición
       console.log("Alimento editado correctamente");
+      setIsModalOpen(true);
     } catch (error) {
       console.error("Error al editar el alimento:", error);
     }
@@ -77,7 +80,7 @@ export function EditProduct() {
   return (
     <div className="editProduct">
       <div className="editProductTitle">
-        <Guide message="Asegúrate de rellenar todos los campos. <3"></Guide>
+        <Guide message="Asegúrate de rellenar todos los campos."></Guide>
         <ReturnButton textElement="Editar Producto Existente"></ReturnButton>
       </div>
 
@@ -146,6 +149,11 @@ export function EditProduct() {
           onClick={handleSubmit}
         ></GeneralButton>
       </div>
+      {isModalOpen && (
+        <div className="modalOverlayConf">
+          <ConfirmationPopUp message="Alimento editado correctamente" answer1="Ok" isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
+        </div>
+      )}
     </div>
   );
 }
