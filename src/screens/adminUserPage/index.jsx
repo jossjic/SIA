@@ -4,10 +4,14 @@ import { GeneralButton } from "../../components/button";
 import { Guide } from "../../components/guide";
 import { ReturnButton } from "../../components/returnButton";
 import { SearchBar } from "../../components/search";
+import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 
 export const UserPage = () => {
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null); // Almacena el ID del usuario a eliminar
+
 
   useEffect(() => {
     fetch("http://3.20.237.82:3000/usuarios") // Replace with our actual API endpoint
@@ -33,15 +37,28 @@ export const UserPage = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          setUsers(users.filter((user) => user.id !== userId));
+          setIsModalOpen(false);
         }
-        // Remove the user from the state to update the UI
-        setUsers(users.filter((user) => user.id !== userId));
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
+
+
+  const handleDeleteClick = (userId) => {
+    setSelectedUserId(userId); // Establecer el ID del usuario para posible eliminación
+    setIsModalOpen(true); // Abrir el modal de confirmación
+  };
+  
+  const handleDeleteConfirmed = () => {
+      handleDelete(selectedUserId); // Procede a eliminar el usuario
+  };
+  
+  const closeModal = () => {
+    setIsModalOpen(false); // Solo cierra el modal sin eliminar
+  };  
 
   const handleSearch = (searchTerm) => {
     setFilter(searchTerm.toLowerCase());
@@ -59,7 +76,7 @@ export const UserPage = () => {
       use las cajas al la izquierda del nombre de usuario para eliminar múltiples usuarios."
         size={100}
       />
-      <SearchBar onSearch={handleSearch}/>
+      <SearchBar onSearch={(term) => setFilter(term)} />
       <div className="tableContainer">
         <table className="userTable square">
           <thead>
@@ -71,7 +88,7 @@ export const UserPage = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user) => (
+          {users.filter(user => user.id.toLowerCase().includes(filter)).map((user) => (
               <tr key={user.id}>
                 <td>
                   <input type="checkbox" className="checkboxLarge" />
@@ -93,8 +110,13 @@ export const UserPage = () => {
                     textElement="  Eliminar  "
                     color="#DC3545"
                     className="generalButton"
-                    onClick={() => handleDelete(user.id)}
+                    onClick={() => handleDeleteClick(user.id)}
                   />
+                  {isModalOpen && (
+                    <div className="modalOverlayConf">
+                      <ConfirmationPopUp isOpen={isModalOpen} message = "¿Seguro que quieres eliminar al usuario permanentemente?" answer1 = "Si" answer2 = "No" handleFirstAction={handleDeleteConfirmed}
+                      closeModal={closeModal} />
+                    </div>)}
                 </td>
               </tr>
             ))}
