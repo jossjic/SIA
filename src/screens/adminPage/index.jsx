@@ -8,7 +8,6 @@ import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { SearchBar } from "../../components/search";
 import { SlidingSideBar } from "../../components/slidingSideBar";
 import "./AdminPage.css";
-import { set } from "date-fns";
 
 export const AdminPage = () => {
   const [alimentos, setAlimentos] = useState([]);
@@ -52,7 +51,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -70,7 +68,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -87,7 +84,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -104,7 +100,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -121,7 +116,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -138,7 +132,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -155,7 +148,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -172,7 +164,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -189,7 +180,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -206,7 +196,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -223,7 +212,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -240,7 +228,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -257,7 +244,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -274,7 +260,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -291,7 +276,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -308,7 +292,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -325,7 +308,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -342,7 +324,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -359,7 +340,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -376,7 +356,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -393,7 +372,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -417,7 +395,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -441,7 +418,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -465,7 +441,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -489,7 +464,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -503,7 +477,7 @@ export const AdminPage = () => {
       options.o1
     ) {
       fetch(
-        `http://3.20.237.82:3000/ordenados/dCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.20.237.82:3000/alimentos/ordenados/dCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -512,7 +486,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -526,7 +499,7 @@ export const AdminPage = () => {
       options.o2
     ) {
       fetch(
-        `http://3.20.237.82:3000/ordenados/uCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.20.237.82:3000/alimentos/ordenados/uCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -535,7 +508,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -549,7 +521,7 @@ export const AdminPage = () => {
       options.o3
     ) {
       fetch(
-        `http://3.20.237.82:3000/ordenados/dEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.20.237.82:3000/alimentos/ordenados/dEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -558,7 +530,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -572,7 +543,7 @@ export const AdminPage = () => {
       options.o4
     ) {
       fetch(
-        `http://3.20.237.82:3000/ordenados/uEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.20.237.82:3000/alimentos/ordenados/uEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -581,7 +552,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -595,7 +565,7 @@ export const AdminPage = () => {
       options.o5
     ) {
       fetch(
-        `http://3.20.237.82:3000/ordenados/alfaB?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.20.237.82:3000/alimentos/ordenados/alfaB?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -604,7 +574,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setAlimentos(data);
         })
         .catch((error) => {
@@ -625,7 +594,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
@@ -640,7 +608,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
@@ -655,7 +622,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
@@ -670,7 +636,6 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
@@ -685,14 +650,13 @@ export const AdminPage = () => {
           throw new Error("Error al obtener los alimentos");
         })
         .then((data) => {
-          console.log("Alimentos:", data);
           setTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
           console.error("Error:", error.message);
         });
     }
-  }, [currentPage]);
+  }, [currentPage, options, pageSize]);
 
   const goToPreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));

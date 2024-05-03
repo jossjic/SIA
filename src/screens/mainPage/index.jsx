@@ -5,7 +5,7 @@ import { GeneralButton } from "../../components/button";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
-import {SlidingSideBar} from "../../components/slidingSideBar";
+import { SlidingSideBar } from "../../components/slidingSideBar";
 
 export const MainPage = () => {
   const [alimentos, setAlimentos] = useState([]);
@@ -26,7 +26,7 @@ export const MainPage = () => {
         // Mapear los alimentos y agregarles el estatus
         const alimentosCaducados = data.map((alimento) => ({
           ...alimento,
-          estatus: "Caducado"
+          estatus: "Caducado",
         }));
         // Agregar los alimentos caducados al arreglo temporal
         tempAlimentos = [...tempAlimentos, ...alimentosCaducados];
@@ -34,7 +34,7 @@ export const MainPage = () => {
       .catch((error) => {
         console.error("Error:", error.message);
       });
-  
+
     // Segunda petición
     fetch("http://3.20.237.82:3000/alimentos/proximoscaducados/dCad")
       .then((response) => {
@@ -47,7 +47,7 @@ export const MainPage = () => {
         // Mapear los alimentos y agregarles el estatus
         const alimentosProximosCaducar = data.map((alimento) => ({
           ...alimento,
-          estatus: "Por caducar"
+          estatus: "Por caducar",
         }));
         // Agregar los alimentos próximos a caducar al arreglo temporal
         tempAlimentos = [...tempAlimentos, ...alimentosProximosCaducar];
@@ -58,53 +58,57 @@ export const MainPage = () => {
         console.error("Error:", error.message);
       });
   }, []);
-  
+
   // Función para formatear la fecha
   const formatDate = (dateString) => {
-    if (dateString === '0000-00-00') {
+    if (dateString === "0000-00-00") {
       return "Sin fecha";
     }
-      const date = new Date(dateString);
+    const date = new Date(dateString);
     return date.toLocaleDateString();
   };
 
   // Función para cambiar color del estatus en el estilo
   const getClassForEstatus = (estatus) => {
-    const className = estatus.replace(/\s+/g, '-').toLowerCase();
+    const className = estatus.replace(/\s+/g, "-").toLowerCase();
     return `${className}`;
   };
-  
+
   const navigate = useNavigate();
-  const handleClick = () => navigate('/restorePass'); 
+  const handleClick = () => navigate("/restorePass");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="main">
-      <SlidingSideBar />
       <div className="mensaje">
-        <Guide message="Bienvenid@ Estos alimentos son los próximos a caducar." size={130}/>
-      </div> 
+        <Guide
+          message="Bienvenid@ Estos alimentos son los próximos a caducar."
+          size={130}
+        />
+      </div>
       <div className="als">
-          <table className="alTable">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Marca</th>
-                <th>Estatus</th>
-                <th>Fecha caducidad próxima</th>
-              </tr>
-            </thead>
-            <tbody>
+        <table className="alTable">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Marca</th>
+              <th>Estatus</th>
+              <th>Fecha caducidad próxima</th>
+            </tr>
+          </thead>
+          <tbody>
             {alimentos.map((alimento) => (
               <tr key={alimento.id}>
                 <td>{alimento.a_nombre}</td>{" "}
                 <td>{alimento.m_nombre || "Sin marca"}</td>
-                <td className={getClassForEstatus(alimento.estatus)}>{alimento.estatus}</td>
+                <td className={getClassForEstatus(alimento.estatus)}>
+                  {alimento.estatus}
+                </td>
                 <td>{formatDate(alimento.a_fechaCaducidad)}</td>
               </tr>
             ))}
-            </tbody>
-          </table>
+          </tbody>
+        </table>
       </div>
       <div className="buttonContainer">
         <GeneralButton textElement="Administrar alimentos" path="/adminPage" />
@@ -112,12 +116,23 @@ export const MainPage = () => {
           textElement="Administrar usuarios"
           path="/adminUserPage"
         />
-        <GeneralButton textElement="Cerrar sesión" onClick={() => setIsModalOpen(true)} color="red" />
+        <GeneralButton
+          textElement="Cerrar sesión"
+          onClick={() => setIsModalOpen(true)}
+          color="red"
+        />
       </div>
       {isModalOpen && (
-      <div className="modalOverlayConf">
-          <ConfirmationPopUp message = "¿Seguro que quieres cerrar sesión?" answer1 = "Si" answer2 = "No" path1 = "/login" isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
-      </div>
+        <div className="modalOverlayConf">
+          <ConfirmationPopUp
+            message="¿Seguro que quieres cerrar sesión?"
+            answer1="Si"
+            answer2="No"
+            path1="/login"
+            isOpen={isModalOpen}
+            closeModal={() => setIsModalOpen(false)}
+          />
+        </div>
       )}
     </div>
   );

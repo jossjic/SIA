@@ -11,9 +11,6 @@ export function SlidingSideBar({ options, setOptions }) {
 
   const toggleSidebar = () => {
     setExpanded(!expanded);
-    if (expanded) {
-      console.log("Go to first page");
-    }
   };
 
   const handleClick = (event) => {

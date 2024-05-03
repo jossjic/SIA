@@ -24,7 +24,6 @@ export function Ordenamiento({ message, options, option, setOptions }) {
       [option]: !options[option],
     }));
 
-    console.log("Options:", options);
     setCircleColor(!circleColor);
   };
 
