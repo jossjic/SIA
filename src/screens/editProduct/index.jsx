@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Guide } from "../../components/guide";
 import { ReturnButton } from "../../components/returnButton";
 import { TextInput } from "../../components/textInput";
@@ -7,8 +8,10 @@ import { GeneralButton } from "../../components/button";
 import { formatDate } from "../../generalFunctions";
 import { DropDown } from "../../components/dropDown";
 import "./EditProduct.css";
+import { CalendarInputDate } from "../../components/calendarInputDate";
 
-export function EditProduct({ productId }) {
+export function EditProduct() {
+  const {a_id} = useParams();
   const [formData, setFormData] = useState({
     a_nombre: "",
     a_cantidad: "",
@@ -23,24 +26,25 @@ export function EditProduct({ productId }) {
   useEffect(() => {
     async function fetchProductData() {
       try {
-        const response = await fetch(`http://3.20.237.82:3000/alimentos/${productId}`);
+        const response = await fetch(`http://3.20.237.82:3000/alimentos/${a_id}`);
         const productData = await response.json();
         setFormData({
           a_nombre: productData.a_nombre,
           a_cantidad: productData.a_cantidad,
           a_stock: productData.a_stock,
-          a_fechaSalida: productData.a_fechaSalida,
+          // a_fechaSalida: productData.a_fechaSalida,
           a_fechaEntrada: productData.a_fechaEntrada,
           a_fechaCaducidad: productData.a_fechaCaducidad,
           um_id: productData.um_id,
           m_id: productData.m_id,
         });
+        console.log(productData);
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
     }
     fetchProductData();
-  }, [productId]);
+  }, [a_id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,7 +57,7 @@ export function EditProduct({ productId }) {
   const handleSubmit = async () => {
     try {
       console.log(formData);
-      const response = await fetch(`http://3.20.237.82:3000/alimentos/${productId}`, {
+      const response = await fetch(`http://3.20.237.82:3000/alimentos/${a_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -108,7 +112,12 @@ export function EditProduct({ productId }) {
 
           <CalendarInput
             name="a_fechaCaducidad"
-            value={formData.a_fechaCaducidad}
+            value={
+              formData.a_fechaCaducidad instanceof Date
+                ? formatDate(formData.a_fechaCaducidad)
+                : formData.a_fechaCaducidad
+            }
+            
             onChange={handleChange}
           />
 

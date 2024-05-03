@@ -52,7 +52,7 @@ function App() {
           <Route path="/restorePass" element={<RestorePass />} />
           <Route path="/createUser" element={<CreateUser />} />
           <Route path="/addProduct" element={<AddProduct />} />
-          <Route path="/editProduct" element={<EditProduct />} />
+          <Route path="/editProduct/:a_id" element={<EditProduct />} />
           <Route path="/codePage" element={<CodePage />} />
           <Route path="/newPass" element={<NewPass />} />
           <Route path="/editUser" element={<EditUser />} />

@@ -10,6 +10,7 @@ import { SlidingSideBar } from "../../components/slidingSideBar";
 import "./AdminPage.css";
 import { set } from "date-fns";
 import { de } from "date-fns/locale";
+import { Link } from "react-router-dom";
 
 export const AdminPage = ({ selectedIds, setSelectedIds }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -839,7 +840,8 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       <SlidingSideBar options={options} setOptions={setOptions} />
       <div className="alimentosBox">
         {filteredAlimentos.map((alimento) => (
-          <div className="divRow" key={alimento.a_id}>
+          <Link to = {"/editProduct/" + alimento.a_id}>
+            <div className="divRow" key={alimento.a_id}>
             <RowAdminPage
               id={alimento.a_id}
               product={alimento.a_nombre}
@@ -855,6 +857,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
             />
             <hr />
           </div>
+          </Link>
         ))}
       </div>
       <div className="paginacion">
