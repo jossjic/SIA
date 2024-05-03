@@ -12,6 +12,8 @@ export const CheckDateAdd = () => {
     const [products, setProducts] = useState([]);
     const [dates, setDates] = useState({}); // Estado para guardar las fechas por producto
 
+    const [productsWithStock, setProductsWithStock] = useState([]);
+
     const ids = [1, 44, 2]; // Tu arreglo de IDs
 
      useEffect(() => {
@@ -35,6 +37,17 @@ export const CheckDateAdd = () => {
           });
       }, [ids]); // Agregué ids como dependencia del efecto
     
+      const updateProductStock = (productId, newStock) => {
+        setProductsWithStock(prevProducts => {
+          return prevProducts.map(product => {
+            if (product.a_id === productId) {
+              return { ...product, a_stock: newStock };
+            }
+            return product;
+          });
+        });
+      };
+
       const updateProductState = (productId, newState) => {
         console.log("Updating product state for product ID:", productId, "with new state:", newState);
         setProducts(prevProducts => {
@@ -109,7 +122,7 @@ export const CheckDateAdd = () => {
                                 <tr key={product.a_id}>
                                     <td>{product.a_nombre}</td>
                                     <td>{product.a_cantidad+' '+product.um_id}</td>
-                                    <td>{product.m_id}</td>
+                                    <td>{product.marca_nombre}</td>
                                     <td>
                                         <ButtonSquare textElement="v" color={product.estado ? "#00FF00" : "#E14040"} onClick={() => handleButtonClick(product)} disabled={product.estado}/>
 
@@ -128,7 +141,9 @@ export const CheckDateAdd = () => {
                 <div className="modalOverlay">
                     <div className="modalContent">
                         {/* Pasa las fechas al componente SelectDate */}
-                        <SelectDate dates={dates[selectedProductId]} onCancel={handleCancelSelectDate} onConfirm={handleConfirmButtonClick}/>
+                        <SelectDate dates={dates[selectedProductId]} onCancel={handleCancelSelectDate} onConfirm={handleConfirmButtonClick}
+                        onUpdateStock={updateProductStock}
+                        productStock={productsWithStock[selectedProductId]?.a_stock || 0}/>
                     </div>
                 </div>
             )}

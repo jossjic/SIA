@@ -2,8 +2,8 @@ import "./stockBarDate.css";
 import { useState } from "react";
 
 
-export function StockBarDate({ stock, isDisabled }) {
-  const [currentStock, setCurrentStock] = useState(parseInt(stock));
+export function StockBarDate({ productStock, isDisabled, onStockChange }) {
+  const [currentStock, setCurrentStock] = useState(productStock);
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -12,6 +12,7 @@ export function StockBarDate({ stock, isDisabled }) {
     } else {
       setCurrentStock(parseInt(value));
     }
+    onStockChange(parseInt(value));
   };
 
   const changeStock = (logic) => {

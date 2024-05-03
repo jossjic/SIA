@@ -8,7 +8,7 @@ import { barraBusqueda } from "../barraBusqueda";
 import { StockBarDate } from "../stockBarDate";
 import { formatDate } from "../../generalFunctions";
 
-export function SelectDate({ unit, amount, dates, onCancel, onConfirm }) {
+export function SelectDate({ unit, amount, dates, onCancel, onConfirm, onUpdateStock, productStock }) {
 
   const [formData, setFormData] = useState({
     a_nombre: dates[0].a_nombre,
@@ -22,6 +22,12 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm }) {
   });
 
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [updatedStock, setUpdatedStock] = useState(productStock);
+
+  const handleStockChange = (newStock) => {
+    setFormData((prevFormData) => ({...prevFormData, a_stock: newStock }));
+    onUpdateStock(newStock);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +35,8 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm }) {
       ...prevData,
       [name]: value,
     }));
+    setUpdatedStock(parseInt(value)); // update the local state variable
+    onUpdateStock(parseInt(value)); // update the parent component's state variable
   };
 
   const handleSubmit = async () => {
@@ -57,6 +65,11 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm }) {
     window.location.reload(); // Actualizar la página
   };
 
+  // Modify the onConfirm function to include the updated stock value as a token
+  const handleConfirm = () => {
+    onConfirm({ ...formData, a_stock: updatedStock }); // include the updated stock value as a token
+  };
+
   return (
     <div className="checkCard_selectDate">
       <table className="generalTable">
@@ -65,7 +78,7 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm }) {
             <CadCheckCounter unit={unit} amount={amount}></CadCheckCounter>
           </tr>
           <tr>
-            <GeneralButton textElement="Confirmar" onClick={onConfirm} color="#4FA725"></GeneralButton>
+            <GeneralButton textElement="Confirmar" onClick={handleConfirm} color="#4FA725"></GeneralButton>
           </tr>
           <tr>
             <GeneralButton textElement="Cancelar" onClick={onCancel} color="#E14040"></GeneralButton>
@@ -93,7 +106,12 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm }) {
                         {dates.map(date => (
                             <tr key={date.a_id}>
                             <td>{date.a_fechaCaducidad.substring(0,10)}</td>
-                            <td><StockBarDate stock={date.a_stock}></StockBarDate></td>
+                            <td><StockBarDate
+                                  productStock={date.a_stock} // Replace with the correct a_stock value for the selected date
+                                  isDisabled={!dates.length}
+                                  onStockChange={handleStockChange}
+                                />
+                                  </td>
                             </tr>
                         ))}
                         </tbody>
