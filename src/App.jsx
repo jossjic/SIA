@@ -17,7 +17,11 @@ import { CodePage } from "./screens/codePage";
 import { NewPass } from "./screens/newPass";
 import { EditUser } from "./screens/editUser";
 
+import { useState } from "react";
+
 function App() {
+  const [selectedIds, setSelectedIds] = useState([]);
+
   return (
     <div className="app">
       <Router>
@@ -27,8 +31,14 @@ function App() {
           <Route path="/layout" element={<Layout />} />
           <Route path="/mainPage" element={<MainPage />} />
           <Route path="/adminUserPage" element={<UserPage />} />
-          <Route path="/adminPage" element={<AdminPage />} />
-          <Route path="/checkDateAdd" element={<CheckDateAdd />} />
+          <Route
+            path="/adminPage"
+            element={<AdminPage selectedIds={selectedIds} />}
+          />
+          <Route
+            path="/checkDateAdd"
+            element={<CheckDateAdd selectedIds={selectedIds} />}
+          />
           <Route path="/checkDateDelete" element={<CheckDateDelete />} />
           <Route path="/createUser" element={<CreateUser />} />
           <Route path="/restorePass" element={<RestorePass />} />

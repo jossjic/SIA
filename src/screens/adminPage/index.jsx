@@ -9,8 +9,9 @@ import { SearchBar } from "../../components/search";
 import { SlidingSideBar } from "../../components/slidingSideBar";
 import "./AdminPage.css";
 import { set } from "date-fns";
+import { de } from "date-fns/locale";
 
-export const AdminPage = () => {
+export const AdminPage = ({ selectedIds }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const pageSize = 10;
@@ -18,7 +19,12 @@ export const AdminPage = () => {
   const [filteredAlimentos, setFilteredAlimentos] = useState([]);
   const [originalAlimentos, setOriginalAlimentos] = useState([]);
   const [originalTotalPages, setOriginalTotalPages] = useState(1);
-  const [selectedIds, setSelectedIds] = useState([]);
+
+  const [addCartNumber, setAddCartNumber] = useState(0);
+  const [deleteCartNumber, setDeleteCartNumber] = useState(0);
+
+  const [addActive, setAddActive] = useState(false);
+  const [deleteActive, setDeleteActive] = useState(false);
 
   const handleCheckboxChange = (event, id) => {
     const isChecked = event.target.checked;
@@ -29,7 +35,46 @@ export const AdminPage = () => {
         prevIds.filter((selectedId) => selectedId !== id)
       ); // Eliminar el ID deseleccionado del estado
     }
+
+    // Actualizar el número de elementos seleccionados por cada id de alimento obtener el stock y sumarlos
+    if (isChecked) {
+      fetch("http://3.20.237.82:3000/alimentos/" + id)
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error("Error al obtener el alimento");
+        })
+        .then((data) => {
+          setDeleteCartNumber((prevNumber) => prevNumber + data.a_stock);
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
+        });
+    } else {
+      fetch("http://3.20.237.82:3000/alimentos/" + id)
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error("Error al obtener el alimento");
+        })
+        .then((data) => {
+          setDeleteCartNumber((prevNumber) => prevNumber - data.a_stock);
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
+        });
+    }
   };
+
+  useEffect(() => {
+    if (deleteCartNumber === 0) {
+      setDeleteActive(false);
+    } else {
+      setDeleteActive(true);
+    }
+  }, [deleteCartNumber]);
   // Función para manejar la búsqueda
   const handleSearch = (searchTerm) => {
     // Si el término de búsqueda es una cadena vacía, restaura los alimentos y la paginación originales
@@ -784,7 +829,13 @@ export const AdminPage = () => {
         size={100}
         className="guide"
       />
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar
+        onSearch={handleSearch}
+        addCartNumber={addCartNumber}
+        deleteCartNumber={deleteCartNumber}
+        addActive={addActive}
+        deleteActive={deleteActive}
+      />
       <SlidingSideBar options={options} setOptions={setOptions} />
       <div className="alimentosBox">
         {filteredAlimentos.map((alimento) => (
