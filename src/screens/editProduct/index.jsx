@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Guide } from "../../components/guide";
 import { ReturnButton } from "../../components/returnButton";
 import { TextInput } from "../../components/textInput";
-import { CalendarInputDate } from "../../components/calendarInputDate";
+import { CalendarInput } from "../../components/calendarInput";
 import { GeneralButton } from "../../components/button";
 import { formatDate } from "../../generalFunctions";
 import { DropDown } from "../../components/dropDown";
@@ -110,7 +110,7 @@ export function EditProduct() {
             onChange={handleChange}
           />
 
-          <CalendarInputDate
+          <CalendarInput
             name="a_fechaCaducidad"
             value={
               formData.a_fechaCaducidad instanceof Date
