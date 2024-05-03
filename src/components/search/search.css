@@ -16,7 +16,7 @@
 }
 
 .search-bar .icon-button {
-  width: 10%; /* Modificado para que todos los botones tengan el mismo ancho */
+  width: 100%; /* Modificado para que todos los botones tengan el mismo ancho */
   height: 100%;
   display: flex;
   align-items: center;
@@ -45,4 +45,47 @@
 .search-bar .icon-button.active-delete {
   background-color: #f44336; /* Red */
   color: white;
+}
+.search-bar .addCart {
+  position: relative; /* Agrega posición relativa al contenedor del botón de añadir */
+  width: 10%; /* Modificado para que el botón de añadir tenga un ancho fijo */
+  height: 100%;
+}
+
+.search-bar .addCart .addCartNumber {
+  position: absolute;
+  top: -10px;
+  right: -10px; /* Posición relativa al contenedor del botón */
+  background-color: #f44336; /* Red */
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar .deleteCart {
+  position: relative; /* Agrega posición relativa al contenedor del botón de eliminar */
+  width: 10%;
+  height: 100%;
+}
+
+.search-bar .deleteCart .deleteCartNumber {
+  position: absolute;
+  top: -10px;
+  right: -10px; /* Posición relativa al contenedor del botón */
+  background-color: #f44336; /* Red */
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
 }
