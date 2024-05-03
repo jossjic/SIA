@@ -840,8 +840,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       <SlidingSideBar options={options} setOptions={setOptions} />
       <div className="alimentosBox">
         {filteredAlimentos.map((alimento) => (
-          <Link to = {"/editProduct/" + alimento.a_id}>
-            <div className="divRow" key={alimento.a_id}>
+          <div className="divRow" key={alimento.a_id}>
             <RowAdminPage
               id={alimento.a_id}
               product={alimento.a_nombre}
@@ -857,7 +856,6 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
             />
             <hr />
           </div>
-          </Link>
         ))}
       </div>
       <div className="paginacion">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StockBar } from "../stockBar";
+import { Link } from "react-router-dom";
 import "./RowAdminPage.css";
 
 export function RowAdminPage({
@@ -46,7 +47,13 @@ export function RowAdminPage({
         onChange={handleCheckboxChange}
         disabled={stock === 0 || stock === "0" ? true : false}
       />
-      <p className="product">{product}</p>
+      <Link
+        className="productLink"
+        to={"/editProduct/" + id}
+        style={{ textDecoration: "none" }}
+      >
+        <p className="product">{product}</p>
+      </Link>
       <p className="quantity">{quantity}</p>
       <p className="brand">{brand}</p>
       <StockBar stock={stock} isDisabled={isChecked} />

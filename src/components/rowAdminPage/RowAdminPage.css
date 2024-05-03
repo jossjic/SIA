@@ -9,6 +9,10 @@
   font-weight: 400;
 }
 
+.rowAdminPage:hover {
+  background-color: #767dff1c;
+}
+
 .rowChecked {
   color: #e14040;
 }
@@ -22,7 +26,7 @@
   cursor: not-allowed;
 }
 
-.rowAdminPage .product {
+.rowAdminPage .productLink {
   width: 20%;
   text-align: initial;
 }
@@ -57,4 +61,6 @@
 .rowAdminPage p {
   font-weight: 600;
   font-size: 1.2em;
+  text-decoration: none;
+  color: black;
 }
