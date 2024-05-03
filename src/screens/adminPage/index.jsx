@@ -8,9 +8,7 @@ import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { SearchBar } from "../../components/search";
 import { SlidingSideBar } from "../../components/slidingSideBar";
 import "./AdminPage.css";
-import { set } from "date-fns";
-import { de } from "date-fns/locale";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const AdminPage = ({ selectedIds, setSelectedIds }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,11 +19,17 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
   const [originalAlimentos, setOriginalAlimentos] = useState([]);
   const [originalTotalPages, setOriginalTotalPages] = useState(1);
 
+  const navigate = useNavigate();
+
   const [addCartNumber, setAddCartNumber] = useState(0);
   const [deleteCartNumber, setDeleteCartNumber] = useState(0);
 
   const [addActive, setAddActive] = useState(false);
   const [deleteActive, setDeleteActive] = useState(false);
+
+  const handleCreateUser = () => {
+    navigate("/addProduct");
+  };
 
   const handleCheckboxChange = (event, id) => {
     const isChecked = event.target.checked;
@@ -836,6 +840,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         deleteCartNumber={deleteCartNumber}
         addActive={addActive}
         deleteActive={deleteActive}
+        onAddUser={handleCreateUser}
       />
       <SlidingSideBar options={options} setOptions={setOptions} />
       <div className="alimentosBox">

@@ -1,50 +1,48 @@
 .createUser {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    align-items: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  gap: 20px;
 }
 
 .createUser-container {
-    background-color: #f2f2f2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px; 
-    border-radius: 8px;
-    width: 100%; 
-    gap: 20px;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  gap: 20px;
 }
 
-.mensaje{
-    align-items: center;
-    display: flex;
-    flex-direction: column; 
-    width: 70%;
+.mensaje {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
 }
-
 
 .createInput {
-    background-color: transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    width: 50%;
-}
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 50%;
 
 .createInput p {
-    font-weight: normal;
-    font-size: large; 
-    background-color: transparent;
+  font-weight: normal;
+  font-size: large;
+  background-color: #f2f2f2;
 }
 
 .createInput input {
-    background-color: transparent; 
-    color: blue;
-    border: none;
-    height: 40px;
+  background-color: #f2f2f2;
+  color: blue;
+  border: none;
+  height: 40px;
 }
