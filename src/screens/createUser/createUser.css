@@ -38,7 +38,8 @@
 
 .createInput p {
     font-weight: normal;
-    font-size: large;    
+    font-size: large; 
+    background-color: transparent;
 }
 
 .createInput input {

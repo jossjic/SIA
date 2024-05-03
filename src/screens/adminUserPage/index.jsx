@@ -5,6 +5,8 @@ import { Guide } from "../../components/guide";
 import { ReturnButton } from "../../components/returnButton";
 import { SearchBar } from "../../components/search";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
+import { useNavigate } from 'react-router-dom';
+
 
 export const UserPage = () => {
   const [users, setUsers] = useState([]);
@@ -13,6 +15,7 @@ export const UserPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(null);
   const [deleteActive, setDeleteActive] = useState(false);
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -78,6 +81,10 @@ export const UserPage = () => {
     (user.otherField && user.otherField.toLowerCase().includes(filter)) // Example for additional fields
   );
 
+  const handleCreateUser = () => {
+    navigate('/createuser'); // Asegúrate de que la ruta es correcta según tu configuración de rutas
+  };
+
   return (
     <div className="userPage">
       <div className="buttonTopLeft">
@@ -93,6 +100,7 @@ export const UserPage = () => {
       deleteCartNumber={selectedUserIds.length}
       deleteActive={selectedUserIds.length > 0}
       onDeleteSelected={() => setConfirmDeleteOpen(true)}
+      onAddUser={handleCreateUser}
       />
       {confirmDeleteOpen && (
         <ConfirmationPopUp

@@ -8,7 +8,8 @@ export function SearchBar({
   deleteCartNumber,
   addActive,
   deleteActive,
-  onDeleteSelected
+  onDeleteSelected,
+  onAddUser
 }) {
   const [inputText, setInputText] = useState("");
 
@@ -25,7 +26,8 @@ export function SearchBar({
         <p className={addCartNumber === 0 ? "hidden" : "addCartNumber"}>
           {addCartNumber}
         </p>
-        <button className={`icon-button add ${addActive ? "active-add" : ""}`}>
+        <button className={`icon-button add ${addActive ? "active-add" : ""}`}
+        onClick={onAddUser}>
           ➕
         </button>
       </div>
