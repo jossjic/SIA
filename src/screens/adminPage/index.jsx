@@ -16,14 +16,22 @@ export const AdminPage = () => {
   const pageSize = 10;
   const [inputPage, setInputPage] = useState(String(currentPage));
   const [filteredAlimentos, setFilteredAlimentos] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
   const [originalAlimentos, setOriginalAlimentos] = useState([]);
   const [originalTotalPages, setOriginalTotalPages] = useState(1);
+  const [selectedIds, setSelectedIds] = useState([]);
 
+  const handleCheckboxChange = (event, id) => {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      setSelectedIds((prevIds) => [...prevIds, id]); // Agregar el ID seleccionado al estado
+    } else {
+      setSelectedIds((prevIds) =>
+        prevIds.filter((selectedId) => selectedId !== id)
+      ); // Eliminar el ID deseleccionado del estado
+    }
+  };
   // Función para manejar la búsqueda
   const handleSearch = (searchTerm) => {
-    setSearchTerm(searchTerm);
-
     // Si el término de búsqueda es una cadena vacía, restaura los alimentos y la paginación originales
     if (searchTerm === "") {
       setFilteredAlimentos(originalAlimentos);
@@ -656,6 +664,7 @@ export const AdminPage = () => {
         })
         .then((data) => {
           setOriginalTotalPages(Math.ceil(data.total / pageSize));
+          setTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -670,6 +679,7 @@ export const AdminPage = () => {
         })
         .then((data) => {
           setOriginalTotalPages(Math.ceil(data.total / pageSize));
+          setTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -684,6 +694,7 @@ export const AdminPage = () => {
         })
         .then((data) => {
           setOriginalTotalPages(Math.ceil(data.total / pageSize));
+          setTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -698,6 +709,7 @@ export const AdminPage = () => {
         })
         .then((data) => {
           setOriginalTotalPages(Math.ceil(data.total / pageSize));
+          setTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -712,6 +724,7 @@ export const AdminPage = () => {
         })
         .then((data) => {
           setOriginalTotalPages(Math.ceil(data.total / pageSize));
+          setTotalPages(Math.ceil(data.total / pageSize));
         })
         .catch((error) => {
           console.error("Error:", error.message);
@@ -786,6 +799,8 @@ export const AdminPage = () => {
               }
               stock={alimento.a_stock}
               cadDate={alimento.a_fechaCaducidad}
+              onChange={handleCheckboxChange}
+              selectedIds={selectedIds}
             />
             <hr />
           </div>

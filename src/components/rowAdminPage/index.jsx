@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StockBar } from "../stockBar";
 import "./RowAdminPage.css";
 
@@ -10,9 +10,15 @@ export function RowAdminPage({
   brand,
   stock,
   cadDate,
+  onChange,
+  selectedIds,
 }) {
   const fecha = new Date(cadDate);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(selectedIds.includes(id));
+
+  useEffect(() => {
+    setIsChecked(selectedIds.includes(id)); // Actualiza 'isChecked' cuando 'selectedIds' cambie
+  }, [selectedIds]);
 
   const year = fecha.getFullYear();
   const month = fecha.getMonth() + 1; // getMonth returns month index starting from 0
@@ -27,13 +33,17 @@ export function RowAdminPage({
 
   const rowClass = isChecked ? "rowAdminPage rowChecked" : "rowAdminPage";
 
+  const handleCheckboxChange = (event) => {
+    onChange(event, id); // Llamar a la función de onChange del componente padre
+  };
+
   return (
     <div className={rowClass}>
       <input
         className="checkBox"
         type="checkbox"
         checked={isChecked}
-        onChange={(e) => setIsChecked(e.target.checked)}
+        onChange={handleCheckboxChange}
         disabled={stock === 0 || stock === "0" ? true : false}
       />
       <p className="product">{product}</p>
