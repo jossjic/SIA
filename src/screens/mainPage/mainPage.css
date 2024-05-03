@@ -1,4 +1,4 @@
-.main {
+.mainP {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -10,6 +10,7 @@
 .buttonContainer {
   display: flex;
   justify-content: center; /* Centrar horizontalmente */
+  gap: 10px;
 }
 
 .als {
@@ -20,10 +21,10 @@
   background-color: #d9d9d9;
 }
 
-.mensaje {
+.mainP .mensaje {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
 }
 
 .alTable {
@@ -61,4 +62,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.mainP .info-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+}
+
+.mainP .info-banner img {
+  width: 15%;
+  height: 100%;
+}
+
+.mainP .info-banner p {
+  font-size: 20px;
+  font-weight: 700;
+  background-color: #f0f0f0;
+  padding: 4% 15%;
 }
