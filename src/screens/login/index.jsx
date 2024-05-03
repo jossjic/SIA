@@ -49,7 +49,7 @@ export const Login = () => {
       <Guide message="Bienvenid@ Por favor inicia sesión." size={200} />
       <div className='login-container'>
         <div className="logInput">
-          <p>Correo</p>
+          <p>Usuario</p>
           <input type="text" value={id} onChange={(e) => setId(e.target.value)} />
           <p>Contraseña</p>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
