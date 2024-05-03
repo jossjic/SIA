@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import "./selectDate.css";
+import { SuccessPopupDate } from "../../components/successPopupDate";
 import { CadCheckCounter } from "../cadCheckCounter";
 import { GeneralButton } from "../button";
 import { CalendarInputDate } from "../../components/calendarInputDate";
@@ -20,6 +21,7 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm }) {
     m_id: dates[0].m_id,
   });
 
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,7 +29,6 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm }) {
       ...prevData,
       [name]: value,
     }));
-    console.log(a_fechaCaducidad);
   };
 
   const handleSubmit = async () => {
@@ -44,10 +45,16 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm }) {
         throw new Error("Error al agregar el alimento");
       }
       // Manejar el éxito de la inserción
+      setShowSuccessPopup(true); // Mostrar el Popup de éxito
       console.log("Alimento agregado correctamente");
     } catch (error) {
       console.error("Error al agregar el alimento:", error);
     }
+  };
+
+  const handlePopupClose = () => {
+    setShowSuccessPopup(false); // Ocultar el Popup de éxito
+    window.location.reload(); // Actualizar la página
   };
 
   return (
@@ -92,7 +99,14 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm }) {
                         </tbody>
                     </table>
         </td>
-      </table>  
+      </table>
+      
+          {showSuccessPopup && 
+          <div className="modalOverlay">
+          <div className="modalContent">
+            <SuccessPopupDate onClose={handlePopupClose} />
+          </div>
+          </div>}  
     </div>
   );
 }
