@@ -16,7 +16,12 @@ export const CheckDateDelete = ({ selectedIds }) => {
   // Mantén un estado para los colores de los botones cuadrados
   const [buttonColors, setButtonColors] = useState({});
 
-  const ids = [3, 4, 8]; // Tu arreglo de IDs
+  const [ids, setIds] = useState([]); // Tu arreglo de IDs inicial
+
+  // Actualizar los IDs cada vez que selectedIds cambie
+  useEffect(() => {
+    setIds(selectedIds);
+  }, [selectedIds]);
 
   /*
     const products = [

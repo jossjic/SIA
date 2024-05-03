@@ -79,7 +79,7 @@ export const MainPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="main">
+    <div className="mainP">
       <div className="mensaje">
         <Guide
           message="Bienvenid@ Estos alimentos son los próximos a caducar."

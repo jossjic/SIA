@@ -46,9 +46,7 @@ export const Login = () => {
 
   return (
     <div className='login'>
-      <div className="mensaje">
-        <Guide message="Bienvenid@ Por favor inicia sesión." size={130} />
-      </div>
+      <Guide message="Bienvenid@ Por favor inicia sesión." size={200} />
       <div className='login-container'>
         <div className="logInput">
           <p>Correo</p>
