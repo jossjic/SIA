@@ -33,7 +33,12 @@ function App() {
           <Route path="/adminUserPage" element={<UserPage />} />
           <Route
             path="/adminPage"
-            element={<AdminPage selectedIds={selectedIds} />}
+            element={
+              <AdminPage
+                selectedIds={selectedIds}
+                setSelectedIds={setSelectedIds}
+              />
+            }
           />
           <Route
             path="/checkDateAdd"

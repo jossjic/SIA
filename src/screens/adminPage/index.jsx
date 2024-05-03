@@ -11,7 +11,7 @@ import "./AdminPage.css";
 import { set } from "date-fns";
 import { de } from "date-fns/locale";
 
-export const AdminPage = ({ selectedIds }) => {
+export const AdminPage = ({ selectedIds, setSelectedIds }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const pageSize = 10;
