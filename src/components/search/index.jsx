@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./search.css";
+import { Link } from "react-router-dom"; // Añade esta línea
 
 export function SearchBar({
   onSearch,
@@ -37,6 +38,7 @@ export function SearchBar({
         <p className={deleteCartNumber === 0 ? "hidden" : "deleteCartNumber"}>
           {deleteCartNumber}
         </p>
+        <Link to="/checkDateDelete">
         <button
           className={`icon-button delete ${
             deleteActive ? "active-delete" : ""
@@ -44,6 +46,7 @@ export function SearchBar({
         >
           🗑️
         </button>
+        </Link>
       </div>
     </div>
   );
