@@ -4,16 +4,24 @@ import "./SlidingSideBar.css";
 import returnImage from "../../assets/img/returnImage.png";
 import { Ordenamiento } from "../ordenamiento";
 
-export function SlidingSideBar() {
+export function SlidingSideBar({ options, setOptions }) {
   const [expanded, setExpanded] = useState(false);
+
   const sidebarRef = useRef(null);
 
   const toggleSidebar = () => {
     setExpanded(!expanded);
+    if (expanded) {
+      console.log("Go to first page");
+    }
   };
 
   const handleClick = (event) => {
-    if (!expanded && sidebarRef.current && sidebarRef.current.contains(event.target)) {
+    if (
+      !expanded &&
+      sidebarRef.current &&
+      sidebarRef.current.contains(event.target)
+    ) {
       setExpanded(true);
     } else if (expanded) {
       event.stopPropagation();
@@ -21,7 +29,10 @@ export function SlidingSideBar() {
   };
 
   return (
-    <div className={`sidebar ${expanded ? "expanded" : ""}`} onClick={toggleSidebar}>
+    <div
+      className={`sidebar ${expanded ? "expanded" : ""}`}
+      onClick={toggleSidebar}
+    >
       <div className="bar" ref={sidebarRef}></div>
       <img
         className="sidebar-image"
@@ -32,9 +43,12 @@ export function SlidingSideBar() {
           paddingLeft: expanded ? "0px" : "12%",
           paddingRight: expanded ? "2%" : "0px",
         }}
-        onClick={toggleSidebar} 
+        onClick={toggleSidebar}
       />
-      <div className={`additional-content ${expanded ? "expanded" : ""}`} onClick={handleClick}>
+      <div
+        className={`additional-content ${expanded ? "expanded" : ""}`}
+        onClick={handleClick}
+      >
         <div>
           <Guide
             message="Selecciona un filtro para ver solo un tipo de alimentos u ordenalos como gustes"
@@ -45,19 +59,64 @@ export function SlidingSideBar() {
           <p className="title">FILTRAR ALIMENTOS</p>
           <p className="title">ESTADO</p>
         </div>
-        <Ordenamiento message="Mostrar solo alimentos caducados"></Ordenamiento>
-        <Ordenamiento message="Mostrar solo alimentos próximos a caducar"></Ordenamiento>
-        <Ordenamiento message="Mostrar solo alimentos con disponibilidad"></Ordenamiento>
-        <Ordenamiento message="Mostrar solo alimentos sin disponibilidad"></Ordenamiento>
+        <Ordenamiento
+          message="Mostrar solo alimentos caducados"
+          options={options}
+          option="f1"
+          setOptions={setOptions}
+        ></Ordenamiento>
+        <Ordenamiento
+          message="Mostrar solo alimentos próximos a caducar"
+          options={options}
+          option="f2"
+          setOptions={setOptions}
+        ></Ordenamiento>
+        <Ordenamiento
+          message="Mostrar solo alimentos con disponibilidad"
+          options={options}
+          option="f3"
+          setOptions={setOptions}
+        ></Ordenamiento>
+        <Ordenamiento
+          message="Mostrar solo alimentos sin disponibilidad"
+          options={options}
+          option="f4"
+          setOptions={setOptions}
+        ></Ordenamiento>
         <div className="title-container">
           <p className="title">ORDENAR ALIMENTOS</p>
           <p className="title">ESTADO</p>
         </div>
-        <Ordenamiento message="Fecha de caducidad (de más cercana a menos cercana)"></Ordenamiento>
-        <Ordenamiento message="Fecha de caducidad (de menos cercana a más cercana)"></Ordenamiento>
-        <Ordenamiento message="Fecha de registro (de más cercana a menos cercana)"></Ordenamiento>
-        <Ordenamiento message="Fecha de registro (de menos cercana a más cercana)"></Ordenamiento>
-        <Ordenamiento message="Orden alfabético"></Ordenamiento>
+        <Ordenamiento
+          message="Fecha de caducidad (de más cercana a menos cercana)"
+          options={options}
+          option="o1"
+          setOptions={setOptions}
+        ></Ordenamiento>
+        <Ordenamiento
+          message="Fecha de caducidad (de menos cercana a más cercana)"
+          options={options}
+          option="o2"
+          setOptions={setOptions}
+        ></Ordenamiento>
+        <Ordenamiento
+          message="Fecha de registro (de más cercana a menos cercana)"
+          options={options}
+          option="o3"
+          setOptions={setOptions}
+        ></Ordenamiento>
+        <Ordenamiento
+          message="Fecha de registro (de menos cercana a más cercana)"
+          options={options}
+          option="o4"
+          setOptions={setOptions}
+        ></Ordenamiento>
+        <Ordenamiento
+          message="Orden alfabético"
+          options={options}
+          option="o5"
+          setOptions={setOptions}
+        ></Ordenamiento>
       </div>
     </div>
   );

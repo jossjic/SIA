@@ -1,19 +1,43 @@
-import React, { useState } from 'react';
-import './ordenamiento.css';
+import React, { useEffect, useState } from "react";
+import "./ordenamiento.css";
 
-export function Ordenamiento({message}) {
+export function Ordenamiento({ message, options, option, setOptions }) {
   const [circleColor, setCircleColor] = useState(false);
 
   const handleClick = () => {
-    setCircleColor(!circleColor); // Cambiar el estado del color del círculo al hacer clic
+    //solo se permite un filtro a la vez junto con un ordenamiento a la vez f1...f4 y o1...o5
+    if (option[0] === "f") {
+      for (let key in options) {
+        if (key[0] === "f" && key !== option) {
+          setOptions((prevOptions) => ({ ...prevOptions, [key]: false }));
+        }
+      }
+    } else {
+      for (let key in options) {
+        if (key[0] === "o" && key !== option) {
+          setOptions((prevOptions) => ({ ...prevOptions, [key]: false }));
+        }
+      }
+    }
+    setOptions((prevOptions) => ({
+      ...prevOptions,
+      [option]: !options[option],
+    }));
+
+    console.log("Options:", options);
+    setCircleColor(!circleColor);
   };
 
   return (
     <div className="rectangulo-azul">
-      <a href="#" className="hipervinculo" onClick={handleClick}>{message}</a>
+      <a href="#" className="hipervinculo" onClick={handleClick}>
+        {message}
+      </a>
       <p
         className="circulo"
-        style={{ backgroundColor: circleColor ? 'green' : 'rgb(190, 190, 190)'}}
+        style={{
+          backgroundColor: options[option] ? "green" : "rgb(190,190,190)",
+        }}
       ></p>
     </div>
   );
