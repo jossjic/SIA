@@ -17,7 +17,6 @@ export const CheckDateDelete = ({ selectedIds }) => {
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false); 
 
   const [buttonSquareColor, setButtonSquareColor] = useState("#E14040");
-
   // Mantén un estado para los colores de los botones cuadrados
   const [buttonColors, setButtonColors] = useState({});
 
@@ -101,7 +100,6 @@ export const CheckDateDelete = ({ selectedIds }) => {
   };
 
   const handleButtonClickSquare = (productId) => {
-    // Actualiza el color del botón cuadrado correspondiente al producto seleccionado
     setButtonColors((prevColors) => ({
       ...prevColors,
       [productId]: "#00FF00", // Cambia el color a verde
@@ -194,7 +192,7 @@ export const CheckDateDelete = ({ selectedIds }) => {
               isOpen={confirmDeleteOpen}
               closeModal={() => setConfirmDeleteOpen(false)}
             />
-            )}
+          )}
           </div>
         </div>
       </div>
