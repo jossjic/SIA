@@ -21,6 +21,7 @@ import { useState } from "react";
 
 function App() {
   const [selectedIds, setSelectedIds] = useState([]);
+  const [selectedUserId, setSelectedUserId] = useState();
 
   return (
     <div className="app">
@@ -55,7 +56,8 @@ function App() {
           <Route path="/editProduct/:a_id" element={<EditProduct />} />
           <Route path="/codePage" element={<CodePage />} />
           <Route path="/newPass" element={<NewPass />} />
-          <Route path="/editUser" element={<EditUser />} />
+          <Route path="/editUser"
+           element={<EditUser selectedUserId={selectedUserId}/>} />
         </Routes>
       </Router>
     </div>

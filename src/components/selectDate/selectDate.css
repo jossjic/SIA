@@ -14,7 +14,12 @@
 }
 
 .generalTable .calendarID{
-  margin-top: 15px;
+  margin-top: 10px;
+}
+
+.generalTable .textID{
+  margin-left: 90px;
+  margin-top: 10px;
 }
 
 .generalTable{
@@ -22,7 +27,7 @@
     text-align: center;
     width: 800px;
     margin-left: 50px;
-    margin-top: 20px;
+    margin-top:5p 5;
 }
 
 .generalTable td{

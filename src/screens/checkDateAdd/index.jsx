@@ -107,7 +107,7 @@ export const CheckDateAdd = () => {
 
     const allProductsVerified = () => {
         // Verifica si todos los ButtonSquare están en verde
-        return Object.values(buttonColors).every(color => color === "#00FF00");
+        return products.every((product) => buttonColors[product.a_id] === "#00FF00");
     };
     
 
@@ -159,7 +159,9 @@ export const CheckDateAdd = () => {
                     </table>
                     <div className="botonesAdd">
                         <GeneralButton textElement="Cancelar" path="" color="#5982C0" />
-                        <GeneralButton textElement="Agregar" path="" color={allProductsVerified() ? "#00FF00" : "#8F938D"} />
+                        <GeneralButton 
+                        textElement="Agregar" 
+                        color={allProductsVerified() ? "#00FF00" : "#8F938D"} />
                     </div>
                 </div>
             </div>
