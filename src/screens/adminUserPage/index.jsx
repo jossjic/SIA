@@ -139,7 +139,7 @@ export const UserPage = () => {
                     className="generalButton"
                   />
                   <GeneralButton
-                    textElement="  Editar  " path="/editUser"
+                    textElement="  Editar  " path="/editUser "
                     color="#19739A"
                     className="generalButton"
                   />
