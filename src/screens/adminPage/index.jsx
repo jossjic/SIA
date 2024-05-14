@@ -27,6 +27,11 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
   const [addActive, setAddActive] = useState(false);
   const [deleteActive, setDeleteActive] = useState(false);
 
+  // 0 = Buscar por nombre, 1 = Buscar por cantidad, 2 = Buscar por marca, 3 = Buscar por existencias, 4 = Buscar por caducidad
+  const [searchType, setSearchType] = useState(0);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
   const handleCreateUser = () => {
     navigate("/addProduct");
   };
@@ -80,30 +85,6 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       setDeleteActive(true);
     }
   }, [deleteCartNumber]);
-  // Función para manejar la búsqueda
-  const handleSearch = (searchTerm) => {
-    // Si el término de búsqueda es una cadena vacía, restaura los alimentos y la paginación originales
-    if (searchTerm === "") {
-      setFilteredAlimentos(originalAlimentos);
-      setTotalPages(originalTotalPages);
-      return;
-    }
-
-    // Realizar la lógica de búsqueda aquí
-    const filtered = originalAlimentos.filter((alimento) => {
-      return (
-        alimento.a_nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        alimento.um_id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (alimento.m_nombre &&
-          alimento.m_nombre.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        alimento.a_stock.toString().includes(searchTerm) ||
-        alimento.a_fechaCaducidad.includes(searchTerm)
-      );
-    });
-
-    setFilteredAlimentos(filtered);
-    setTotalPages(Math.ceil(filtered.length / pageSize));
-  };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [options, setOptions] = useState({
@@ -130,22 +111,145 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       !options.o4 &&
       !options.o5
     ) {
-      fetch(
-        `http://3.20.237.82:3000/alimentos/join/marca?page=${currentPage}&pageSize=${pageSize}`
-      )
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error("Error al obtener los alimentos");
-        })
-        .then((data) => {
-          setOriginalAlimentos(data);
-          setFilteredAlimentos(data);
-        })
-        .catch((error) => {
-          console.error("Error:", error.message);
-        });
+      if (searchTerm === "") {
+        fetch(
+          `http://3.20.237.82:3000/alimentos/join/marca?page=${currentPage}&pageSize=${pageSize}`
+        )
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error("Error al obtener los alimentos");
+          })
+          .then((data) => {
+            setOriginalAlimentos(data);
+            setFilteredAlimentos(data);
+          })
+          .catch((error) => {
+            console.error("Error:", error.message);
+          });
+
+        fetch("http://3.20.237.82:3000/alimentos/count")
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error("Error al obtener los alimentos");
+          })
+          .then((data) => {
+            setOriginalTotalPages(Math.ceil(data.total / pageSize));
+            setTotalPages(Math.ceil(data.total / pageSize));
+          })
+          .catch((error) => {
+            console.error("Error:", error.message);
+          });
+      } else if (searchType === 0) {
+        console.log("searchTerm", searchTerm);
+        fetch(
+          `http://3.20.237.82:3000/alimentos/busqueda/nombre/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+        )
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error("Error al obtener los alimentos");
+          })
+
+          .then((data) => {
+            console.log(
+              "alimentos",
+              data.alimentos,
+              "total",
+              data.total,
+              "data",
+              data
+            );
+            setOriginalAlimentos(data.alimentos);
+            setFilteredAlimentos(data.alimentos);
+            setOriginalTotalPages(Math.ceil(data.total / pageSize));
+            setTotalPages(Math.ceil(data.total / pageSize));
+          })
+          .catch((error) => {
+            console.error("Error:", error.message);
+          });
+      } else if (searchType === 1) {
+        fetch(
+          `http://3.20.237.82:3000/alimentos/busqueda/cantidad/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+        )
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error("Error al obtener los alimentos");
+          })
+          .then((data) => {
+            setOriginalAlimentos(data.alimentos);
+            setFilteredAlimentos(data.alimentos);
+            setOriginalTotalPages(Math.ceil(data.total / pageSize));
+            setTotalPages(Math.ceil(data.total / pageSize));
+          })
+          .catch((error) => {
+            console.error("Error:", error.message);
+          });
+      } else if (searchType === 2) {
+        fetch(
+          `http://3.20.237.82:3000/alimentos/busqueda/marca/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+        )
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error("Error al obtener los alimentos");
+          })
+          .then((data) => {
+            setOriginalAlimentos(data.alimentos);
+            setFilteredAlimentos(data.alimentos);
+            setOriginalTotalPages(Math.ceil(data.total / pageSize));
+            setTotalPages(Math.ceil(data.total / pageSize));
+          })
+          .catch((error) => {
+            console.error("Error:", error.message);
+          });
+      } else if (searchType === 3) {
+        fetch(
+          `http://3.20.237.82:3000/alimentos/busqueda/stock/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+        )
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error("Error al obtener los alimentos");
+          })
+          .then((data) => {
+            setOriginalAlimentos(data.alimentos);
+            setFilteredAlimentos(data.alimentos);
+            setOriginalTotalPages(Math.ceil(data.total / pageSize));
+            setTotalPages(Math.ceil(data.total / pageSize));
+          })
+          .catch((error) => {
+            console.error("Error:", error.message);
+          });
+      } else if (searchType === 4) {
+        fetch(
+          `http://3.20.237.82:3000/alimentos/busqueda/caducidad/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+        )
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error("Error al obtener los alimentos");
+          })
+          .then((data) => {
+            setOriginalAlimentos(data.alimentos);
+            setFilteredAlimentos(data.alimentos);
+            setOriginalTotalPages(Math.ceil(data.total / pageSize));
+            setTotalPages(Math.ceil(data.total / pageSize));
+          })
+          .catch((error) => {
+            console.error("Error:", error.message);
+          });
+      }
+
       //alimentos caducados dCad
     } else if (options.f1 && options.o1) {
       fetch(
@@ -765,22 +869,9 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           console.error("Error:", error.message);
         });
     } else {
-      fetch(`http://3.20.237.82:3000/alimentos/count`)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error("Error al obtener los alimentos");
-        })
-        .then((data) => {
-          setOriginalTotalPages(Math.ceil(data.total / pageSize));
-          setTotalPages(Math.ceil(data.total / pageSize));
-        })
-        .catch((error) => {
-          console.error("Error:", error.message);
-        });
+      console.log("No hay filtros seleccionados");
     }
-  }, [currentPage, options, pageSize]);
+  }, [currentPage, options, pageSize, searchType, searchTerm]);
 
   const goToPreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
@@ -835,15 +926,54 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         className="guide"
       />
       <SearchBar
-        onSearch={handleSearch}
+        onSearch={setSearchTerm}
         addCartNumber={addCartNumber}
         deleteCartNumber={deleteCartNumber}
         addActive={addActive}
         deleteActive={deleteActive}
         onAddUser={handleCreateUser}
+        searchType={searchType}
       />
       <SlidingSideBar options={options} setOptions={setOptions} />
       <div className="alimentosBox">
+        <div className="divHeaders">
+          <button
+            className={
+              searchType === 0 ? "productoH productoH__active" : "productoH"
+            }
+            onClick={() => setSearchType(0)}
+          >
+            Producto
+          </button>
+          <button
+            className={
+              searchType === 1 ? "cantidadH cantidadH__active" : "cantidadH"
+            }
+            onClick={() => setSearchType(1)}
+          >
+            Cantidad
+          </button>
+          <button
+            className={searchType === 2 ? "marcaH marcaH__active" : "marcaH"}
+            onClick={() => setSearchType(2)}
+          >
+            Marca
+          </button>
+          <button
+            className={searchType === 3 ? "stockH stockH__active" : "stockH"}
+            onClick={() => setSearchType(3)}
+          >
+            Existencias
+          </button>
+          <button
+            className={
+              searchType === 4 ? "caducidadH caducidadH__active" : "caducidadH"
+            }
+            onClick={() => setSearchType(4)}
+          >
+            Caducidad
+          </button>
+        </div>
         {filteredAlimentos.map((alimento) => (
           <div className="divRow" key={alimento.a_id}>
             <RowAdminPage

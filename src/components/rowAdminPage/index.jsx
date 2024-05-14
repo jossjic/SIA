@@ -23,7 +23,7 @@ export function RowAdminPage({
 
   const year = fecha.getFullYear();
   const month = fecha.getMonth() + 1; // getMonth returns month index starting from 0
-  const day = fecha.getDate();
+  const day = fecha.getDate() + 1;
 
   // Format the date in YYYY/MM/DD
   const formattedDate = `${year}/${month.toString().padStart(2, "0")}/${day

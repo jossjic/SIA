@@ -33,6 +33,7 @@
   flex-direction: column;
   align-items: left;
   width: 50%;
+}
 
 .createInput p {
   font-weight: normal;
