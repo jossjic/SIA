@@ -14,7 +14,7 @@ export const MainPage = () => {
     // Arreglo temporal para almacenar los alimentos de dos peticiones
     let tempAlimentos = [];
     // Primera petición
-    fetch("http://3.20.237.82:3000/alimentos/caducados/dCad")
+    fetch("http://3.144.175.151:3000/alimentos/caducados/dCad")
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -35,7 +35,7 @@ export const MainPage = () => {
       });
 
     // Segunda petición
-    fetch("http://3.20.237.82:3000/alimentos/proximoscaducados/dCad")
+    fetch("http://3.144.175.151:3000/alimentos/proximoscaducados/dCad")
       .then((response) => {
         if (response.ok) {
           return response.json();

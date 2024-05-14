@@ -3,7 +3,7 @@ import "./adminUserPage.css";
 import { GeneralButton } from "../../components/button";
 import { Guide } from "../../components/guide";
 import { ReturnButton } from "../../components/returnButton";
-import { SearchBar } from "../../components/search";
+import { SearchBar } from "../../components/searchBar";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { useNavigate } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ export const UserPage = () => {
 
 
   useEffect(() => {
-    fetch("http://3.20.237.82:3000/usuarios") // Replace with our actual API endpoint
+    fetch("http://3.144.175.151:3000/usuarios") // Replace with our actual API endpoint
       .then((response) => {
         if (response.ok) {
           console.log(response);
@@ -43,7 +43,7 @@ export const UserPage = () => {
 
   const handleDeleteSelected = () => {
     Promise.all(selectedUserIds.map(id => 
-      fetch(`http://3.20.237.82:3000/usuarios/${id}`, { method: "DELETE" })
+      fetch(`http://3.144.175.151:3000/usuarios/${id}`, { method: "DELETE" })
     )).then(() => {
       setUsers(users.filter(user => !selectedUserIds.includes(user.id)));
       setSelectedUserIds([]);
@@ -55,7 +55,7 @@ export const UserPage = () => {
 
   const handleDelete = (userId) => {
     // Call the delete API endpoint
-    fetch(`http://3.20.237.82:3000/usuarios/${userId}`, {
+    fetch(`http://3.144.175.151:3000/usuarios/${userId}`, {
       method: "DELETE",
     })
       .then((response) => {

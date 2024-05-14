@@ -37,7 +37,7 @@ export const CreateUser = () => {
         throw new Error("Por favor, complete todos los campos obligatorios.");
       }
 
-      const response = await fetch("http://3.20.237.82:3000/usuarios", {
+      const response = await fetch("http://3.144.175.151:3000/usuarios", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

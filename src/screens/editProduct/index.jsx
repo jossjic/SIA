@@ -28,7 +28,7 @@ export function EditProduct() {
   useEffect(() => {
     async function fetchProductData() {
       try {
-        const response = await fetch(`http://3.20.237.82:3000/alimentos/${a_id}`);
+        const response = await fetch(`http://3.144.175.151:3000/alimentos/${a_id}`);
         const productData = await response.json();
         setFormData({
           a_nombre: productData.a_nombre,
@@ -59,7 +59,7 @@ export function EditProduct() {
   const handleSubmit = async () => {
     try {
       console.log(formData);
-      const response = await fetch(`http://3.20.237.82:3000/alimentos/${a_id}`, {
+      const response = await fetch(`http://3.144.175.151:3000/alimentos/${a_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -24,7 +24,7 @@ export const Login = () => {
 
     const hashedPassword = sha256(password).toString();
 
-    fetch(`http://3.20.237.82:3000/usuarios/${id}`)
+    fetch(`http://3.144.175.151:3000/usuarios/${id}`)
       .then((response) => {
         if (response.ok) {
           return response.json();
