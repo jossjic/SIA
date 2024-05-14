@@ -7,13 +7,15 @@ import { CalendarInputDate } from "../../components/calendarInputDate";
 import { barraBusqueda } from "../barraBusqueda";
 import { StockBarDate } from "../stockBarDate";
 import { formatDate } from "../../generalFunctions";
+import { ReturnButton } from "../../components/returnButton";
+import { TextInput } from "../../components/textInput";
 
 export function SelectDate({ unit, amount, dates, onCancel, onConfirm, onUpdateStock, productStock }) {
 
   const [formData, setFormData] = useState({
     a_nombre: dates[0].a_nombre,
     a_cantidad: dates[0].a_cantidad,
-    a_stock: 0,
+    a_stock: "",
     a_fechaSalida: null,
     a_fechaEntrada: formatDate(new Date()),
     a_fechaCaducidad: null,
@@ -23,6 +25,7 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm, onUpdateS
 
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [updatedStock, setUpdatedStock] = useState(productStock);
+  const [error, setError] = useState("");
 
   const handleStockChange = (newStock) => {
     setFormData((prevFormData) => ({...prevFormData, a_stock: newStock }));
@@ -35,11 +38,23 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm, onUpdateS
       ...prevData,
       [name]: value,
     }));
-    setUpdatedStock(parseInt(value)); // update the local state variable
-    onUpdateStock(parseInt(value)); // update the parent component's state variable
+  
+    if (name === "a_fechaCaducidad" && !value) {
+      setError(<span style={{ color: 'red' }}>Debe seleccionar una fecha de caducidad</span>);
+    } else if (name === "a_stock" && !value) {
+      setError(<span style={{ color: 'red' }}>Debe ingresar el stock del producto</span>);
+    } else {
+      setError("");
+    }
   };
-
+  
+  
   const handleSubmit = async () => {
+    if (!formData.a_fechaCaducidad || !formData.a_stock) {
+      setError(<span style={{ color: 'red' }}>Debe rellenar todos los campos</span>);
+      return;
+    }
+  
     try {
       console.log(formData);
       const response = await fetch("http://3.20.237.82:3000/alimentos", {
@@ -59,6 +74,7 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm, onUpdateS
       console.error("Error al agregar el alimento:", error);
     }
   };
+  
 
   const handlePopupClose = () => {
     setShowSuccessPopup(false); // Ocultar el Popup de éxito
@@ -90,8 +106,18 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm, onUpdateS
                 value={formData.a_fechaCaducidad}
                 onChange={handleChange}
               />
+              
+            </div>
+            <div className="textID">
+            <TextInput
+                placeholder="Stock. Ej. 10"
+                name="a_stock"
+                value={formData.a_stock}
+                onChange={handleChange}
+              />
             </div>
           </tr>
+          {error && <p className="error">{error}</p>}
           <tr>
             <GeneralButton textElement="Agregar Caducidad" onClick={handleSubmit} color="#5982C0"></GeneralButton> 
           </tr>
