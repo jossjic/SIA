@@ -3,7 +3,7 @@ import "./adminUserPage.css";
 import { GeneralButton } from "../../components/button";
 import { Guide } from "../../components/guide";
 import { ReturnButton } from "../../components/returnButton";
-import { SearchBar } from "../../components/search";
+import { SearchBar } from "../../components/searchBar";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { useNavigate } from 'react-router-dom';
 
