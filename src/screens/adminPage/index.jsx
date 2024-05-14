@@ -230,8 +230,11 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
             console.error("Error:", error.message);
           });
       } else if (searchType === 4) {
+        // Formatear la fecha de búsqueda para que coincida con el formato aceptado por la API
+        const formattedSearchTerm = searchTerm.replace(/\//g, "-");
+
         fetch(
-          `http://3.144.175.151:3000/alimentos/busqueda/caducidad/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+          `http://3.144.175.151:3000/alimentos/busqueda/caducidad/${formattedSearchTerm}?page=${currentPage}&pageSize=${pageSize}`
         )
           .then((response) => {
             if (response.ok) {
@@ -933,6 +936,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         deleteActive={deleteActive}
         onAddUser={handleCreateUser}
         searchType={searchType}
+        goToFirstPage={goToFirstPage}
       />
       <SlidingSideBar options={options} setOptions={setOptions} />
       <div className="alimentosBox">

@@ -11,17 +11,23 @@ export function SearchBar({
   onDeleteSelected,
   onAddUser,
   searchType,
+  goToFirstPage,
 }) {
   const [inputText, setInputText] = useState("");
 
   const handleInputChange = (e) => {
     const searchText = e.target.value;
     setInputText(searchText);
+    if (searchText === "") {
+      onSearch(searchText);
+      goToFirstPage();
+    }
   };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       onSearch(inputText);
+      goToFirstPage();
     }
   };
 
