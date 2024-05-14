@@ -26,7 +26,7 @@ export const CheckDateAdd = () => {
           params.append('ids', id);
         });
       
-        fetch(`http://3.20.237.82:3000/alimentos/checkDate?${params.toString()}`)
+        fetch(`http://3.144.175.151:3000/alimentos/checkDate?${params.toString()}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Error al obtener los productos");
@@ -68,7 +68,7 @@ export const CheckDateAdd = () => {
     useEffect(() => {
         const fetchDates = async () => {
           const promises = ids.map((id) => {
-            return fetch(`http://3.20.237.82:3000/alimentos/atun/${id}`)
+            return fetch(`http://3.144.175.151:3000/alimentos/atun/${id}`)
              .then((response) => response.json())
              .then((data) => ({ [id]: data }));
           });
@@ -107,7 +107,7 @@ export const CheckDateAdd = () => {
 
     const allProductsVerified = () => {
         // Verifica si todos los ButtonSquare están en verde
-        return Object.values(buttonColors).every(color => color === "#00FF00");
+        return products.every((product) => buttonColors[product.a_id] === "#00FF00");
     };
     
 
@@ -159,7 +159,9 @@ export const CheckDateAdd = () => {
                     </table>
                     <div className="botonesAdd">
                         <GeneralButton textElement="Cancelar" path="" color="#5982C0" />
-                        <GeneralButton textElement="Agregar" path="" color={allProductsVerified() ? "#00FF00" : "#8F938D"} />
+                        <GeneralButton 
+                        textElement="Agregar" 
+                        color={allProductsVerified() ? "#00FF00" : "#8F938D"} />
                     </div>
                 </div>
             </div>

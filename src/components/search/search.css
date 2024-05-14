@@ -11,7 +11,6 @@
   height: 95%;
   width: 80%; /* Modificado para que el input ocupe el 80% del ancho */
   font-size: 16px; /* Modificado para que sea más legible */
-  background-color: #e0e0e0;
   margin: 0 2%;
 }
 
@@ -50,6 +49,26 @@
   position: relative; /* Agrega posición relativa al contenedor del botón de añadir */
   width: 10%; /* Modificado para que el botón de añadir tenga un ancho fijo */
   height: 100%;
+}
+
+.search-bar-producto {
+  background-color: #d8f3f9;
+}
+
+.search-bar-cantidad {
+  background-color: #d8f9e7;
+}
+
+.search-bar-marca {
+  background-color: #e7d8f9;
+}
+
+.search-bar-stock {
+  background-color: #f9f3d8;
+}
+
+.search-bar-caducidad {
+  background-color: #f9d8d8;
 }
 
 .search-bar .addCart .addCartNumber {

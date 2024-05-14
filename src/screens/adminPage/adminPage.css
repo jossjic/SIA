@@ -24,6 +24,85 @@
   height: 60vh;
   background-color: #f0f0f0;
 }
+.divHeaders {
+  display: flex;
+  align-items: center;
+}
+
+.divHeaders button {
+  background: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2em;
+  border: none;
+}
+
+.productoH {
+  width: 32%;
+  text-align: center;
+  margin-left: 3.7%;
+}
+
+.productoH:hover {
+  color: #00d0ff;
+}
+
+.cantidadH {
+  width: 13.5%;
+  text-align: center;
+}
+
+.cantidadH:hover {
+  color: #00ff73;
+}
+
+.marcaH {
+  width: 15%;
+  text-align: center;
+}
+
+.marcaH:hover {
+  color: #7300ff;
+}
+
+.stockH {
+  width: 18.5%;
+  text-align: center;
+}
+
+.stockH:hover {
+  color: #fdce00;
+}
+
+.caducidadH {
+  width: 17.3%;
+  text-align: center;
+}
+
+.caducidadH:hover {
+  color: #ff0000;
+}
+
+.productoH__active {
+  color: #00d0ff;
+}
+
+.cantidadH__active {
+  color: #00ff73;
+}
+
+.marcaH__active {
+  color: #7300ff;
+}
+
+.stockH__active {
+  color: #fdce00;
+}
+
+.caducidadH__active {
+  color: #ff0000;
+}
+
 .divRow {
   width: 100%;
   height: 10%;

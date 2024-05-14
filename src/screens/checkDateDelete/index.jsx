@@ -5,12 +5,16 @@ import { ReturnButton } from "../../components/returnButton";
 import { ButtonSquare, ButtonCircle } from "../../components/buttonSquare";
 import { GeneralButton } from "../../components/button";
 import { SelectDateDelete } from "../../components/selectDateDelete";
+import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 
 export const CheckDateDelete = ({ selectedIds }) => {
   const [showSelectDate, setShowSelectDate] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null); // Nuevo estado para el ID del producto seleccionado
   const [products, setProducts] = useState([]);
   const [dates, setDates] = useState({}); // Estado para guardar las fechas por producto
+
+  // Para el DELETE
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false); 
 
   const [buttonSquareColor, setButtonSquareColor] = useState("#E14040");
   // Mantén un estado para los colores de los botones cuadrados
@@ -37,7 +41,7 @@ export const CheckDateDelete = ({ selectedIds }) => {
       params.append("ids", id);
     });
 
-    fetch(`http://3.20.237.82:3000/alimentos/checkDate?${params.toString()}`)
+    fetch(`http://3.144.175.151:3000/alimentos/checkDate?${params.toString()}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al obtener los productos");
@@ -73,7 +77,7 @@ export const CheckDateDelete = ({ selectedIds }) => {
   useEffect(() => {
     const fetchDates = async () => {
       const promises = ids.map((id) => {
-        return fetch(`http://3.20.237.82:3000/alimentos/atun/${id}`)
+        return fetch(`http://3.144.175.151:3000/alimentos/atun/${id}`)
           .then((response) => response.json())
           .then((data) => ({ [id]: data }));
       });
@@ -96,7 +100,6 @@ export const CheckDateDelete = ({ selectedIds }) => {
   };
 
   const handleButtonClickSquare = (productId) => {
-    // Actualiza el color del botón cuadrado correspondiente al producto seleccionado
     setButtonColors((prevColors) => ({
       ...prevColors,
       [productId]: "#00FF00", // Cambia el color a verde
@@ -113,8 +116,20 @@ export const CheckDateDelete = ({ selectedIds }) => {
   };
 
   const allProductsVerified = () => {
-    // Verifica si todos los ButtonSquare están en verde
-    return Object.values(buttonColors).every((color) => color === "#00FF00");
+    // Verifica si todos los productos están en verde en buttonColors
+    return products.every((product) => buttonColors[product.a_id] === "#00FF00");
+  };
+
+  const handleDeleteSelected = () => {
+    Promise.all(selectedIds.map(id => 
+      fetch(`http://3.144.175.151:3000/alimentos/${id}`, { method: "DELETE" })
+    )).then(() => {
+      setUsers(users.filter(user => !selectedIds.includes(user.id)));
+      setSelectedIds([]);
+      setConfirmDeleteOpen(false);
+    }).catch(error => {
+      console.error("Error:", error);
+    });
   };
 
   return (
@@ -164,9 +179,20 @@ export const CheckDateDelete = ({ selectedIds }) => {
             <GeneralButton textElement="Cancelar" path="" color="#5982C0" />
             <GeneralButton
               textElement="Eliminar"
-              path=""
-              color={allProductsVerified() ? "#E14040" : "#8F938D"}
+              onClick = {() => setConfirmDeleteOpen(true)}
+              color={allProductsVerified() ? "#E14040" : "#8F938D"
+              }
             />
+            {confirmDeleteOpen && (
+            <ConfirmationPopUp
+              message="¿Está seguro que desea eliminar a los alimentos seleccionados permanentemente?"
+              answer1="Si"
+              answer2="No"
+              funct={handleDeleteSelected}
+              isOpen={confirmDeleteOpen}
+              closeModal={() => setConfirmDeleteOpen(false)}
+            />
+          )}
           </div>
         </div>
       </div>

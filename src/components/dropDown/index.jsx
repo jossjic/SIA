@@ -13,7 +13,7 @@ export function DropDown({
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    fetch(`http://3.20.237.82:3000/${tableName}`)
+    fetch(`http://3.144.175.151:3000/${tableName}`)
       .then((response) => response.json())
       .then((data) => {
         // Agregar la opción "Sin marca" al principio del array si el campo es opcional

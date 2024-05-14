@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./search.css";
+import "./searchBar.css";
 import { Link } from "react-router-dom"; // Añade esta línea
 
 export function SearchBar({
@@ -9,8 +9,7 @@ export function SearchBar({
   addActive,
   deleteActive,
   onDeleteSelected,
-  onAddUser,
-  searchType,
+  onAddUser
 }) {
   const [inputText, setInputText] = useState("");
 
@@ -27,43 +26,16 @@ export function SearchBar({
         <p className={addCartNumber === 0 ? "hidden" : "addCartNumber"}>
           {addCartNumber}
         </p>
-        <button
-          className={`icon-button add ${addActive ? "active-add" : ""}`}
-          onClick={onAddUser}
-        >
+        <button className={`icon-button add ${addActive ? "active-add" : ""}`}
+        onClick={onAddUser}>
           ➕
         </button>
       </div>
       <input
         type="text"
-        placeholder={
-          searchType === 0
-            ? "Buscando por producto..."
-            : searchType === 1
-            ? "Buscando por cantidad..."
-            : searchType === 2
-            ? "Buscando por marca..."
-            : searchType === 3
-            ? "Buscando por existencia..."
-            : searchType === 4
-            ? "Buscando por caducidad..."
-            : "Buscando..."
-        }
+        placeholder="Buscar..."
         value={inputText}
         onChange={handleInputChange}
-        className={
-          searchType === 0
-            ? "search-bar-producto"
-            : searchType === 1
-            ? "search-bar-cantidad"
-            : searchType === 2
-            ? "search-bar-marca"
-            : searchType === 3
-            ? "search-bar-stock"
-            : searchType === 4
-            ? "search-bar-caducidad"
-            : "search-bar"
-        }
       />
       <div className="deleteCart">
         <p className={deleteCartNumber === 0 ? "hidden" : "deleteCartNumber"}>
