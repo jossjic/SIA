@@ -39,7 +39,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
 
     // Actualizar el número de elementos seleccionados por cada id de alimento obtener el stock y sumarlos
     if (isChecked) {
-      fetch("http://3.20.237.82:3000/alimentos/" + id)
+      fetch("http://3.144.175.151:3000/alimentos/" + id)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -53,7 +53,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           console.error("Error:", error.message);
         });
     } else {
-      fetch("http://3.20.237.82:3000/alimentos/" + id)
+      fetch("http://3.144.175.151:3000/alimentos/" + id)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -127,7 +127,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       !options.o5
     ) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/join/marca?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/join/marca?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -145,7 +145,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       //alimentos caducados dCad
     } else if (options.f1 && options.o1) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/caducados/dCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/caducados/dCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -162,7 +162,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); //alimentos proximos a caducar dCad
     } else if (options.f2 && options.o1) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/proximoscaducados/dCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/proximoscaducados/dCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -179,7 +179,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos con disponibilidad dCad
     } else if (options.f3 && options.o1) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/disponibles/dCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/disponibles/dCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -196,7 +196,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); //alimentos no disponibles dCad
     } else if (options.f4 && options.o1) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/nodisponibles/dCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/nodisponibles/dCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -213,7 +213,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos caducados uCad
     } else if (options.f1 && options.o2) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/caducados/uCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/caducados/uCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -230,7 +230,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos proximos a caducar uCad
     } else if (options.f2 && options.o2) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/proximoscaducados/uCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/proximoscaducados/uCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -247,7 +247,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos con disponibilidad dCad
     } else if (options.f3 && options.o2) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/disponibles/uCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/disponibles/uCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -264,7 +264,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos sin disponibilidad uCad
     } else if (options.f4 && options.o2) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/nodisponibles/uCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/nodisponibles/uCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -281,7 +281,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos caducados dEnt
     } else if (options.f1 && options.o3) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/caducados/dEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/caducados/dEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -298,7 +298,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos proximos a caducar dEnt
     } else if (options.f2 && options.o3) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/proximoscaducados/dEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/proximoscaducados/dEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -315,7 +315,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos disponibles dEnt
     } else if (options.f3 && options.o3) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/disponibles/dEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/disponibles/dEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -332,7 +332,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos no disponibles dEnt
     } else if (options.f4 && options.o3) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/nodisponibles/dEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/nodisponibles/dEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -349,7 +349,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos caducados uEnt
     } else if (options.f1 && options.o4) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/caducados/uEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/caducados/uEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -366,7 +366,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos proximos a caducar uEnt
     } else if (options.f2 && options.o4) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/proximoscaducados/uEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/proximoscaducados/uEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -383,7 +383,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos disponibles uEnt
     } else if (options.f3 && options.o4) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/disponibles/uEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/disponibles/uEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -400,7 +400,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos nodisponibles uEnt
     } else if (options.f4 && options.o4) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/nodisponibles/uEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/nodisponibles/uEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -417,7 +417,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos caducados alfaB
     } else if (options.f1 && options.o5) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/caducados/alfaB?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/caducados/alfaB?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -434,7 +434,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos proximos a caducar alfaB
     } else if (options.f2 && options.o5) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/proximoscaducados/alfaB?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/proximoscaducados/alfaB?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -451,7 +451,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos disponibles alfaB
     } else if (options.f3 && options.o5) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/disponibles/alfaB?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/disponibles/alfaB?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -468,7 +468,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos nodisponibles alfaB
     } else if (options.f4 && options.o5) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/nodisponibles/alfaB?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/nodisponibles/alfaB?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -492,7 +492,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       !options.o5
     ) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/caducados?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/caducados?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -516,7 +516,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       !options.o5
     ) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/proximoscaducados?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/proximoscaducados?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -540,7 +540,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       !options.o5
     ) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/disponibles?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/disponibles?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -564,7 +564,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       !options.o5
     ) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/nodisponibles?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/nodisponibles?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -587,7 +587,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       options.o1
     ) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/ordenados/dCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/ordenados/dCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -610,7 +610,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       options.o2
     ) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/ordenados/uCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/ordenados/uCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -633,7 +633,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       options.o3
     ) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/ordenados/dEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/ordenados/dEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -656,7 +656,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       options.o4
     ) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/ordenados/uEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/ordenados/uEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -679,7 +679,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       options.o5
     ) {
       fetch(
-        `http://3.20.237.82:3000/alimentos/ordenados/alfaB?page=${currentPage}&pageSize=${pageSize}`
+        `http://3.144.175.151:3000/alimentos/ordenados/alfaB?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -701,7 +701,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
     //set pages according to alimentos
 
     if (options.f1) {
-      fetch(`http://3.20.237.82:3000/alimentos/count/caducados`)
+      fetch(`http://3.144.175.151:3000/alimentos/count/caducados`)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -716,7 +716,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           console.error("Error:", error.message);
         });
     } else if (options.f2) {
-      fetch(`http://3.20.237.82:3000/alimentos/count/proximoscaducados`)
+      fetch(`http://3.144.175.151:3000/alimentos/count/proximoscaducados`)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -731,7 +731,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           console.error("Error:", error.message);
         });
     } else if (options.f3) {
-      fetch(`http://3.20.237.82:3000/alimentos/count/disponibles`)
+      fetch(`http://3.144.175.151:3000/alimentos/count/disponibles`)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -746,7 +746,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           console.error("Error:", error.message);
         });
     } else if (options.f4) {
-      fetch(`http://3.20.237.82:3000/alimentos/count/nodisponibles`)
+      fetch(`http://3.144.175.151:3000/alimentos/count/nodisponibles`)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -761,7 +761,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           console.error("Error:", error.message);
         });
     } else {
-      fetch(`http://3.20.237.82:3000/alimentos/count`)
+      fetch(`http://3.144.175.151:3000/alimentos/count`)
         .then((response) => {
           if (response.ok) {
             return response.json();

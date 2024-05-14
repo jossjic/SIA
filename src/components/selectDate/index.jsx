@@ -57,7 +57,7 @@ export function SelectDate({ unit, amount, dates, onCancel, onConfirm, onUpdateS
   
     try {
       console.log(formData);
-      const response = await fetch("http://3.20.237.82:3000/alimentos", {
+      const response = await fetch("http://3.144.175.151:3000/alimentos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -41,7 +41,7 @@ export const CheckDateDelete = ({ selectedIds }) => {
       params.append("ids", id);
     });
 
-    fetch(`http://3.20.237.82:3000/alimentos/checkDate?${params.toString()}`)
+    fetch(`http://3.144.175.151:3000/alimentos/checkDate?${params.toString()}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al obtener los productos");
@@ -77,7 +77,7 @@ export const CheckDateDelete = ({ selectedIds }) => {
   useEffect(() => {
     const fetchDates = async () => {
       const promises = ids.map((id) => {
-        return fetch(`http://3.20.237.82:3000/alimentos/atun/${id}`)
+        return fetch(`http://3.144.175.151:3000/alimentos/atun/${id}`)
           .then((response) => response.json())
           .then((data) => ({ [id]: data }));
       });
@@ -122,7 +122,7 @@ export const CheckDateDelete = ({ selectedIds }) => {
 
   const handleDeleteSelected = () => {
     Promise.all(selectedIds.map(id => 
-      fetch(`http://3.20.237.82:3000/alimentos/${id}`, { method: "DELETE" })
+      fetch(`http://3.144.175.151:3000/alimentos/${id}`, { method: "DELETE" })
     )).then(() => {
       setUsers(users.filter(user => !selectedIds.includes(user.id)));
       setSelectedIds([]);
