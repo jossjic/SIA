@@ -130,7 +130,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
             console.error("Error:", error.message);
           });
 
-        fetch("http://3.20.237.82:3000/alimentos/count")
+        fetch("http://3.144.175.151:3000/alimentos/count")
           .then((response) => {
             if (response.ok) {
               return response.json();
@@ -147,7 +147,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       } else if (searchType === 0) {
         console.log("searchTerm", searchTerm);
         fetch(
-          `http://3.20.237.82:3000/alimentos/busqueda/nombre/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+          `http://3.144.175.151:3000/alimentos/busqueda/nombre/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
         )
           .then((response) => {
             if (response.ok) {
@@ -175,7 +175,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           });
       } else if (searchType === 1) {
         fetch(
-          `http://3.20.237.82:3000/alimentos/busqueda/cantidad/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+          `http://3.144.175.151:3000/alimentos/busqueda/cantidad/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
         )
           .then((response) => {
             if (response.ok) {
@@ -194,7 +194,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           });
       } else if (searchType === 2) {
         fetch(
-          `http://3.20.237.82:3000/alimentos/busqueda/marca/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+          `http://3.144.175.151:3000/alimentos/busqueda/marca/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
         )
           .then((response) => {
             if (response.ok) {
@@ -213,7 +213,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           });
       } else if (searchType === 3) {
         fetch(
-          `http://3.20.237.82:3000/alimentos/busqueda/stock/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+          `http://3.144.175.151:3000/alimentos/busqueda/stock/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
         )
           .then((response) => {
             if (response.ok) {
@@ -232,7 +232,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           });
       } else if (searchType === 4) {
         fetch(
-          `http://3.20.237.82:3000/alimentos/busqueda/caducidad/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+          `http://3.144.175.151:3000/alimentos/busqueda/caducidad/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
         )
           .then((response) => {
             if (response.ok) {

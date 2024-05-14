@@ -17,8 +17,12 @@ export function SearchBar({
   const handleInputChange = (e) => {
     const searchText = e.target.value;
     setInputText(searchText);
-    // Call the onSearch function with the updated search text
-    onSearch(searchText);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      onSearch(inputText);
+    }
   };
 
   return (
@@ -51,6 +55,7 @@ export function SearchBar({
         }
         value={inputText}
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
         className={
           searchType === 0
             ? "search-bar-producto"
