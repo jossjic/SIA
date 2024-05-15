@@ -56,8 +56,7 @@ function App() {
           <Route path="/editProduct/:a_id" element={<EditProduct />} />
           <Route path="/codePage" element={<CodePage />} />
           <Route path="/newPass" element={<NewPass />} />
-          <Route path="/editUser"
-           element={<EditUser selectedUserId={selectedUserId}/>} />
+          <Route path="/editUser/:u_id" element={<EditUser />} />
         </Routes>
       </Router>
     </div>
