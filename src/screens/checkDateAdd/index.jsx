@@ -5,6 +5,7 @@ import { ReturnButton } from "../../components/returnButton";
 import { ButtonSquare, ButtonCircle } from "../../components/buttonSquare";
 import { GeneralButton } from '../../components/button';
 import { SelectDate } from '../../components/selectDate';
+import { useNavigate } from "react-router-dom";
 
 export const CheckDateAdd = () => {
     const [showSelectDate, setShowSelectDate] = useState(false);
@@ -17,6 +18,7 @@ export const CheckDateAdd = () => {
     const [buttonColors, setButtonColors] = useState({});
 
     const [productsWithStock, setProductsWithStock] = useState([]);
+    let navigate = useNavigate();
 
     const ids = [1, 44, 2]; // Tu arreglo de IDs
 
@@ -158,7 +160,10 @@ export const CheckDateAdd = () => {
                         </tbody>
                     </table>
                     <div className="botonesAdd">
-                        <GeneralButton textElement="Cancelar" path="" color="#5982C0" />
+                        <GeneralButton textElement="Cancelar" onClick={() => {
+                            navigate("/AdminPage");
+                            }}
+                            color="#5982C0" />
                         <GeneralButton 
                         textElement="Agregar" 
                         color={allProductsVerified() ? "#00FF00" : "#8F938D"} />

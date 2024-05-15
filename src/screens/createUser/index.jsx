@@ -3,6 +3,9 @@ import "./createUser.css";
 import { CreateInput } from "../../components/createInput";
 import { Guide } from "../../components/guide";
 import { GeneralButton } from "../../components/button";
+import { ConfirmationPopUp } from "../../components/confirmationPopUp";
+import { useNavigate } from 'react-router-dom';
+import { ReturnButton } from "../../components/returnButton";
 
 export const CreateUser = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +18,8 @@ export const CreateUser = () => {
   });
   const [error, setError] = useState("");
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +28,7 @@ export const CreateUser = () => {
       [name]: value,
     }));
   };
+
 
   const handleSubmit = async () => {
     try {
@@ -54,11 +60,15 @@ export const CreateUser = () => {
       setError(error.message);
       console.error("Error al agregar el usuario:", error);
     }
+    setIsModalOpen(true);
   };
 
   return (
     <div className="createUser">
       <div className="mensaje">
+      <div className="buttonTopLeft">
+        <ReturnButton />
+      </div>
         <Guide message="No olvides llenar todos los campos para el registro" />
       </div>
       <div className="createUser-container">
@@ -107,6 +117,14 @@ export const CreateUser = () => {
           <p style={{ color: "green" }}>Registro exitoso</p>
         )}
       </div>
+      {isModalOpen && (
+        <div className="modalOverlayConf">
+        <ConfirmationPopUp
+        message="Usuario registrado correctamente"
+        answer1="Ok" 
+        isOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)} /> 
+      </div> )}
     </div>
   );
 };
