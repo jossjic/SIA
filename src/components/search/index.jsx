@@ -12,6 +12,7 @@ export function SearchBar({
   onAddUser,
   searchType,
   goToFirstPage,
+  disabled,
 }) {
   const [inputText, setInputText] = useState("");
 
@@ -32,7 +33,7 @@ export function SearchBar({
   };
 
   return (
-    <div className="search-bar">
+    <div className="search-bar-2">
       <div className="addCart">
         <p className={addCartNumber === 0 ? "hidden" : "addCartNumber"}>
           {addCartNumber}
@@ -45,9 +46,12 @@ export function SearchBar({
         </button>
       </div>
       <input
+        disabled={disabled}
         type="text"
         placeholder={
-          searchType === 0
+          disabled
+            ? "Busqueda deshabilitada... (desactive los filtros de la barra lateral para habilitar la busqueda.)"
+            : searchType === 0
             ? "Buscando por producto..."
             : searchType === 1
             ? "Buscando por cantidad..."
@@ -64,16 +68,16 @@ export function SearchBar({
         onKeyDown={handleKeyDown}
         className={
           searchType === 0
-            ? "search-bar-producto"
+            ? "search-bar-producto-2"
             : searchType === 1
-            ? "search-bar-cantidad"
+            ? "search-bar-cantidad-2"
             : searchType === 2
-            ? "search-bar-marca"
+            ? "search-bar-marca-2"
             : searchType === 3
-            ? "search-bar-stock"
+            ? "search-bar-stock-2"
             : searchType === 4
-            ? "search-bar-caducidad"
-            : "search-bar"
+            ? "search-bar-caducidad-2"
+            : "search-bar-2"
         }
       />
       <div className="deleteCart">

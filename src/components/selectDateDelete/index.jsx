@@ -2,10 +2,9 @@ import React from "react";
 import "./selectDateDelete.css";
 import { CadCheckCounter } from "../cadCheckCounter";
 import { GeneralButton } from "../button";
-import { barraBusqueda } from "../barraBusqueda";
 import { StockBarDate } from "../stockBarDate";
 
-export function SelectDateDelete({ unit, amount, dates, onCancel, onConfirm  }) {
+export function SelectDateDelete({ unit, amount, dates, onCancel, onConfirm }) {
   /*
   const dates = [
     {id: 1, caducidad:"01/05/2002", stock:"NA"},
@@ -20,33 +19,45 @@ export function SelectDateDelete({ unit, amount, dates, onCancel, onConfirm  }) 
             <CadCheckCounter unit={unit} amount={amount}></CadCheckCounter>
           </tr>
           <tr>
-            <GeneralButton textElement="Confirmar" onClick={onConfirm} color="#4FA725"></GeneralButton>
+            <GeneralButton
+              textElement="Confirmar"
+              onClick={onConfirm}
+              color="#4FA725"
+            ></GeneralButton>
           </tr>
           <tr>
-            <GeneralButton textElement="Cancelar" onClick={onCancel} color="#E14040"></GeneralButton>
+            <GeneralButton
+              textElement="Cancelar"
+              onClick={onCancel}
+              color="#E14040"
+            ></GeneralButton>
           </tr>
         </td>
         <td>
           <table className="productsTableD">
-                        <thead>
-                            <th></th>
-                            <th>Caducidad</th>
-                            <th>Cantidad</th>
-                            <th>Cantidad Seleccionada</th>
-                        </thead>
-                        <tbody>
-                        {dates.map(date => (
-                            <tr key={date.a_id}>
-                                <td><input type="checkbox" className="checkboxLargeD" /></td>
-                                <td>{date.a_fechaCaducidad.substring(0,10)}</td>
-                                <td>{date.a_stock}</td>
-                                <td><StockBarDate stock={date.a_stock}></StockBarDate></td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+            <thead>
+              <th></th>
+              <th>Caducidad</th>
+              <th>Cantidad</th>
+              <th>Cantidad Seleccionada</th>
+            </thead>
+            <tbody>
+              {dates.map((date) => (
+                <tr key={date.a_id}>
+                  <td>
+                    <input type="checkbox" className="checkboxLargeD" />
+                  </td>
+                  <td>{date.a_fechaCaducidad.substring(0, 10)}</td>
+                  <td>{date.a_stock}</td>
+                  <td>
+                    <StockBarDate stock={date.a_stock}></StockBarDate>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </td>
-      </table>  
+      </table>
     </div>
   );
 }

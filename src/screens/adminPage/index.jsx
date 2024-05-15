@@ -84,7 +84,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
     } else {
       setDeleteActive(true);
     }
-  }, [deleteCartNumber]);
+  }, []);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [options, setOptions] = useState({
@@ -937,6 +937,17 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         onAddUser={handleCreateUser}
         searchType={searchType}
         goToFirstPage={goToFirstPage}
+        disabled={
+          options.f1 ||
+          options.f2 ||
+          options.f3 ||
+          options.f4 ||
+          options.o1 ||
+          options.o2 ||
+          options.o3 ||
+          options.o4 ||
+          options.o5
+        }
       />
       <SlidingSideBar options={options} setOptions={setOptions} />
       <div className="alimentosBox">
