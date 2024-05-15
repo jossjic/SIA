@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CreateInput } from "../../components/createInput";
+import { useParams } from "react-router-dom";
 import { Guide } from "../../components/guide";
 import { GeneralButton } from "../../components/button";
 import { ReturnButton } from "../../components/returnButton";
@@ -23,7 +24,7 @@ export const EditUser = () => {
 useEffect(() => {
     async function fetchUserData() {
       try {
-        const response = await fetch(`http://3.20.237.82:3000/usuarios/${u_id}`);
+        const response = await fetch(`http://3.144.175.151:3000/usuarios/${u_id}`);
         const userData = await response.json();
         setFormData({
           u_nombre: userData.u_nombre,
@@ -51,7 +52,7 @@ useEffect(() => {
   const handleSubmit = async () => {
     try {
       console.log(formData);
-      const response = await fetch(`http://3.20.237.82:3000/usuarios/${u_id}`, {
+      const response = await fetch(`http://3.144.175.151:3000/usuarios/${u_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

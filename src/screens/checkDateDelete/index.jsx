@@ -6,12 +6,14 @@ import { ButtonSquare, ButtonCircle } from "../../components/buttonSquare";
 import { GeneralButton } from "../../components/button";
 import { SelectDateDelete } from "../../components/selectDateDelete";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
+import { useNavigate } from "react-router-dom";
 
 export const CheckDateDelete = ({ selectedIds }) => {
   const [showSelectDate, setShowSelectDate] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null); // Nuevo estado para el ID del producto seleccionado
   const [products, setProducts] = useState([]);
   const [dates, setDates] = useState({}); // Estado para guardar las fechas por producto
+  let navigate = useNavigate();
 
   // Para el DELETE
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false); 
@@ -125,12 +127,12 @@ export const CheckDateDelete = ({ selectedIds }) => {
       fetch(`http://3.144.175.151:3000/alimentos/${id}`, { method: "DELETE" })
     )).then(() => {
       setUsers(users.filter(user => !selectedIds.includes(user.id)));
-      setSelectedIds([]);
+      setSelectedIds([]); // Establecer selectedIds como un arreglo vacío
       setConfirmDeleteOpen(false);
     }).catch(error => {
       console.error("Error:", error);
     });
-  };
+  };  
 
   return (
     <div className="dateDelete">
@@ -176,7 +178,15 @@ export const CheckDateDelete = ({ selectedIds }) => {
             </tbody>
           </table>
           <div className="botonesDelete">
-            <GeneralButton textElement="Cancelar" path="" color="#5982C0" />
+          <GeneralButton 
+            textElement="Cancelar" 
+            path="" 
+            color="#5982C0" 
+            onClick={() => {
+              navigate(-1); // Navegar hacia atrás
+              setSelectedIds([]); // Establecer selectedIds como un arreglo vacío
+            }}
+          />
             <GeneralButton
               textElement="Eliminar"
               onClick = {() => setConfirmDeleteOpen(true)}

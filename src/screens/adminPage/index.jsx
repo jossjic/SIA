@@ -32,6 +32,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
+
   const handleCreateUser = () => {
     navigate("/addProduct");
   };

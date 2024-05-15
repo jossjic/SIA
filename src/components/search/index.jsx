@@ -84,6 +84,7 @@ export function SearchBar({
         <p className={deleteCartNumber === 0 ? "hidden" : "deleteCartNumber"}>
           {deleteCartNumber}
         </p>
+        <Link to="/CheckDateDelete" >
         <button
           className={`icon-button delete ${
             deleteActive ? "active-delete" : ""
@@ -92,6 +93,7 @@ export function SearchBar({
         >
           🗑️
         </button>
+        </Link>
       </div>
     </div>
   );
