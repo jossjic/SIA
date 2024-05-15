@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./search.css";
 import { Link } from "react-router-dom"; // Añade esta línea
+import trashIcon from "../../assets/img/trashIcon.svg"; // Añade esta línea
+import addIcon from "../../assets/img/addIcon.svg"; // Añade esta línea
 
 export function SearchBar({
   onSearch,
@@ -42,7 +44,7 @@ export function SearchBar({
           className={`icon-button add ${addActive ? "active-add" : ""}`}
           onClick={onAddUser}
         >
-          ➕
+          <img className="addIconPhoto" src={addIcon} alt="Add" />
         </button>
       </div>
       <input
@@ -84,15 +86,15 @@ export function SearchBar({
         <p className={deleteCartNumber === 0 ? "hidden" : "deleteCartNumber"}>
           {deleteCartNumber}
         </p>
-        <Link to="/CheckDateDelete" >
-        <button
-          className={`icon-button delete ${
-            deleteActive ? "active-delete" : ""
-          }`}
-          onClick={onDeleteSelected}
-        >
-          🗑️
-        </button>
+        <Link to="/CheckDateDelete">
+          <button
+            className={`icon-button delete ${
+              deleteActive ? "active-delete" : ""
+            }`}
+            onClick={onDeleteSelected}
+          >
+            <img className="trashIconPhoto" src={trashIcon} alt="Add" />
+          </button>
         </Link>
       </div>
     </div>
