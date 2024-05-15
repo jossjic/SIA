@@ -32,7 +32,6 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-
   const handleCreateUser = () => {
     navigate("/addProduct");
   };
@@ -232,7 +231,12 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           });
       } else if (searchType === 4) {
         // Formatear la fecha de búsqueda para que coincida con el formato aceptado por la API
-        const formattedSearchTerm = searchTerm.replace(/\//g, "-");
+        var formattedSearchTerm = "sin caducidad";
+        if (searchTerm.trim().toLowerCase() !== "sin caducidad") {
+          formattedSearchTerm = searchTerm.replace(/\//g, "-");
+        } else {
+          formattedSearchTerm = "sin caducidad";
+        }
 
         fetch(
           `http://3.144.175.151:3000/alimentos/busqueda/caducidad/${formattedSearchTerm}?page=${currentPage}&pageSize=${pageSize}`
@@ -990,24 +994,29 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
             Caducidad
           </button>
         </div>
-        {filteredAlimentos.map((alimento) => (
-          <div className="divRow" key={alimento.a_id}>
-            <RowAdminPage
-              id={alimento.a_id}
-              product={alimento.a_nombre}
-              amount={alimento.a_cantidad}
-              unit={alimento.um_id}
-              brand={
-                alimento.m_nombre == null ? "Sin marca" : alimento.m_nombre
-              }
-              stock={alimento.a_stock}
-              cadDate={alimento.a_fechaCaducidad}
-              onChange={handleCheckboxChange}
-              selectedIds={selectedIds}
-            />
-            <hr />
-          </div>
-        ))}
+        {filteredAlimentos.map(
+          (alimento) => (
+            console.log("alimento", alimento),
+            (
+              <div className="divRow" key={alimento.a_id}>
+                <RowAdminPage
+                  id={alimento.a_id}
+                  product={alimento.a_nombre}
+                  amount={alimento.a_cantidad}
+                  unit={alimento.um_id}
+                  brand={
+                    alimento.m_nombre == null ? "Sin marca" : alimento.m_nombre
+                  }
+                  stock={alimento.a_stock}
+                  cadDate={alimento.a_fechaCaducidad}
+                  onChange={handleCheckboxChange}
+                  selectedIds={selectedIds}
+                />
+                <hr />
+              </div>
+            )
+          )
+        )}
       </div>
       <div className="paginacion">
         <button

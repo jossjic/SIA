@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StockBar } from "../stockBar";
 import { Link } from "react-router-dom";
+import { formatDate } from "../../generalFunctions";
 import "./RowAdminPage.css";
 
 export function RowAdminPage({
@@ -14,21 +15,11 @@ export function RowAdminPage({
   onChange,
   selectedIds,
 }) {
-  const fecha = new Date(cadDate);
   const [isChecked, setIsChecked] = useState(selectedIds.includes(id));
 
   useEffect(() => {
     setIsChecked(selectedIds.includes(id)); // Actualiza 'isChecked' cuando 'selectedIds' cambie
   }, [selectedIds]);
-
-  const year = fecha.getFullYear();
-  const month = fecha.getMonth() + 1; // getMonth returns month index starting from 0
-  const day = fecha.getDate() + 1;
-
-  // Format the date in YYYY/MM/DD
-  const formattedDate = `${year}/${month.toString().padStart(2, "0")}/${day
-    .toString()
-    .padStart(2, "0")}`;
 
   const quantity = `${amount} ${unit}`;
 
@@ -57,7 +48,9 @@ export function RowAdminPage({
       <p className="quantity">{quantity}</p>
       <p className="brand">{brand}</p>
       <StockBar stock={stock} isDisabled={isChecked} />
-      <p className="cadDate">{formattedDate}</p>
+      <p className="cadDate">
+        {cadDate == null ? "Sin Caducidad" : formatDate(cadDate)}
+      </p>
     </div>
   );
 }
