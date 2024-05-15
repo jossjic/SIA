@@ -59,3 +59,9 @@
   justify-content: center;
   align-items: center;
 }
+
+.buttonTopLeft {
+  position: fixed;
+  top: -6px;
+  left: -25px;
+}
