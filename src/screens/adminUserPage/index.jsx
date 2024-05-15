@@ -75,6 +75,11 @@ export const UserPage = () => {
     setFilter(searchTerm.toLowerCase());
   };
 
+  const handleEditUser = (userId) => {
+    navigate(`/editUser/${userId}`);
+  };
+
+
   const filteredUsers = users.filter(user => 
     user.id.toLowerCase().includes(filter) ||
     user.email.toLowerCase().includes(filter) ||
@@ -139,9 +144,10 @@ export const UserPage = () => {
                     className="generalButton"
                   />
                   <GeneralButton
-                    textElement="  Editar  " path="/editUser "
+                    textElement="  Editar  "
                     color="#19739A"
                     className="generalButton"
+                    onClick={() => handleEditUser(user.id)}
                   />
                   <GeneralButton
                     textElement="  Eliminar  "
