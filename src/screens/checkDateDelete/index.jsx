@@ -10,32 +10,19 @@ import { useNavigate } from "react-router-dom";
 
 export const CheckDateDelete = ({ selectedIds }) => {
   const [showSelectDate, setShowSelectDate] = useState(false);
-  const [selectedProductId, setSelectedProductId] = useState(null); // Nuevo estado para el ID del producto seleccionado
+  const [selectedProductId, setSelectedProductId] = useState(null); 
   const [products, setProducts] = useState([]);
-  const [dates, setDates] = useState({}); // Estado para guardar las fechas por producto
+  const [dates, setDates] = useState({});
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+  const [deleteSuccessOpen, setDeleteSuccessOpen] = useState(false); 
+  const [buttonSquareColor, setButtonSquareColor] = useState("#E14040");
+  const [buttonColors, setButtonColors] = useState({});
+  const [ids, setIds] = useState([]);
   let navigate = useNavigate();
 
-  // Para el DELETE
-  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false); 
-
-  const [buttonSquareColor, setButtonSquareColor] = useState("#E14040");
-  // Mantén un estado para los colores de los botones cuadrados
-  const [buttonColors, setButtonColors] = useState({});
-
-  const [ids, setIds] = useState([]); // Tu arreglo de IDs inicial
-
-  // Actualizar los IDs cada vez que selectedIds cambie
   useEffect(() => {
     setIds(selectedIds);
   }, [selectedIds]);
-
-  /*
-    const products = [
-        {id: 1, nombre:"Lata de Frijol", marca:"NA", cantidad: 250, unidad:"g"},
-        {id: 2, nombre:"Sopa do coditos", marca:"La Costeña", cantidad: 500, unidad:"g"},
-        {id: 3, nombre:"Lata de Atún", marca:"Del Valle", cantidad: 300, unidad:"g"}
-    ];
-    */
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -56,15 +43,9 @@ export const CheckDateDelete = ({ selectedIds }) => {
       .catch((error) => {
         console.error("Error:", error.message);
       });
-  }, [ids]); // Agregué ids como dependencia del efecto
+  }, [ids]);
 
   const updateProductState = (productId, newState) => {
-    console.log(
-      "Updating product state for product ID:",
-      productId,
-      "with new state:",
-      newState
-    );
     setProducts((prevProducts) => {
       return prevProducts.map((product) => {
         if (product.a_id === productId) {
@@ -75,7 +56,6 @@ export const CheckDateDelete = ({ selectedIds }) => {
     });
   };
 
-  // Nuevo efecto para obtener las fechas
   useEffect(() => {
     const fetchDates = async () => {
       const promises = ids.map((id) => {
@@ -94,7 +74,7 @@ export const CheckDateDelete = ({ selectedIds }) => {
     };
 
     fetchDates();
-  }, []); // Dependencia vacía, solo se ejecuta una vez
+  }, [ids]);
 
   const handleButtonClick = (product) => {
     setSelectedProductId(product.a_id);
@@ -104,7 +84,7 @@ export const CheckDateDelete = ({ selectedIds }) => {
   const handleButtonClickSquare = (productId) => {
     setButtonColors((prevColors) => ({
       ...prevColors,
-      [productId]: "#00FF00", // Cambia el color a verde
+      [productId]: "#00FF00", 
     }));
   };
 
@@ -118,7 +98,6 @@ export const CheckDateDelete = ({ selectedIds }) => {
   };
 
   const allProductsVerified = () => {
-    // Verifica si todos los productos están en verde en buttonColors
     return products.every((product) => buttonColors[product.a_id] === "#00FF00");
   };
 
@@ -126,13 +105,17 @@ export const CheckDateDelete = ({ selectedIds }) => {
     Promise.all(selectedIds.map(id => 
       fetch(`http://3.144.175.151:3000/alimentos/${id}`, { method: "DELETE" })
     )).then(() => {
-      setUsers(users.filter(user => !selectedIds.includes(user.id)));
-      setSelectedIds([]); // Establecer selectedIds como un arreglo vacío
       setConfirmDeleteOpen(false);
+      setDeleteSuccessOpen(true);
     }).catch(error => {
       console.error("Error:", error);
     });
-  };  
+  };
+
+  const handleSuccessClose = () => {
+    setDeleteSuccessOpen(false);
+    navigate("/AdminPage");
+  };
 
   return (
     <div className="dateDelete">
@@ -151,12 +134,14 @@ export const CheckDateDelete = ({ selectedIds }) => {
         <div className="tableContainerDelete">
           <table className="userTableDelete">
             <thead>
-              <th>Nombre</th>
-              <th>Cantidad</th>
-              <th>Marca</th>
-              <th>Stock</th>
-              <th>Fecha Caducidad</th>
-              <th>Verificación</th>
+              <tr>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Marca</th>
+                <th>Stock</th>
+                <th>Fecha Caducidad</th>
+                <th>Verificación</th>
+              </tr>
             </thead>
             <tbody>
               {products.map((product) => (
@@ -169,7 +154,7 @@ export const CheckDateDelete = ({ selectedIds }) => {
                   <td>
                     <ButtonSquare
                       textElement="v"
-                      color={buttonColors[product.a_id] || "#E14040"} // Usa el color del estado o el color predeterminado
+                      color={buttonColors[product.a_id] || "#E14040"}
                       onClick={() => handleButtonClickSquare(product.a_id)}
                     />
                   </td>
@@ -178,31 +163,39 @@ export const CheckDateDelete = ({ selectedIds }) => {
             </tbody>
           </table>
           <div className="botonesDelete">
-          <GeneralButton 
-            textElement="Cancelar" 
-            path="" 
-            color="#5982C0" 
-            onClick={() => {
-              navigate(-1); // Navegar hacia atrás
-              setSelectedIds([]); // Establecer selectedIds como un arreglo vacío
-            }}
-          />
+            <GeneralButton 
+              textElement="Cancelar" 
+              path="" 
+              color="#5982C0" 
+              onClick={() => {
+                navigate(-1);
+                setSelectedIds([]);
+              }}
+            />
             <GeneralButton
               textElement="Eliminar"
-              onClick = {() => setConfirmDeleteOpen(true)}
-              color={allProductsVerified() ? "#E14040" : "#8F938D"
-              }
+              onClick={() => setConfirmDeleteOpen(true)}
+              color={allProductsVerified() ? "#E14040" : "#8F938D"}
             />
             {confirmDeleteOpen && (
-            <ConfirmationPopUp
-              message="¿Está seguro que desea eliminar a los alimentos seleccionados permanentemente?"
-              answer1="Si"
-              answer2="No"
-              funct={handleDeleteSelected}
-              isOpen={confirmDeleteOpen}
-              closeModal={() => setConfirmDeleteOpen(false)}
-            />
-          )}
+              <ConfirmationPopUp
+                message="¿Está seguro que desea eliminar a los alimentos seleccionados permanentemente?"
+                answer1="Si"
+                answer2="No"
+                funct={handleDeleteSelected}
+                isOpen={confirmDeleteOpen}
+                closeModal={() => setConfirmDeleteOpen(false)}
+              />
+            )}
+            {deleteSuccessOpen && (
+              <ConfirmationPopUp
+                message="Los alimentos se eliminaron correctamente."
+                answer1="OK"
+                funct={handleSuccessClose}
+                isOpen={deleteSuccessOpen}
+                closeModal={handleSuccessClose}
+              />
+            )}
           </div>
         </div>
       </div>

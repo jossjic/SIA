@@ -4,7 +4,6 @@ import { SuccessPopupDate } from "../../components/successPopupDate";
 import { CadCheckCounter } from "../cadCheckCounter";
 import { GeneralButton } from "../button";
 import { CalendarInputDate } from "../../components/calendarInputDate";
-import { barraBusqueda } from "../barraBusqueda";
 import { StockBarDate } from "../stockBarDate";
 import { formatDate } from "../../generalFunctions";
 import { ReturnButton } from "../../components/returnButton";
