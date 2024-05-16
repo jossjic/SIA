@@ -1,7 +1,6 @@
 import "./StockBar.css";
 import { useState, useEffect } from "react";
 import cloudIcon from "../../assets/img/cloudIcon.png";
-import { set } from "date-fns";
 
 export function StockBar({
   stock,
@@ -15,39 +14,56 @@ export function StockBar({
 }) {
   const [currentStock, setCurrentStock] = useState(parseInt(stock));
   const [stockChanged, setStockChanged] = useState(false);
-  const [initialStock, setInitialStock] = useState(stock);
+  const [initialStock] = useState(stock);
+
+  useEffect(() => {
+    // Cargar datos guardados al montar el componente
+    const savedModificationMap = localStorage.getItem("modificationMap");
+    if (savedModificationMap) {
+      setModificationMap(JSON.parse(savedModificationMap));
+    }
+  }, []);
 
   useEffect(() => {
     stockCheck();
-  }, [currentStock]); // Se ejecutará cada vez que currentStock cambie
+  }, [currentStock]);
 
   useEffect(() => {
     if (stockResetId === id) {
       setCurrentStock(parseInt(stock));
       setStockChanged(false);
     }
-  }, [stockResetId]); // Se ejecutará cada vez que stockResetId cambie
+  }, [stockResetId]);
 
   useEffect(() => {
     if (savedChanges) {
       setStockChanged(false);
       setSavedChanges(false);
-      setInitialStock(currentStock);
     }
-  }, [savedChanges]); // Se ejecutará cada vez que
+  }, [savedChanges]);
+
+  useEffect(() => {
+    // Guardar modificationMap en localStorage cada vez que cambie
+    localStorage.setItem("modificationMap", JSON.stringify(modificationMap));
+  }, [modificationMap]);
+
+  useEffect(() => {
+    // Cuando el componente se monta o el stock inicial cambia
+    setCurrentStock(parseInt(stock));
+  }, [stock]);
 
   const handleChange = (event) => {
     const value = event.target.value;
     if (value === "") {
       setCurrentStock(0);
-    } //limite int max
-    else if (value.length > 4) {
+    } else if (value.length > 4) {
       setCurrentStock(9999);
     } else if (isNaN(value)) {
       setCurrentStock(parseInt(initialStock));
     } else {
       setCurrentStock(parseInt(value));
     }
+    setStockChanged(true);
   };
 
   const changeStock = (logic) => {
@@ -56,6 +72,7 @@ export function StockBar({
     } else if (!logic && currentStock - 1 >= 0) {
       setCurrentStock(currentStock - 1);
     }
+    setStockChanged(true);
   };
 
   const stockCheck = () => {
@@ -77,7 +94,7 @@ export function StockBar({
 
   return (
     <div className="stockBar">
-      <div className={"cloud" + (stockChanged && !isDisabled ? "" : " hide")}>
+      <div className={"cloud" + (modificationMap[id] ? "" : " hide")}>
         <img
           className="cloudIcon"
           src={cloudIcon}
@@ -85,7 +102,7 @@ export function StockBar({
           disabled={isDisabled}
         />
         <p className="cloudText" disabled={isDisabled}>
-          {initialStock}
+          {modificationMap[id] ? modificationMap[id][0] : initialStock}
         </p>
       </div>
       <button onClick={() => changeStock(false)} disabled={isDisabled}>
@@ -93,7 +110,13 @@ export function StockBar({
       </button>
       <input
         type="text"
-        value={isDisabled ? stock : currentStock}
+        value={
+          stockChanged
+            ? currentStock
+            : modificationMap[id]
+            ? modificationMap[id][1]
+            : initialStock
+        }
         onChange={handleChange}
         disabled={isDisabled}
       />
