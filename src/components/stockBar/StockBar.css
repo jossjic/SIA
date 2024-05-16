@@ -32,7 +32,8 @@
     -50%,
     -50%
   ); /* Centra el elemento en el 50% tanto vertical como horizontalmente */
-  font-size: 10px;
+  font-size: 10px !important;
+  font-weight: bold !important;
   text-align: center; /* Alineación horizontal */
 }
 

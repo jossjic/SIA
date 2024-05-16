@@ -4,7 +4,12 @@ import "./SlidingSideBar.css";
 import returnImage from "../../assets/img/returnImage.png";
 import { Ordenamiento } from "../ordenamiento";
 
-export function SlidingSideBar({ options, setOptions }) {
+export function SlidingSideBar({
+  options,
+  setOptions,
+  showWithoutStock,
+  setShowWithoutStock,
+}) {
   const [expanded, setExpanded] = useState(false);
 
   const sidebarRef = useRef(null);
@@ -23,6 +28,11 @@ export function SlidingSideBar({ options, setOptions }) {
     } else if (expanded) {
       event.stopPropagation();
     }
+  };
+
+  const handleClickStock = () => {
+    setShowWithoutStock(!showWithoutStock);
+    console.log(showWithoutStock);
   };
 
   return (
@@ -46,11 +56,16 @@ export function SlidingSideBar({ options, setOptions }) {
         className={`additional-content ${expanded ? "expanded" : ""}`}
         onClick={handleClick}
       >
-        <div>
-          <Guide
-            message="Selecciona un filtro para ver solo un tipo de alimentos u ordenalos como gustes"
-            size={80}
-          />
+        <div className="headerSlider">
+          <Guide message="Selecciona un filtro para ver solo un tipo de alimentos u ordenalos como gustes" />
+          <button
+            className={
+              showWithoutStock ? "showWithoutStock" : "hideWithoutStock"
+            }
+            onClick={handleClickStock}
+          >
+            Mostrar alimentos sin stock
+          </button>
         </div>
         <div className="title-container">
           <p className="title">FILTRAR ALIMENTOS</p>

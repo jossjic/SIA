@@ -14,8 +14,8 @@
   background-color: #767dff1c;
 }
 
-.rowChecked {
-  color: #e14040;
+.rowChecked p {
+  color: #e14040 !important;
 }
 
 .rowAdminPage .checkBox {
@@ -37,6 +37,10 @@
 .rowAdminPage .productLink {
   width: 30%;
   text-align: initial;
+}
+
+.rowAdminPage .productLink:hover .product {
+  color: #00d0ff;
 }
 
 .rowAdminPage .quantity {

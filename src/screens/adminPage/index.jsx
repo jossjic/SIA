@@ -1010,7 +1010,12 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           options.o5
         }
       />
-      <SlidingSideBar options={options} setOptions={setOptions} />
+      <SlidingSideBar
+        options={options}
+        setOptions={setOptions}
+        showWithoutStock={showWithoutStock}
+        setShowWithoutStock={setShowWithoutStock}
+      />
       <div className="alimentosBox">
         <div className="divHeaders">
           <button
@@ -1052,6 +1057,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         </div>
         {filteredAlimentos.map((alimento) => (
           <RowAdminPage
+            showWithoutStock={showWithoutStock}
             key={alimento.a_id}
             id={alimento.a_id}
             product={alimento.a_nombre}
