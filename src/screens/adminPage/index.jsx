@@ -7,6 +7,7 @@ import frontButton from "../../assets/img/frontPageIcon.svg";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { SearchBar } from "../../components/search";
 import { SlidingSideBar } from "../../components/slidingSideBar";
+import saveIcon from "../../assets/img/saveIcon.svg";
 import "./AdminPage.css";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +19,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
   const [filteredAlimentos, setFilteredAlimentos] = useState([]);
   const [originalAlimentos, setOriginalAlimentos] = useState([]);
   const [originalTotalPages, setOriginalTotalPages] = useState(1);
-
+  const [stockResetId, setStockResetId] = useState(0);
   const navigate = useNavigate();
 
   const [addCartNumber, setAddCartNumber] = useState(0);
@@ -29,8 +30,50 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
 
   // 0 = Buscar por nombre, 1 = Buscar por cantidad, 2 = Buscar por marca, 3 = Buscar por existencias, 4 = Buscar por caducidad
   const [searchType, setSearchType] = useState(0);
-
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [modificationMap, setModificationMap] = useState({});
+
+  const [modificationConfirmation, setModificationConfirmation] =
+    useState(false);
+
+  const [savedChanges, setSavedChanges] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [savedChangesPopUp, setSavedChangesPopUp] = useState(false);
+  const [options, setOptions] = useState({
+    f1: false,
+    f2: false,
+    f3: false,
+    f4: false,
+    o1: false,
+    o2: false,
+    o3: false,
+    o4: false,
+    o5: false,
+  });
+  const handleSaveChanges = async () => {
+    try {
+      for (const key in modificationMap) {
+        if (modificationMap.hasOwnProperty(key)) {
+          await fetch("http://3.144.175.151:3000/alimentos/stock/" + key, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              a_stock: modificationMap[key][1],
+            }),
+          });
+        }
+      }
+      setSavedChangesPopUp(true);
+      setModificationMap({});
+      setSavedChanges(true);
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
 
   const handleCreateUser = () => {
     navigate("/addProduct");
@@ -40,6 +83,13 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
     const isChecked = event.target.checked;
     if (isChecked) {
       setSelectedIds((prevIds) => [...prevIds, id]); // Agregar el ID seleccionado al estado
+      //remove element from modificationMap
+      const newMap = { ...modificationMap };
+      delete newMap[id];
+      setModificationMap(newMap);
+      setStockResetId(id); // reset stock
+
+      // reset stock
     } else {
       setSelectedIds((prevIds) =>
         prevIds.filter((selectedId) => selectedId !== id)
@@ -84,20 +134,23 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
     } else {
       setDeleteActive(true);
     }
-  }, []);
+  }, [deleteCartNumber]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [options, setOptions] = useState({
-    f1: false,
-    f2: false,
-    f3: false,
-    f4: false,
-    o1: false,
-    o2: false,
-    o3: false,
-    o4: false,
-    o5: false,
-  });
+  useEffect(() => {
+    if (Object.keys(modificationMap).length <= 0) {
+      setModificationConfirmation(true);
+    } else {
+      setModificationConfirmation(false);
+    }
+    console.log(
+      "modificationMap",
+      modificationMap,
+      "confirmation",
+      modificationConfirmation,
+      "length",
+      Object.keys(modificationMap).length
+    );
+  }, [modificationMap]);
 
   useEffect(() => {
     if (
@@ -994,29 +1047,29 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
             Caducidad
           </button>
         </div>
-        {filteredAlimentos.map(
-          (alimento) => (
-            console.log("alimento", alimento),
-            (
-              <div className="divRow" key={alimento.a_id}>
-                <RowAdminPage
-                  id={alimento.a_id}
-                  product={alimento.a_nombre}
-                  amount={alimento.a_cantidad}
-                  unit={alimento.um_id}
-                  brand={
-                    alimento.m_nombre == null ? "Sin marca" : alimento.m_nombre
-                  }
-                  stock={alimento.a_stock}
-                  cadDate={alimento.a_fechaCaducidad}
-                  onChange={handleCheckboxChange}
-                  selectedIds={selectedIds}
-                />
-                <hr />
-              </div>
-            )
-          )
-        )}
+        {filteredAlimentos.map((alimento) => (
+          <div className="divRow" key={alimento.a_id}>
+            <RowAdminPage
+              id={alimento.a_id}
+              product={alimento.a_nombre}
+              amount={alimento.a_cantidad}
+              unit={alimento.um_id}
+              brand={
+                alimento.m_nombre == null ? "Sin marca" : alimento.m_nombre
+              }
+              stock={alimento.a_stock}
+              cadDate={alimento.a_fechaCaducidad}
+              onChange={handleCheckboxChange}
+              selectedIds={selectedIds}
+              modificationMap={modificationMap}
+              setModificationMap={setModificationMap}
+              savedChanges={savedChanges}
+              setSavedChanges={setSavedChanges}
+              stockResetId={stockResetId}
+            />
+            <hr />
+          </div>
+        ))}
       </div>
       <div className="paginacion">
         <button
@@ -1058,6 +1111,26 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           />
         </div>
       )}
+
+      {savedChangesPopUp && (
+        <div className="modalOverlayConf">
+          <ConfirmationPopUp
+            message="Se han modificado los alimentos seleccionados."
+            answer1="Ok"
+            isOpen={savedChangesPopUp}
+            closeModal={() => setSavedChangesPopUp(false)}
+          />
+        </div>
+      )}
+
+      <button
+        onClick={handleSaveChanges}
+        className={
+          modificationConfirmation ? "saveButton hidden" : "saveButton"
+        }
+      >
+        <img src={saveIcon}></img>
+      </button>
     </div>
   );
 };

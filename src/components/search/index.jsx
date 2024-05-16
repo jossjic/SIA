@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./search.css";
-import { Link } from "react-router-dom"; // Añade esta línea
-import trashIcon from "../../assets/img/trashIcon.svg"; // Añade esta línea
-import addIcon from "../../assets/img/addIcon.svg"; // Añade esta línea
+import { Link } from "react-router-dom";
+import trashIcon from "../../assets/img/trashIcon.svg";
+import addIcon from "../../assets/img/addIcon.svg";
 
 export function SearchBar({
   onSearch,

@@ -14,12 +14,20 @@ export function RowAdminPage({
   cadDate,
   onChange,
   selectedIds,
+  modificationMap,
+  setModificationMap,
+  savedChanges,
+  setSavedChanges,
+  stockResetId,
 }) {
   const [isChecked, setIsChecked] = useState(selectedIds.includes(id));
+  const [resetCheckbox, setResetCheckbox] = useState(false);
 
   useEffect(() => {
     setIsChecked(selectedIds.includes(id)); // Actualiza 'isChecked' cuando 'selectedIds' cambie
   }, [selectedIds]);
+
+  //checkbox refresh stock from 0 to n
 
   const quantity = `${amount} ${unit}`;
 
@@ -36,7 +44,7 @@ export function RowAdminPage({
         type="checkbox"
         checked={isChecked}
         onChange={handleCheckboxChange}
-        disabled={stock === 0 || stock === "0" ? true : false}
+        disabled={stock === 0}
       />
       <Link
         className="productLink"
@@ -47,7 +55,16 @@ export function RowAdminPage({
       </Link>
       <p className="quantity">{quantity}</p>
       <p className="brand">{brand}</p>
-      <StockBar stock={stock} isDisabled={isChecked} />
+      <StockBar
+        id={id}
+        stock={stock}
+        isDisabled={isChecked}
+        modificationMap={modificationMap}
+        setModificationMap={setModificationMap}
+        savedChanges={savedChanges}
+        setSavedChanges={setSavedChanges}
+        stockResetId={stockResetId}
+      />
       <p className="cadDate">
         {cadDate == null ? "Sin Caducidad" : formatDate(cadDate)}
       </p>

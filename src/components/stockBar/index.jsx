@@ -1,19 +1,50 @@
 import "./StockBar.css";
 import { useState, useEffect } from "react";
 import cloudIcon from "../../assets/img/cloudIcon.png";
+import { set } from "date-fns";
 
-export function StockBar({ stock, isDisabled }) {
+export function StockBar({
+  stock,
+  isDisabled,
+  modificationMap,
+  setModificationMap,
+  savedChanges,
+  setSavedChanges,
+  id,
+  stockResetId,
+}) {
   const [currentStock, setCurrentStock] = useState(parseInt(stock));
   const [stockChanged, setStockChanged] = useState(false);
+  const [initialStock, setInitialStock] = useState(stock);
 
   useEffect(() => {
     stockCheck();
   }, [currentStock]); // Se ejecutará cada vez que currentStock cambie
 
+  useEffect(() => {
+    if (stockResetId === id) {
+      setCurrentStock(parseInt(stock));
+      setStockChanged(false);
+    }
+  }, [stockResetId]); // Se ejecutará cada vez que stockResetId cambie
+
+  useEffect(() => {
+    if (savedChanges) {
+      setStockChanged(false);
+      setSavedChanges(false);
+      setInitialStock(currentStock);
+    }
+  }, [savedChanges]); // Se ejecutará cada vez que
+
   const handleChange = (event) => {
     const value = event.target.value;
     if (value === "") {
       setCurrentStock(0);
+    } //limite int max
+    else if (value.length > 4) {
+      setCurrentStock(9999);
+    } else if (isNaN(value)) {
+      setCurrentStock(parseInt(initialStock));
     } else {
       setCurrentStock(parseInt(value));
     }
@@ -28,10 +59,19 @@ export function StockBar({ stock, isDisabled }) {
   };
 
   const stockCheck = () => {
-    if (currentStock === parseInt(stock)) {
+    if (currentStock === parseInt(initialStock)) {
       setStockChanged(false);
+      setModificationMap((prevMap) => {
+        const newMap = { ...prevMap };
+        delete newMap[id];
+        return newMap;
+      });
     } else {
       setStockChanged(true);
+      setModificationMap((prevMap) => ({
+        ...prevMap,
+        [id]: [parseInt(initialStock), parseInt(currentStock)],
+      }));
     }
   };
 
@@ -45,7 +85,7 @@ export function StockBar({ stock, isDisabled }) {
           disabled={isDisabled}
         />
         <p className="cloudText" disabled={isDisabled}>
-          {stock}
+          {initialStock}
         </p>
       </div>
       <button onClick={() => changeStock(false)} disabled={isDisabled}>
