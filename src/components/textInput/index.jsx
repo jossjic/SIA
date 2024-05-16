@@ -1,7 +1,7 @@
 import React from "react";
 import "./TextInput.css";
 
-export function TextInput({ label, placeholder, onChange, name, value }) {
+export function TextInput({ label, placeholder, onChange, name, value, list }) {
   return (
     <div className="textInput">
       <label>{label}</label>
@@ -11,6 +11,7 @@ export function TextInput({ label, placeholder, onChange, name, value }) {
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        list={list}
       />
     </div>
   );

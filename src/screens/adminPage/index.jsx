@@ -53,7 +53,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
     o5: false,
   });
 
-  const [showWithoutStock, setShowWithoutStock] = useState(false);
+  const [showWithoutStock, setShowWithoutStock] = useState(true);
 
   const handleSaveChanges = async () => {
     try {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Guide } from "../../components/guide";
 import { ReturnButton } from "../../components/returnButton";
 import { TextInput } from "../../components/textInput";
@@ -20,12 +20,48 @@ export function AddProduct() {
     m_id: 0,
   });
 
+  const [searchResults, setSearchResults] = useState([]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+  };
+
+  const handleChangeName = (e) => {
+    const { value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      a_nombre: value,
+    }));
+    fetch(`http://3.144.175.151:3000/alimentos/busqueda/nombre/total/${value}`)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Error al obtener los alimentos");
+      })
+      .then((data) => {
+        // Filtrar resultados para evitar duplicados
+        const uniqueResults = data.filter(
+          (result, index, self) =>
+            index === self.findIndex((r) => r.a_nombre === result.a_nombre)
+        );
+        setSearchResults(uniqueResults); // Actualiza el estado con los resultados filtrados
+      })
+      .catch((error) => {
+        console.error("Error:", error.message);
+      });
+  };
+
+  const handleSelectResult = (selectedResult) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      a_nombre: selectedResult.a_nombre,
+    }));
+    setSearchResults([]); // Limpia los resultados de la búsqueda después de seleccionar uno
   };
 
   const handleSubmit = async () => {
@@ -47,7 +83,6 @@ export function AddProduct() {
       console.error("Error al agregar el alimento:", error);
     }
   };
-
   return (
     <div className="addProduct">
       <div className="addProductTitle">
@@ -62,9 +97,18 @@ export function AddProduct() {
             placeholder="Ej. Lata de Atún"
             name="a_nombre"
             value={formData.a_nombre}
-            onChange={handleChange}
+            onChange={handleChangeName}
+            list="productOptions" // Referencia al ID del datalist
+            autoComplete="off" // Desactiva el autocompletado nativo del navegador
           />
 
+          <datalist id="productOptions">
+            {" "}
+            {/* El ID debe coincidir con el list del input */}
+            {searchResults.map((result, index) => (
+              <option key={index} value={result.a_nombre} />
+            ))}
+          </datalist>
           <DropDown
             title="Marca (Opcional)"
             name="m_id"
