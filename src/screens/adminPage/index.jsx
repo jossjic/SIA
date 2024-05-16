@@ -52,6 +52,9 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
     o4: false,
     o5: false,
   });
+
+  const [showWithoutStock, setShowWithoutStock] = useState(false);
+
   const handleSaveChanges = async () => {
     try {
       for (const key in modificationMap) {
@@ -1048,27 +1051,23 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           </button>
         </div>
         {filteredAlimentos.map((alimento) => (
-          <div className="divRow" key={alimento.a_id}>
-            <RowAdminPage
-              id={alimento.a_id}
-              product={alimento.a_nombre}
-              amount={alimento.a_cantidad}
-              unit={alimento.um_id}
-              brand={
-                alimento.m_nombre == null ? "Sin marca" : alimento.m_nombre
-              }
-              stock={alimento.a_stock}
-              cadDate={alimento.a_fechaCaducidad}
-              onChange={handleCheckboxChange}
-              selectedIds={selectedIds}
-              modificationMap={modificationMap}
-              setModificationMap={setModificationMap}
-              savedChanges={savedChanges}
-              setSavedChanges={setSavedChanges}
-              stockResetId={stockResetId}
-            />
-            <hr />
-          </div>
+          <RowAdminPage
+            key={alimento.a_id}
+            id={alimento.a_id}
+            product={alimento.a_nombre}
+            amount={alimento.a_cantidad}
+            unit={alimento.um_id}
+            brand={alimento.m_nombre == null ? "Sin marca" : alimento.m_nombre}
+            stock={alimento.a_stock}
+            cadDate={alimento.a_fechaCaducidad}
+            onChange={handleCheckboxChange}
+            selectedIds={selectedIds}
+            modificationMap={modificationMap}
+            setModificationMap={setModificationMap}
+            savedChanges={savedChanges}
+            setSavedChanges={setSavedChanges}
+            stockResetId={stockResetId}
+          />
         ))}
       </div>
       <div className="paginacion">

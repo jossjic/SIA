@@ -39,13 +39,17 @@ export function RowAdminPage({
 
   return (
     <div className={rowClass}>
-      <input
-        className="checkBox"
-        type="checkbox"
-        checked={isChecked}
-        onChange={handleCheckboxChange}
-        disabled={stock === 0}
-      />
+      <div className="rowAdminPage__buttons">
+        <button className="addDifferentCad">+</button>
+        <input
+          className="checkBox"
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleCheckboxChange}
+          disabled={stock === 0}
+        />
+      </div>
+
       <Link
         className="productLink"
         to={"/editProduct/" + id}
@@ -56,6 +60,7 @@ export function RowAdminPage({
       <p className="quantity">{quantity}</p>
       <p className="brand">{brand}</p>
       <StockBar
+        className="stockBar"
         id={id}
         stock={stock}
         isDisabled={isChecked}
