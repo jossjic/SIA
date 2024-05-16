@@ -36,26 +36,36 @@ export function AddProduct() {
       ...prevData,
       a_nombre: value,
     }));
-    fetch(`http://3.144.175.151:3000/alimentos/busqueda/nombre/total/${value}`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Error al obtener los alimentos");
-      })
-      .then((data) => {
-        // Filtrar resultados para evitar duplicados
-        const uniqueResults = data.filter(
-          (result, index, self) =>
-            index === self.findIndex((r) => r.a_nombre === result.a_nombre)
-        );
-        setSearchResults(uniqueResults); // Actualiza el estado con los resultados filtrados
-      })
-      .catch((error) => {
-        console.error("Error:", error.message);
-      });
-  };
 
+    if (value.trim() !== "") {
+      fetch(
+        `http://3.144.175.151:3000/alimentos/busqueda/nombre/total/${value}`
+      )
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error("Error al obtener los alimentos");
+        })
+        .then((data) => {
+          // Verificar si hay resultados antes de filtrar
+          if (data.length > 0) {
+            const uniqueResults = data.filter(
+              (result, index, self) =>
+                index === self.findIndex((r) => r.a_nombre === result.a_nombre)
+            );
+            setSearchResults(uniqueResults); // Actualiza el estado con los resultados filtrados
+          } else {
+            setSearchResults([]); // Establece los resultados de la búsqueda como vacíos
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
+        });
+    } else {
+      setSearchResults([]); // Establece los resultados de la búsqueda como vacíos si el valor del input está vacío
+    }
+  };
   const handleSelectResult = (selectedResult) => {
     setFormData((prevData) => ({
       ...prevData,
