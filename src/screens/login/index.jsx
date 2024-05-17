@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import sha256 from 'crypto-js/sha256';
 import { Guide } from '../../components/guide';
 import { GeneralButton } from '../../components/button';
 import { useNavigate } from "react-router-dom";
+
 import "./login.css";
 
 export const Login = () => {
@@ -21,32 +21,39 @@ export const Login = () => {
       setErrorMessage('Por favor completa todos los campos');
       return;
     }
-
-    const hashedPassword = sha256(password).toString();
-
-    fetch(`http://3.144.175.151:3000/usuarios/${id}`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Usuario incorrecto");
-      })
-      .then((userData) => {
-        if (userData.u_contraseña === hashedPassword) {
-          navigate('/mainPage');
-        } else {
-          throw new Error("Contraseña incorrecta");
-        }
-      })
-      .catch((error) => {
-        setErrorMessage(error.message);
-        console.error("Error:", error.message);
-      });
+    
+    fetch(`http://3.144.175.151:3000/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id, password }), 
+      credentials: 'include'
+    })
+    .then(response => {
+      if (response.status === 200) {
+        return response.json();
+      } else if (response.status === 401) {
+        setErrorMessage('Usuario o contraseña incorrectos');
+      } else {
+        throw new Error("Error de servidor");
+      }
+    })
+    .then(data => {
+      // Guardar tokens en localStorage
+      localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
+      navigate('/mainPage'); 
+    })
+    .catch(error => {
+      setErrorMessage(error.message);
+      console.error("Error:", error.message);
+    });
   };
 
   return (
     <div className='login'>
-      <Guide message="Bienvenid@ Por favor inicia sesión." size={200} />
+      <Guide message="Bienvenid@ Por favor inicia sesión." size={130} />
       <div className='login-container'>
         <div className="logInput">
           <p>Usuario</p>

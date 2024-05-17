@@ -19,6 +19,7 @@ import { EditUser } from "./screens/editUser";
 import { AddDate } from "./screens/addDate";
 
 import { useState } from "react";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   const [selectedIds, setSelectedIds] = useState([]);
@@ -31,7 +32,11 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/layout" element={<Layout />} />
-          <Route path="/mainPage" element={<MainPage />} />
+          <Route path="/mainPage" element={
+          // <ProtectedRoute>
+            <MainPage />
+          // </ProtectedRoute>
+          } />
           <Route path="/adminUserPage" element={<UserPage />} />
           <Route
             path="/adminPage"
