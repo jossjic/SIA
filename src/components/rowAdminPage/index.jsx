@@ -47,7 +47,10 @@ export function RowAdminPage({
   return (
     <div className={rowClass + " " + color}>
       <div className="rowAdminPage__buttons">
+      <Link to={`/addDate/${id}`}
+        style={{ textDecoration: "none" }}>
         <button className="addDifferentCad">+</button>
+      </Link>
         <input
           className="checkBox"
           type="checkbox"

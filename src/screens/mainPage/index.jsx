@@ -5,57 +5,43 @@ import { GeneralButton } from "../../components/button";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
+import { logout } from "../../generalFunctions";
 
 export const MainPage = () => {
   const [alimentos, setAlimentos] = useState([]);
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  //Funcion para cargar los datos de la db
+  // Función para cargar los datos de la db
   useEffect(() => {
-    // Arreglo temporal para almacenar los alimentos de dos peticiones
-    let tempAlimentos = [];
-    // Primera petición
-    fetch("http://3.144.175.151:3000/alimentos/caducados/dCad")
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Error al obtener los alimentos caducados");
-      })
-      .then((data) => {
-        // Mapear los alimentos y agregarles el estatus
-        const alimentosCaducados = data.map((alimento) => ({
+    const fetchData = async () => {
+      try {
+        // Primera petición
+        const response1 = await fetch("http://3.144.175.151:3000/alimentos/caducados/dCad");
+        if (!response1.ok) throw new Error("Error al obtener los alimentos caducados");
+        const data1 = await response1.json();
+        const alimentosCaducados = data1.map((alimento) => ({
           ...alimento,
           estatus: "Caducado",
         }));
-        // Agregar los alimentos caducados al arreglo temporal
-        tempAlimentos = [...tempAlimentos, ...alimentosCaducados];
-      })
-      .catch((error) => {
-        console.error("Error:", error.message);
-      });
 
-    // Segunda petición
-    fetch("http://3.144.175.151:3000/alimentos/proximoscaducados/dCad")
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Error al obtener los alimentos próximos a caducar");
-      })
-      .then((data) => {
-        // Mapear los alimentos y agregarles el estatus
-        const alimentosProximosCaducar = data.map((alimento) => ({
+        // Segunda petición
+        const response2 = await fetch("http://3.144.175.151:3000/alimentos/proximoscaducados/dCad");
+        if (!response2.ok) throw new Error("Error al obtener los alimentos próximos a caducar");
+        const data2 = await response2.json();
+        const alimentosProximosCaducar = data2.map((alimento) => ({
           ...alimento,
           estatus: "Por caducar",
         }));
-        // Agregar los alimentos próximos a caducar al arreglo temporal
-        tempAlimentos = [...tempAlimentos, ...alimentosProximosCaducar];
+
         // Actualizar el estado alimentos con los datos combinados
-        setAlimentos(tempAlimentos);
-      })
-      .catch((error) => {
+        setAlimentos([...alimentosCaducados, ...alimentosProximosCaducar]);
+      } catch (error) {
         console.error("Error:", error.message);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   // Función para formatear la fecha
@@ -69,13 +55,8 @@ export const MainPage = () => {
 
   // Función para cambiar color del estatus en el estilo
   const getClassForEstatus = (estatus) => {
-    const className = estatus.replace(/\s+/g, "-").toLowerCase();
-    return `${className}`;
+    return estatus.replace(/\s+/g, "-").toLowerCase();
   };
-
-  const navigate = useNavigate();
-  const handleClick = () => navigate("/restorePass");
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="mainP">
@@ -98,7 +79,7 @@ export const MainPage = () => {
           <tbody>
             {alimentos.map((alimento) => (
               <tr key={alimento.id}>
-                <td>{alimento.a_nombre}</td>{" "}
+                <td>{alimento.a_nombre}</td>
                 <td>{alimento.m_nombre || "Sin marca"}</td>
                 <td className={getClassForEstatus(alimento.estatus)}>
                   {alimento.estatus}
@@ -128,6 +109,7 @@ export const MainPage = () => {
             answer1="Si"
             answer2="No"
             path1="/login"
+            funct={() => logout(navigate)}
             isOpen={isModalOpen}
             closeModal={() => setIsModalOpen(false)}
           />
