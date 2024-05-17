@@ -11,10 +11,12 @@ export function StockBar({
   setSavedChanges,
   id,
   stockResetId,
+  color,
+  setColor,
 }) {
   const [currentStock, setCurrentStock] = useState(parseInt(stock));
   const [stockChanged, setStockChanged] = useState(false);
-  const [initialStock] = useState(stock);
+  const [initialStock, setInitialStock] = useState(parseInt(stock));
 
   useEffect(() => {
     // Cargar datos guardados al montar el componente
@@ -37,19 +39,30 @@ export function StockBar({
 
   useEffect(() => {
     if (savedChanges) {
+      setInitialStock(currentStock); // Guardar el stock actual como el nuevo stock inicial
       setStockChanged(false);
       setSavedChanges(false);
     }
-  }, [savedChanges]);
+  }, [savedChanges, currentStock]);
 
   useEffect(() => {
     // Guardar modificationMap en localStorage cada vez que cambie
     localStorage.setItem("modificationMap", JSON.stringify(modificationMap));
+    if (modificationMap[id]) {
+      if (modificationMap[id][0] > modificationMap[id][1]) {
+        setColor("red");
+      } else {
+        setColor("green");
+      }
+    } else {
+      setColor("black");
+    }
   }, [modificationMap]);
 
   useEffect(() => {
     // Cuando el componente se monta o el stock inicial cambia
     setCurrentStock(parseInt(stock));
+    setInitialStock(parseInt(stock));
   }, [stock]);
 
   const handleChange = (event) => {
@@ -78,11 +91,6 @@ export function StockBar({
   const stockCheck = () => {
     if (currentStock === parseInt(initialStock)) {
       setStockChanged(false);
-      setModificationMap((prevMap) => {
-        const newMap = { ...prevMap };
-        delete newMap[id];
-        return newMap;
-      });
     } else {
       setStockChanged(true);
       setModificationMap((prevMap) => ({
@@ -109,6 +117,7 @@ export function StockBar({
         -
       </button>
       <input
+        style={{ color: color }}
         type="text"
         value={
           stockChanged
