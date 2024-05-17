@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./createUser.css";
 import { CreateInput } from "../../components/createInput";
-import { Guide } from "../../components/guide";
+import { Guide2 } from "../../components/guide2";
 import { GeneralButton } from "../../components/button";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { useNavigate } from 'react-router-dom';
@@ -69,10 +69,9 @@ export const CreateUser = () => {
       <div className="buttonTopLeft">
         <ReturnButton />
       </div>
-        <Guide message="No olvides llenar todos los campos para el registro" />
+        <Guide2 message="No olvides llenar todos los campos para el registro " />
       </div>
       <div className="createUser-container">
-        <br />
         <div className="createInput">
           <p>Nombre de usuario</p>
           <input

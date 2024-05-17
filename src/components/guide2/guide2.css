@@ -1,0 +1,20 @@
+.info-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150%;
+    height: 100px;
+  }
+  
+  .info-banner img {
+    width: 12%;
+    height: 100%;
+  }
+  
+  .info-banner p {
+    font-size: 25px;
+    font-weight: 700;
+    background-color: #f0f0f0;
+    padding: 20px 20px;
+  }
+  
