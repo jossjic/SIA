@@ -102,15 +102,26 @@ export const CheckDateDelete = ({ selectedIds }) => {
   };
 
   const handleDeleteSelected = () => {
-    Promise.all(selectedIds.map(id => 
-      fetch(`http://3.144.175.151:3000/alimentos/${id}`, { method: "DELETE" })
+    Promise.all(selectedIds.map(id =>
+      fetch(`http://3.144.175.151:3000/alimentos/stock/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ a_stock: 0 })
+      })
     )).then(() => {
+      return Promise.all(selectedIds.map(id =>
+        fetch(`http://3.144.175.151:3000/alimentos/stock/${id}`, { method: "DELETE" })
+      ));
+    }).then(() => {
       setConfirmDeleteOpen(false);
       setDeleteSuccessOpen(true);
     }).catch(error => {
       console.error("Error:", error);
     });
   };
+  
 
   const handleSuccessClose = () => {
     setDeleteSuccessOpen(false);
