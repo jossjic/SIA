@@ -2,6 +2,7 @@ import "./DropDown.css";
 import React, { useEffect, useState } from "react";
 import editIcon from "../../assets/img/editIcon.svg";
 import addIcon from "../../assets/img/addIcon.svg";
+import trashIcon from "../../assets/img/trashIcon.svg";
 
 export function DropDown({
   value,
@@ -11,6 +12,7 @@ export function DropDown({
   label,
   title,
   optional,
+  cdr,
 }) {
   const [options, setOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -39,11 +41,8 @@ export function DropDown({
   };
 
   const handleSelectChange = (event) => {
-    const selectedValue = parseInt(event.target.value, 10);
-    if (!isNaN(selectedValue)) {
-      onChange({ target: { name, value: selectedValue } });
-    }
-    setInputValue("");
+    const selectedValue = event.target.value;
+    onChange({ target: { name, value: selectedValue } });
   };
 
   const handleAddOption = () => {
@@ -58,6 +57,15 @@ export function DropDown({
     }).then((response) => {
       if (response.ok) {
         console.log("New option added successfully");
+        fetch(`http://3.144.175.151:3000/${tableName}`)
+          .then((response) => response.json())
+          .then((data) => {
+            if (optional) {
+              setOptions([{ [name]: 0, [label]: "Sin marca" }, ...data]);
+            } else {
+              setOptions(data);
+            }
+          });
       }
     });
   };
@@ -79,16 +87,28 @@ export function DropDown({
     option[label].toLowerCase().includes(inputValue.toLowerCase())
   );
 
+  const handleEditButton = () => {
+    setShowCRD(!showCRD);
+    setInputValue("");
+  };
+
+  const handleSpanClick = (option) => {
+    onChange({ target: { name, value: option[name] } });
+    setShowCRD(false);
+  };
+
   return (
     <div className="dropDownContainer">
       <div className="headerDropDownContainer">
         <label>{title}</label>
-        <button className="editButtonCRD" onClick={() => setShowCRD(!showCRD)}>
-          <img src={editIcon} alt="editIcon"></img>
-        </button>
+        {cdr && (
+          <button className="editButtonCRD" onClick={handleEditButton}>
+            <img src={editIcon} alt="editIcon"></img>
+          </button>
+        )}
       </div>
 
-      {showCRD && (
+      {cdr && showCRD && (
         <div className="dropdown-crd">
           <div className="dropdown-crd-header">
             <input
@@ -104,13 +124,17 @@ export function DropDown({
 
           <div className="dropdownCRD-options">
             {filteredOptions.map((option) => (
-              <div key={option[name]} className="dropdownCRD-option">
-                <span>{option[label]}</span>
+              <div
+                key={option[name]}
+                className="dropdownCRD-option"
+                onClick={() => handleSpanClick(option)}
+              >
+                <span className="option-span">{option[label]}</span>
                 <button
                   className="remove-button"
                   onClick={() => handleRemoveOption(option)}
                 >
-                  &times;
+                  <img src={trashIcon} alt="trashIcon"></img>
                 </button>
               </div>
             ))}
@@ -118,9 +142,9 @@ export function DropDown({
         </div>
       )}
       <select name={name} value={value} onChange={handleSelectChange}>
-        {filteredOptions.map((option) => (
+        {options.map((option) => (
           <option key={option[name]} value={option[name]}>
-            {option[label]}
+            {cdr ? option[label] : option[label] + " (" + option[name] + ")"}
           </option>
         ))}
       </select>
