@@ -1,18 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Guide } from "../../components/guide";
 import { ReturnButton } from "../../components/returnButton";
-import { TextInput } from "../../components/textInput";
-import { CalendarInput } from "../../components/calendarInput";
-import { GeneralButton } from "../../components/button";
-import { formatDate } from "../../generalFunctions";
-import { DropDown } from "../../components/dropDown";
-import "./AddDate.css";
+import { TextInputAdd } from "../../components/textInputAdd";
 import { CalendarInputDate } from "../../components/calendarInputDate";
-import { ConfirmationPopUp } from "../../components/confirmationPopUp";
-import { ButtonSquare, ButtonCircle } from "../../components/buttonSquare";
-import { SelectDateAddDate } from '../../components/selectDate';
-import { useNavigate } from "react-router-dom";
+import { GeneralButton } from "../../components/button";
+import { ButtonCircle } from "../../components/buttonSquare";
+import "./AddDate.css";
 
 export function AddDate() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,16 +22,21 @@ export function AddDate() {
     um_id: "g",
     m_id: 0,
   });
+  const [entries, setEntries] = useState([]);
+  const [inputValues, setInputValues] = useState({
+    a_fechaCaducidad: null,
+    a_stock: "",
+  });
 
   useEffect(() => {
     async function fetchProductData() {
-      console.log(a_id);
       try {
         const response = await fetch(`http://3.144.175.151:3000/alimentos/${a_id}`);
         if (!response.ok) {
           throw new Error("Error fetching product data");
         }
         const productData = await response.json();
+        console.log(entries);
         setFormData({
           a_nombre: productData.a_nombre,
           a_cantidad: productData.a_cantidad,
@@ -48,8 +47,8 @@ export function AddDate() {
           um_id: productData.um_id,
           m_id: productData.m_id,
         });
-        console.log(productData);
       } catch (error) {
+        console.log(a_id);
         console.error("Error fetching product data:", error);
       }
     }
@@ -58,22 +57,31 @@ export function AddDate() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
+    setInputValues((prevValues) => ({
+      ...prevValues,
       [name]: value,
     }));
   };
 
   const handleDateChange = (name, date) => {
-    setFormData((prevData) => ({
-      ...prevData,
+    setInputValues((prevValues) => ({
+      ...prevValues,
       [name]: date,
     }));
   };
 
+  const handleAddEntry = () => {
+    if (inputValues.a_fechaCaducidad && inputValues.a_stock) {
+      setEntries((prevEntries) => [
+        ...prevEntries,
+        { a_fechaCaducidad: inputValues.a_fechaCaducidad, a_stock: inputValues.a_stock },
+      ]);
+      setInputValues({ a_fechaCaducidad: null, a_stock: "" });
+    }
+  };
+
   const handleSubmit = async () => {
     try {
-      console.log(formData);
       const response = await fetch(`http://3.144.175.151:3000/alimentos/${a_id}`, {
         method: "PUT",
         headers: {
@@ -84,7 +92,6 @@ export function AddDate() {
       if (!response.ok) {
         throw new Error("Error al editar el alimento");
       }
-      console.log("Alimento editado correctamente");
       setIsModalOpen(true);
     } catch (error) {
       console.error("Error al editar el alimento:", error);
@@ -93,57 +100,76 @@ export function AddDate() {
 
   return (
     <div className="addDate">
-        <div className="mensajeDA">
-            <Guide message="Estás a punto de agregar una lista de productos. Recuerda verificar la fecha de caducidad de los productos que deseas agregar." size={100} />
-        </div>
-        <div className="buttonBackDA">
-            <ReturnButton />
-            <h1 className="titulo">Agregar Fecha de Caducidad</h1>
-        </div>
+      <div className="mensajeDA">
+        <Guide
+          message="Estás a punto de agregar una lista de productos. Recuerda verificar la fecha de caducidad de los productos que deseas agregar."
+          size={100}
+        />
+      </div>
+      <div className="buttonBackDA">
+        <ReturnButton />
+        <h1 className="titulo">Agregar Fecha de Caducidad</h1>
+      </div>
 
-        <div className="infoDA">
-            <h2>Alimento seleccionado: </h2>
-            <h3>{formData.a_nombre + "    " + formData.a_cantidad + " " + formData.um_id + "    " + formData.m_id}</h3>
-        </div>
+      <div className="infoDA">
+        <h2>Alimento seleccionado: </h2>
+        <h3>
+          {formData.a_nombre + "    " + formData.a_cantidad + " " + formData.um_id + "    " + formData.m_id}
+        </h3>
+      </div>
 
-        <div className="tablaGeneral">
-            <table className="tabla1">
-                <tr>
-                    <th>Fecha</th>
-                    <th>Cantidad</th>
-                </tr>
-                <tr>
-                    <td>
-                        <CalendarInputDate
-                        name="a_fechaCaducidad"
-                        value={formData.a_fechaCaducidad}
-                        onChange={handleChange}
-                        />
-                    </td>
-                    <td>
-                        <TextInput
-                        placeholder="Stock. Ej. 10"
-                        name="a_stock"
-                        value={formData.a_stock}
-                        onChange={handleChange}
-                        />
-                    </td>
-                </tr>
-            </table>
+      <div className="tablaGeneral">
+        <table className="tabla1">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            {entries.map((entry, index) => (
+              <tr key={index}>
+                <td>{entry.a_fechaCaducidad ? new Date(entry.a_fechaCaducidad).toLocaleDateString() : ''}</td>
+                <td>{entry.a_stock}</td>
+              </tr>
+            ))}
+            <tr>
+              <td>
+                <CalendarInputDate
+                  name="a_fechaCaducidad"
+                  //value={inputValues.a_fechaCaducidad}
+                  onChange={handleChange}
+                />
+              </td>
+              <td>
+                <TextInputAdd
+                  placeholder="Stock. Ej. 10"
+                  name="a_stock"
+                  //value={inputValues.a_stock}
+                  onChange={handleChange}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-            <ButtonCircle textElement="+" color="#5982C0" />
-        </div>
+        <ButtonCircle textElement="+" color="#5982C0" onClick={handleAddEntry} />
+      </div>
 
-        <div className="botonesAddDA">
-            <GeneralButton textElement="Cancelar" onClick={() => {
-                navigate("/AdminPage");
-                }}
-                color="#E14040" />
-            <GeneralButton 
-                textElement="Agregar" 
-                color="#00FF00"  />
-        </div>
-      
+      <div className="botonesAddDA">
+        <GeneralButton
+          textElement="Cancelar"
+          onClick={() => {
+            navigate("/AdminPage");
+          }}
+          color="#E14040"
+        />
+        <GeneralButton
+          textElement="Agregar"
+          onClick={handleSubmit}
+          color={entries.length > 0 ? "#00FF00" : "gray"}
+        />
+      </div>
     </div>
   );
 }
