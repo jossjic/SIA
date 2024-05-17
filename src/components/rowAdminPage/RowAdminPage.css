@@ -95,3 +95,11 @@
 .addDifferentCad:active {
   background-color: #767dff;
 }
+
+.rowAdminPage.red p {
+  color: #e14040;
+}
+
+.rowAdminPage.green p {
+  color: #4fa725;
+}

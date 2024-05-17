@@ -23,6 +23,7 @@ export function RowAdminPage({
 }) {
   const [isChecked, setIsChecked] = useState(selectedIds.includes(id));
   const [resetCheckbox, setResetCheckbox] = useState(false);
+  const [color, setColor] = useState("");
 
   useEffect(() => {
     setIsChecked(selectedIds.includes(id)); // Actualiza 'isChecked' cuando 'selectedIds' cambie
@@ -44,7 +45,7 @@ export function RowAdminPage({
   };
 
   return (
-    <div className={rowClass}>
+    <div className={rowClass + " " + color}>
       <div className="rowAdminPage__buttons">
       <Link to={`/addDate/${id}`}
         style={{ textDecoration: "none" }}>
@@ -78,6 +79,8 @@ export function RowAdminPage({
         savedChanges={savedChanges}
         setSavedChanges={setSavedChanges}
         stockResetId={stockResetId}
+        color={color}
+        setColor={setColor}
       />
       <p className="cadDate">
         {cadDate == null ? "Sin Caducidad" : formatDate(cadDate)}
