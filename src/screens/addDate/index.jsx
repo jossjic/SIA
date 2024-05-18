@@ -6,6 +6,7 @@ import { TextInputAdd } from "../../components/textInputAdd";
 import { CalendarInputDate } from "../../components/calendarInputDate";
 import { GeneralButton } from "../../components/button";
 import { ButtonCircle } from "../../components/buttonSquare";
+import { formatDate } from "../../generalFunctions";
 import "./AddDate.css";
 
 export function AddDate() {
@@ -41,9 +42,9 @@ export function AddDate() {
           a_nombre: productData.a_nombre,
           a_cantidad: productData.a_cantidad,
           a_stock: productData.a_stock,
-          a_fechaSalida: productData.a_fechaSalida ? new Date(productData.a_fechaSalida) : null,
-          a_fechaEntrada: productData.a_fechaEntrada ? new Date(productData.a_fechaEntrada) : null,
-          a_fechaCaducidad: productData.a_fechaCaducidad ? new Date(productData.a_fechaCaducidad) : null,
+          a_fechaSalida: null,
+          a_fechaEntrada: formatDate(new Date()),
+          a_fechaCaducidad: productData.a_fechaCaducidad,
           um_id: productData.um_id,
           m_id: productData.m_id,
         });
@@ -72,29 +73,44 @@ export function AddDate() {
 
   const handleAddEntry = () => {
     if (inputValues.a_fechaCaducidad && inputValues.a_stock) {
+      const formattedDate = new Date(inputValues.a_fechaCaducidad).toISOString().split("T")[0];
       setEntries((prevEntries) => [
         ...prevEntries,
-        { a_fechaCaducidad: inputValues.a_fechaCaducidad, a_stock: inputValues.a_stock },
+        { a_fechaCaducidad: formattedDate, a_stock: inputValues.a_stock },
       ]);
       setInputValues({ a_fechaCaducidad: null, a_stock: "" });
     }
   };
+  
 
   const handleSubmit = async () => {
-    try {
-      const response = await fetch(`http://3.144.175.151:3000/alimentos/${a_id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (!response.ok) {
-        throw new Error("Error al editar el alimento");
+    if (entries.length > 0) {
+      try {
+        for (const entry of entries) {
+          const updatedFormData = {
+            ...formData,
+            a_fechaCaducidad: entry.a_fechaCaducidad,
+            a_stock: entry.a_stock,
+          };
+  
+          const response = await fetch("http://3.144.175.151:3000/alimentos", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedFormData),
+          });
+  
+          if (!response.ok) {
+            throw new Error("Error al agregar el alimento");
+          }
+        }
+  
+        // Manejar el éxito de la inserción
+        console.log("Alimentos agregados correctamente");
+      } catch (error) {
+        console.error("Error al agregar los alimentos:", error);
       }
-      setIsModalOpen(true);
-    } catch (error) {
-      console.error("Error al editar el alimento:", error);
     }
   };
 
@@ -129,7 +145,7 @@ export function AddDate() {
           <tbody>
             {entries.map((entry, index) => (
               <tr key={index}>
-                <td>{entry.a_fechaCaducidad ? new Date(entry.a_fechaCaducidad).toLocaleDateString() : ''}</td>
+                <td>{entry.a_fechaCaducidad}</td>
                 <td>{entry.a_stock}</td>
               </tr>
             ))}
