@@ -1,5 +1,12 @@
+.headerDropDownContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
 .dropDownContainer {
-  background-color: white;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -28,4 +35,98 @@
 
 .dropDownContainer select:hover {
   cursor: pointer;
+}
+
+.dropDownContainer .editButtonCRD {
+  background-color: #d9d9d9;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.dropDownContainer .editButtonCRD:hover {
+  background-color: #5982c0;
+}
+
+.dropDownContainer .editButtonCRD img {
+  width: 80%;
+  height: 80%;
+}
+
+.dropdown-crd {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  left: 0;
+  z-index: 1;
+  background-color: white;
+  border: 1px solid #ccc; /* Añade un borde para definir el dropdown */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.dropdown-crd-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  background-color: #d9d9d9;
+}
+
+.dropdown-crd-header button {
+  background-color: #d9d9d9;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border: none;
+}
+
+.dropdown-crd-header button img {
+  width: 80%;
+  height: 80%;
+}
+
+.dropdownCRD-options {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdownCRD-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  border-bottom: 1px solid #ccc;
+  padding: 0 10% 0 10%;
+  cursor: pointer;
+}
+
+.dropdownCRD-option:hover {
+  background-color: #a5a5a5;
+}
+
+.dropdownCRD-options .remove-button {
+  cursor: pointer;
+  margin: 10px 0px 10px 0px;
+}
+
+.dropdownCRD-options .remove-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.dropdownCRD-options .remove-button:hover {
+  background-color: #e14040;
+  border: none;
 }
