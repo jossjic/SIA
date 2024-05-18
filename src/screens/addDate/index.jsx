@@ -7,6 +7,7 @@ import { CalendarInputDate } from "../../components/calendarInputDate";
 import { GeneralButton } from "../../components/button";
 import { ButtonCircle } from "../../components/buttonSquare";
 import { formatDate } from "../../generalFunctions";
+import { SuccessPopupDate } from "../../components/successPopupDate";
 import "./AddDate.css";
 
 export function AddDate() {
@@ -24,6 +25,7 @@ export function AddDate() {
     m_id: 0,
   });
   const [entries, setEntries] = useState([]);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [inputValues, setInputValues] = useState({
     a_fechaCaducidad: null,
     a_stock: "",
@@ -108,10 +110,16 @@ export function AddDate() {
   
         // Manejar el éxito de la inserción
         console.log("Alimentos agregados correctamente");
+        setShowSuccessPopup(true);
       } catch (error) {
         console.error("Error al agregar los alimentos:", error);
       }
     }
+  };
+
+  const handlePopupClose = () => {
+    setShowSuccessPopup(false); // Ocultar el Popup de éxito
+    navigate("/AdminPage");
   };
 
   return (
@@ -186,6 +194,15 @@ export function AddDate() {
           color={entries.length > 0 ? "#00FF00" : "gray"}
         />
       </div>
+
+      {showSuccessPopup && (
+        <div className="modalOverlay">
+          <div className="modalContent">
+            <SuccessPopupDate onClose={handlePopupClose} />
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
