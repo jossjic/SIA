@@ -13,7 +13,7 @@ import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 
 export function EditProduct() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const {a_id} = useParams();
+  const { a_id } = useParams();
   const [formData, setFormData] = useState({
     a_nombre: "",
     a_cantidad: "",
@@ -28,15 +28,17 @@ export function EditProduct() {
   useEffect(() => {
     async function fetchProductData() {
       try {
-        const response = await fetch(`http://3.144.175.151:3000/alimentos/${a_id}`);
+        const response = await fetch(
+          `http://3.144.175.151:3000/alimentos/${a_id}`
+        );
         const productData = await response.json();
         setFormData({
           a_nombre: productData.a_nombre,
           a_cantidad: productData.a_cantidad,
           a_stock: productData.a_stock,
           // a_fechaSalida: productData.a_fechaSalida,
-          a_fechaEntrada: productData.a_fechaEntrada,
-          a_fechaCaducidad: productData.a_fechaCaducidad,
+          a_fechaEntrada: formatDate(productData.a_fechaEntrada),
+          a_fechaCaducidad: formatDate(productData.a_fechaCaducidad),
           um_id: productData.um_id,
           m_id: productData.m_id,
         });
@@ -51,7 +53,7 @@ export function EditProduct() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
-     ...prevData,
+      ...prevData,
       [name]: value,
     }));
   };
@@ -59,13 +61,16 @@ export function EditProduct() {
   const handleSubmit = async () => {
     try {
       console.log(formData);
-      const response = await fetch(`http://3.144.175.151:3000/alimentos/${a_id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `http://3.144.175.151:3000/alimentos/${a_id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       if (!response.ok) {
         throw new Error("Error al editar el alimento");
       }
@@ -120,7 +125,6 @@ export function EditProduct() {
                 ? formatDate(formData.a_fechaCaducidad)
                 : formData.a_fechaCaducidad
             }
-            
             onChange={handleChange}
           />
 
@@ -151,7 +155,12 @@ export function EditProduct() {
       </div>
       {isModalOpen && (
         <div className="modalOverlayConf">
-          <ConfirmationPopUp message="Alimento editado correctamente" answer1="Ok" isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
+          <ConfirmationPopUp
+            message="Alimento editado correctamente"
+            answer1="Ok"
+            isOpen={isModalOpen}
+            closeModal={() => setIsModalOpen(false)}
+          />
         </div>
       )}
     </div>
