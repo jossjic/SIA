@@ -185,12 +185,13 @@ export const CheckDateDelete = ({ selectedIds }) => {
             />
             <GeneralButton
               textElement="Eliminar"
-              onClick={() => setConfirmDeleteOpen(true)}
+              onClick={() => allProductsVerified() && setConfirmDeleteOpen(true)}
               color={allProductsVerified() ? "#E14040" : "#8F938D"}
+              disabled={!allProductsVerified()} // Añadir esta línea para deshabilitar el botón si no todos los productos están verificados
             />
             {confirmDeleteOpen && (
               <ConfirmationPopUp
-                message="¿Está seguro que desea eliminar a los alimentos seleccionados permanentemente?"
+                message="¿Está seguro que desea eliminar a los alimentos seleccionados?"
                 answer1="Si"
                 answer2="No"
                 funct={handleDeleteSelected}
