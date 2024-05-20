@@ -181,7 +181,9 @@ export function AddDate() {
           </tbody>
         </table>
         {errorMessage && <p className="error">{errorMessage}</p>}
-        <ButtonCircle textElement="+" color="#5982C0" onClick={handleAddEntry} />
+        <div className="button">
+          <ButtonCircle textElement="+" color="#5982C0" onClick={handleAddEntry} />
+        </div>
       </div>
 
       <div className="botonesAddDA">
