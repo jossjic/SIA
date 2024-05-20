@@ -8,6 +8,7 @@ import { formatDate } from "../../generalFunctions";
 import { DropDown } from "../../components/dropDown";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import "./AddProduct.css";
+import { useNavigate } from "react-router-dom";
 
 export function AddProduct() {
   const [formData, setFormData] = useState({
@@ -25,6 +26,7 @@ export function AddProduct() {
     "Recuerda rellenar todos los campos obligatorios."
   );
 
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [individualValidationMessage, setIndividualValidationMessage] =
@@ -375,10 +377,11 @@ export function AddProduct() {
           <div className="modalOverlayConf">
             <ConfirmationPopUp
               message="Se agregó el producto correctamente."
-              answer1="De acuerdo"
-              path1={"/addProduct"}
+              answer1="Ok"
               isOpen={isModalOpen}
-              closeModal={() => setIsModalOpen(false)}
+              closeModal={() => {
+                setIsModalOpen(false), navigate("/adminPage");
+              }}
             />
           </div>
         )}
