@@ -121,7 +121,6 @@ export const CheckDateDelete = ({ selectedIds }) => {
       console.error("Error:", error);
     });
   };
-  
 
   const handleSuccessClose = () => {
     setDeleteSuccessOpen(false);
@@ -161,7 +160,7 @@ export const CheckDateDelete = ({ selectedIds }) => {
                   <td>{product.a_cantidad + " " + product.um_id}</td>
                   <td>{product.m_id}</td>
                   <td>{product.a_stock}</td>
-                  <td>{product.a_fechaCaducidad.substring(0, 10)}</td>
+                  <td>{product.a_fechaCaducidad ? product.a_fechaCaducidad.substring(0, 10) : "Sin caducidad"}</td>
                   <td>
                     <ButtonSquare
                       textElement="v"
