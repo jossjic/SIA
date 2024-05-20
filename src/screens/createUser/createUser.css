@@ -14,17 +14,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 90px;
-  border-radius: 10px;
-  width: 200%; /* You might want to adjust this if the form is too wide or too narrow */
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%; /* You might want to adjust this if the form is too wide or too narrow */
   gap: 20px; /* Spacing between elements */
 }
 
 .mensaje {
-  align-items: left;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  width: 100%; /* Ensure it fills the container */
+  width: 70%; /* Ensure it fills the container */
   padding: 20px; /* Added padding around the text */
   margin-bottom: 20px; /* Added bottom margin for spacing */
   
@@ -32,21 +32,21 @@
 }
 
 .createInput {
-  
+  background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
   align-items: left;
-  width: 100%; /* Adjusted to 100% instead of 1000% */
+  width: 50%; /* Adjusted to 100% instead of 1000% */
 }
 
 .createInput p {
   font-weight: normal;
   font-size: large;
-  
+  background-color: #f2f2f2;
 }
 
 .createInput input {
-  
+  background-color: #f2f2f2;
   color: blue;
   border: none;
   height: 50px;
@@ -68,5 +68,5 @@
 .buttonTopLeft {
   position: fixed;
   top: 20px;
-  left: -450px;
+  left: -25px;
 }
