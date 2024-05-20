@@ -8,7 +8,7 @@ import { SelectDateDelete } from "../../components/selectDateDelete";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { useNavigate } from "react-router-dom";
 
-export const CheckDateDelete = ({ selectedIds }) => {
+export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
   const [showSelectDate, setShowSelectDate] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null); 
   const [products, setProducts] = useState([]);
@@ -124,6 +124,7 @@ export const CheckDateDelete = ({ selectedIds }) => {
 
   const handleSuccessClose = () => {
     setDeleteSuccessOpen(false);
+    setSelectedIds([]); // Vaciar el arreglo selectedIds
     navigate("/AdminPage");
   };
 
@@ -178,8 +179,8 @@ export const CheckDateDelete = ({ selectedIds }) => {
               path="" 
               color="#5982C0" 
               onClick={() => {
+                setSelectedIds([]); // Vaciar el arreglo selectedIds
                 navigate(-1);
-                setSelectedIds([]);
               }}
             />
             <GeneralButton
