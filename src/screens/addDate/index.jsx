@@ -81,6 +81,13 @@ export function AddDate() {
     }
 
     const formattedDate = new Date(inputValues.a_fechaCaducidad).toISOString().split("T")[0];
+
+    // Check if the expiration date already exists in entries
+    if (entries.some(entry => entry.a_fechaCaducidad === formattedDate)) {
+      setErrorMessage("La fecha de caducidad ya existe, porfavor, ingrese otra fecha");
+      return;
+    }
+
     setEntries((prevEntries) => [
       ...prevEntries,
       { a_fechaCaducidad: formattedDate, a_stock: inputValues.a_stock },
@@ -142,7 +149,7 @@ export function AddDate() {
       <div className="infoDA">
         <h2>Alimento seleccionado: </h2>
         <h3>
-          {formData.a_nombre + "    " + formData.a_cantidad + " " + formData.um_id + "    " + formData.m_id}
+          {formData.a_nombre + "ㅤㅤ" + formData.a_cantidad + "" + formData.um_id + "ㅤㅤ" + formData.m_id}
         </h3>
       </div>
 
