@@ -31,14 +31,14 @@
 }
 
 .mensajeDA{
-    margin-left: 2%;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
+    margin-left: 8%;
 }
   
 .buttonBackDA {
     display: flex;
-    margin: 15px 4%; /* Centrar horizontalmente */
+    margin: 0% 12%; /* Centrar horizontalmente */
     align-items: flex-start; /* Ajusta el comportamiento de align-items para .buttonBackAdd */
 }
 
@@ -51,7 +51,7 @@
 
 .infoDA {
     display: flex;
-    margin-left: 5%;
+    margin-left: 12%;
 }
 
 .infoDA h2{
@@ -70,7 +70,7 @@
     width: 50%; /* Ajustar automáticamente al tamaño de los datos */
     display: table;
     background: #D9D9D9;
-    margin: 0 20%; /* Centra la tablaGeneral en su contenedor padre */
+    margin: 0 auto; /* Centra la tablaGeneral en su contenedor padre */
 }
 
 .tablaGeneral button{
@@ -104,7 +104,7 @@
 
 .botonesAddDA{
     margin-top: 2%;
-    margin: 0% 33%;
+    margin: 0% auto;
 }
 
 .botonesAddDA button{
@@ -188,3 +188,11 @@
   .editProductContainer .generalButton {
     margin-top: 30px;
   }
+
+
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  

@@ -30,6 +30,7 @@ export function AddDate() {
     a_fechaCaducidad: null,
     a_stock: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     async function fetchProductData() {
@@ -74,16 +75,19 @@ export function AddDate() {
   };
 
   const handleAddEntry = () => {
-    if (inputValues.a_fechaCaducidad && inputValues.a_stock) {
-      const formattedDate = new Date(inputValues.a_fechaCaducidad).toISOString().split("T")[0];
-      setEntries((prevEntries) => [
-        ...prevEntries,
-        { a_fechaCaducidad: formattedDate, a_stock: inputValues.a_stock },
-      ]);
-      setInputValues({ a_fechaCaducidad: null, a_stock: "" });
+    if (!inputValues.a_fechaCaducidad || !inputValues.a_stock) {
+      setErrorMessage("Ambos campos son obligatorios");
+      return;
     }
+
+    const formattedDate = new Date(inputValues.a_fechaCaducidad).toISOString().split("T")[0];
+    setEntries((prevEntries) => [
+      ...prevEntries,
+      { a_fechaCaducidad: formattedDate, a_stock: inputValues.a_stock },
+    ]);
+    setInputValues({ a_fechaCaducidad: null, a_stock: "" });
+    setErrorMessage("");
   };
-  
 
   const handleSubmit = async () => {
     if (entries.length > 0) {
@@ -176,7 +180,7 @@ export function AddDate() {
             </tr>
           </tbody>
         </table>
-
+        {errorMessage && <p className="error">{errorMessage}</p>}
         <ButtonCircle textElement="+" color="#5982C0" onClick={handleAddEntry} />
       </div>
 
@@ -202,7 +206,6 @@ export function AddDate() {
           </div>
         </div>
       )}
-
     </div>
   );
 }

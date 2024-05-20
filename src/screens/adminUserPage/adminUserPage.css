@@ -89,13 +89,38 @@ input[type="checkbox"] {
     gap: 20px; /* Adjust the gap as needed */
   }
 
-  .modalOverlayConf {
+.modalOverlayConf {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(56, 55, 55, 0.249);
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.modalOverlayConfig {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(56, 55, 55, 0.249);
+    background-color: rgba(129, 129, 129, 0.581);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+/* Estilos unificados para el overlay de los modales */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(129, 129, 129, 0.581); /* Ajusta la opacidad para que sea más transparente */
     display: flex;
     justify-content: center;
     align-items: center;
