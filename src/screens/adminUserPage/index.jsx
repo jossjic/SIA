@@ -16,6 +16,7 @@ export const UserPage = () => {
   const [deleteActive, setDeleteActive] = useState(false);
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const navigate = useNavigate();
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
 
 
   useEffect(() => {
@@ -48,6 +49,7 @@ export const UserPage = () => {
       setUsers(users.filter(user => !selectedUserIds.includes(user.id)));
       setSelectedUserIds([]);
       setConfirmDeleteOpen(false);
+      setDeleteSuccess(true);
     }).catch(error => {
       console.error("Error:", error);
     });
@@ -65,6 +67,7 @@ export const UserPage = () => {
         // Remove the user from the state to update the UI
         setUsers(users.filter(user => user.id !== userId));
         setIsModalOpen(null);
+        setDeleteSuccess(true);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -153,10 +156,11 @@ export const UserPage = () => {
                     textElement="  Eliminar  "
                     color="#DC3545"
                     className="generalButton"
-                    onClick={() => setIsModalOpen(user.id)}
+                    onClick={() => setIsModalOpen(user.id)} 
+                    
                   />
                   {isModalOpen === user.id && (
-                    <div className="modalOverlayConf">
+                    <div className="modalOverlay">
                       <ConfirmationPopUp
                         message="¿Seguro que quieres eliminar al usuario de forma permanente?"
                         answer1="Si" answer2="No"
@@ -166,6 +170,14 @@ export const UserPage = () => {
                       />
                     </div>
                   )}
+                  {deleteSuccess && (
+                    <div className="modalOverlay">
+                      <ConfirmationPopUp
+                      message="Usuario eliminado correctamente"
+                      answer1="Ok"
+                      isOpen={deleteSuccess}
+                      closeModal={() => setDeleteSuccess(false)}/>
+                    </div>)}
                 </td>
               </tr>
             ))}
