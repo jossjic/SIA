@@ -63,6 +63,10 @@ const links = [
     name: "EditUser",
     href: "editUser",
   },
+  {
+    name: "UserDetails",
+    href: "userDetails"
+  },
 ];
 
 export function NavBar() {

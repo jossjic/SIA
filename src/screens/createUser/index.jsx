@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./createUser.css";
-import { CreateInput } from "../../components/createInput";
 import { Guide } from "../../components/guide";
 import { GeneralButton } from "../../components/button";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
@@ -27,7 +26,6 @@ export const CreateUser = () => {
       [name]: value,
     }));
   };
-
 
   const handleSubmit = async () => {
     try {
@@ -62,11 +60,15 @@ export const CreateUser = () => {
     setIsModalOpen(true);
   };
 
+  const closeModalAndRedirect = () => {
+    setIsModalOpen(false);
+    navigate("/adminUserPage");
+  };
+
   return (
     <div className="createUser">
       <div className="mensaje">
         <Guide message="No olvides llenar todos los campos para el registro" />
-        
       </div>
       
       <div className="createUser-container">
@@ -117,12 +119,14 @@ export const CreateUser = () => {
       </div>
       {isModalOpen && (
         <div className="modalOverlayConf">
-        <ConfirmationPopUp
-        message="Usuario registrado correctamente"
-        answer1="Ok" 
-        isOpen={isModalOpen}
-        closeModal={() => setIsModalOpen(false)} /> 
-      </div> )}
+          <ConfirmationPopUp
+            message="Usuario registrado correctamente"
+            answer1="Ok"
+            isOpen={isModalOpen}
+            closeModal={closeModalAndRedirect}
+          />
+        </div>
+      )}
     </div>
   );
 };
