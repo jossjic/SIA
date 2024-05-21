@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+.inputContainer > * {
+  height: 80px;
+}
+
 .addProduct .confPopUp {
   width: 50%;
   z-index: 9999 !important;

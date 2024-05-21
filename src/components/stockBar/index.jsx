@@ -54,6 +54,7 @@ export function StockBar({
       );
     } else {
       setColor("black");
+      console.log("No hay cambios en el stock");
     }
   }, [modificationMap, id, setColor]);
 
@@ -62,6 +63,13 @@ export function StockBar({
     setCurrentStock(parseInt(stock));
     setInitialStock(parseInt(stock));
   }, [stock]);
+
+  useEffect(() => {
+    if (stockChanged && currentStock === parseInt(initialStock)) {
+      setStockChanged(false);
+      setColor("black");
+    }
+  }, [currentStock, initialStock]);
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -100,7 +108,7 @@ export function StockBar({
 
   return (
     <div className="stockBar">
-      <div className={"cloud" + (modificationMap[id] ? "" : " hide")}>
+      <div className={"cloud" + (currentStock !== initialStock ? "" : " hide")}>
         <img
           className="cloudIcon"
           src={cloudIcon}

@@ -1,6 +1,7 @@
 .calendar-input-container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   position: relative;
   align-items: left;
   width: 50%;

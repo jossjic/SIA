@@ -28,6 +28,8 @@ export function AddProduct() {
 
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenRemove, setIsModalOpenRemove] = useState(false);
+  const [removeCheck, setRemoveCheck] = useState(false);
 
   const [individualValidationMessage, setIndividualValidationMessage] =
     useState({
@@ -323,6 +325,8 @@ export function AddProduct() {
             key={1}
             optional={true}
             cdr={true}
+            removeCheck={removeCheck}
+            setIsModalOpenRemove={setIsModalOpenRemove}
           />
 
           <TextInput
@@ -372,20 +376,33 @@ export function AddProduct() {
           color="#5982C0"
           onClick={handleSubmit}
         ></GeneralButton>
-
-        {isModalOpen && (
-          <div className="modalOverlayConf">
-            <ConfirmationPopUp
-              message="Se agregó el producto correctamente."
-              answer1="Ok"
-              isOpen={isModalOpen}
-              closeModal={() => {
-                setIsModalOpen(false), navigate("/adminPage");
-              }}
-            />
-          </div>
-        )}
       </div>
+      {isModalOpen && (
+        <div className="modalOverlayConf">
+          <ConfirmationPopUp
+            message="Se agregó el producto correctamente."
+            answer1="Ok"
+            isOpen={isModalOpen}
+            closeModal={() => {
+              setIsModalOpen(false), navigate("/adminPage");
+            }}
+          />
+        </div>
+      )}
+      {isModalOpenRemove && (
+        <div className="modalOverlayConf">
+          <ConfirmationPopUp
+            message="¿Estás seguro de que deseas eliminar esta opción?"
+            answer1="Eliminar"
+            answer2="Cancelar"
+            color1="#FF6565"
+            color2="#5982C0"
+            funct={() => setRemoveCheck(true)}
+            isOpen={isModalOpenRemove}
+            closeModal={() => setIsModalOpenRemove(false)}
+          />
+        </div>
+      )}
     </div>
   );
 }

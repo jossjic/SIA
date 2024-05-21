@@ -14,6 +14,8 @@ export function DropDown({
   title,
   optional,
   cdr,
+  removeCheck,
+  setIsModalOpenRemove,
 }) {
   const [options, setOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -32,6 +34,12 @@ export function DropDown({
         }
       });
   }, [tableName, optional, label, name]);
+
+  useEffect(() => {
+    if (removeCheck) {
+      handleRemoveOption(optionToRemove);
+    }
+  }, [removeCheck, optionToRemove]);
 
   useEffect(() => {
     if (options.length > 0 && value === undefined) {
@@ -165,7 +173,7 @@ export function DropDown({
                 <button
                   className="remove-button"
                   onClick={() => {
-                    setIsModalOpen(true), setOptionToRemove(option);
+                    setIsModalOpenRemove(true), setOptionToRemove(option);
                   }}
                 >
                   <img src={trashIcon} alt="trashIcon"></img>
@@ -182,18 +190,6 @@ export function DropDown({
           </option>
         ))}
       </select>
-      {isModalOpen && (
-        <div className="modalOverlayConf">
-          <ConfirmationPopUp
-            message="¿Estás seguro de que deseas eliminar esta opción?"
-            answer1="Eliminar"
-            answer2="Cancelar"
-            funct={() => handleRemoveOption(optionToRemove)}
-            isOpen={isModalOpen}
-            closeModal={() => setIsModalOpen(false)}
-          />
-        </div>
-      )}
     </div>
   );
 }
