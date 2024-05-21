@@ -24,3 +24,10 @@
 .textInput input:focus {
   outline-color: blue;
 }
+
+.errorMessage {
+  color: red;
+  font-size: small;
+  margin-top: 5px;
+  background-color: #d9d9d9;
+}

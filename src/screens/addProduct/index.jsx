@@ -6,7 +6,9 @@ import { CalendarInput } from "../../components/calendarInput";
 import { GeneralButton } from "../../components/button";
 import { formatDate } from "../../generalFunctions";
 import { DropDown } from "../../components/dropDown";
+import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import "./AddProduct.css";
+import { useNavigate } from "react-router-dom";
 
 export function AddProduct() {
   const [formData, setFormData] = useState({
@@ -19,10 +21,21 @@ export function AddProduct() {
     um_id: "g",
     m_id: 0,
   });
-
+  const [checkDate, setCheckDate] = useState(true);
   const [validationMessage, setValidationMessage] = useState(
     "Recuerda rellenar todos los campos obligatorios."
   );
+
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [individualValidationMessage, setIndividualValidationMessage] =
+    useState({
+      productValidationMessage: "",
+      stockValidationMessage: "",
+      expirationDateValidationMessage: "",
+      quantityValidationMessage: "",
+    });
   function dataReset(name, value) {
     setFormData((prevData) => ({
       ...prevData,
@@ -93,17 +106,38 @@ export function AddProduct() {
     console.log("validating form", formData.a_nombre.trim());
     if (formData.a_nombre.trim() === "") {
       setValidationMessage("El nombre del producto es obligatorio.");
+      setIndividualValidationMessage({
+        productValidationMessage: "El nombre del producto es obligatorio.",
+        stockValidationMessage: "",
+        expirationDateValidationMessage: "",
+        quantityValidationMessage: "",
+      });
       console.log("nombre", formData.a_nombre);
       return false;
     } else if (formData.a_nombre.length > 40) {
       setValidationMessage(
         "El nombre del producto es muy largo (máximo 40 caracteres)."
       );
+      setIndividualValidationMessage({
+        productValidationMessage:
+          "El nombre del producto es muy largo (máximo 40 caracteres).",
+        stockValidationMessage: "",
+        expirationDateValidationMessage: "",
+        quantityValidationMessage: "",
+      });
       return false;
     } else if (formData.a_nombre.length < 2) {
       setValidationMessage(
         "El nombre del producto es muy corto (mínimo 2 caracteres)."
       );
+      setIndividualValidationMessage({
+        productValidationMessage:
+          "El nombre del producto es muy corto (mínimo 2 caracteres).",
+        stockValidationMessage: "",
+        expirationDateValidationMessage: "",
+        quantityValidationMessage: "",
+      });
+
       return false;
     } //regex Cada palabra empezando por mayúscula, separadas por espacios. Se aplicará mayúsculas iniciales a cada palabra individual en caso de no tener.
     else if (!/^[A-Z][a-z]*(\s[A-Z][a-z]*)*$/.test(formData.a_nombre)) {
@@ -121,17 +155,41 @@ export function AddProduct() {
 
     if (formData.a_stock.trim() === "") {
       setValidationMessage("El stock es obligatorio.");
+      setIndividualValidationMessage({
+        productValidationMessage: "",
+        stockValidationMessage: "El stock es obligatorio.",
+        expirationDateValidationMessage: "",
+        quantityValidationMessage: "",
+      });
       return false;
     } else if (!Number.isInteger(parseFloat(formData.a_stock))) {
       setValidationMessage("El stock debe ser un número entero.");
+      setIndividualValidationMessage({
+        productValidationMessage: "",
+        stockValidationMessage: "El stock debe ser un número entero.",
+        expirationDateValidationMessage: "",
+        quantityValidationMessage: "",
+      });
       dataReset("a_stock", 0);
       return false;
     } else if (parseInt(formData.a_stock) < 0) {
       setValidationMessage("El stock debe ser un número positivo.");
+      setIndividualValidationMessage({
+        productValidationMessage: "",
+        stockValidationMessage: "El stock debe ser un número positivo.",
+        expirationDateValidationMessage: "",
+        quantityValidationMessage: "",
+      });
       dataReset("a_stock", 0);
       return false;
     } else if (parseInt(formData.a_stock) > 2147483647) {
       setValidationMessage("El stock es muy grande.");
+      setIndividualValidationMessage({
+        productValidationMessage: "",
+        stockValidationMessage: "El stock es muy grande.",
+        expirationDateValidationMessage: "",
+        quantityValidationMessage: "",
+      });
       dataReset("a_stock", 0);
       return false;
     }
@@ -139,25 +197,69 @@ export function AddProduct() {
     //validación cantidad, decimal(13,3) mayor a 0 pueden ser decimales o enteros
     if (formData.a_cantidad.trim() === "") {
       setValidationMessage("La cantidad es obligatoria.");
+      setIndividualValidationMessage({
+        productValidationMessage: "",
+        stockValidationMessage: "",
+        expirationDateValidationMessage: "",
+        quantityValidationMessage: "La cantidad es obligatoria.",
+      });
+
       return false;
     } else if (!/^\d{1,13}(\.\d{1,3})?$/.test(formData.a_cantidad)) {
       setValidationMessage(
         "La cantidad no es válida (máximo 13 enteros y 3 decimales)."
       );
+      setIndividualValidationMessage({
+        productValidationMessage: "",
+        stockValidationMessage: "",
+        expirationDateValidationMessage: "",
+        quantityValidationMessage:
+          "La cantidad no es válida (máximo 13 enteros y 3 decimales).",
+      });
       dataReset("a_cantidad", 0);
       return false;
     } else if (parseFloat(formData.a_cantidad) < 0) {
       setValidationMessage("La cantidad debe ser un número positivo.");
+      setIndividualValidationMessage({
+        productValidationMessage: "",
+        stockValidationMessage: "",
+        expirationDateValidationMessage: "",
+        quantityValidationMessage: "La cantidad debe ser un número positivo.",
+      });
+
       dataReset("a_cantidad", 0);
       return false;
     } else if (parseFloat(formData.a_cantidad) > 9999999999999.999) {
       setValidationMessage("La cantidad es muy grande.");
+      setIndividualValidationMessage({
+        productValidationMessage: "",
+        stockValidationMessage: "",
+        expirationDateValidationMessage: "",
+        quantityValidationMessage: "La cantidad es muy grande.",
+      });
       dataReset("a_cantidad", 0);
       return false;
     }
 
-    setValidationMessage("");
-    return true;
+    if (checkDate) {
+      setValidationMessage("");
+      setIndividualValidationMessage({
+        productValidationMessage: "",
+        stockValidationMessage: "",
+        expirationDateValidationMessage: "",
+        quantityValidationMessage: "",
+      });
+      return true;
+    } else {
+      setValidationMessage("La fecha de caducidad no es válida.");
+      setIndividualValidationMessage({
+        productValidationMessage: "",
+        stockValidationMessage: "",
+        expirationDateValidationMessage: "La fecha de caducidad no es válida.",
+        quantityValidationMessage: "",
+      });
+      return false;
+    }
   };
 
   const handleSubmit = async () => {
@@ -179,6 +281,7 @@ export function AddProduct() {
       }
 
       console.log("Alimento agregado correctamente");
+      setIsModalOpen(true);
     } catch (error) {
       console.error("Error al agregar el alimento:", error);
     }
@@ -201,6 +304,7 @@ export function AddProduct() {
             onChange={handleChangeName}
             list="productOptions"
             autoComplete="off"
+            errorMessage={individualValidationMessage.productValidationMessage}
           />
 
           <datalist id="productOptions">
@@ -227,12 +331,19 @@ export function AddProduct() {
             name="a_stock"
             value={formData.a_stock}
             onChange={handleChange}
+            errorMessage={individualValidationMessage.stockValidationMessage}
           />
 
           <CalendarInput
             name="a_fechaCaducidad"
             value={formData.a_fechaCaducidad}
+            setCheckDate={setCheckDate}
             onChange={handleChange}
+            setValidationMessage={setValidationMessage}
+            setIndividualValidationMessage={setIndividualValidationMessage}
+            errorMessage={
+              individualValidationMessage.expirationDateValidationMessage
+            }
           />
 
           <TextInput
@@ -241,6 +352,7 @@ export function AddProduct() {
             name="a_cantidad"
             value={formData.a_cantidad}
             onChange={handleChange}
+            errorMessage={individualValidationMessage.quantityValidationMessage}
           />
 
           <DropDown
@@ -260,6 +372,19 @@ export function AddProduct() {
           color="#5982C0"
           onClick={handleSubmit}
         ></GeneralButton>
+
+        {isModalOpen && (
+          <div className="modalOverlayConf">
+            <ConfirmationPopUp
+              message="Se agregó el producto correctamente."
+              answer1="Ok"
+              isOpen={isModalOpen}
+              closeModal={() => {
+                setIsModalOpen(false), navigate("/adminPage");
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

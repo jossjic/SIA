@@ -66,7 +66,9 @@ export const CreateUser = () => {
     <div className="createUser">
       <div className="mensaje">
         <Guide message="No olvides llenar todos los campos para el registro" />
+        
       </div>
+      
       <div className="createUser-container">
         <br />
         <div className="createInput">

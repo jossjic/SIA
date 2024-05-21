@@ -6,6 +6,15 @@
   align-items: center;
 }
 
+.addProduct .confPopUp {
+  width: 50%;
+  z-index: 9999 !important;
+}
+
+.addProduct .confPopUp .buttonContainer {
+  width: 100%;
+}
+
 .addProductTitle {
   margin: 2%;
   width: 100%; /* Ajusta el ancho al 100% del contenedor principal */

@@ -49,9 +49,9 @@ function App() {
             }
           />
           <Route
-            path="/checkDateAdd"
-            element={<CheckDateAdd selectedIds={selectedIds} />}
-          />
+            path="/checkDateDelete"
+            element={<CheckDateDelete selectedIds={selectedIds} setSelectedIds={setSelectedIds} />}
+        />
           <Route
             path="/checkDateDelete"
             element={<CheckDateDelete selectedIds={selectedIds} />}

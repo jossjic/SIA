@@ -36,6 +36,12 @@
     font-size: 30px;
 }
 
+/* Aumentar especificidad */
+button.accC:hover {
+    background-color: #a9adf2;
+}
+
+
 /*
 .accC:hover {
     background-color: #3c6382;

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import editIcon from "../../assets/img/editIcon.svg";
 import addIcon from "../../assets/img/addIcon.svg";
 import trashIcon from "../../assets/img/trashIcon.svg";
+import { ConfirmationPopUp } from "../confirmationPopUp";
 
 export function DropDown({
   value,
@@ -17,6 +18,8 @@ export function DropDown({
   const [options, setOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [showCRD, setShowCRD] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [optionToRemove, setOptionToRemove] = useState({});
 
   useEffect(() => {
     fetch(`http://3.144.175.151:3000/${tableName}`)
@@ -46,7 +49,36 @@ export function DropDown({
   };
 
   const handleAddOption = () => {
-    const newOption = { [name]: inputValue, [label]: inputValue };
+    //validacion de campos vacios y 30 caracteres maximo, todas las palabras empezando con mayuscula, para las mayuculas el sistema hace el formato en automatico
+
+    if (inputValue === "") {
+      alert("El campo no puede estar vacío");
+      return;
+    }
+    if (inputValue.length > 30) {
+      alert("El campo no puede tener más de 30 caracteres");
+      return;
+    }
+    //formato, cada palabra empieza con mayuscula, si no lo cumple cambiar a mayusculas el input antes de enviarlo
+    const words = inputValue.split(" ");
+    const formattedWords = words.map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    });
+    const formattedInputValue = formattedWords.join(" ");
+    //validacion de que no exista la opcion en la lista
+    const optionExists = options.some(
+      (option) =>
+        option[label].toLowerCase() === formattedInputValue.toLowerCase()
+    );
+    if (optionExists) {
+      alert("La opción ya existe");
+      return;
+    }
+
+    const newOption = {
+      [name]: formattedInputValue,
+      [label]: formattedInputValue,
+    };
     setOptions([...options, newOption]);
     fetch(`http://3.144.175.151:3000/${tableName}`, {
       method: "POST",
@@ -132,7 +164,9 @@ export function DropDown({
                 <span className="option-span">{option[label]}</span>
                 <button
                   className="remove-button"
-                  onClick={() => handleRemoveOption(option)}
+                  onClick={() => {
+                    setIsModalOpen(true), setOptionToRemove(option);
+                  }}
                 >
                   <img src={trashIcon} alt="trashIcon"></img>
                 </button>
@@ -148,6 +182,18 @@ export function DropDown({
           </option>
         ))}
       </select>
+      {isModalOpen && (
+        <div className="modalOverlayConf">
+          <ConfirmationPopUp
+            message="¿Estás seguro de que deseas eliminar esta opción?"
+            answer1="Eliminar"
+            answer2="Cancelar"
+            funct={() => handleRemoveOption(optionToRemove)}
+            isOpen={isModalOpen}
+            closeModal={() => setIsModalOpen(false)}
+          />
+        </div>
+      )}
     </div>
   );
 }
