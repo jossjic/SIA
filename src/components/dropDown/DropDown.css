@@ -58,10 +58,13 @@
   position: absolute;
   top: 50%;
   width: 100%;
+  overflow-y: scroll;
+  height: 50vh;
+  overflow-x: hidden;
   left: 0;
   z-index: 1;
   background-color: white;
-  border: 1px solid #ccc; /* Añade un borde para definir el dropdown */
+  border: 2px solid #ccc; /* Añade un borde para definir el dropdown */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
