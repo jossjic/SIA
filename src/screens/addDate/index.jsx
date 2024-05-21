@@ -30,6 +30,7 @@ export function AddDate() {
     a_fechaCaducidad: null,
     a_stock: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     async function fetchProductData() {
@@ -74,16 +75,26 @@ export function AddDate() {
   };
 
   const handleAddEntry = () => {
-    if (inputValues.a_fechaCaducidad && inputValues.a_stock) {
-      const formattedDate = new Date(inputValues.a_fechaCaducidad).toISOString().split("T")[0];
-      setEntries((prevEntries) => [
-        ...prevEntries,
-        { a_fechaCaducidad: formattedDate, a_stock: inputValues.a_stock },
-      ]);
-      setInputValues({ a_fechaCaducidad: null, a_stock: "" });
+    if (!inputValues.a_fechaCaducidad || !inputValues.a_stock) {
+      setErrorMessage("Ambos campos son obligatorios");
+      return;
     }
+
+    const formattedDate = new Date(inputValues.a_fechaCaducidad).toISOString().split("T")[0];
+
+    // Check if the expiration date already exists in entries
+    if (entries.some(entry => entry.a_fechaCaducidad === formattedDate)) {
+      setErrorMessage("La fecha de caducidad ya existe, porfavor, ingrese otra fecha");
+      return;
+    }
+
+    setEntries((prevEntries) => [
+      ...prevEntries,
+      { a_fechaCaducidad: formattedDate, a_stock: inputValues.a_stock },
+    ]);
+    setInputValues({ a_fechaCaducidad: null, a_stock: "" });
+    setErrorMessage("");
   };
-  
 
   const handleSubmit = async () => {
     if (entries.length > 0) {
@@ -138,7 +149,7 @@ export function AddDate() {
       <div className="infoDA">
         <h2>Alimento seleccionado: </h2>
         <h3>
-          {formData.a_nombre + "    " + formData.a_cantidad + " " + formData.um_id + "    " + formData.m_id}
+          {formData.a_nombre + "ㅤㅤ" + formData.a_cantidad + "" + formData.um_id + "ㅤㅤ" + formData.m_id}
         </h3>
       </div>
 
@@ -176,8 +187,10 @@ export function AddDate() {
             </tr>
           </tbody>
         </table>
-
-        <ButtonCircle textElement="+" color="#5982C0" onClick={handleAddEntry} />
+        {errorMessage && <p className="error">{errorMessage}</p>}
+        <div className="button">
+          <ButtonCircle textElement="+" color="#5982C0" onClick={handleAddEntry} />
+        </div>
       </div>
 
       <div className="botonesAddDA">
@@ -202,7 +215,6 @@ export function AddDate() {
           </div>
         </div>
       )}
-
     </div>
   );
 }

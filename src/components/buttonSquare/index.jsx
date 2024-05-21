@@ -19,7 +19,7 @@ export function ButtonCircle({ textElement, onClick, color = "#5982C0" }) {
     };
 
     return (
-        <button className="accC" style={buttonStyle} onClick={onClick}>
+        <button className="accC" onClick={onClick}>
             {textElement}
         </button>
     );
