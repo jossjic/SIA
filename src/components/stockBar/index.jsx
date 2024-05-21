@@ -24,7 +24,7 @@ export function StockBar({
     if (savedModificationMap) {
       setModificationMap(JSON.parse(savedModificationMap));
     }
-  }, []);
+  }, [setModificationMap]);
 
   useEffect(() => {
     stockCheck();
@@ -35,7 +35,7 @@ export function StockBar({
       setCurrentStock(parseInt(stock));
       setStockChanged(false);
     }
-  }, [stockResetId]);
+  }, [stockResetId, stock, id]);
 
   useEffect(() => {
     if (savedChanges) {
@@ -43,21 +43,19 @@ export function StockBar({
       setStockChanged(false);
       setSavedChanges(false);
     }
-  }, [savedChanges, currentStock]);
+  }, [savedChanges, currentStock, setSavedChanges]);
 
   useEffect(() => {
     // Guardar modificationMap en localStorage cada vez que cambie
     localStorage.setItem("modificationMap", JSON.stringify(modificationMap));
     if (modificationMap[id]) {
-      if (modificationMap[id][0] > modificationMap[id][1]) {
-        setColor("red");
-      } else {
-        setColor("green");
-      }
+      setColor(
+        modificationMap[id][0] > modificationMap[id][1] ? "red" : "green"
+      );
     } else {
       setColor("black");
     }
-  }, [modificationMap]);
+  }, [modificationMap, id, setColor]);
 
   useEffect(() => {
     // Cuando el componente se monta o el stock inicial cambia
@@ -79,11 +77,11 @@ export function StockBar({
     setStockChanged(true);
   };
 
-  const changeStock = (logic) => {
-    if (logic && currentStock + 1 >= 0) {
-      setCurrentStock(currentStock + 1);
-    } else if (!logic && currentStock - 1 >= 0) {
-      setCurrentStock(currentStock - 1);
+  const changeStock = (increment) => {
+    if (increment) {
+      setCurrentStock((prev) => Math.max(0, prev + 1));
+    } else {
+      setCurrentStock((prev) => Math.max(0, prev - 1));
     }
     setStockChanged(true);
   };
@@ -119,13 +117,7 @@ export function StockBar({
       <input
         style={{ color: color }}
         type="text"
-        value={
-          stockChanged
-            ? currentStock
-            : modificationMap[id]
-            ? modificationMap[id][1]
-            : initialStock
-        }
+        value={currentStock}
         onChange={handleChange}
         disabled={isDisabled}
       />
