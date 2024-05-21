@@ -17,6 +17,7 @@ import { CodePage } from "./screens/codePage";
 import { NewPass } from "./screens/newPass";
 import { EditUser } from "./screens/editUser";
 import { AddDate } from "./screens/addDate";
+import { UserDetails } from "./screens/userDetails";
 
 import { useState } from "react";
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -64,6 +65,8 @@ function App() {
           <Route path="/newPass" element={<NewPass />} />
           <Route path="/editUser/:u_id" element={<EditUser />} />
           <Route path="/addDate/:a_id" element={<AddDate />} />
+          <Route path="/userDetails" element={<UserDetails/>} />
+
         </Routes>
       </Router>
     </div>
