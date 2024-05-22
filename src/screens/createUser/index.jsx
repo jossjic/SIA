@@ -52,6 +52,7 @@ export const CreateUser = () => {
       }
       // Manejar el éxito de la inserción
       setRegistrationSuccess(true);
+      setError(null);
       console.log("Usuario agregado correctamente");
     } catch (error) {
       setError(error.message);
@@ -113,11 +114,8 @@ export const CreateUser = () => {
         <br />
         {error && <p style={{ color: "red" }}>{error}</p>}
         <GeneralButton textElement="Crear usuario" onClick={handleSubmit} />
-        {registrationSuccess && (
-          <p style={{ color: "green" }}>Registro exitoso</p>
-        )}
       </div>
-      {isModalOpen && (
+      {isModalOpen && registrationSuccess && (
         <div className="modalOverlayConf">
           <ConfirmationPopUp
             message="Usuario registrado correctamente"
