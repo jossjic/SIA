@@ -1,27 +1,45 @@
+/* UserDetails.css */
 .transaccionesUsuario {
-    padding: 20px;
-    max-width: 960px;
-    margin: auto;
-  }
-  
-  .transaccionesUsuario h1 {
-    color: #333;
-    text-align: center;
-  }
-  
-  .transaccionesUsuario table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .transaccionesUsuario th, .transaccionesUsuario td {
-    text-align: left;
-    padding: 8px;
-    border: 1px solid #ccc;
-  }
-  
-  .transaccionesUsuario th {
-    background-color: #f8f8f8;
-  }
-  
+  padding: 20px;
+  max-width: 960px;
+  margin: 50px auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.transaccionesUsuario h1 {
+  color: #333;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 20px;
+}
+
+.transaccionesUsuario table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transaccionesUsuario th, .transaccionesUsuario td {
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.transaccionesUsuario th {
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: 500;
+}
+
+.transaccionesUsuario td {
+  color: #666;
+}
+
+.transaccionesUsuario tr:last-child td {
+  border-bottom: none;
+}
+
+.transaccionesUsuario tr:hover {
+  background-color: #f9f9f9;
+}

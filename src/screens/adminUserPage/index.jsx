@@ -159,6 +159,7 @@ export const UserPage = () => {
                     textElement=" Ver "
                     color="#28A745"
                     className="generalButton"
+                    onClick={() => navigate(`/userDetails/${user.id}`)}
                   />
                   <GeneralButton
                     textElement=" Editar "
