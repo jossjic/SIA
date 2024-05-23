@@ -10,6 +10,8 @@ export function CalendarInput({
   onChange,
   errorMessage,
   setValidationMessage,
+  antiBlock,
+  setAntiBlock,
   setIndividualValidationMessage,
   setCheckDate,
 }) {
@@ -27,6 +29,13 @@ export function CalendarInput({
     }
   }, [value]);
 
+  useEffect(() => {
+    if (antiBlock) {
+      handleInputChange({ target: { value: inputText } });
+      setAntiBlock(false);
+    }
+  }, [antiBlock]);
+
   const handleDateChange = (date) => {
     setDate(date);
     const formattedDate = formatDate(date);
@@ -36,6 +45,8 @@ export function CalendarInput({
       onChange({ target: { name, value: formattedDate } });
     }
     clearValidationMessages();
+    setCheckDate(true); // Reset checkDate when a valid date is selected
+    setAntiBlock(false); // Reset antiBlock when a valid date is selected
   };
 
   const handleInputChange = (event) => {
@@ -76,6 +87,8 @@ export function CalendarInput({
         }
       }
       clearValidationMessages();
+      setCheckDate(true); // Reset checkDate when the input is valid
+      setAntiBlock(false); // Reset antiBlock when the input is valid
     } else {
       setValidationMessage("La fecha de caducidad no es válida (aaaa/mm/dd).");
       setIndividualValidationMessage({

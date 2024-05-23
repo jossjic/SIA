@@ -9,6 +9,7 @@ import { DropDown } from "../../components/dropDown";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import "./AddProduct.css";
 import { useNavigate } from "react-router-dom";
+import { is } from "date-fns/locale";
 
 export function AddProduct() {
   const [formData, setFormData] = useState({
@@ -27,11 +28,15 @@ export function AddProduct() {
   const [validationMessage, setValidationMessage] = useState(
     "Recuerda rellenar todos los campos obligatorios."
   );
+  const [isModalOpenCRD, setIsModalOpenCRD] = useState(false);
+  const [validationMessageCRD, setValidationMessageCRD] = useState("");
 
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpenRemove, setIsModalOpenRemove] = useState(false);
   const [removeCheck, setRemoveCheck] = useState(false);
+
+  const [antiBlock, setAntiBlock] = useState(false);
 
   const [individualValidationMessage, setIndividualValidationMessage] =
     useState({
@@ -40,6 +45,8 @@ export function AddProduct() {
       expirationDateValidationMessage: "",
       quantityValidationMessage: "",
     });
+
+  const [showCRD, setShowCRD] = useState(false);
   function dataReset(name, value) {
     setFormData((prevData) => ({
       ...prevData,
@@ -48,9 +55,10 @@ export function AddProduct() {
   }
 
   useEffect(() => {
-    console.log(formData);
-    console.log(validationMessage);
-  }, [formData, validationMessage]);
+    if (isModalOpenRemove || isModalOpen || isModalOpenCRD) {
+      setShowCRD(false);
+    }
+  }, [isModalOpenRemove, isModalOpen, isModalOpenCRD]);
 
   const [searchResults, setSearchResults] = useState([]);
 
@@ -244,7 +252,7 @@ export function AddProduct() {
       dataReset("a_cantidad", 0);
       return false;
     }
-
+    console.log("-------CheckDate:", checkDate);
     if (checkDate) {
       setValidationMessage("");
       setIndividualValidationMessage({
@@ -262,6 +270,7 @@ export function AddProduct() {
         expirationDateValidationMessage: "La fecha de caducidad no es válida.",
         quantityValidationMessage: "",
       });
+      setAntiBlock(true);
       return false;
     }
   };
@@ -270,7 +279,6 @@ export function AddProduct() {
     if (!validateForm()) {
       return;
     }
-
     try {
       const response = await fetch("http://3.144.175.151:3000/alimentos", {
         method: "POST",
@@ -329,8 +337,12 @@ export function AddProduct() {
             key={1}
             optional={true}
             cdr={true}
+            showCRD={showCRD}
+            setShowCRD={setShowCRD}
             removeCheck={removeCheck}
             setIsModalOpenRemove={setIsModalOpenRemove}
+            setValidationMessageCRD={setValidationMessageCRD}
+            setIsModalOpenCRD={setIsModalOpenCRD}
           />
 
           <TextInput
@@ -352,6 +364,8 @@ export function AddProduct() {
             errorMessage={
               individualValidationMessage.expirationDateValidationMessage
             }
+            antiBlock={antiBlock}
+            setAntiBlock={setAntiBlock}
           />
 
           <TextInput
@@ -389,6 +403,18 @@ export function AddProduct() {
             isOpen={isModalOpen}
             closeModal={() => {
               setIsModalOpen(false), navigate("/adminPage");
+            }}
+          />
+        </div>
+      )}
+      {isModalOpenCRD && (
+        <div className="modalOverlayConf">
+          <ConfirmationPopUp
+            message={validationMessageCRD}
+            answer1="Ok"
+            isOpen={isModalOpenCRD}
+            closeModal={() => {
+              setIsModalOpenCRD(false);
             }}
           />
         </div>

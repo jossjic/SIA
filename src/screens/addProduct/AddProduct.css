@@ -20,20 +20,28 @@
 }
 
 .addProductTitle {
-  margin: 2%;
   width: 100%; /* Ajusta el ancho al 100% del contenedor principal */
-  height: 30%; /* Modifica la altura según tus necesidades */
+  margin: 5vh 5vh;
+  height: 20vh; /* Modifica la altura según tus necesidades */
+}
+
+.addProductTitle .info-banner {
+  height: 50%;
+}
+
+.addProductTitle .returnButtonContainer {
+  height: 45%;
+  margin-top: 2%;
 }
 
 .addProductContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 85%; /* Ajusta el ancho al 100% del contenedor principal */
-  height: 60%; /* Ajusta la altura al 90% del contenedor principal */
+  height: 58vh; /* Ajusta la altura al 90% del contenedor principal */
   background-color: #d9d9d9;
-  margin: 2% 0 2% 0; /* Elimina el margen para evitar desbordamientos */
   padding: 3% 0 3% 0;
 }
 
@@ -54,7 +62,6 @@
 
 .inputContainer > * {
   width: 40%;
-  margin: 1%; /* Ajusta los márgenes según tus necesidades */
 }
 
 /* Añade reglas para evitar el desbordamiento horizontal en caso de contenido grande */
