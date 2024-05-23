@@ -30,6 +30,7 @@ export function AddDate() {
     a_fechaCaducidad: "",
     a_stock: "",
   });
+  const [resetKey, setResetKey] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -98,6 +99,7 @@ export function AddDate() {
       { a_fechaCaducidad: formattedDate, a_stock: inputValues.a_stock },
     ]);
     setInputValues({ a_fechaCaducidad: "", a_stock: "" });
+    setResetKey(prevKey => prevKey + 1); // Change the resetKey to reset CalendarInputDate
     setErrorMessage("");
   };
 
@@ -179,6 +181,7 @@ export function AddDate() {
                   name="a_fechaCaducidad"
                   value={inputValues.a_fechaCaducidad}
                   onChange={handleDateChange}
+                  resetKey={resetKey}
                 />
               </td>
               <td>

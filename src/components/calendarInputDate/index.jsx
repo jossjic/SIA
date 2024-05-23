@@ -4,7 +4,7 @@ import { formatDate } from "../../generalFunctions";
 import "react-calendar/dist/Calendar.css";
 import "./CalendarInputDate.css";
 
-export function CalendarInputDate({ name, value, onChange }) {
+export function CalendarInputDate({ name, value, onChange, resetKey }) {
   const [date, setDate] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
   const [inputText, setInputText] = useState(value ? formatDate(new Date(value)) : "");
@@ -15,6 +15,13 @@ export function CalendarInputDate({ name, value, onChange }) {
       setInputText(formatDate(new Date(value)));
     }
   }, [value]);
+
+  useEffect(() => {
+    if (resetKey) {
+      setDate(new Date());
+      setInputText("");
+    }
+  }, [resetKey]);
 
   const handleDateChange = (date) => {
     const formattedDate = formatDate(date);
