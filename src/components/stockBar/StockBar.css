@@ -12,6 +12,7 @@
     -50%
   ); /* Centra el contenedor de nube horizontalmente */
   z-index: 1; /* Asegura que el contenedor de nube esté por encima del input */
+  cursor: pointer;
 }
 
 .hide {

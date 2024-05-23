@@ -68,8 +68,13 @@ export function StockBar({
     if (stockChanged && currentStock === parseInt(initialStock)) {
       setStockChanged(false);
       setColor("black");
+      // Eliminar la entrada del modificationMap si el stock ha vuelto al inicial
+      setModificationMap((prevMap) => {
+        const { [id]: _, ...rest } = prevMap;
+        return rest;
+      });
     }
-  }, [currentStock, initialStock]);
+  }, [currentStock, initialStock, id, setModificationMap, setColor]);
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -97,6 +102,11 @@ export function StockBar({
   const stockCheck = () => {
     if (currentStock === parseInt(initialStock)) {
       setStockChanged(false);
+      // Eliminar la entrada del modificationMap si el stock ha vuelto al inicial
+      setModificationMap((prevMap) => {
+        const { [id]: _, ...rest } = prevMap;
+        return rest;
+      });
     } else {
       setStockChanged(true);
       setModificationMap((prevMap) => ({
@@ -108,7 +118,14 @@ export function StockBar({
 
   return (
     <div className="stockBar">
-      <div className={"cloud" + (currentStock !== initialStock ? "" : " hide")}>
+      <div
+        onClick={() => {
+          setCurrentStock(parseInt(initialStock));
+          setStockChanged(false);
+          setColor("black");
+        }}
+        className={"cloud" + (currentStock !== initialStock ? "" : " hide")}
+      >
         <img
           className="cloudIcon"
           src={cloudIcon}

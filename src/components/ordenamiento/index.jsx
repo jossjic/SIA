@@ -32,12 +32,13 @@ export function Ordenamiento({ message, options, option, setOptions }) {
       <a href="#" className="hipervinculo" onClick={handleClick}>
         {message}
       </a>
-      <p
+      <button
+        onClick={handleClick}
         className="circulo"
         style={{
           backgroundColor: options[option] ? "green" : "rgb(190,190,190)",
         }}
-      ></p>
+      ></button>
     </div>
   );
 }

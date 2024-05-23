@@ -280,12 +280,14 @@ export function AddProduct() {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        throw new Error("Error al agregar el alimento");
+      if (response.ok) {
+        // Solo se muestra el pop-up si la respuesta es correcta
+        console.log("Alimento agregado correctamente");
+        setIsModalOpen(true);
+      } else {
+        // Manejamos específicamente otros códigos de error, si es necesario
+        throw new Error(`Error al agregar el alimento: ${response.statusText}`);
       }
-
-      console.log("Alimento agregado correctamente");
-      setIsModalOpen(true);
     } catch (error) {
       console.error("Error al agregar el alimento:", error);
     }

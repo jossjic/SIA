@@ -163,23 +163,31 @@ export function DropDown({
           </div>
 
           <div className="dropdownCRD-options">
-            {filteredOptions.map((option) => (
-              <div
-                key={option[name]}
-                className="dropdownCRD-option"
-                onClick={() => handleSpanClick(option)}
-              >
-                <span className="option-span">{option[label]}</span>
-                <button
-                  className="remove-button"
-                  onClick={() => {
-                    setIsModalOpenRemove(true), setOptionToRemove(option);
-                  }}
+            {[...filteredOptions]
+              .sort((a, b) => a[label].localeCompare(b[label]))
+              .map((option) => (
+                <div
+                  key={option[name]}
+                  className="dropdownCRD-option"
+                  onClick={() => handleSpanClick(option)}
                 >
-                  <img src={trashIcon} alt="trashIcon"></img>
-                </button>
-              </div>
-            ))}
+                  <span className="option-span">{option[label]}</span>
+                  {option[name] !== 0 ? (
+                    <button
+                      className="remove-button"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Evitar que el evento de clic se propague al contenedor
+                        setIsModalOpenRemove(true);
+                        setOptionToRemove(option);
+                      }}
+                    >
+                      <img src={trashIcon} alt="trashIcon" />
+                    </button>
+                  ) : (
+                    <span className="placeholder-button" />
+                  )}
+                </div>
+              ))}
           </div>
         </div>
       )}

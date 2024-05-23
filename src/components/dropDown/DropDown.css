@@ -130,6 +130,10 @@
   height: 20px;
 }
 
+.placeholder-button {
+  width: 20px;
+  height: 60px;
+}
 .dropdownCRD-options .remove-button:hover {
   background-color: #e14040;
   border: none;
