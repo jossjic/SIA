@@ -11,7 +11,10 @@ import saveIcon from "../../assets/img/saveIcon.svg";
 import "./AdminPage.css";
 import { useNavigate } from "react-router-dom";
 
+import { formatDate } from "../../generalFunctions.js";
+
 export const AdminPage = ({ selectedIds, setSelectedIds }) => {
+  const userId = localStorage.getItem("userId");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const pageSize = 10;
@@ -59,14 +62,29 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
     try {
       for (const key in modificationMap) {
         if (modificationMap.hasOwnProperty(key)) {
-          await fetch("http://3.144.175.151:3000/alimentos/stock/" + key, {
-            method: "PUT",
+          const body =
+            modificationMap[key][0] < modificationMap[key][1]
+              ? {
+                  a_id: key,
+                  u_id: userId,
+                  actionType: 0,
+                  quantity: modificationMap[key][1] - modificationMap[key][0],
+                }
+              : {
+                  a_id: key,
+                  u_id: userId,
+                  actionType: 1,
+                  quantity: modificationMap[key][0] - modificationMap[key][1],
+                };
+
+          console.log("body", body);
+
+          await fetch("http://3.144.175.151:3000/usuarios/stock/", {
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-              a_stock: modificationMap[key][1],
-            }),
+            body: JSON.stringify(body),
           });
         }
       }

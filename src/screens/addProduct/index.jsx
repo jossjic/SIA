@@ -20,7 +20,9 @@ export function AddProduct() {
     a_fechaCaducidad: null,
     um_id: "g",
     m_id: 0,
+    u_id: localStorage.getItem("userId"),
   });
+
   const [checkDate, setCheckDate] = useState(true);
   const [validationMessage, setValidationMessage] = useState(
     "Recuerda rellenar todos los campos obligatorios."

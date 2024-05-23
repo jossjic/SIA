@@ -12,6 +12,7 @@ import { CalendarInputDate } from "../../components/calendarInputDate";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 
 export function EditProduct() {
+  const userId = localStorage.getItem("userId");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { a_id } = useParams();
   const [formData, setFormData] = useState({
@@ -60,7 +61,10 @@ export function EditProduct() {
 
   const handleSubmit = async () => {
     try {
+      // Log the form data for debugging purposes
       console.log(formData);
+
+      // Send a PUT request to update the alimento
       const response = await fetch(
         `http://3.144.175.151:3000/alimentos/${a_id}`,
         {
@@ -71,14 +75,45 @@ export function EditProduct() {
           body: JSON.stringify(formData),
         }
       );
+
+      // Check if the response is not ok and throw an error if so
       if (!response.ok) {
         throw new Error("Error al editar el alimento");
       }
-      // Manejar el éxito de la edición
+
+      // Log success message
       console.log("Alimento editado correctamente");
+
+      // Prepare the body for the POST request to update the stock
+      const stockBody = {
+        a_id: a_id,
+        u_id: userId,
+        actionType: 2,
+        quantity: formData.a_stock,
+      };
+
+      // Send a POST request to update the stock
+      const stockResponse = await fetch(
+        "http://3.144.175.151:3000/usuarios/stock/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(stockBody),
+        }
+      );
+
+      // Check if the stock update response is not ok and throw an error if so
+      if (!stockResponse.ok) {
+        throw new Error("Error al editar el stock");
+      }
+
+      // Set the modal open state to true to indicate success
       setIsModalOpen(true);
     } catch (error) {
-      console.error("Error al editar el alimento:", error);
+      // Log any errors that occur during the process
+      console.error("Error al editar el alimento o el stock:", error);
     }
   };
 

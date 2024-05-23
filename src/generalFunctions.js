@@ -20,29 +20,31 @@ export const formatDate = (date) => {
 
 export const logout = (navigate) => {
   return new Promise((resolve, reject) => {
-    const refreshToken = localStorage.getItem('refreshToken');
+    const refreshToken = localStorage.getItem("refreshToken");
 
-    fetch('http://3.144.175.151:3000/logout', {
-      method: 'POST',
+    fetch("http://3.144.175.151:3000/logout", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ token: refreshToken }),
-      credentials: 'include' 
+      credentials: "include",
     })
-    .then(() => {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      navigate('/login');
-      resolve(); // Resuelve la promesa cuando se complete la operación
-    })
-    .catch(err => {
-      console.error("Error al cerrar sesión:", err);
-      // Incluso si hay un error, elimina los tokens y redirige
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      navigate('/login');
-      reject(err); // Rechaza la promesa si hay un error
-    });
+      .then(() => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("userId");
+        navigate("/login");
+        resolve(); // Resuelve la promesa cuando se complete la operación
+      })
+      .catch((err) => {
+        console.error("Error al cerrar sesión:", err);
+        // Incluso si hay un error, elimina los tokens y redirige
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("userId");
+        navigate("/login");
+        reject(err); // Rechaza la promesa si hay un error
+      });
   });
 };
