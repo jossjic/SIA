@@ -65,7 +65,8 @@ function App() {
           <Route path="/newPass" element={<NewPass />} />
           <Route path="/editUser/:u_id" element={<EditUser />} />
           <Route path="/addDate/:a_id" element={<AddDate />} />
-          <Route path="/userDetails" element={<UserDetails/>} />
+          <Route path="/userDetails/:id" element={<UserDetails />} />
+
 
         </Routes>
       </Router>
