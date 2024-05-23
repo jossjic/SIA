@@ -27,9 +27,10 @@ export function AddDate() {
   const [entries, setEntries] = useState([]);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [inputValues, setInputValues] = useState({
-    a_fechaCaducidad: null,
+    a_fechaCaducidad: "",
     a_stock: "",
   });
+  const [resetKey, setResetKey] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -40,7 +41,6 @@ export function AddDate() {
           throw new Error("Error fetching product data");
         }
         const productData = await response.json();
-        console.log(entries);
         setFormData({
           a_nombre: productData.a_nombre,
           a_cantidad: productData.a_cantidad,
@@ -52,7 +52,6 @@ export function AddDate() {
           m_id: productData.m_id,
         });
       } catch (error) {
-        console.log(a_id);
         console.error("Error fetching product data:", error);
       }
     }
@@ -65,12 +64,14 @@ export function AddDate() {
       ...prevValues,
       [name]: value,
     }));
+    setErrorMessage(""); // Clear error message on valid input
   };
 
-  const handleDateChange = (name, date) => {
+  const handleDateChange = (e) => {
+    const { name, value } = e.target;
     setInputValues((prevValues) => ({
       ...prevValues,
-      [name]: date,
+      [name]: value,
     }));
   };
 
@@ -80,11 +81,16 @@ export function AddDate() {
       return;
     }
 
-    const formattedDate = new Date(inputValues.a_fechaCaducidad).toISOString().split("T")[0];
+    if (isNaN(inputValues.a_stock)) {
+      setErrorMessage("El stock debe ser un número.");
+      return;
+    }
+
+    const formattedDate = inputValues.a_fechaCaducidad;
 
     // Check if the expiration date already exists in entries
     if (entries.some(entry => entry.a_fechaCaducidad === formattedDate)) {
-      setErrorMessage("La fecha de caducidad ya existe, porfavor, ingrese otra fecha");
+      setErrorMessage("La fecha de caducidad ya existe, por favor, ingrese otra fecha");
       return;
     }
 
@@ -92,7 +98,8 @@ export function AddDate() {
       ...prevEntries,
       { a_fechaCaducidad: formattedDate, a_stock: inputValues.a_stock },
     ]);
-    setInputValues({ a_fechaCaducidad: null, a_stock: "" });
+    setInputValues({ a_fechaCaducidad: "", a_stock: "" });
+    setResetKey(prevKey => prevKey + 1); // Change the resetKey to reset CalendarInputDate
     setErrorMessage("");
   };
 
@@ -105,7 +112,7 @@ export function AddDate() {
             a_fechaCaducidad: entry.a_fechaCaducidad,
             a_stock: entry.a_stock,
           };
-  
+
           const response = await fetch("http://3.144.175.151:3000/alimentos", {
             method: "POST",
             headers: {
@@ -113,12 +120,12 @@ export function AddDate() {
             },
             body: JSON.stringify(updatedFormData),
           });
-  
+
           if (!response.ok) {
             throw new Error("Error al agregar el alimento");
           }
         }
-  
+
         // Manejar el éxito de la inserción
         console.log("Alimentos agregados correctamente");
         setShowSuccessPopup(true);
@@ -172,15 +179,16 @@ export function AddDate() {
               <td>
                 <CalendarInputDate
                   name="a_fechaCaducidad"
-                  //value={inputValues.a_fechaCaducidad}
-                  onChange={handleChange}
+                  value={inputValues.a_fechaCaducidad}
+                  onChange={handleDateChange}
+                  resetKey={resetKey}
                 />
               </td>
               <td>
                 <TextInputAdd
                   placeholder="Stock. Ej. 10"
                   name="a_stock"
-                  //value={inputValues.a_stock}
+                  value={inputValues.a_stock}
                   onChange={handleChange}
                 />
               </td>

@@ -128,6 +128,10 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
     navigate("/AdminPage");
   };
 
+  const handleReturn = () => {
+    setSelectedIds([]); // Vaciar el arreglo selectedIds
+  };
+
   return (
     <div className="dateDelete">
       <div className="mensajeD">
@@ -137,7 +141,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
         />
       </div>
       <div className="buttonBackDelete">
-        <ReturnButton />
+        <ReturnButton onClick={handleReturn}/>
         <h1 className="tituloD">Eliminar Productos</h1>
       </div>
       <div className="cuadradoD">
