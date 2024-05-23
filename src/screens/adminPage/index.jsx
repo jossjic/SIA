@@ -2,16 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Guide } from "../../components/guide";
 import { ReturnButton } from "../../components/returnButton";
 import { RowAdminPage } from "../../components/rowAdminPage";
-import backButton from "../../assets/img/backPageIcon.svg";
-import frontButton from "../../assets/img/frontPageIcon.svg";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { SearchBar } from "../../components/search";
 import { SlidingSideBar } from "../../components/slidingSideBar";
 import saveIcon from "../../assets/img/saveIcon.svg";
 import "./AdminPage.css";
 import { useNavigate } from "react-router-dom";
-
-import { formatDate } from "../../generalFunctions.js";
 
 export const AdminPage = ({ selectedIds, setSelectedIds }) => {
   const userId = localStorage.getItem("userId");
@@ -1100,7 +1096,22 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           onClick={goToPreviousPage}
           disabled={currentPage === 1}
         >
-          <img src={backButton} alt="backButton" /> Página Anterior
+          <svg
+            width="100"
+            height="100"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 4l-8 8 8 8"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          Página Anterior
         </button>
         <button className="bottom" onClick={goToFirstPage}>
           1
@@ -1121,7 +1132,22 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           onClick={goToNextPage}
           disabled={currentPage === totalPages}
         >
-          Siguiente Página <img src={frontButton} alt="frontButton" />
+          Siguiente Página{" "}
+          <svg
+            width="100"
+            height="100"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 4l8 8-8 8"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </button>
       </div>
       {isModalOpen && (

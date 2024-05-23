@@ -7,7 +7,9 @@ export function Guide({ message }) {
   return (
     <div className="info-banner">
       <img src={humanoIcon} alt="Icono de humano" />
-      <p>{message}</p>
+      <div className="info-banner-text">
+        <p>{message}</p>
+      </div>
     </div>
   );
 }
