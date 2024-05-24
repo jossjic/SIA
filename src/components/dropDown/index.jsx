@@ -16,10 +16,13 @@ export function DropDown({
   cdr,
   removeCheck,
   setIsModalOpenRemove,
+  showCRD,
+  setShowCRD,
+  setIsModalOpenCRD,
+  setValidationMessageCRD,
 }) {
   const [options, setOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [showCRD, setShowCRD] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [optionToRemove, setOptionToRemove] = useState({});
 
@@ -60,11 +63,13 @@ export function DropDown({
     //validacion de campos vacios y 30 caracteres maximo, todas las palabras empezando con mayuscula, para las mayuculas el sistema hace el formato en automatico
 
     if (inputValue === "") {
-      alert("El campo no puede estar vacío");
+      setValidationMessageCRD("El campo no puede estar vacío");
+      setIsModalOpenCRD(true);
       return;
     }
     if (inputValue.length > 30) {
-      alert("El campo no puede tener más de 30 caracteres");
+      setValidationMessageCRD("El campo no puede tener más de 30 caracteres");
+      setIsModalOpenCRD(true);
       return;
     }
     //formato, cada palabra empieza con mayuscula, si no lo cumple cambiar a mayusculas el input antes de enviarlo
@@ -79,7 +84,8 @@ export function DropDown({
         option[label].toLowerCase() === formattedInputValue.toLowerCase()
     );
     if (optionExists) {
-      alert("La opción ya existe");
+      setValidationMessageCRD("La opción ya existe");
+      setIsModalOpenCRD(true);
       return;
     }
 

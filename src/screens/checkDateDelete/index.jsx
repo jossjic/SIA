@@ -7,6 +7,7 @@ import { GeneralButton } from "../../components/button";
 import { SelectDateDelete } from "../../components/selectDateDelete";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { useNavigate } from "react-router-dom";
+import { formatDate } from "../../generalFunctions";
 
 export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
   const [showSelectDate, setShowSelectDate] = useState(false);
@@ -102,7 +103,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
   };
 
   const handleDeleteSelected = () => {
-    Promise.all(selectedIds.map(id =>
+    const updateStockPromises = selectedIds.map(id =>
       fetch(`http://3.144.175.151:3000/alimentos/stock/${id}`, {
         method: "PUT",
         headers: {
@@ -110,17 +111,36 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
         },
         body: JSON.stringify({ a_stock: 0 })
       })
-    )).then(() => {
-      return Promise.all(selectedIds.map(id =>
-        fetch(`http://3.144.175.151:3000/alimentos/stock/${id}`, { method: "DELETE" })
-      ));
-    }).then(() => {
-      setConfirmDeleteOpen(false);
-      setDeleteSuccessOpen(true);
-    }).catch(error => {
-      console.error("Error:", error);
-    });
+    );
+  
+    const deleteProductPromises = selectedIds.map(id =>
+      fetch(`http://3.144.175.151:3000/alimentos/stock/${id}`, { method: "DELETE" })
+    );
+  
+    const logDeleteActionPromises = selectedIds.map(id =>
+      fetch(`http://3.144.175.151:3000/alimentos/out/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ a_fechaSalida: formatDate(new Date())})
+      })
+    );
+
+    const deleteProductPromises2 = selectedIds.map(id =>
+      fetch(`http://3.144.175.151:3000/alimentos/out/${id}`, { method: "DELETE" })
+    );
+  
+    Promise.all([...updateStockPromises, ...deleteProductPromises, ...logDeleteActionPromises, ...deleteProductPromises2])
+      .then(() => {
+        setConfirmDeleteOpen(false);
+        setDeleteSuccessOpen(true);
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
   };
+  
 
   const handleSuccessClose = () => {
     setDeleteSuccessOpen(false);

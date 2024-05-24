@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import { formatDate } from "../../generalFunctions";
 import "react-calendar/dist/Calendar.css";
 import "./CalendarInputDate.css";
 
-export function CalendarInputDate({ name, value, onChange }) {
+export function CalendarInputDate({ name, value, onChange, resetKey }) {
   const [date, setDate] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState(value ? formatDate(new Date(value)) : "");
+
+  useEffect(() => {
+    if (value) {
+      setDate(new Date(value));
+      setInputText(formatDate(new Date(value)));
+    }
+  }, [value]);
+
+  useEffect(() => {
+    if (resetKey) {
+      setDate(new Date());
+      setInputText("");
+    }
+  }, [resetKey]);
 
   const handleDateChange = (date) => {
+    const formattedDate = formatDate(date);
     setDate(date);
-    setInputText(formatDate(date));
+    setInputText(formattedDate);
     setShowCalendar(false);
     if (onChange) {
-      onChange({ target: { name, value: formatDate(date) } });
+      onChange({ target: { name, value: formattedDate } });
     }
   };
 
@@ -24,16 +39,17 @@ export function CalendarInputDate({ name, value, onChange }) {
     if (isValidDate(inputValue)) {
       setDate(new Date(inputValue));
       if (onChange) {
-        onChange(event);
+        onChange({ target: { name, value: inputValue } });
       }
     }
   };
 
   const handleBlur = () => {
     if (isValidDate(inputText) && inputText !== formatDate(date)) {
-      setDate(new Date(inputText));
+      const newDate = new Date(inputText);
+      setDate(newDate);
       if (onChange) {
-        onChange({ target: { name, value: inputText } });
+        onChange({ target: { name, value: formatDate(newDate) } });
       }
     }
   };
