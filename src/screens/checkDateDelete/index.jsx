@@ -39,7 +39,11 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
         return response.json();
       })
       .then((data) => {
-        setProducts(data);
+        const updatedData = data.map((product) => ({
+          ...product,
+          marca_nombre: product.m_id ? product.marca_nombre : "Sin marca",
+        }));
+        setProducts(updatedData);
       })
       .catch((error) => {
         console.error("Error:", error.message);
@@ -118,7 +122,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
     );
   
     const logDeleteActionPromises = selectedIds.map(id =>
-      fetch(`http://3.144.175.151:3000/alimentos/out/${id}`, {
+      fetch(`http:// 3.144.175.151:3000/alimentos/out/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -183,7 +187,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
                 <tr key={product.a_id}>
                   <td>{product.a_nombre}</td>
                   <td>{product.a_cantidad + " " + product.um_id}</td>
-                  <td>{product.m_id}</td>
+                  <td>{product.marca_nombre}</td>
                   <td>{product.a_stock}</td>
                   <td>{product.a_fechaCaducidad ? product.a_fechaCaducidad.substring(0, 10) : "Sin caducidad"}</td>
                   <td>
