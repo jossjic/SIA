@@ -4,6 +4,7 @@ import { Guide } from "../../components/guide";
 import { GeneralButton } from "../../components/button";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { useNavigate } from 'react-router-dom';
+import { ReturnButton } from "../../components/returnButton";
 
 export const CreateUser = () => {
   const [formData, setFormData] = useState({
@@ -70,6 +71,7 @@ export const CreateUser = () => {
     <div className="createUser">
       <div className="mensaje">
         <Guide message="No olvides llenar todos los campos para el registro" />
+        <ReturnButton textElement="Registrar Usuario"></ReturnButton>
       </div>
       
       <div className="createUser-container">
