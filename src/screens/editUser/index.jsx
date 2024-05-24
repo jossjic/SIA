@@ -79,7 +79,7 @@ export const EditUser = () => {
     return (
         <div className="editUser">
             <div className="editUserTitle">
-                <Guide message="Asegúrate de rellenar todos los campos. <3"></Guide>
+                <Guide message="Podrás editar el/los datos de este usuario que desees"></Guide>
                 <ReturnButton textElement="Editar Usuario"></ReturnButton>
             </div>
 
