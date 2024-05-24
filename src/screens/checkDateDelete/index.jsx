@@ -11,11 +11,11 @@ import { formatDate } from "../../generalFunctions";
 
 export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
   const [showSelectDate, setShowSelectDate] = useState(false);
-  const [selectedProductId, setSelectedProductId] = useState(null); 
+  const [selectedProductId, setSelectedProductId] = useState(null);
   const [products, setProducts] = useState([]);
   const [dates, setDates] = useState({});
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
-  const [deleteSuccessOpen, setDeleteSuccessOpen] = useState(false); 
+  const [deleteSuccessOpen, setDeleteSuccessOpen] = useState(false);
   const [buttonSquareColor, setButtonSquareColor] = useState("#E14040");
   const [buttonColors, setButtonColors] = useState({});
   const [ids, setIds] = useState([]);
@@ -85,7 +85,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
   const handleButtonClickSquare = (productId) => {
     setButtonColors((prevColors) => ({
       ...prevColors,
-      [productId]: "#00FF00", 
+      [productId]: "#00FF00",
     }));
   };
 
@@ -99,48 +99,63 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
   };
 
   const allProductsVerified = () => {
-    return products.every((product) => buttonColors[product.a_id] === "#00FF00");
+    return products.every(
+      (product) => buttonColors[product.a_id] === "#00FF00"
+    );
   };
 
   const handleDeleteSelected = () => {
-    const updateStockPromises = selectedIds.map(id =>
-      fetch(`http://3.144.175.151:3000/alimentos/stock/${id}`, {
-        method: "PUT",
+    const updateStockPromises = selectedIds.map((id) =>
+      fetch(`http://3.144.175.151:3000/usuarios/stock/`, {
+        method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ a_stock: 0 })
+        body: JSON.stringify({
+          a_id: id,
+          u_id: "luit",
+          actionType: 1,
+          quantity: products.find((product) => product.a_id === id).a_stock,
+        }),
       })
     );
-  
-    const deleteProductPromises = selectedIds.map(id =>
-      fetch(`http://3.144.175.151:3000/alimentos/stock/${id}`, { method: "DELETE" })
-    );
-  
-    const logDeleteActionPromises = selectedIds.map(id =>
-      fetch(`http://3.144.175.151:3000/alimentos/out/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ a_fechaSalida: formatDate(new Date())})
+    console.log(products.find((product) => product.a_id === 267).a_stock);
+    const deleteProductPromises = selectedIds.map((id) =>
+      fetch(`http://3.144.175.151:3000/alimentos/stock/${id}`, {
+        method: "DELETE",
       })
     );
 
-    const deleteProductPromises2 = selectedIds.map(id =>
-      fetch(`http://3.144.175.151:3000/alimentos/out/${id}`, { method: "DELETE" })
+    const logDeleteActionPromises = selectedIds.map((id) =>
+      fetch(`http://3.144.175.151:3000/alimentos/out/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ a_fechaSalida: formatDate(new Date()) }),
+      })
     );
-  
-    Promise.all([...updateStockPromises, ...deleteProductPromises, ...logDeleteActionPromises, ...deleteProductPromises2])
+
+    const deleteProductPromises2 = selectedIds.map((id) =>
+      fetch(`http://3.144.175.151:3000/alimentos/out/${id}`, {
+        method: "DELETE",
+      })
+    );
+
+    Promise.all([
+      ...updateStockPromises,
+      ...deleteProductPromises,
+      ...logDeleteActionPromises,
+      ...deleteProductPromises2,
+    ])
       .then(() => {
         setConfirmDeleteOpen(false);
         setDeleteSuccessOpen(true);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error:", error);
       });
   };
-  
 
   const handleSuccessClose = () => {
     setDeleteSuccessOpen(false);
@@ -161,7 +176,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
         />
       </div>
       <div className="buttonBackDelete">
-        <ReturnButton onClick={handleReturn}/>
+        <ReturnButton onClick={handleReturn} />
         <h1 className="tituloD">Eliminar Productos</h1>
       </div>
       <div className="cuadradoD">
@@ -185,7 +200,11 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
                   <td>{product.a_cantidad + " " + product.um_id}</td>
                   <td>{product.m_id}</td>
                   <td>{product.a_stock}</td>
-                  <td>{product.a_fechaCaducidad ? product.a_fechaCaducidad.substring(0, 10) : "Sin caducidad"}</td>
+                  <td>
+                    {product.a_fechaCaducidad
+                      ? product.a_fechaCaducidad.substring(0, 10)
+                      : "Sin caducidad"}
+                  </td>
                   <td>
                     <ButtonSquare
                       textElement="v"
@@ -198,10 +217,10 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
             </tbody>
           </table>
           <div className="botonesDelete">
-            <GeneralButton 
-              textElement="Cancelar" 
-              path="" 
-              color="#5982C0" 
+            <GeneralButton
+              textElement="Cancelar"
+              path=""
+              color="#5982C0"
               onClick={() => {
                 setSelectedIds([]); // Vaciar el arreglo selectedIds
                 navigate(-1);
@@ -209,7 +228,9 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
             />
             <GeneralButton
               textElement="Eliminar"
-              onClick={() => allProductsVerified() && setConfirmDeleteOpen(true)}
+              onClick={() =>
+                allProductsVerified() && setConfirmDeleteOpen(true)
+              }
               color={allProductsVerified() ? "#E14040" : "#8F938D"}
               disabled={!allProductsVerified()} // Añadir esta línea para deshabilitar el botón si no todos los productos están verificados
             />
