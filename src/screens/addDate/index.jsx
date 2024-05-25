@@ -24,6 +24,11 @@ export function AddDate() {
     um_id: "g",
     m_id: 0,
   });
+
+  const [marca, setMarca] = useState ({
+    m_nombre: "",
+  });
+
   const [entries, setEntries] = useState([]);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [inputValues, setInputValues] = useState({
@@ -51,6 +56,11 @@ export function AddDate() {
           um_id: productData.um_id,
           m_id: productData.m_id,
         });
+
+        setMarca({
+          m_nombre: productData.m_nombre,
+        });
+
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
@@ -156,7 +166,7 @@ export function AddDate() {
       <div className="infoDA">
         <h2>Alimento seleccionado: </h2>
         <h3>
-          {formData.a_nombre + "ㅤㅤ" + formData.a_cantidad + "" + formData.um_id + "ㅤㅤ" + formData.m_id}
+          {formData.a_nombre + "ㅤㅤ" + formData.a_cantidad + formData.um_id + "ㅤㅤ" + (marca.m_nombre == null ? "Sin marca" : marca.m_nombre)}
         </h3>
       </div>
 
