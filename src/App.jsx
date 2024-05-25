@@ -31,12 +31,13 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
+          <Route path="/" element={
+          
+          <ProtectedRoute></ProtectedRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/layout" element={<Layout />} />
           <Route path="/mainPage" element={
-          // <ProtectedRoute>
             <MainPage />
-          // </ProtectedRoute>
           } />
           <Route path="/adminUserPage" element={<UserPage />} />
           <Route

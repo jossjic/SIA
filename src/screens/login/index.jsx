@@ -28,24 +28,34 @@ export const Login = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ id, password }),
-      credentials: "include",
     })
       .then((response) => {
         if (response.status === 200) {
-          return response.json();
+          // Obtener cookies de la respuesta y guardarlas
+          const myValue = id;
+
+          // Obtener la fecha actual
+          const now = new Date();
+          
+          // Calcular la fecha de expiración sumando 30 días a la fecha actual
+          const expires = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 días en milisegundos
+          
+          // Convertir la fecha de expiración a un formato de cadena adecuado para la cookie
+          const expiresFormatted = expires.toUTCString();
+          
+          // Guardar el valor en las cookies con la fecha de expiración y la ruta especificada
+          document.cookie = `userCookieSIA=${myValue}; expires=${expiresFormatted}; path=/`;
+          
+          // Verificar que el valor se haya guardado correctamente en las cookies
+          console.log("Valor guardado en las cookies:", myValue);
+          localStorage.setItem("userId", id);
+
+          navigate("/mainPage");
         } else if (response.status === 401) {
           setErrorMessage("Usuario o contraseña incorrectos");
         } else {
           throw new Error("Error de servidor");
         }
-      })
-      .then((data) => {
-        // Guardar tokens en localStorage
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-        localStorage.setItem("userId", data.userId);
-
-        navigate("/mainPage");
       })
       .catch((error) => {
         setErrorMessage(error.message);

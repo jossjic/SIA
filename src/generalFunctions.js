@@ -45,31 +45,12 @@ export const formatDateTime = (date) => {
 
 export const logout = (navigate) => {
   return new Promise((resolve, reject) => {
-    const refreshToken = localStorage.getItem("refreshToken");
+    // Eliminar las cookies del documento
+    document.cookie = "userCookieSIA=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+    localStorage.removeItem("userId");
+    // Redirigir al usuario a la página de inicio de sesión
+    navigate("/login");
 
-    fetch("http://3.144.175.151:3000/logout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token: refreshToken }),
-      credentials: "include",
-    })
-      .then(() => {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("userId");
-        navigate("/login");
-        resolve(); // Resuelve la promesa cuando se complete la operación
-      })
-      .catch((err) => {
-        console.error("Error al cerrar sesión:", err);
-        // Incluso si hay un error, elimina los tokens y redirige
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("userId");
-        navigate("/login");
-        reject(err); // Rechaza la promesa si hay un error
-      });
+    resolve(); // Resuelve la promesa cuando se complete la operación
   });
 };
