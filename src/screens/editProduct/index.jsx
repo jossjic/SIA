@@ -10,9 +10,11 @@ import { DropDown } from "../../components/dropDown";
 import "./EditProduct.css";
 import { CalendarInputDate } from "../../components/calendarInputDate";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
+import { useNavigate } from "react-router-dom";
 
 export function EditProduct() {
   const userId = localStorage.getItem("userId");
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { a_id } = useParams();
   const [formData, setFormData] = useState({
@@ -83,6 +85,7 @@ export function EditProduct() {
 
       // Log success message
       console.log("Alimento editado correctamente");
+      setIsModalOpen(true);
 
       // Prepare the body for the POST request to update the stock
       const stockBody = {
@@ -194,7 +197,8 @@ export function EditProduct() {
             message="Alimento editado correctamente"
             answer1="Ok"
             isOpen={isModalOpen}
-            closeModal={() => setIsModalOpen(false)}
+            closeModal={() => {setIsModalOpen(false), navigate("/adminPage");
+          }}
           />
         </div>
       )}
