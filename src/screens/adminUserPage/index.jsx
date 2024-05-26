@@ -16,6 +16,7 @@ export const UserPage = () => {
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const navigate = useNavigate();
   const [deleteSuccess, setDeleteSuccess] = useState(false);
+  const [deleteError, setDeleteError] = useState(false);
 
   useEffect(() => {
     fetch("http://3.144.175.151:3000/usuarios")
@@ -94,6 +95,20 @@ export const UserPage = () => {
     navigate("/createuser");
   };
 
+
+  const handleViewUser = (userId) => {
+    fetch(`http://3.144.175.151:3000/usuario-alimento/join/all/usuario/${userId}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.length === 0) {
+          setDeleteError(true);  // Abre el modal indicando que no hay datos
+        } else {
+          navigate(`/userDetails/${userId}`);
+        }
+      })
+      .catch(error => console.error('Error:', error));
+  };
+
   return (
     <div className="userPage">
       <div className="buttonTopLeft">
@@ -159,7 +174,7 @@ export const UserPage = () => {
                     textElement=" Ver "
                     color="#28A745"
                     className="generalButton"
-                    onClick={() => navigate(`/userDetails/${user.id}`)}
+                    onClick={() => handleViewUser(user.id)}
                   />
                   <GeneralButton
                     textElement=" Editar "
@@ -182,6 +197,16 @@ export const UserPage = () => {
                         funct={() => handleDelete(user.id)}
                         isOpen={isModalOpen === user.id}
                         closeModal={() => setIsModalOpen(null)}
+                      />
+                    </div>
+                  )}
+                  {deleteError && (
+                    <div>
+                      <ConfirmationPopUp
+                      message="No existe actividad para este usuario."
+                      answer1="Ok"
+                      isOpen={deleteError}
+                      closeModal={() => setDeleteError(false)}
                       />
                     </div>
                   )}

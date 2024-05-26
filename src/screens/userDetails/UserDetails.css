@@ -2,22 +2,26 @@
 .transaccionesUsuario {
   padding: 20px;
   max-width: 960px;
-  margin: 50px auto;
+  margin: 20px auto;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   border-radius: 8px;
   background-color: #fff;
 }
 
 .transaccionesUsuario h1 {
-  color: #333;
+  color: #1a1a1a;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  font-size: 34px;
 }
 
 .transaccionesUsuario table {
   width: 100%;
   border-collapse: collapse;
+  display: block; /* Cambio clave para permitir scroll */
+  max-height: 550px; /* Altura máxima antes de que el scroll aparezca */
+  overflow-y: auto; /* Habilita el scroll vertical */
 }
 
 .transaccionesUsuario th, .transaccionesUsuario td {
@@ -30,6 +34,10 @@
   background-color: #f0f0f0;
   color: #333;
   font-weight: 500;
+  position: sticky;
+  top: 0; /* Hace que los encabezados se queden fijos en la parte superior */
+  z-index: 2; /* Asegura que se mantengan sobre otros elementos */
+  background: #b0acac; /* Fondo necesario para evitar que las filas se vean a través */
 }
 
 .transaccionesUsuario td {

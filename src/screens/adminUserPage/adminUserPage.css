@@ -1,6 +1,6 @@
 .tableContainer {
     width: 82%;
-    max-height: 600px;
+    max-height: 540px;
     overflow-y: scroll;
     background-color: #d9d9d9;
 }
