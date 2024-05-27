@@ -59,3 +59,11 @@
 .stockBar button:active {
   background-color: rgb(233, 231, 231);
 }
+
+/* resposive for mobile */
+
+@media (max-width: 768px) {
+  .stockBar input {
+    font-size: 0.5rem;
+  }
+}

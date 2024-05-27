@@ -64,7 +64,7 @@ export function SlidingSideBar({
             }
             onClick={handleClickStock}
           >
-            Mostrar alimentos sin stock
+            <p>Mostrar alimentos sin stock</p>
           </button>
         </div>
         <div className="title-container">

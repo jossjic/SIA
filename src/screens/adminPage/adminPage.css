@@ -33,7 +33,9 @@
   flex-direction: column;
   width: 80%;
   height: 60vh;
-  background-color: #f0f0f0;
+  background-color: #f2f2f2;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
 }
 .divHeaders {
   display: flex;
@@ -180,4 +182,19 @@
 
 .adminPage .sidebar .info-banner p {
   font-size: 1.4vw;
+}
+
+/* resposive for mobile */
+
+@media (max-width: 768px) {
+  .adminPage .returnButton {
+    width: 20px;
+    height: 30px;
+  }
+
+  .adminPage .returnButton img {
+    width: 10px;
+    height: 10px;
+    padding: auto;
+  }
 }
