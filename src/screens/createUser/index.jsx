@@ -35,7 +35,7 @@ export const CreateUser = () => {
     }
 
       // Validar el ID del usuario
-    if (formData.u_id.length < 4 || formData.u_id.length > 10) {
+    if (formData.u_id.length < 4 || formData.u_id.length > 20) {
       setError("El username debe tener entre 4 y 10 caracteres.");
       return false;
     }
