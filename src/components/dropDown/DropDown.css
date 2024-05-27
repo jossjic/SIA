@@ -17,9 +17,10 @@
 .dropDownContainer label {
   font-weight: normal;
   font-size: large;
-  background-color: #d9d9d9;
+  background-color: #f2f2f2;
   margin: 0;
   padding-bottom: 5px;
+  font-weight: bold;
 }
 
 .dropDownContainer select {
@@ -117,7 +118,7 @@
 }
 
 .dropdownCRD-option:hover {
-  background-color: #a5a5a5;
+  background-color: #f2f2f2;
 }
 
 .dropdownCRD-options .remove-button {
