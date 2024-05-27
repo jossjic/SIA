@@ -34,17 +34,20 @@
 
 /* Estilos para el botón de eliminar */
 .search-bar .icon-button.delete {
-  border-radius: 0 100px 100px 0;
+  border-radius: 0 100px 100px 0; 
+  cursor: not-allowed;
 }
 
 .search-bar .icon-button.active-add {
   background-color: #4caf50; /* Green */
   color: white;
+  cursor: pointer;
 }
 
 .search-bar .icon-button.active-delete {
   background-color: #f44336; /* Red */
   color: white;
+  cursor: pointer;
 }
 .search-bar .addCart {
   position: relative; /* Agrega posición relativa al contenedor del botón de añadir */

@@ -34,7 +34,7 @@
 /* Estilos para el botón de eliminar */
 .search-bar-2 .icon-button.delete {
   border-radius: 0 100px 100px 0;
-  cursor: initial;
+  cursor: not-allowed;
 }
 
 .search-bar-2 .icon-button.active-add {

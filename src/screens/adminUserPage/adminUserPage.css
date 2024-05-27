@@ -14,6 +14,10 @@
     overflow-x: hidden;
 }
 
+.userPage .info-banner{
+    height: 80px;
+  }
+
 .userTable {
     width: 100%;
     border-collapse: collapse;
