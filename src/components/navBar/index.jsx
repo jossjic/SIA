@@ -1,6 +1,8 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./navBar.css";
-import { Link } from "react-router-dom";
+import iconImage from '../../assets/img/home.png'; // Reemplaza con la ruta correcta a tu imagen
+
 
 const links = [
   {
@@ -70,24 +72,19 @@ const links = [
 ];
 
 export function NavBar() {
+  const navigate = useNavigate();
+
   const handleClick = () => {
-    setHidden(!hidden);
+    navigate("/mainPage");
   };
 
   const [hidden, setHidden] = React.useState(false);
+
   return (
     <>
-      <div className={`navbar${hidden ? " hidden" : ""}`}>
-        <div className="links">
-          {links.map((x, index) => (
-            <Link key={index} to={x.href} className="nav-link">
-              {x.name}
-            </Link>
-          ))}
-        </div>
-      </div>
+      
       <button className="hideButton" onClick={handleClick}>
-        Click me
+        <img src={iconImage} alt="Icon" className="button-icon" />
       </button>
     </>
   );
