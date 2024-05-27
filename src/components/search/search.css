@@ -22,6 +22,7 @@
   justify-content: center;
   border: none;
   background-color: #e0e0e0;
+
   cursor: pointer;
   font-size: 20px; /* Modificado para que sea más legible */
 }
