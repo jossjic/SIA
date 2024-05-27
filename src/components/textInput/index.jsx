@@ -9,7 +9,7 @@ export function TextInput({
   value,
   list,
   errorMessage,
-  type = 'text',
+  type = "text",
 }) {
   return (
     <div className="textInput">
@@ -22,7 +22,7 @@ export function TextInput({
         placeholder={placeholder}
         list={list}
       />
-      {errorMessage === '' && (<p className="errorMessage">{errorMessage}</p>)}
+      {<p className="errorMessage">{errorMessage}</p>}
     </div>
   );
 }
