@@ -28,19 +28,40 @@ export const CreateUser = () => {
     }));
   };
 
-  const handleSubmit = async () => {
-    try {
-      // Verificar campos obligatorios
-      if (
-        !formData.u_id ||
-        !formData.u_nombre ||
-        !formData.u_apellidos ||
-        !formData.u_email ||
-        !formData.u_contraseña
-      ) {
-        throw new Error("Por favor, complete todos los campos obligatorios.");
-      }
+  const validateForm = () => {
+    if (!formData.u_id || !formData.u_nombre || !formData.u_apellidos || !formData.u_email || !formData.u_contraseña) {
+      setError("Por favor, complete todos los campos obligatorios.");
+      return false;
+    }
 
+      // Validar el ID del usuario
+    if (formData.u_id.length < 4 || formData.u_id.length > 10) {
+      setError("El username debe tener entre 4 y 10 caracteres.");
+      return false;
+    }
+
+    // Validar el correo electrónico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.u_email)) {
+      setError("Ingrese un correo electrónico válido.");
+      return false;
+    }
+
+    // Validar la contraseña
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,15}$/;
+    if (!passwordRegex.test(formData.u_contraseña)) {
+      setError("La contraseña debe tener entre 5 y 15 caracteres, al menos una letra mayúscula, una letra minúscula, un dígito y no debe contener espacios en blanco.");
+      return false;
+    }
+
+    setError("");
+    return true;
+  };
+
+  const handleSubmit = async () => {
+    if (!validateForm()) return;
+
+    try {
       const response = await fetch("http://3.144.175.151:3000/usuarios", {
         method: "POST",
         headers: {
@@ -71,7 +92,7 @@ export const CreateUser = () => {
     <div className="createUser">
       <div className="mensaje">
         <Guide message="No olvides llenar todos los campos para el registro" />
-        <ReturnButton textElement="Registrar Usuario"></ReturnButton>
+        <ReturnButton textElement="Registrar Usuario" />
       </div>
       
       <div className="createUser-container">
@@ -129,4 +150,4 @@ export const CreateUser = () => {
       )}
     </div>
   );
-};
+}; 
