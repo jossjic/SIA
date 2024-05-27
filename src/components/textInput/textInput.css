@@ -7,22 +7,22 @@
 }
 
 .textInput label {
-  font-weight: normal;
+  font-weight: bold;
   font-size: large;
-  background-color: #d9d9d9;
+  background-color: #f2f2f2;
   margin: 0;
   padding-bottom: 5px;
 }
 /*update textinputq*/
 .textInput input {
   background-color: white;
-  color: blue;
+  color: black;
   height: 40px;
   border: none;
 }
 
 .textInput input:focus {
-  outline-color: blue;
+  outline-color: black;
 }
 
 .errorMessage {

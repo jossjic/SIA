@@ -9,19 +9,20 @@ export function TextInput({
   value,
   list,
   errorMessage,
+  type = 'text',
 }) {
   return (
     <div className="textInput">
       <label>{label}</label>
       <input
-        type="text"
+        type={type}
         name={name}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
         list={list}
       />
-      <p className="errorMessage">{errorMessage}</p>
+      {errorMessage === '' && (<p className="errorMessage">{errorMessage}</p>)}
     </div>
   );
 }

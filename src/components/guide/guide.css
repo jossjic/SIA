@@ -19,6 +19,8 @@
   text-align: center;
   overflow: hidden; /* Asegura que el contenido no se salga del contenedor */
   box-sizing: border-box; /* Incluye padding y border en el tamaño total del elemento */
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
 }
 
 .info-banner img {

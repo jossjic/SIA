@@ -5,6 +5,7 @@ import { GeneralButton } from "../../components/button";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { useNavigate } from 'react-router-dom';
 import { ReturnButton } from "../../components/returnButton";
+import { TextInput } from "../../components/textInput";
 
 export const CreateUser = () => {
   const [formData, setFormData] = useState({
@@ -34,7 +35,7 @@ export const CreateUser = () => {
       return false;
     }
 
-      // Validar el ID del usuario
+    // Validar el ID del usuario
     if (formData.u_id.length < 4 || formData.u_id.length > 20) {
       setError("El username debe tener entre 4 y 10 caracteres.");
       return false;
@@ -90,7 +91,7 @@ export const CreateUser = () => {
 
   return (
     <div className="createUser">
-      <div className="mensaje">
+      <div className="editUserTitle">
         <Guide message="No olvides llenar todos los campos para el registro" />
         <ReturnButton textElement="Registrar Usuario" />
       </div>
@@ -98,39 +99,37 @@ export const CreateUser = () => {
       <div className="createUser-container">
         <br />
         <div className="createInput">
-          <p>Nombre de usuario</p>
-          <input
+
+          <TextInput
+            label="Nombre de usuario"
             name="u_id"
             value={formData.u_id}
-            type="text"
             onChange={handleChange}
           />
-          <p>Nombre</p>
-          <input
+          <TextInput
+            label="Nombre"
             name="u_nombre"
             value={formData.u_nombre}
-            type="text"
             onChange={handleChange}
           />
-          <p>Apellidos</p>
-          <input
+          <TextInput
+            label="Apellidos"
             name="u_apellidos"
             value={formData.u_apellidos}
-            type="text"
             onChange={handleChange}
           />
-          <p>Correo</p>
-          <input
+          <TextInput
+            label="Correo"
+            type="email"
             name="u_email"
             value={formData.u_email}
-            type="email"
             onChange={handleChange}
           />
-          <p>Contraseña</p>
-          <input
+          <TextInput
+            label="Contraseña"
             name="u_contraseña"
-            value={formData.u_contraseña}
             type="password"
+            value={formData.u_contraseña}
             onChange={handleChange}
           />
         </div>
@@ -150,4 +149,4 @@ export const CreateUser = () => {
       )}
     </div>
   );
-}; 
+};
