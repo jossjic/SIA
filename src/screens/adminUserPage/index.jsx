@@ -146,6 +146,17 @@ export const UserPage = () => {
           />
         </div>
       )}
+      {deleteError && (
+        <div className="modalOverlay">
+          <ConfirmationPopUp
+            message="No existe actividad para este usuario."
+            answer1="Ok"
+            isOpen={deleteError}
+            closeModal={() => setDeleteError(false)}
+          />
+        </div>
+      )}
+
       <div className="tableContainer">
         <table className="userTable square">
           <thead>
@@ -197,16 +208,6 @@ export const UserPage = () => {
                         funct={() => handleDelete(user.id)}
                         isOpen={isModalOpen === user.id}
                         closeModal={() => setIsModalOpen(null)}
-                      />
-                    </div>
-                  )}
-                  {deleteError && (
-                    <div>
-                      <ConfirmationPopUp
-                      message="No existe actividad para este usuario."
-                      answer1="Ok"
-                      isOpen={deleteError}
-                      closeModal={() => setDeleteError(false)}
                       />
                     </div>
                   )}

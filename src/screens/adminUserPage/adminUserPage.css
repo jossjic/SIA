@@ -1,6 +1,6 @@
 .tableContainer {
     width: 82%;
-    max-height: 540px;
+    max-height: 640px;
     overflow-y: scroll;
     background-color: #d9d9d9;
 }
@@ -27,13 +27,26 @@
 .userTable th, .userTable td {
     text-align: center;
     padding: 20px;
-    border-bottom: 1px solid #ddd;
 }
 
 .userTable th {
-    background-color: #f2f2f234;
+    background-color: #b0acac;
     font-weight: bold;
+    position: sticky;
+    top: 0; /* Mantiene los encabezados en la parte superior */
+    z-index: 10; /* Asegura que los encabezados están sobre otros elementos */
 }
+
+.userTable tbody tr:hover {
+    background-color: #f9f9f9; /* Color suave para la selección de fila */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra para dar efecto de elevación */
+    cursor: pointer; 
+}
+
+.userTable tbody tr:last-child:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2), 0 -2px 6px rgba(0,0,0,0.1); /* Menos intensidad de sombra hacia abajo */
+}
+
 
 /* Estilos para los botones dentro de la tabla */
 .userTable .add {
