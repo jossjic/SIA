@@ -3,6 +3,8 @@
     max-height: 640px;
     overflow-y: scroll;
     background-color: #d9d9d9;
+    border-radius: 30px; /* Agrega border radius */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
 }
 
 .userPage {
