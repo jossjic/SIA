@@ -50,6 +50,7 @@ export function SearchBar({
             deleteActive ? "active-delete" : ""
           }`}
           onClick={onDeleteSelected}
+          disabled={deleteCartNumber === 0}
         >
           <img className="trashIconPhoto" src={trashIcon} alt="Delete" />
         </button>
