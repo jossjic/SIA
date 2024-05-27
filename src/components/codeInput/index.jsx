@@ -13,7 +13,7 @@ export function CodeInput({ onComplete }) {
     if (value !== '' && index < 4) {
       inputRefs[index + 1].current.focus();
     }
-    if (index === 4) {
+    if (index === 4 && newCodes.join('').length === 5) {
       onComplete(newCodes.join(''));
     }
   };
@@ -25,7 +25,7 @@ export function CodeInput({ onComplete }) {
   };
 
   return (
-    <div>
+    <div className="code-input-container">
       {codes.map((code, index) => (
         <input
           key={index}

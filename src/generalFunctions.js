@@ -48,6 +48,7 @@ export const logout = (navigate) => {
     // Eliminar las cookies del documento
     document.cookie = "userCookieSIA=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
     localStorage.removeItem("userId");
+    localStorage.removeItem("userRol");
     // Redirigir al usuario a la página de inicio de sesión
     navigate("/login");
 

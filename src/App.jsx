@@ -18,9 +18,9 @@ import { NewPass } from "./screens/newPass";
 import { EditUser } from "./screens/editUser";
 import { AddDate } from "./screens/addDate";
 import { UserDetails } from "./screens/userDetails";
-
+import {ProtectedRoute} from "./components/ProtectedRoute";
 import { useState } from "react";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+
 
 function App() {
   const [selectedIds, setSelectedIds] = useState([]);
@@ -32,43 +32,85 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={
-          
-          <ProtectedRoute></ProtectedRoute>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/layout" element={<Layout />} />
-          <Route path="/mainPage" element={
+          <ProtectedRoute>
             <MainPage />
+          </ProtectedRoute>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/mainPage" element={
+            <ProtectedRoute>
+              <MainPage />
+            </ProtectedRoute>
           } />
-          <Route path="/adminUserPage" element={<UserPage />} />
+          <Route path="/adminUserPage" element={
+            <ProtectedRoute>
+              <UserPage />
+            </ProtectedRoute>
+            } />
           <Route
             path="/adminPage"
             element={
-              <AdminPage
-                selectedIds={selectedIds}
-                setSelectedIds={setSelectedIds}
-              />
+              <ProtectedRoute>
+                <AdminPage
+                  selectedIds={selectedIds}
+                  setSelectedIds={setSelectedIds}
+                />
+              </ProtectedRoute>
             }
           />
           <Route
             path="/checkDateDelete"
-            element={<CheckDateDelete selectedIds={selectedIds} setSelectedIds={setSelectedIds} />}
-        />
+            element={
+              <ProtectedRoute>
+                <CheckDateDelete selectedIds={selectedIds} setSelectedIds={setSelectedIds} />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/checkDateDelete"
-            element={<CheckDateDelete selectedIds={selectedIds} />}
+            element={
+              <ProtectedRoute>
+                <CheckDateDelete selectedIds={selectedIds} />
+              </ProtectedRoute>
+            }
           />
-          <Route path="/createUser" element={<CreateUser />} />
+          <Route path="/createUser" element={
+            <ProtectedRoute>
+              <CreateUser />
+            </ProtectedRoute>
+          } />
           <Route path="/restorePass" element={<RestorePass />} />
-          <Route path="/createUser" element={<CreateUser />} />
-          <Route path="/addProduct" element={<AddProduct />} />
-          <Route path="/editProduct/:a_id" element={<EditProduct />} />
+          <Route path="/createUser" element={
+            <ProtectedRoute>
+              <CreateUser />
+            </ProtectedRoute>
+          } />
+          <Route path="/addProduct" element={
+            <ProtectedRoute>
+              <AddProduct />
+            </ProtectedRoute>  
+          } />
+          <Route path="/editProduct/:a_id" element={
+            <ProtectedRoute>
+              <EditProduct />  
+            </ProtectedRoute>
+          } />
           <Route path="/codePage" element={<CodePage />} />
           <Route path="/newPass" element={<NewPass />} />
-          <Route path="/editUser/:u_id" element={<EditUser />} />
-          <Route path="/addDate/:a_id" element={<AddDate />} />
-          <Route path="/userDetails/:id" element={<UserDetails />} />
-
-
+          <Route path="/editUser/:u_id" element={
+            <ProtectedRoute>
+              <EditUser />  
+            </ProtectedRoute>
+          } />
+          <Route path="/addDate/:a_id" element={
+            <ProtectedRoute>
+              <AddDate />
+            </ProtectedRoute>
+          } />
+          <Route path="/userDetails/:id" element={
+            <ProtectedRoute>
+              <UserDetails />
+            </ProtectedRoute>
+          } />
         </Routes>
       </Router>
     </div>

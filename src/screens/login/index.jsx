@@ -45,17 +45,19 @@ export const Login = () => {
           
           // Guardar el valor en las cookies con la fecha de expiración y la ruta especificada
           document.cookie = `userCookieSIA=${myValue}; expires=${expiresFormatted}; path=/`;
-          
-          // Verificar que el valor se haya guardado correctamente en las cookies
-          console.log("Valor guardado en las cookies:", myValue);
-          localStorage.setItem("userId", id);
-
-          navigate("/mainPage");
+          return response.json(); // Convertir la respuesta a JSON
         } else if (response.status === 401) {
           setErrorMessage("Usuario o contraseña incorrectos");
         } else {
           throw new Error("Error de servidor");
         }
+      })
+      .then((data) => {
+        // Guardar el userId y userRol en el almacenamiento local
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("userRol", data.userRol);
+        
+        navigate("/mainPage");
       })
       .catch((error) => {
         setErrorMessage(error.message);
