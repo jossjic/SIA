@@ -13,6 +13,7 @@ export const EditUser = () => {
     const navigate = useNavigate();
     const [confirmUpdateOpen, setConfirmUpdateOpen] = useState(false);
     const [updateSuccessOpen, setUpdateSuccessOpen] = useState(false); 
+    const [error, setError] = useState("");
     const [formData, setFormData] = useState({
        u_nombre: "",
        u_apellidos: "",
@@ -55,6 +56,8 @@ export const EditUser = () => {
     };
 
     const handleSubmit = async () => {
+            if (!validateForm()) return;
+
         try {
             console.log(formData);
             const response = await fetch(`http://3.144.175.151:3000/usuarios/${u_id}`, {
@@ -75,6 +78,19 @@ export const EditUser = () => {
         setConfirmUpdateOpen(false);
         setUpdateSuccessOpen(true);
     };
+
+    const validateForm = () => {
+    
+        // Validar el correo electrónico
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.u_email)) {
+          setError("Ingrese un correo electrónico válido.");
+          return false;
+        }  
+    
+        setError("");
+        return true;
+      };
 
     return (
         <div className="editUser">
@@ -104,6 +120,8 @@ export const EditUser = () => {
                         onChange={handleChange}
                     />
                 </div>
+                <br />
+                {error && <p style={{ color: "red" }}>{error}</p>}
                 <GeneralButton
                     textElement="Editar"
                     color="#5982C0"
