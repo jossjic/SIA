@@ -133,7 +133,6 @@ export const CreateUser = () => {
             onChange={handleChange}
           />
         </div>
-        <br />
         {error && <p style={{ color: "red" }}>{error}</p>}
         <GeneralButton textElement="Crear usuario" onClick={handleSubmit} />
       </div>

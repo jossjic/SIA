@@ -1,5 +1,36 @@
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+export const ProtectedRoute = ({ children }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkSession = () => {
+      const isAuthenticated = document.cookie.includes("userCookieSIA");
+
+      setIsLoading(false);
+
+      if (!isAuthenticated) {
+        // Aquí puedes manejar la lógica para cuando el usuario no está autenticado
+        navigate("/login");
+      } else {
+        const userCookieValue = getCookieValue("userCookieSIA");
+        localStorage.setItem("userId", userCookieValue);
+      }
+    };
+
+    checkSession();
+  }, []);
+
+  if (isLoading) {
+    // Indicador de carga mientras se verifica la sesión
+    return <div>Loading...</div>;
+  }
+
+  // Si hay una sesión activa, renderizar el contenido protegido
+  return children;
+};
 
 function getCookieValue(cookieName) {
   // Separamos las cookies por punto y coma para obtener un array de cookies
@@ -17,41 +48,3 @@ function getCookieValue(cookieName) {
   // Si no encontramos la cookie, devolvemos null
   return null;
 }
-
-export const ProtectedRoute = ({ children, redirectTo = "/mainPage" }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [redirectPath, setRedirectPath] = useState(null);
-
-  useEffect(() => {
-    const checkSession = () => {
-      const isAuthenticated = document.cookie.includes("userCookieSIA=");
-
-      setIsLoading(false);
-
-      if (!isAuthenticated) {
-        // Si no se encuentra la cookie, establecer la ruta de redirección
-        setRedirectPath("/login");
-      } else {
-        const userCookieValue = getCookieValue("userCookieSIA");
-        localStorage.setItem("userId", userCookieValue);
-        
-        setRedirectPath(redirectTo);
-      }
-    };
-
-    checkSession();
-  }, [redirectTo]);
-
-  if (isLoading) {
-    // Indicador de carga mientras se verifica la sesión
-    return <div>Loading...</div>;
-  }
-
-  // Si se establece la ruta de redirección, redirigir al usuario
-  if (redirectPath) {
-    return <Navigate to={redirectPath} />;
-  }
-
-  // Si hay una sesión activa, renderizar el contenido protegido
-  return children;
-};

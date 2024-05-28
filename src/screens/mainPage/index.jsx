@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./mainPage.css";
 import { Guide } from "../../components/guide";
 import { GeneralButton } from "../../components/button";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { logout } from "../../generalFunctions";
+import { useNavigate } from "react-router-dom";
 
 export const MainPage = () => {
   const [alimentos, setAlimentos] = useState([]);
-  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const userRol = localStorage.getItem("userRol"); // Obtener el userRol del almacenamiento local
+  const navigate = useNavigate();
 
   // Función para cargar los datos de la db
   useEffect(() => {
@@ -92,10 +92,12 @@ export const MainPage = () => {
       </div>
       <div className="buttonContainer">
         <GeneralButton textElement="Administrar alimentos" path="/adminPage" />
-        <GeneralButton
-          textElement="Administrar usuarios"
-          path="/adminUserPage"
-        />
+        {userRol === "1" && ( // Condicionar la renderización del botón en función de userRol
+          <GeneralButton
+            textElement="Administrar usuarios"
+            path="/adminUserPage"
+          />
+        )}
         <GeneralButton
           textElement="Cerrar sesión"
           onClick={() => setIsModalOpen(true)}

@@ -3,9 +3,7 @@
   padding: 20px;
   max-width: 960px;
   margin: 20px auto;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  border-radius: 8px;
-  background-color: #fff;
+  
 }
 
 .transaccionesUsuario h1 {
@@ -22,6 +20,8 @@
   display: block; /* Cambio clave para permitir scroll */
   max-height: 550px; /* Altura máxima antes de que el scroll aparezca */
   overflow-y: auto; /* Habilita el scroll vertical */
+  border-radius: 30px; /* Agrega border radius */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
 }
 
 .transaccionesUsuario th, .transaccionesUsuario td {

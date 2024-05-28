@@ -8,6 +8,11 @@
   gap: 20px;
 }
 
+.new .info-banner{
+  height: 100px;
+  width: 100%;
+}
+
 .login-container {
   background-color: #f2f2f2;
   display: flex;

@@ -4,6 +4,7 @@ import { Guide } from '../../components/guide';
 import { GeneralButton } from '../../components/button';
 import emailjs from 'emailjs-com';
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
+import { LoadingSpinner } from '../../components/loadingSpinner';
 import { useNavigate } from 'react-router-dom';
 
 export const RestorePass = () => {
@@ -12,55 +13,90 @@ export const RestorePass = () => {
   const [code, setCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);  // Estado para manejar la animación de carga
   const navigate = useNavigate();
-  const handleOkClick = () => {
-    setIsModalOpen(false);
-    navigate("/codePage"); 
-  };
 
-  // función para generar un código aleatorio de 5 dígitos
+  // Función para generar un código aleatorio de 5 dígitos
   const generateRandomCode = () => {
     const randomCode = Math.floor(10000 + Math.random() * 90000);
-    return randomCode.toString(); 
+    return randomCode.toString();
   };
 
-  // funcion para realizar la confirmacion del movimiento
+  // Función para manejar el clic de recuperación
   const handleRecoveryClick = async (event) => {
-    event.preventDefault(); // Evita que el formulario se envíe por defecto
+    event.preventDefault();
     setErrorMessage('');
+    setIsLoading(true);  // Mostrar animación de carga
 
     if (!email || !confirmEmail) {
       setErrorMessage('Por favor completa todos los campos');
+      setIsLoading(false);  // Ocultar animación de carga
       return;
     }
 
     if (email !== confirmEmail) {
       setErrorMessage('Los correos electrónicos no coinciden');
+      setIsLoading(false);  // Ocultar animación de carga
       return;
     }
 
-    const generatedCode = generateRandomCode(); 
-    setCode(generatedCode); 
+    // Verificar si el correo existe en la base de datos
+    try {
+      const response = await fetch(`http://3.144.175.151:3000/usuarios/verificar-email/${email}`);
+      if (response.status === 404) {
+        setErrorMessage('Correo no registrado');
+        setIsLoading(false);  // Ocultar animación de carga
+        return;
+      }
+      if (!response.ok) {
+        setErrorMessage('Error al verificar el correo');
+        setIsLoading(false);  // Ocultar animación de carga
+        return;
+      }
+    } catch (error) {
+      console.error('Error al verificar el correo:', error);
+      setErrorMessage('Error de servidor');
+      setIsLoading(false);  // Ocultar animación de carga
+      return;
+    }
+
+    const generatedCode = generateRandomCode();
+    setCode(generatedCode);
 
     const templateParams = {
       user_email: email,
-      code: generatedCode, 
+      code: generatedCode,
     };
+
+    const myValue = generatedCode;
+    const now = new Date();
+    const expires = new Date(now.getTime() + 5 * 60 * 1000); 
+    const expiresFormatted = expires.toUTCString();
+    document.cookie = `passCookieSIA=${myValue}; expires=${expiresFormatted}; path=/`;
 
     try {
       const response = await emailjs.send("service_touk674", "template_zisnua5", templateParams, "ItP7OTaI2vAb03jHA");
       console.log('Correo enviado con éxito:', response);
-      setIsModalOpen(true); 
+      sessionStorage.setItem("email", email);
+      setIsModalOpen(true);
     } catch (error) {
       console.error('Error al enviar el correo:', error);
       setErrorMessage('Error al enviar el correo');
+    } finally {
+      setIsLoading(false);  // Ocultar animación de carga
     }
+  };
+
+  const handleOkClick = () => {
+    setIsModalOpen(false);
+    navigate("/codePage");
   };
 
   return (
     <div className="restore">
-      <div className="mensaje"> 
-        <Guide message="Bienvenid@ Introduce el correo electrónico de la cuenta para recuperarla" size={130}/>      
+      {isLoading && <LoadingSpinner />}  
+      <div className="mensaje">
+        <Guide message="Bienvenid@ Introduce el correo electrónico de la cuenta para recuperarla" size={130}/>
       </div>
       <div className='login-container'>
         <form className="logInput" onSubmit={handleRecoveryClick}>
