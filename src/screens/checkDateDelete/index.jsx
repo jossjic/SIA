@@ -117,7 +117,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
         },
         body: JSON.stringify({
           a_id: id,
-          u_id: "luit",
+          u_id: localStorage.getItem("userId"),
           actionType: 1,
           quantity: products.find((product) => product.a_id === id).a_stock,
         }),

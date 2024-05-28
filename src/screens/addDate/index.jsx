@@ -144,7 +144,7 @@ export function AddDate() {
               },
               body: JSON.stringify({
                 a_id: entry.a_id,
-                u_id: "luit",
+                u_id: localStorage.getItem("userId"),
                 actionType: 1,
                 quantity: entry.a_stock,
               }),
