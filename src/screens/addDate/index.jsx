@@ -23,6 +23,7 @@ export function AddDate() {
     a_fechaCaducidad: null,
     um_id: "g",
     m_id: 0,
+    u_id: localStorage.getItem("userId"),
   });
 
   const [marca, setMarca] = useState ({
@@ -55,6 +56,7 @@ export function AddDate() {
           a_fechaCaducidad: productData.a_fechaCaducidad,
           um_id: productData.um_id,
           m_id: productData.m_id,
+          u_id: localStorage.getItem("userId"),
         });
 
         setMarca({
@@ -122,7 +124,7 @@ export function AddDate() {
             a_fechaCaducidad: entry.a_fechaCaducidad,
             a_stock: entry.a_stock,
           };
-  
+
           const response = await fetch("http://3.144.175.151:3000/alimentos", {
             method: "POST",
             headers: {
@@ -130,38 +132,12 @@ export function AddDate() {
             },
             body: JSON.stringify(updatedFormData),
           });
-  
+
           if (!response.ok) {
             throw new Error("Error al agregar el alimento");
           }
-  
-          // Crear promesas para cada entrada en 'entries'
-          const addDatePromises = entries.map((entry) =>
-            fetch(`http://3.144.175.151:3000/usuarios/stock/`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                a_id: entry.a_id,
-                u_id: localStorage.getItem("userId"),
-                actionType: 1,
-                quantity: entry.a_stock,
-              }),
-            })
-          );
-  
-          // Esperar que todas las promesas se resuelvan
-          const addDateResponses = await Promise.all(addDatePromises);
-  
-          // Verificar si alguna de las respuestas no es ok
-          for (const addDateResponse of addDateResponses) {
-            if (!addDateResponse.ok) {
-              throw new Error("Error al agregar el stock de alimento");
-            }
-          }
         }
-  
+
         // Manejar el éxito de la inserción
         console.log("Alimentos agregados correctamente");
         setShowSuccessPopup(true);
@@ -170,9 +146,6 @@ export function AddDate() {
       }
     }
   };
-  
-
-
 
   const handlePopupClose = () => {
     setShowSuccessPopup(false); // Ocultar el Popup de éxito
