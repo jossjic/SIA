@@ -108,57 +108,57 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
     );
   };
 
-  const handleDeleteSelected = () => {
-    const updateStockPromises = selectedIds.map((id) =>
-      fetch(`http://3.144.175.151:3000/usuarios/stock/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          a_id: id,
-          u_id: localStorage.getItem("userId"),
-          actionType: 1,
-          quantity: products.find((product) => product.a_id === id).a_stock,
-        }),
-      })
-    );
+  const handleDeleteSelected = async () => {
+    try {
+      const updateStockPromises = selectedIds.map((id) =>
+        fetch(`http://3.144.175.151:3000/usuarios/stock/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            a_id: id,
+            u_id: localStorage.getItem("userId"),
+            actionType: 1,
+            quantity: products.find((product) => product.a_id === id).a_stock,
+          }),
+        })
+      );
 
-    const deleteProductPromises = selectedIds.map((id) =>
-      fetch(`http://3.144.175.151:3000/alimentos/stock/${id}`, {
-        method: "DELETE",
-      })
-    );
+      const deleteProductPromises = selectedIds.map((id) =>
+        fetch(`http://3.144.175.151:3000/alimentos/stock/${id}`, {
+          method: "DELETE",
+        })
+      );
 
-    const logDeleteActionPromises = selectedIds.map((id) =>
-      fetch(`http:// 3.144.175.151:3000/alimentos/out/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ a_fechaSalida: formatDate(new Date()) }),
-      })
-    );
+      const logDeleteActionPromises = selectedIds.map((id) =>
+        fetch(`http://3.144.175.151:3000/alimentos/out/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ a_fechaSalida: formatDate(new Date()) }),
+        })
+      );
 
-    const deleteProductPromises2 = selectedIds.map((id) =>
-      fetch(`http://3.144.175.151:3000/alimentos/out/${id}`, {
-        method: "DELETE",
-      })
-    );
+      const deleteProductPromises2 = selectedIds.map((id) =>
+        fetch(`http://3.144.175.151:3000/alimentos/out/${id}`, {
+          method: "DELETE",
+        })
+      );
 
-    Promise.all([
-      ...updateStockPromises,
-      ...deleteProductPromises,
-      ...logDeleteActionPromises,
-      ...deleteProductPromises2,
-    ])
-      .then(() => {
-        setConfirmDeleteOpen(false);
-        setDeleteSuccessOpen(true);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+      await Promise.all([
+        ...updateStockPromises,
+        ...deleteProductPromises,
+        ...logDeleteActionPromises,
+        ...deleteProductPromises2,
+      ]);
+
+      setConfirmDeleteOpen(false);
+      setDeleteSuccessOpen(true);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handleSuccessClose = () => {
