@@ -23,7 +23,7 @@
 .calendarD-inputD-containerD label {
   font-weight: normal;
   font-size: large;
-  background-color: #f2f2f2;
+  background-color: var(--white-background);
   margin: 0;
   padding-bottom: 5px;
 }

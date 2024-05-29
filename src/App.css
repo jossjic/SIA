@@ -1,3 +1,15 @@
+:root {
+  --white-background: var(--white-background);
+  --color-success: #28a745;
+  --color-info: #17a2b8;
+  --color-warning: #ffc107;
+  --color-danger: #dc3545;
+  --color-light: #f8f9fa;
+  --color-dark: #343a40;
+  --color-white: #fff;
+  --color-black: #000;
+}
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -142,4 +154,3 @@ body {
   align-items: center;
   height: 100%; /* Ocupa el 100% de la altura de la ventana */
 }
-

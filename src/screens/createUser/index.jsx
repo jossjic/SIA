@@ -13,7 +13,7 @@ export const CreateUser = () => {
     u_nombre: "",
     u_apellidos: "",
     u_email: "",
-    u_contraseña: "",
+    u_pass: "",
     u_rol: 0,
   });
   const [error, setError] = useState("");
@@ -35,7 +35,7 @@ export const CreateUser = () => {
       !formData.u_nombre ||
       !formData.u_apellidos ||
       !formData.u_email ||
-      !formData.u_contraseña
+      !formData.u_pass
     ) {
       setError("Por favor, complete todos los campos obligatorios.");
       return false;
@@ -56,7 +56,7 @@ export const CreateUser = () => {
 
     // Validar la contraseña
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,15}$/;
-    if (!passwordRegex.test(formData.u_contraseña)) {
+    if (!passwordRegex.test(formData.u_pass)) {
       setError(
         "La contraseña debe tener entre 5 y 15 caracteres, al menos una letra mayúscula, una letra minúscula, un dígito y no debe contener espacios en blanco."
       );
@@ -134,9 +134,9 @@ export const CreateUser = () => {
           />
           <TextInput
             label="Contraseña"
-            name="u_contraseña"
+            name="u_pass"
             type="password"
-            value={formData.u_contraseña}
+            value={formData.u_pass}
             onChange={handleChange}
           />
         </div>

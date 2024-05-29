@@ -58,7 +58,7 @@ app.post("/login", (req, res) => {
         .update(password)
         .digest("hex");
 
-      if (userData.u_contraseña === hashedPassword) {
+      if (userData.u_pass === hashedPassword) {
         // Establecer la sesión del usuario
         req.session.userId = userData.u_id;
         res.sendStatus(200);
@@ -743,15 +743,15 @@ app.get("/usuarios/:id", (req, res) => {
 
 // Agregar un nuevo usuario
 app.post("/usuarios", (req, res) => {
-  const { u_id, u_nombre, u_apellidos, u_email, u_contraseña } = req.body;
+  const { u_id, u_nombre, u_apellidos, u_email, u_pass } = req.body;
 
   const hashedContraseña = crypto
     .createHash("sha256")
-    .update(u_contraseña)
+    .update(u_pass)
     .digest("hex");
 
   connection.query(
-    "INSERT INTO Usuario (u_id, u_nombre, u_apellidos, u_email, u_contraseña) VALUES (?, ?, ?, ?, ?)",
+    "INSERT INTO Usuario (u_id, u_nombre, u_apellidos, u_email, u_pass) VALUES (?, ?, ?, ?, ?)",
     [u_id, u_nombre, u_apellidos, u_email, hashedContraseña],
     (err, result) => {
       if (err) {
@@ -814,7 +814,7 @@ app.put("/usuarios/:id/contraseña", (req, res) => {
 
   // Ejecutar la consulta para actualizar la contraseña del usuario
   connection.query(
-    "UPDATE Usuario SET u_contraseña = ? WHERE u_id = ?",
+    "UPDATE Usuario SET u_pass = ? WHERE u_id = ?",
     [hashedNuevaContraseña, id],
     (err, result) => {
       if (err) {

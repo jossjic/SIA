@@ -8,13 +8,13 @@
   gap: 20px;
 }
 
-.restore .info-banner{
+.restore .info-banner {
   height: 100px;
   width: 90%;
 }
 
 .login-container {
-  background-color: #f2f2f2;
+  background-color: var(--white-background);
   display: flex;
   flex-direction: column;
   align-items: center;

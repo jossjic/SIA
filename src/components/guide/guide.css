@@ -15,7 +15,7 @@
   height: 100%;
   font-size: 100%;
   font-weight: 700;
-  background-color: #f0f0f0;
+  background-color: var(--white-background);
   text-align: center;
   overflow: hidden; /* Asegura que el contenido no se salga del contenedor */
   box-sizing: border-box; /* Incluye padding y border en el tamaño total del elemento */

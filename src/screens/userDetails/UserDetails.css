@@ -3,13 +3,12 @@
   padding: 20px;
   max-width: 960px;
   margin: 20px auto;
-  
 }
 
 .transaccionesUsuario h1 {
   color: #1a1a1a;
   text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin-bottom: 40px;
   font-size: 34px;
 }
@@ -24,14 +23,15 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
 }
 
-.transaccionesUsuario th, .transaccionesUsuario td {
+.transaccionesUsuario th,
+.transaccionesUsuario td {
   text-align: left;
   padding: 12px 15px;
   border-bottom: 1px solid #ddd;
 }
 
 .transaccionesUsuario th {
-  background-color: #f0f0f0;
+  background-color: var(--white-background);
   color: #333;
   font-weight: 500;
   position: sticky;

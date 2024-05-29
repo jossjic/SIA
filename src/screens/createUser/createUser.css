@@ -7,24 +7,24 @@
   margin-top: 50px;
 }
 
-.createUser .textInput{
+.createUser .textInput {
   width: 100%;
 }
 
-.createUser label{
+.createUser label {
   padding-top: 20px;
 }
 
-.createUser .info-banner{
-height: 60%;
+.createUser .info-banner {
+  height: 60%;
 }
 
-.createUser .returnButtonContaine{
-  width: 100%;;
+.createUser .returnButtonContaine {
+  width: 100%;
 }
 
 .createUser-container {
-  background-color: #f2f2f2;
+  background-color: var(--white-background);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,7 +48,7 @@ height: 60%;
 }
 
 .createInput {
-  background-color: #f2f2f2;
+  background-color: var(--white-background);
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -58,11 +58,11 @@ height: 60%;
 .createInput p {
   font-weight: normal;
   font-size: large;
-  background-color: #f2f2f2;
+  background-color: var(--white-background);
 }
 
 .createInput input {
-  background-color: #f2f2f2;
+  background-color: var(--white-background);
   color: black;
   border: none;
   height: 40px;

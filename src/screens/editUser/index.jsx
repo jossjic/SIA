@@ -18,7 +18,7 @@ export const EditUser = () => {
     u_nombre: "",
     u_apellidos: "",
     u_email: "",
-    u_contraseña: "",
+    u_pass: "",
     u_rol: 0,
   });
 
@@ -31,7 +31,7 @@ export const EditUser = () => {
           u_nombre: userData.u_nombre,
           u_apellidos: userData.u_apellidos,
           u_email: userData.u_email,
-          u_contraseña: userData.u_contraseña,
+          u_pass: userData.u_pass,
           u_rol: userData.u_rol,
         });
         console.log(userData);
