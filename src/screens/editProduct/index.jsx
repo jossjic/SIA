@@ -27,19 +27,18 @@ export function EditProduct() {
     m_id: 0,
   });
   const [validationMessage, setValidationMessage] = useState("");
-  const [individualValidationMessage, setIndividualValidationMessage] = useState({
-    productValidationMessage: "",
-    stockValidationMessage: "",
-    expirationDateValidationMessage: "",
-    quantityValidationMessage: "",
-  });
+  const [individualValidationMessage, setIndividualValidationMessage] =
+    useState({
+      productValidationMessage: "",
+      stockValidationMessage: "",
+      expirationDateValidationMessage: "",
+      quantityValidationMessage: "",
+    });
 
   useEffect(() => {
     async function fetchProductData() {
       try {
-        const response = await fetch(
-          `http://3.144.175.151:3000/alimentos/${a_id}`
-        );
+        const response = await fetch(`http://localhost:3001/alimentos/${a_id}`);
         const productData = await response.json();
         setFormData({
           a_nombre: productData.a_nombre,
@@ -77,18 +76,24 @@ export function EditProduct() {
       });
       return false;
     } else if (formData.a_nombre.length > 40) {
-      setValidationMessage("El nombre del producto es muy largo (máximo 40 caracteres).");
+      setValidationMessage(
+        "El nombre del producto es muy largo (máximo 40 caracteres)."
+      );
       setIndividualValidationMessage({
-        productValidationMessage: "El nombre del producto es muy largo (máximo 40 caracteres).",
+        productValidationMessage:
+          "El nombre del producto es muy largo (máximo 40 caracteres).",
         stockValidationMessage: "",
         expirationDateValidationMessage: "",
         quantityValidationMessage: "",
       });
       return false;
     } else if (formData.a_nombre.length < 2) {
-      setValidationMessage("El nombre del producto es muy corto (mínimo 2 caracteres).");
+      setValidationMessage(
+        "El nombre del producto es muy corto (mínimo 2 caracteres)."
+      );
       setIndividualValidationMessage({
-        productValidationMessage: "El nombre del producto es muy corto (mínimo 2 caracteres).",
+        productValidationMessage:
+          "El nombre del producto es muy corto (mínimo 2 caracteres).",
         stockValidationMessage: "",
         expirationDateValidationMessage: "",
         quantityValidationMessage: "",
@@ -96,7 +101,9 @@ export function EditProduct() {
       return false;
     } else if (!/^[A-Z][a-z]*(\s[A-Z][a-z]*)*$/.test(formData.a_nombre)) {
       let words = formData.a_nombre.split(" ");
-      let newWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+      let newWords = words.map(
+        (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      );
       setFormData((prevData) => ({
         ...prevData,
         a_nombre: newWords.join(" "),
@@ -154,12 +161,15 @@ export function EditProduct() {
       });
       return false;
     } else if (!/^\d{1,13}(\.\d{1,3})?$/.test(formData.a_cantidad)) {
-      setValidationMessage("La cantidad no es válida (máximo 13 enteros y 3 decimales).");
+      setValidationMessage(
+        "La cantidad no es válida (máximo 13 enteros y 3 decimales)."
+      );
       setIndividualValidationMessage({
         productValidationMessage: "",
         stockValidationMessage: "",
         expirationDateValidationMessage: "",
-        quantityValidationMessage: "La cantidad no es válida (máximo 13 enteros y 3 decimales).",
+        quantityValidationMessage:
+          "La cantidad no es válida (máximo 13 enteros y 3 decimales).",
       });
       setFormData((prevData) => ({ ...prevData, a_cantidad: 0 }));
       return false;
@@ -199,16 +209,13 @@ export function EditProduct() {
     if (!validateForm()) return;
 
     try {
-      const response = await fetch(
-        `http://3.144.175.151:3000/alimentos/${a_id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`http://localhost:3001/alimentos/${a_id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (!response.ok) {
         throw new Error("Error al editar el alimento");
@@ -224,7 +231,7 @@ export function EditProduct() {
       };
 
       const stockResponse = await fetch(
-        "http://3.144.175.151:3000/usuarios/stock/",
+        "http://localhost:3001/usuarios/stock/",
         {
           method: "POST",
           headers: {
@@ -250,7 +257,7 @@ export function EditProduct() {
         <Guide message="Asegúrate de rellenar todos los campos." />
         <ReturnButton textElement="Editar Producto Existente" />
       </div>
-  
+
       <div className="editProductContainer">
         <div className="inputContainer">
           <TextInput
@@ -260,7 +267,7 @@ export function EditProduct() {
             value={formData.a_nombre}
             onChange={handleChange}
           />
-  
+
           <DropDown
             title="Marca (Opcional)"
             name="m_id"
@@ -271,7 +278,7 @@ export function EditProduct() {
             key={1}
             optional={true}
           />
-  
+
           <TextInput
             label="Stock"
             placeholder="Ej. 10"
@@ -279,13 +286,17 @@ export function EditProduct() {
             value={formData.a_stock}
             onChange={handleChange}
           />
-  
+
           <CalendarInput
             name="a_fechaCaducidad"
-            value={formData.a_fechaCaducidad instanceof Date ? formatDate(formData.a_fechaCaducidad) : formData.a_fechaCaducidad}
+            value={
+              formData.a_fechaCaducidad instanceof Date
+                ? formatDate(formData.a_fechaCaducidad)
+                : formData.a_fechaCaducidad
+            }
             onChange={handleChange}
           />
-  
+
           <TextInput
             label="Cantidad"
             placeholder="Ej. 200"
@@ -293,7 +304,7 @@ export function EditProduct() {
             value={formData.a_cantidad}
             onChange={handleChange}
           />
-  
+
           <DropDown
             title="Unidad de medida (para cantidad)"
             name="um_id"
@@ -304,27 +315,30 @@ export function EditProduct() {
             key={2}
           />
         </div>
-  
+
         {validationMessage && (
           <div className="errorMessage">{validationMessage}</div>
         )}
-        
-        <br/>
-        <br/>
+
+        <br />
+        <br />
         <GeneralButton
           textElement="Guardar"
           color="#5982C0"
           onClick={handleSubmit}
         />
       </div>
-  
+
       {isModalOpen && (
         <div className="modalOverlayConf">
           <ConfirmationPopUp
             message="Alimento editado correctamente"
             answer1="Ok"
             isOpen={isModalOpen}
-            closeModal={() => { setIsModalOpen(false); navigate("/adminPage"); }}
+            closeModal={() => {
+              setIsModalOpen(false);
+              navigate("/adminPage");
+            }}
           />
         </div>
       )}

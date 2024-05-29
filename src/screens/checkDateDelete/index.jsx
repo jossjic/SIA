@@ -31,7 +31,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
       params.append("ids", id);
     });
 
-    fetch(`http://3.144.175.151:3000/alimentos/checkDate?${params.toString()}`)
+    fetch(`http://localhost:3001/alimentos/checkDate?${params.toString()}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al obtener los productos");
@@ -64,7 +64,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
   useEffect(() => {
     const fetchDates = async () => {
       const promises = ids.map((id) => {
-        return fetch(`http://3.144.175.151:3000/alimentos/atun/${id}`)
+        return fetch(`http://localhost:3001/alimentos/atun/${id}`)
           .then((response) => response.json())
           .then((data) => ({ [id]: data }));
       });
@@ -111,7 +111,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
   const handleDeleteSelected = async () => {
     try {
       const updateStockPromises = selectedIds.map((id) =>
-        fetch(`http://3.144.175.151:3000/usuarios/stock/`, {
+        fetch(`http://localhost:3001/usuarios/stock/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -126,13 +126,13 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
       );
 
       const deleteProductPromises = selectedIds.map((id) =>
-        fetch(`http://3.144.175.151:3000/alimentos/stock/${id}`, {
+        fetch(`http://localhost:3001/alimentos/stock/${id}`, {
           method: "DELETE",
         })
       );
 
       const logDeleteActionPromises = selectedIds.map((id) =>
-        fetch(`http://3.144.175.151:3000/alimentos/out/${id}`, {
+        fetch(`http://localhost:3001/alimentos/out/${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -142,7 +142,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
       );
 
       const deleteProductPromises2 = selectedIds.map((id) =>
-        fetch(`http://3.144.175.151:3000/alimentos/out/${id}`, {
+        fetch(`http://localhost:3001/alimentos/out/${id}`, {
           method: "DELETE",
         })
       );

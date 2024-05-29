@@ -27,7 +27,7 @@ export function DropDown({
   const [optionToRemove, setOptionToRemove] = useState({});
 
   useEffect(() => {
-    fetch(`http://3.144.175.151:3000/${tableName}`)
+    fetch(`http://localhost:3001/${tableName}`)
       .then((response) => response.json())
       .then((data) => {
         if (optional) {
@@ -94,7 +94,7 @@ export function DropDown({
       [label]: formattedInputValue,
     };
     setOptions([...options, newOption]);
-    fetch(`http://3.144.175.151:3000/${tableName}`, {
+    fetch(`http://localhost:3001/${tableName}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -103,7 +103,7 @@ export function DropDown({
     }).then((response) => {
       if (response.ok) {
         console.log("New option added successfully");
-        fetch(`http://3.144.175.151:3000/${tableName}`)
+        fetch(`http://localhost:3001/${tableName}`)
           .then((response) => response.json())
           .then((data) => {
             if (optional) {
@@ -120,7 +120,7 @@ export function DropDown({
     setOptions(
       options.filter((option) => option[name] !== optionToRemove[name])
     );
-    fetch(`http://3.144.175.151:3000/${tableName}/${optionToRemove[name]}`, {
+    fetch(`http://localhost:3001/${tableName}/${optionToRemove[name]}`, {
       method: "DELETE",
     }).then((response) => {
       if (response.ok) {

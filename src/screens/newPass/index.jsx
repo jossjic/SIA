@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Guide } from '../../components/guide';
-import { GeneralButton } from '../../components/button';
+import React, { useState } from "react";
+import { Guide } from "../../components/guide";
+import { GeneralButton } from "../../components/button";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import "./NewPass.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export const NewPass = () => {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -23,27 +23,34 @@ export const NewPass = () => {
     // Validar la contraseña según las reglas establecidas
     const isValidPassword = validatePassword(password);
     if (!isValidPassword) {
-      setErrorMessage("La contraseña debe tener entre 5 y 15 caracteres, al menos una letra mayúscula, una letra minúscula, y un dígito.");
+      setErrorMessage(
+        "La contraseña debe tener entre 5 y 15 caracteres, al menos una letra mayúscula, una letra minúscula, y un dígito."
+      );
       return;
     }
 
     // Aquí se realiza la solicitud al servidor para actualizar la contraseña
     try {
       const email = sessionStorage.getItem("email");
-      const response = await fetch(`http://3.144.175.151:3000/usuarios/${email}/pass`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ nueva_contraseña: password }),
-      });
+      const response = await fetch(
+        `http://localhost:3001/usuarios/${email}/pass`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ nueva_contraseña: password }),
+        }
+      );
       if (!response.ok) {
         throw new Error("Error al cambiar la contraseña");
       }
       setIsModalOpen(true);
     } catch (error) {
       console.error("Error al cambiar la contraseña:", error);
-      setErrorMessage("Error al cambiar la contraseña. Por favor, inténtalo de nuevo.");
+      setErrorMessage(
+        "Error al cambiar la contraseña. Por favor, inténtalo de nuevo."
+      );
     }
   };
 
@@ -59,25 +66,42 @@ export const NewPass = () => {
 
   return (
     <div className="new">
-      <div className="mensaje"> 
-        <Guide message="Ingresa la nueva contraseña" size={130}/>      
+      <div className="mensaje">
+        <Guide message="Ingresa la nueva contraseña" size={130} />
       </div>
-      <div className='login-container'>
+      <div className="login-container">
         <form className="logInput" onSubmit={handleSubmit}>
           <p>Nueva contraseña</p>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <p>Confirmar nueva contraseña</p>
-          <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
           {errorMessage && <p className="error-message">{errorMessage}</p>}
-          <div className='buttonContainer'>
-            <GeneralButton textElement="Confirmar" type="submit" color='#4FA725'/>
+          <div className="buttonContainer">
+            <GeneralButton
+              textElement="Confirmar"
+              type="submit"
+              color="#4FA725"
+            />
             <GeneralButton textElement="Cancelar" path="/login" />
           </div>
         </form>
       </div>
       {isModalOpen && (
         <div className="modalOverlayConf">
-          <ConfirmationPopUp message="Contraseña actualizada." answer1="Ok" isOpen={isModalOpen} closeModal={handleOkClick} />
+          <ConfirmationPopUp
+            message="Contraseña actualizada."
+            answer1="Ok"
+            isOpen={isModalOpen}
+            closeModal={handleOkClick}
+          />
         </div>
       )}
     </div>

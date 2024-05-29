@@ -72,7 +72,7 @@ export function SelectDate({
 
     try {
       console.log(formData);
-      const response = await fetch("http://3.144.175.151:3000/alimentos", {
+      const response = await fetch("http://localhost:3001/alimentos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -182,7 +182,6 @@ export function SelectDate({
   );
 }
 
-
 export function SelectDateAddDate({
   unit,
   amount,
@@ -246,7 +245,7 @@ export function SelectDateAddDate({
 
     try {
       console.log(formData);
-      const response = await fetch("http://3.144.175.151:3000/alimentos", {
+      const response = await fetch("http://localhost:3001/alimentos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

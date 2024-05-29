@@ -5,7 +5,7 @@ import { Guide } from "../../components/guide";
 import { ReturnButton } from "../../components/returnButton";
 import { SearchBar } from "../../components/searchBar";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export const UserPage = () => {
   const [users, setUsers] = useState([]);
@@ -19,7 +19,7 @@ export const UserPage = () => {
   const [deleteError, setDeleteError] = useState(false);
 
   useEffect(() => {
-    fetch("http://3.144.175.151:3000/usuarios")
+    fetch("http://localhost:3001/usuarios")
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -45,7 +45,7 @@ export const UserPage = () => {
   const handleDeleteSelected = () => {
     Promise.all(
       selectedUserIds.map((id) =>
-        fetch(`http://3.144.175.151:3000/usuarios/${id}`, { method: "DELETE" })
+        fetch(`http://localhost:3001/usuarios/${id}`, { method: "DELETE" })
       )
     )
       .then(() => {
@@ -60,7 +60,7 @@ export const UserPage = () => {
   };
 
   const handleDelete = (userId) => {
-    fetch(`http://3.144.175.151:3000/usuarios/${userId}`, {
+    fetch(`http://localhost:3001/usuarios/${userId}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -95,18 +95,17 @@ export const UserPage = () => {
     navigate("/createuser");
   };
 
-
   const handleViewUser = (userId) => {
-    fetch(`http://3.144.175.151:3000/usuario-alimento/join/all/usuario/${userId}`)
-      .then(response => response.json())
-      .then(data => {
+    fetch(`http://localhost:3001/usuario-alimento/join/all/usuario/${userId}`)
+      .then((response) => response.json())
+      .then((data) => {
         if (data.length === 0) {
-          setDeleteError(true);  // Abre el modal indicando que no hay datos
+          setDeleteError(true); // Abre el modal indicando que no hay datos
         } else {
           navigate(`/userDetails/${userId}`);
         }
       })
-      .catch(error => console.error('Error:', error));
+      .catch((error) => console.error("Error:", error));
   };
 
   return (

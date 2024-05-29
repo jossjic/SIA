@@ -78,9 +78,7 @@ export function AddProduct() {
     }));
 
     if (value.trim() !== "") {
-      fetch(
-        `http://3.144.175.151:3000/alimentos/busqueda/nombre/total/${value}`
-      )
+      fetch(`http://localhost:3001/alimentos/busqueda/nombre/total/${value}`)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -280,7 +278,7 @@ export function AddProduct() {
       return;
     }
     try {
-      const response = await fetch("http://3.144.175.151:3000/alimentos", {
+      const response = await fetch("http://localhost:3001/alimentos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

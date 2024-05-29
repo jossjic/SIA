@@ -26,7 +26,7 @@ export function AddDate() {
     u_id: localStorage.getItem("userId"),
   });
 
-  const [marca, setMarca] = useState ({
+  const [marca, setMarca] = useState({
     m_nombre: "",
   });
 
@@ -42,7 +42,7 @@ export function AddDate() {
   useEffect(() => {
     async function fetchProductData() {
       try {
-        const response = await fetch(`http://3.144.175.151:3000/alimentos/${a_id}`);
+        const response = await fetch(`http://localhost:3001/alimentos/${a_id}`);
         if (!response.ok) {
           throw new Error("Error fetching product data");
         }
@@ -62,7 +62,6 @@ export function AddDate() {
         setMarca({
           m_nombre: productData.m_nombre,
         });
-
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
@@ -101,8 +100,10 @@ export function AddDate() {
     const formattedDate = inputValues.a_fechaCaducidad;
 
     // Check if the expiration date already exists in entries
-    if (entries.some(entry => entry.a_fechaCaducidad === formattedDate)) {
-      setErrorMessage("La fecha de caducidad ya existe, por favor, ingrese otra fecha");
+    if (entries.some((entry) => entry.a_fechaCaducidad === formattedDate)) {
+      setErrorMessage(
+        "La fecha de caducidad ya existe, por favor, ingrese otra fecha"
+      );
       return;
     }
 
@@ -111,7 +112,7 @@ export function AddDate() {
       { a_fechaCaducidad: formattedDate, a_stock: inputValues.a_stock },
     ]);
     setInputValues({ a_fechaCaducidad: "", a_stock: "" });
-    setResetKey(prevKey => prevKey + 1); // Change the resetKey to reset CalendarInputDate
+    setResetKey((prevKey) => prevKey + 1); // Change the resetKey to reset CalendarInputDate
     setErrorMessage("");
   };
 
@@ -125,7 +126,7 @@ export function AddDate() {
             a_stock: entry.a_stock,
           };
 
-          const response = await fetch("http://3.144.175.151:3000/alimentos", {
+          const response = await fetch("http://localhost:3001/alimentos", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -168,7 +169,12 @@ export function AddDate() {
       <div className="infoDA">
         <h2>Alimento seleccionado: </h2>
         <h3>
-          {formData.a_nombre + "ㅤㅤ" + formData.a_cantidad + formData.um_id + "ㅤㅤ" + (marca.m_nombre == null ? "Sin marca" : marca.m_nombre)}
+          {formData.a_nombre +
+            "ㅤㅤ" +
+            formData.a_cantidad +
+            formData.um_id +
+            "ㅤㅤ" +
+            (marca.m_nombre == null ? "Sin marca" : marca.m_nombre)}
         </h3>
       </div>
 
@@ -209,7 +215,11 @@ export function AddDate() {
         </table>
         {errorMessage && <p className="error">{errorMessage}</p>}
         <div className="button">
-          <ButtonCircle textElement="+" color="#5982C0" onClick={handleAddEntry} />
+          <ButtonCircle
+            textElement="+"
+            color="#5982C0"
+            onClick={handleAddEntry}
+          />
         </div>
       </div>
 

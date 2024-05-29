@@ -22,7 +22,7 @@ export const Login = () => {
       return;
     }
 
-    fetch(`http://3.144.175.151:3000/login`, {
+    fetch(`http://localhost:3001/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,13 +36,13 @@ export const Login = () => {
 
           // Obtener la fecha actual
           const now = new Date();
-          
+
           // Calcular la fecha de expiración sumando 30 días a la fecha actual
           const expires = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 días en milisegundos
-          
+
           // Convertir la fecha de expiración a un formato de cadena adecuado para la cookie
           const expiresFormatted = expires.toUTCString();
-          
+
           // Guardar el valor en las cookies con la fecha de expiración y la ruta especificada
           document.cookie = `userCookieSIA=${myValue}; expires=${expiresFormatted}; path=/`;
           return response.json(); // Convertir la respuesta a JSON
@@ -56,7 +56,7 @@ export const Login = () => {
         // Guardar el userId y userRol en el almacenamiento local
         localStorage.setItem("userId", data.userId);
         localStorage.setItem("userRol", data.userRol);
-        
+
         navigate("/mainPage");
       })
       .catch((error) => {

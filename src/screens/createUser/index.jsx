@@ -3,7 +3,7 @@ import "./createUser.css";
 import { Guide } from "../../components/guide";
 import { GeneralButton } from "../../components/button";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { ReturnButton } from "../../components/returnButton";
 import { TextInput } from "../../components/textInput";
 
@@ -30,7 +30,13 @@ export const CreateUser = () => {
   };
 
   const validateForm = () => {
-    if (!formData.u_id || !formData.u_nombre || !formData.u_apellidos || !formData.u_email || !formData.u_contraseña) {
+    if (
+      !formData.u_id ||
+      !formData.u_nombre ||
+      !formData.u_apellidos ||
+      !formData.u_email ||
+      !formData.u_contraseña
+    ) {
       setError("Por favor, complete todos los campos obligatorios.");
       return false;
     }
@@ -51,7 +57,9 @@ export const CreateUser = () => {
     // Validar la contraseña
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,15}$/;
     if (!passwordRegex.test(formData.u_contraseña)) {
-      setError("La contraseña debe tener entre 5 y 15 caracteres, al menos una letra mayúscula, una letra minúscula, un dígito y no debe contener espacios en blanco.");
+      setError(
+        "La contraseña debe tener entre 5 y 15 caracteres, al menos una letra mayúscula, una letra minúscula, un dígito y no debe contener espacios en blanco."
+      );
       return false;
     }
 
@@ -63,7 +71,7 @@ export const CreateUser = () => {
     if (!validateForm()) return;
 
     try {
-      const response = await fetch("http://3.144.175.151:3000/usuarios", {
+      const response = await fetch("http://localhost:3001/usuarios", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,11 +103,10 @@ export const CreateUser = () => {
         <Guide message="No olvides llenar todos los campos para el registro" />
         <ReturnButton textElement="Registrar Usuario" />
       </div>
-      
+
       <div className="createUser-container">
         <br />
         <div className="createInput">
-
           <TextInput
             label="Nombre de usuario"
             name="u_id"

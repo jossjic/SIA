@@ -17,8 +17,11 @@ export const MainPage = () => {
     const fetchData = async () => {
       try {
         // Primera petición
-        const response1 = await fetch("http://3.144.175.151:3000/alimentos/caducados/dCad");
-        if (!response1.ok) throw new Error("Error al obtener los alimentos caducados");
+        const response1 = await fetch(
+          "http://localhost:3001/alimentos/caducados/dCad"
+        );
+        if (!response1.ok)
+          throw new Error("Error al obtener los alimentos caducados");
         const data1 = await response1.json();
         const alimentosCaducados = data1.map((alimento) => ({
           ...alimento,
@@ -26,8 +29,11 @@ export const MainPage = () => {
         }));
 
         // Segunda petición
-        const response2 = await fetch("http://3.144.175.151:3000/alimentos/proximoscaducados/dCad");
-        if (!response2.ok) throw new Error("Error al obtener los alimentos próximos a caducar");
+        const response2 = await fetch(
+          "http://localhost:3001/alimentos/proximoscaducados/dCad"
+        );
+        if (!response2.ok)
+          throw new Error("Error al obtener los alimentos próximos a caducar");
         const data2 = await response2.json();
         const alimentosProximosCaducar = data2.map((alimento) => ({
           ...alimento,

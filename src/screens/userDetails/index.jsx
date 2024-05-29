@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import './UserDetails.css';  // Asegúrate de que la ruta del CSS es correcta
-import { formatDateTime, formatDate } from '../../generalFunctions';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import "./UserDetails.css"; // Asegúrate de que la ruta del CSS es correcta
+import { formatDateTime, formatDate } from "../../generalFunctions";
 import { Guide } from "../../components/guide";
 import { ReturnButton } from "../../components/returnButton";
 
@@ -11,11 +11,10 @@ export const UserDetails = () => {
 
   useEffect(() => {
     // Reemplaza 'http://tuapi.com' con la URL base de tu API real
-    fetch(`http://3.144.175.151:3000/usuario-alimento/join/all/usuario/${id}`)
-
-      .then(response => response.json())
-      .then(data => setTransacciones(data))
-      .catch(error => console.error('Error:', error));
+    fetch(`http://localhost:3001/usuario-alimento/join/all/usuario/${id}`)
+      .then((response) => response.json())
+      .then((data) => setTransacciones(data))
+      .catch((error) => console.error("Error:", error));
   }, [id]);
 
   return (
@@ -43,14 +42,28 @@ export const UserDetails = () => {
             </tr>
           </thead>
           <tbody>
-            {transacciones.map(transaccion => (
+            {transacciones.map((transaccion) => (
               <tr key={transaccion.ua_id}>
                 <td>{transaccion.ua_id}</td>
                 <td>{transaccion.a_nombre}</td>
-                <td>{transaccion.m_id === null ? 'Sin marca' : transaccion.m_nombre}</td>
+                <td>
+                  {transaccion.m_id === null
+                    ? "Sin marca"
+                    : transaccion.m_nombre}
+                </td>
                 <td>{transaccion.a_cantidad + " " + transaccion.um_id}</td>
-                <td>{transaccion.a_fechaCaducidad === null ?  'Sin fecha' : formatDate(transaccion.a_fechaCaducidad)}</td>
-                <td>{transaccion.ua_accion === "Add" ? "Incremento": transaccion.ua_accion === "Reduce" ? "Decremento" : "Actualizacion"}</td>
+                <td>
+                  {transaccion.a_fechaCaducidad === null
+                    ? "Sin fecha"
+                    : formatDate(transaccion.a_fechaCaducidad)}
+                </td>
+                <td>
+                  {transaccion.ua_accion === "Add"
+                    ? "Incremento"
+                    : transaccion.ua_accion === "Reduce"
+                    ? "Decremento"
+                    : "Actualizacion"}
+                </td>
                 <td>{transaccion.ua_cantidad}</td>
                 <td>{formatDateTime(transaccion.ua_fecha)}</td>
               </tr>
