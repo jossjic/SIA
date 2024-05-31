@@ -9,6 +9,8 @@ import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "../../generalFunctions";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
   const [showSelectDate, setShowSelectDate] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
@@ -16,7 +18,8 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
   const [dates, setDates] = useState({});
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const [deleteSuccessOpen, setDeleteSuccessOpen] = useState(false);
-  const [buttonSquareColor, setButtonSquareColor] = useState("#E14040");
+  const [buttonSquareColor, setButtonSquareColor] =
+    useState("var(--color-red)");
   const [buttonColors, setButtonColors] = useState({});
   const [ids, setIds] = useState([]);
   let navigate = useNavigate();
@@ -31,7 +34,9 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
       params.append("ids", id);
     });
 
-    fetch(`http://localhost:3001/alimentos/checkDate?${params.toString()}`)
+    fetch(
+      `http://${API_HOST}:${API_PORT}/alimentos/checkDate?${params.toString()}`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al obtener los productos");
@@ -64,7 +69,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
   useEffect(() => {
     const fetchDates = async () => {
       const promises = ids.map((id) => {
-        return fetch(`http://localhost:3001/alimentos/atun/${id}`)
+        return fetch(`http://${API_HOST}:${API_PORT}/alimentos/atun/${id}`)
           .then((response) => response.json())
           .then((data) => ({ [id]: data }));
       });
@@ -111,7 +116,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
   const handleDeleteSelected = async () => {
     try {
       const updateStockPromises = selectedIds.map((id) =>
-        fetch(`http://localhost:3001/usuarios/stock/`, {
+        fetch(`http://${API_HOST}:${API_PORT}/usuarios/stock/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -126,13 +131,13 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
       );
 
       const deleteProductPromises = selectedIds.map((id) =>
-        fetch(`http://localhost:3001/alimentos/stock/${id}`, {
+        fetch(`http://${API_HOST}:${API_PORT}/alimentos/stock/${id}`, {
           method: "DELETE",
         })
       );
 
       const logDeleteActionPromises = selectedIds.map((id) =>
-        fetch(`http://localhost:3001/alimentos/out/${id}`, {
+        fetch(`http://${API_HOST}:${API_PORT}/alimentos/out/${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -142,7 +147,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
       );
 
       const deleteProductPromises2 = selectedIds.map((id) =>
-        fetch(`http://localhost:3001/alimentos/out/${id}`, {
+        fetch(`http://${API_HOST}:${API_PORT}/alimentos/out/${id}`, {
           method: "DELETE",
         })
       );
@@ -212,7 +217,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
                   <td>
                     <ButtonSquare
                       textElement="v"
-                      color={buttonColors[product.a_id] || "#E14040"}
+                      color={buttonColors[product.a_id] || "var(--color-red)"}
                       onClick={() => handleButtonClickSquare(product.a_id)}
                     />
                   </td>
@@ -224,7 +229,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
             <GeneralButton
               textElement="Cancelar"
               path=""
-              color="#5982C0"
+              color="var(--color-button-blue)"
               onClick={() => {
                 setSelectedIds([]); // Vaciar el arreglo selectedIds
                 navigate(-1);
@@ -235,7 +240,7 @@ export const CheckDateDelete = ({ selectedIds, setSelectedIds }) => {
               onClick={() =>
                 allProductsVerified() && setConfirmDeleteOpen(true)
               }
-              color={allProductsVerified() ? "#E14040" : "#8F938D"}
+              color={allProductsVerified() ? "var(--color-red)" : "#8F938D"}
               disabled={!allProductsVerified()} // Añadir esta línea para deshabilitar el botón si no todos los productos están verificados
             />
             {confirmDeleteOpen && (

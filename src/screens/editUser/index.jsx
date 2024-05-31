@@ -8,6 +8,8 @@ import "./EditUser.css";
 import { TextInput } from "../../components/textInput";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export const EditUser = () => {
   const { u_id } = useParams();
   const navigate = useNavigate();
@@ -25,7 +27,9 @@ export const EditUser = () => {
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const response = await fetch(`http://localhost:3001/usuarios/${u_id}`);
+        const response = await fetch(
+          `http://${API_HOST}:${API_PORT}/usuarios/${u_id}`
+        );
         const userData = await response.json();
         setFormData({
           u_nombre: userData.u_nombre,
@@ -60,13 +64,16 @@ export const EditUser = () => {
 
     try {
       console.log(formData);
-      const response = await fetch(`http://localhost:3001/usuarios/${u_id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `http://${API_HOST}:${API_PORT}/usuarios/${u_id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       if (!response.ok) {
         throw new Error("Error al editar el usuario");
       }
@@ -123,7 +130,7 @@ export const EditUser = () => {
         {error && <p style={{ color: "red" }}>{error}</p>}
         <GeneralButton
           textElement="Editar"
-          color="#5982C0"
+          color="var(--color-button-blue)"
           onClick={() => setConfirmUpdateOpen(true)}
         ></GeneralButton>
         {confirmUpdateOpen && (

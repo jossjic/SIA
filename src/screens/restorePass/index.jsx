@@ -7,6 +7,8 @@ import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { LoadingSpinner } from "../../components/loadingSpinner";
 import { useNavigate } from "react-router-dom";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export const RestorePass = () => {
   const [email, setEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
@@ -43,7 +45,7 @@ export const RestorePass = () => {
     // Verificar si el correo existe en la base de datos
     try {
       const response = await fetch(
-        `http://localhost:3001/usuarios/verificar-email/${email}`
+        `http://${API_HOST}:${API_PORT}/usuarios/verificar-email/${email}`
       );
       if (response.status === 404) {
         setErrorMessage("Correo no registrado");
@@ -127,7 +129,7 @@ export const RestorePass = () => {
             <GeneralButton
               textElement="Recuperar"
               type="submit"
-              color="#4FA725"
+              color="var(--color-green-dark)"
             />
             <GeneralButton textElement="Regresar" path="/login" />
           </div>

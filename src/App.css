@@ -1,13 +1,13 @@
 :root {
-  --white-background: var(--white-background);
-  --color-success: #28a745;
-  --color-info: #17a2b8;
-  --color-warning: #ffc107;
-  --color-danger: #dc3545;
-  --color-light: #f8f9fa;
-  --color-dark: #343a40;
-  --color-white: #fff;
-  --color-black: #000;
+  --white-background: #f8f9fa;
+  --color-button-blue: #5982c0;
+  --color-info: #3c6382;
+  --color-gray: #d9d9d9;
+  --color-red: #e14040;
+  --color-green-dark: #4fa725;
+  --color-green: #5fdc00;
+  --color: #3c6382;
+  --color-light: #f9f9f9;
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 

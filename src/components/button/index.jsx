@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export function GeneralButton({
   textElement,
   path,
-  color = "#5982C0",
+  color = "var(--color-button-blue)",
   onClick,
 }) {
   const navigate = useNavigate();

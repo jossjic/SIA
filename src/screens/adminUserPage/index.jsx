@@ -7,6 +7,8 @@ import { SearchBar } from "../../components/searchBar";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { useNavigate } from "react-router-dom";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export const UserPage = () => {
   const [users, setUsers] = useState([]);
   const [selectedUserIds, setSelectedUserIds] = useState([]);
@@ -19,7 +21,7 @@ export const UserPage = () => {
   const [deleteError, setDeleteError] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3001/usuarios")
+    fetch(`http://${API_HOST}:${API_PORT}/usuarios`)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -45,7 +47,9 @@ export const UserPage = () => {
   const handleDeleteSelected = () => {
     Promise.all(
       selectedUserIds.map((id) =>
-        fetch(`http://localhost:3001/usuarios/${id}`, { method: "DELETE" })
+        fetch(`http://${API_HOST}:${API_PORT}/usuarios/${id}`, {
+          method: "DELETE",
+        })
       )
     )
       .then(() => {
@@ -60,7 +64,7 @@ export const UserPage = () => {
   };
 
   const handleDelete = (userId) => {
-    fetch(`http://localhost:3001/usuarios/${userId}`, {
+    fetch(`http://${API_HOST}:${API_PORT}/usuarios/${userId}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -96,7 +100,9 @@ export const UserPage = () => {
   };
 
   const handleViewUser = (userId) => {
-    fetch(`http://localhost:3001/usuario-alimento/join/all/usuario/${userId}`)
+    fetch(
+      `http://${API_HOST}:${API_PORT}/usuario-alimento/join/all/usuario/${userId}`
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.length === 0) {
@@ -182,19 +188,19 @@ export const UserPage = () => {
                 <td>
                   <GeneralButton
                     textElement=" Ver "
-                    color="#28A745"
+                    color="var(--color-green-dark)"
                     className="generalButton"
                     onClick={() => handleViewUser(user.id)}
                   />
                   <GeneralButton
                     textElement=" Editar "
-                    color="#19739A"
+                    color="var(--color-button-blue)"
                     className="generalButton"
                     onClick={() => handleEditUser(user.id)}
                   />
                   <GeneralButton
                     textElement=" Eliminar "
-                    color="#DC3545"
+                    color="var(--color-red)"
                     className="generalButton"
                     onClick={() => setIsModalOpen(user.id)}
                   />

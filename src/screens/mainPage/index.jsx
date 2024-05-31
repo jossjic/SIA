@@ -6,6 +6,8 @@ import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { logout } from "../../generalFunctions";
 import { useNavigate } from "react-router-dom";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export const MainPage = () => {
   const [alimentos, setAlimentos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +20,7 @@ export const MainPage = () => {
       try {
         // Primera petición
         const response1 = await fetch(
-          "http://localhost:3001/alimentos/caducados/dCad"
+          `http://${API_HOST}:${API_PORT}/alimentos/caducados/dCad`
         );
         if (!response1.ok)
           throw new Error("Error al obtener los alimentos caducados");
@@ -30,7 +32,7 @@ export const MainPage = () => {
 
         // Segunda petición
         const response2 = await fetch(
-          "http://localhost:3001/alimentos/proximoscaducados/dCad"
+          `http://${API_HOST}:${API_PORT}/alimentos/proximoscaducados/dCad`
         );
         if (!response2.ok)
           throw new Error("Error al obtener los alimentos próximos a caducar");

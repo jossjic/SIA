@@ -10,6 +10,8 @@ import { formatDate } from "../../generalFunctions";
 import { SuccessPopupDate } from "../../components/successPopupDate";
 import "./AddDate.css";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export function AddDate() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   let navigate = useNavigate();
@@ -42,7 +44,9 @@ export function AddDate() {
   useEffect(() => {
     async function fetchProductData() {
       try {
-        const response = await fetch(`http://localhost:3001/alimentos/${a_id}`);
+        const response = await fetch(
+          `http://${API_HOST}:${API_PORT}/alimentos/${a_id}`
+        );
         if (!response.ok) {
           throw new Error("Error fetching product data");
         }
@@ -126,13 +130,16 @@ export function AddDate() {
             a_stock: entry.a_stock,
           };
 
-          const response = await fetch("http://localhost:3001/alimentos", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedFormData),
-          });
+          const response = await fetch(
+            `http://${API_HOST}:${API_PORT}/alimentos`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(updatedFormData),
+            }
+          );
 
           if (!response.ok) {
             throw new Error("Error al agregar el alimento");
@@ -217,7 +224,7 @@ export function AddDate() {
         <div className="button">
           <ButtonCircle
             textElement="+"
-            color="#5982C0"
+            color="var(--color-button-blue)"
             onClick={handleAddEntry}
           />
         </div>
@@ -229,7 +236,7 @@ export function AddDate() {
           onClick={() => {
             navigate("/AdminPage");
           }}
-          color="#E14040"
+          color="var(--color-red)"
         />
         <GeneralButton
           textElement="Agregar"

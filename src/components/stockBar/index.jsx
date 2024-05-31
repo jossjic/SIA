@@ -37,6 +37,15 @@ export function StockBar({
     }
   }, [stockResetId, stock, id]);
 
+  //cuando se recargue el componente se asigna modificacionMap[id][0] a initialStock y modificacionMap[id][1] a currentStock
+
+  useEffect(() => {
+    if (modificationMap[id]) {
+      setInitialStock(modificationMap[id][0]);
+      setCurrentStock(modificationMap[id][1]);
+    }
+  }, [modificationMap, id]);
+
   useEffect(() => {
     if (savedChanges) {
       setInitialStock(currentStock); // Guardar el stock actual como el nuevo stock inicial

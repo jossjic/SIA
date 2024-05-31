@@ -1,17 +1,17 @@
 .acc {
-    background-color: #5982C0;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: medium;
-    padding: 0rem 1rem;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-weight: normal;
-    width: 100px; 
-    cursor: pointer;
-    height: 30px;
+  background-color: var(--color-button-blue);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: medium;
+  padding: 0rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: normal;
+  width: 100px;
+  cursor: pointer;
+  height: 30px;
 }
 
 /*
@@ -20,27 +20,26 @@
 }*/
 
 .accC {
-    background-color: #5982C0;
-    border: none;
-    border-radius: 30px;
-    color: white;
-    font-size: medium;
-    padding: 0rem 1rem;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-weight: normal;
-    width: 50px; 
-    cursor: pointer;
-    height: 50px;
-    font-size: 30px;
+  background-color: var(--color-button-blue);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-size: medium;
+  padding: 0rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: normal;
+  width: 50px;
+  cursor: pointer;
+  height: 50px;
+  font-size: 30px;
 }
 
 /* Aumentar especificidad */
 button.accC:hover {
-    background-color: #a9adf2;
+  background-color: #a9adf2;
 }
-
 
 /*
 .accC:hover {

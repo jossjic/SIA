@@ -4,14 +4,14 @@ import returnImage from "../../assets/img/returnImage.png";
 import { useNavigate } from "react-router-dom";
 
 export function ReturnButton({ textElement, onClick }) {
-  const [color, setColor] = useState("#D9D9D9");
+  const [color, setColor] = useState("var(--color-gray)");
   let navigate = useNavigate();
 
   const handleClick = () => {
     if (onClick) {
       onClick();
     }
-    navigate(-1); 
+    navigate(-1);
   };
 
   return (

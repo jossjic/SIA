@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import "./AdminPage.css";
-import { RowAdminPage } from "../../components/rowAdminPage";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export const TestScreen = () => {
   const [alimentos, setAlimentos] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/alimentos/join/marca")
+    fetch(`http://${API_HOST}:${API_PORT}/alimentos/join/marca`)
       .then((response) => {
         if (response.ok) {
           return response.json();

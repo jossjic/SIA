@@ -5,12 +5,14 @@ import { ReturnButton } from "../../components/returnButton";
 import { TextInput } from "../../components/textInput";
 import { CalendarInput } from "../../components/calendarInput";
 import { GeneralButton } from "../../components/button";
-import { formatDate } from "../../generalFunctions";
+import { formatDate, convertAmount } from "../../generalFunctions";
 import { DropDown } from "../../components/dropDown";
 import "./EditProduct.css";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { useNavigate } from "react-router-dom";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export function EditProduct() {
   const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
@@ -38,11 +40,13 @@ export function EditProduct() {
   useEffect(() => {
     async function fetchProductData() {
       try {
-        const response = await fetch(`http://localhost:3001/alimentos/${a_id}`);
+        const response = await fetch(
+          `http://${API_HOST}:${API_PORT}/alimentos/${a_id}`
+        );
         const productData = await response.json();
         setFormData({
           a_nombre: productData.a_nombre,
-          a_cantidad: productData.a_cantidad,
+          a_cantidad: convertAmount(productData.a_cantidad),
           a_stock: productData.a_stock,
           a_fechaEntrada: formatDate(productData.a_fechaEntrada),
           a_fechaCaducidad: formatDate(productData.a_fechaCaducidad),
@@ -209,13 +213,16 @@ export function EditProduct() {
     if (!validateForm()) return;
 
     try {
-      const response = await fetch(`http://localhost:3001/alimentos/${a_id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `http://${API_HOST}:${API_PORT}/alimentos/${a_id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Error al editar el alimento");
@@ -231,7 +238,7 @@ export function EditProduct() {
       };
 
       const stockResponse = await fetch(
-        "http://localhost:3001/usuarios/stock/",
+        `http://${API_HOST}:${API_PORT}/usuarios/stock/`,
         {
           method: "POST",
           headers: {
@@ -324,7 +331,7 @@ export function EditProduct() {
         <br />
         <GeneralButton
           textElement="Guardar"
-          color="#5982C0"
+          color="var(--color-button-blue)"
           onClick={handleSubmit}
         />
       </div>

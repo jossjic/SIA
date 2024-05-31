@@ -40,7 +40,7 @@
 }
 
 .dropDownContainer .editButtonCRD {
-  background-color: #d9d9d9;
+  background-color: var(--color-gray);
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -48,7 +48,7 @@
 }
 
 .dropDownContainer .editButtonCRD:hover {
-  background-color: #5982c0;
+  background-color: var(--color-button-blue);
 }
 
 .dropDownContainer .editButtonCRD img {
@@ -81,11 +81,11 @@
   width: 100%;
   border-bottom: 1px solid #ccc;
   padding: 10px;
-  background-color: #d9d9d9;
+  background-color: var(--color-gray);
 }
 
 .dropdown-crd-header button {
-  background-color: #d9d9d9;
+  background-color: var(--color-gray);
   width: 30px;
   height: 30px;
   cursor: pointer;
@@ -136,6 +136,6 @@
   height: 60px;
 }
 .dropdownCRD-options .remove-button:hover {
-  background-color: #e14040;
+  background-color: var(--color-red);
   border: none;
 }

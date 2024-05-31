@@ -9,8 +9,9 @@ import { DropDown } from "../../components/dropDown";
 import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import "./AddProduct.css";
 import { useNavigate } from "react-router-dom";
-import { is } from "date-fns/locale";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export function AddProduct() {
   const [formData, setFormData] = useState({
     a_nombre: "",
@@ -78,7 +79,9 @@ export function AddProduct() {
     }));
 
     if (value.trim() !== "") {
-      fetch(`http://localhost:3001/alimentos/busqueda/nombre/total/${value}`)
+      fetch(
+        `http://${API_HOST}:${API_PORT}/alimentos/busqueda/nombre/total/${value}`
+      )
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -278,7 +281,7 @@ export function AddProduct() {
       return;
     }
     try {
-      const response = await fetch("http://localhost:3001/alimentos", {
+      const response = await fetch(`http://${API_HOST}:${API_PORT}/alimentos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -389,7 +392,7 @@ export function AddProduct() {
 
         <GeneralButton
           textElement="Agregar"
-          color="#5982C0"
+          color="var(--color-button-blue)"
           onClick={handleSubmit}
         ></GeneralButton>
       </div>
@@ -424,7 +427,7 @@ export function AddProduct() {
             answer1="Eliminar"
             answer2="Cancelar"
             color1="#FF6565"
-            color2="#5982C0"
+            color2="var(--color-button-blue)"
             funct={() => setRemoveCheck(true)}
             isOpen={isModalOpenRemove}
             closeModal={() => setIsModalOpenRemove(false)}

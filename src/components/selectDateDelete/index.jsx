@@ -22,14 +22,14 @@ export function SelectDateDelete({ unit, amount, dates, onCancel, onConfirm }) {
             <GeneralButton
               textElement="Confirmar"
               onClick={onConfirm}
-              color="#4FA725"
+              color="var(--color-green-dark)"
             ></GeneralButton>
           </tr>
           <tr>
             <GeneralButton
               textElement="Cancelar"
               onClick={onCancel}
-              color="#E14040"
+              color="var(--color-red)"
             ></GeneralButton>
           </tr>
         </td>

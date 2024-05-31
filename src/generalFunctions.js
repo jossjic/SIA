@@ -6,8 +6,6 @@ export const formatDate = (date) => {
     return "";
   }
 
-
-
   // Create a new Date object from the input date string, treating it as UTC
   const fecha = new Date(date);
 
@@ -42,11 +40,11 @@ export const formatDateTime = (date) => {
   return `${anio}/${mes}/${dia} ${hora}:${minuto}:${segundo}`;
 };
 
-
 export const logout = (navigate) => {
   return new Promise((resolve, reject) => {
     // Eliminar las cookies del documento
-    document.cookie = "userCookieSIA=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+    document.cookie =
+      "userCookieSIA=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
     localStorage.removeItem("userId");
     localStorage.removeItem("userRol");
     // Redirigir al usuario a la página de inicio de sesión
@@ -54,4 +52,12 @@ export const logout = (navigate) => {
 
     resolve(); // Resuelve la promesa cuando se complete la operación
   });
+};
+
+export const convertAmount = (amount) => {
+  // Verificar si el formato es correcto y luego eliminar los últimos tres caracteres si son ".000"
+  if (amount.endsWith(".000")) {
+    return parseInt(amount.slice(0, -4), 10);
+  }
+  return parseFloat(amount); // Conservar cualquier otro decimal
 };

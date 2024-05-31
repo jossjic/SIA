@@ -5,13 +5,17 @@ import { formatDateTime, formatDate } from "../../generalFunctions";
 import { Guide } from "../../components/guide";
 import { ReturnButton } from "../../components/returnButton";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export const UserDetails = () => {
   const { id } = useParams();
   const [transacciones, setTransacciones] = useState([]);
 
   useEffect(() => {
     // Reemplaza 'http://tuapi.com' con la URL base de tu API real
-    fetch(`http://localhost:3001/usuario-alimento/join/all/usuario/${id}`)
+    fetch(
+      `http://${API_HOST}:${API_PORT}/usuario-alimento/join/all/usuario/${id}`
+    )
       .then((response) => response.json())
       .then((data) => setTransacciones(data))
       .catch((error) => console.error("Error:", error));

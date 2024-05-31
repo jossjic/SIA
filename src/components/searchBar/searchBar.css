@@ -11,7 +11,7 @@
   height: 95%;
   width: 80%; /* Modificado para que el input ocupe el 80% del ancho */
   font-size: 16px; /* Modificado para que sea más legible */
-  background-color: #e0e0e0;
+  background-color: var(--color-gray);
   margin: 0 2%;
 }
 
@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: center;
   border: none;
-  background-color: #e0e0e0;
+  background-color: var(--color-gray);
   cursor: pointer;
   font-size: 20px; /* Modificado para que sea más legible */
 }
@@ -34,7 +34,7 @@
 
 /* Estilos para el botón de eliminar */
 .search-bar .icon-button.delete {
-  border-radius: 0 100px 100px 0; 
+  border-radius: 0 100px 100px 0;
   cursor: not-allowed;
 }
 

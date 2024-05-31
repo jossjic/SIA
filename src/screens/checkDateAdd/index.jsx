@@ -7,13 +7,16 @@ import { GeneralButton } from "../../components/button";
 import { SelectDate } from "../../components/selectDate";
 import { useNavigate } from "react-router-dom";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export const CheckDateAdd = () => {
   const [showSelectDate, setShowSelectDate] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null); // Nuevo estado para el ID del producto seleccionado
   const [products, setProducts] = useState([]);
   const [dates, setDates] = useState({}); // Estado para guardar las fechas por producto
 
-  const [buttonSquareColor, setButtonSquareColor] = useState("#E14040");
+  const [buttonSquareColor, setButtonSquareColor] =
+    useState("var(--color-red)");
   // Mantén un estado para los colores de los botones cuadrados
   const [buttonColors, setButtonColors] = useState({});
 
@@ -28,7 +31,9 @@ export const CheckDateAdd = () => {
       params.append("ids", id);
     });
 
-    fetch(`http://localhost:3001/alimentos/checkDate?${params.toString()}`)
+    fetch(
+      `http://${API_HOST}:${API_PORT}/alimentos/checkDate?${params.toString()}`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error al obtener los productos");
@@ -75,7 +80,7 @@ export const CheckDateAdd = () => {
   useEffect(() => {
     const fetchDates = async () => {
       const promises = ids.map((id) => {
-        return fetch(`http://localhost:3001/alimentos/atun/${id}`)
+        return fetch(`http://${API_HOST}:${API_PORT}/alimentos/atun/${id}`)
           .then((response) => response.json())
           .then((data) => ({ [id]: data }));
       });
@@ -159,14 +164,14 @@ export const CheckDateAdd = () => {
                   <td>
                     <ButtonSquare
                       textElement="v"
-                      color={buttonColors[product.a_id] || "#E14040"} // Usa el color del estado o el color predeterminado
+                      color={buttonColors[product.a_id] || "var(--color-red)"} // Usa el color del estado o el color predeterminado
                       onClick={() => handleButtonClickSquare(product.a_id)}
                     />
                   </td>
                   <td>
                     <ButtonCircle
                       textElement="+"
-                      color="#5982C0"
+                      color="var(--color-button-blue)"
                       onClick={() => handleButtonClick(product)}
                       disabled={product.estado}
                     />
@@ -181,7 +186,7 @@ export const CheckDateAdd = () => {
               onClick={() => {
                 navigate("/AdminPage");
               }}
-              color="#5982C0"
+              color="var(--color-button-blue)"
             />
             <GeneralButton
               textElement="Agregar"

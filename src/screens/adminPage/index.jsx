@@ -9,6 +9,10 @@ import saveIcon from "../../assets/img/saveIcon.svg";
 import "./AdminPage.css";
 import { useNavigate } from "react-router-dom";
 
+import { convertAmount } from "../../generalFunctions";
+
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export const AdminPage = ({ selectedIds, setSelectedIds }) => {
   const userId = localStorage.getItem("userId");
   const [currentPage, setCurrentPage] = useState(1);
@@ -75,7 +79,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
 
           console.log("body", body);
 
-          await fetch("http://localhost:3001/usuarios/stock/", {
+          await fetch(`http://${API_HOST}:${API_PORT}/usuarios/stock/`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -115,7 +119,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
 
     // Actualizar el número de elementos seleccionados por cada id de alimento obtener el stock y sumarlos
     if (isChecked) {
-      fetch("http://localhost:3001/alimentos/" + id)
+      fetch(`http://${API_HOST}:${API_PORT}/alimentos/` + id)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -129,7 +133,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           console.error("Error:", error.message);
         });
     } else {
-      fetch("http://localhost:3001/alimentos/" + id)
+      fetch(`http://${API_HOST}:${API_PORT}/alimentos/` + id)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -183,7 +187,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
     ) {
       if (searchTerm === "") {
         fetch(
-          `http://localhost:3001/alimentos/join/marca?page=${currentPage}&pageSize=${pageSize}`
+          `http://${API_HOST}:${API_PORT}/alimentos/join/marca?page=${currentPage}&pageSize=${pageSize}`
         )
           .then((response) => {
             if (response.ok) {
@@ -199,7 +203,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
             console.error("Error:", error.message);
           });
 
-        fetch("http://localhost:3001/alimentos/count")
+        fetch(`http://${API_HOST}:${API_PORT}/alimentos/count`)
           .then((response) => {
             if (response.ok) {
               return response.json();
@@ -216,7 +220,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       } else if (searchType === 0) {
         console.log("searchTerm", searchTerm);
         fetch(
-          `http://localhost:3001/alimentos/busqueda/nombre/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+          `http://${API_HOST}:${API_PORT}/alimentos/busqueda/nombre/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
         )
           .then((response) => {
             if (response.ok) {
@@ -244,7 +248,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           });
       } else if (searchType === 1) {
         fetch(
-          `http://localhost:3001/alimentos/busqueda/cantidad/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+          `http://${API_HOST}:${API_PORT}/alimentos/busqueda/cantidad/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
         )
           .then((response) => {
             if (response.ok) {
@@ -263,7 +267,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           });
       } else if (searchType === 2) {
         fetch(
-          `http://localhost:3001/alimentos/busqueda/marca/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+          `http://${API_HOST}:${API_PORT}/alimentos/busqueda/marca/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
         )
           .then((response) => {
             if (response.ok) {
@@ -282,7 +286,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           });
       } else if (searchType === 3) {
         fetch(
-          `http://localhost:3001/alimentos/busqueda/stock/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
+          `http://${API_HOST}:${API_PORT}/alimentos/busqueda/stock/${searchTerm}?page=${currentPage}&pageSize=${pageSize}`
         )
           .then((response) => {
             if (response.ok) {
@@ -309,7 +313,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }
 
         fetch(
-          `http://localhost:3001/alimentos/busqueda/caducidad/${formattedSearchTerm}?page=${currentPage}&pageSize=${pageSize}`
+          `http://${API_HOST}:${API_PORT}/alimentos/busqueda/caducidad/${formattedSearchTerm}?page=${currentPage}&pageSize=${pageSize}`
         )
           .then((response) => {
             if (response.ok) {
@@ -331,7 +335,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       //alimentos caducados dCad
     } else if (options.f1 && options.o1) {
       fetch(
-        `http://localhost:3001/alimentos/caducados/dCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/caducados/dCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -348,7 +352,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); //alimentos proximos a caducar dCad
     } else if (options.f2 && options.o1) {
       fetch(
-        `http://localhost:3001/alimentos/proximoscaducados/dCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/proximoscaducados/dCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -365,7 +369,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos con disponibilidad dCad
     } else if (options.f3 && options.o1) {
       fetch(
-        `http://localhost:3001/alimentos/disponibles/dCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/disponibles/dCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -382,7 +386,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); //alimentos no disponibles dCad
     } else if (options.f4 && options.o1) {
       fetch(
-        `http://localhost:3001/alimentos/nodisponibles/dCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/nodisponibles/dCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -399,7 +403,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos caducados uCad
     } else if (options.f1 && options.o2) {
       fetch(
-        `http://localhost:3001/alimentos/caducados/uCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/caducados/uCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -416,7 +420,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos proximos a caducar uCad
     } else if (options.f2 && options.o2) {
       fetch(
-        `http://localhost:3001/alimentos/proximoscaducados/uCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/proximoscaducados/uCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -433,7 +437,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos con disponibilidad dCad
     } else if (options.f3 && options.o2) {
       fetch(
-        `http://localhost:3001/alimentos/disponibles/uCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/disponibles/uCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -450,7 +454,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos sin disponibilidad uCad
     } else if (options.f4 && options.o2) {
       fetch(
-        `http://localhost:3001/alimentos/nodisponibles/uCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/nodisponibles/uCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -467,7 +471,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos caducados dEnt
     } else if (options.f1 && options.o3) {
       fetch(
-        `http://localhost:3001/alimentos/caducados/dEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/caducados/dEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -484,7 +488,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos proximos a caducar dEnt
     } else if (options.f2 && options.o3) {
       fetch(
-        `http://localhost:3001/alimentos/proximoscaducados/dEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/proximoscaducados/dEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -501,7 +505,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos disponibles dEnt
     } else if (options.f3 && options.o3) {
       fetch(
-        `http://localhost:3001/alimentos/disponibles/dEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/disponibles/dEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -518,7 +522,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos no disponibles dEnt
     } else if (options.f4 && options.o3) {
       fetch(
-        `http://localhost:3001/alimentos/nodisponibles/dEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/nodisponibles/dEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -535,7 +539,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos caducados uEnt
     } else if (options.f1 && options.o4) {
       fetch(
-        `http://localhost:3001/alimentos/caducados/uEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/caducados/uEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -552,7 +556,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos proximos a caducar uEnt
     } else if (options.f2 && options.o4) {
       fetch(
-        `http://localhost:3001/alimentos/proximoscaducados/uEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/proximoscaducados/uEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -569,7 +573,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos disponibles uEnt
     } else if (options.f3 && options.o4) {
       fetch(
-        `http://localhost:3001/alimentos/disponibles/uEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/disponibles/uEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -586,7 +590,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos nodisponibles uEnt
     } else if (options.f4 && options.o4) {
       fetch(
-        `http://localhost:3001/alimentos/nodisponibles/uEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/nodisponibles/uEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -603,7 +607,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos caducados alfaB
     } else if (options.f1 && options.o5) {
       fetch(
-        `http://localhost:3001/alimentos/caducados/alfaB?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/caducados/alfaB?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -620,7 +624,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos proximos a caducar alfaB
     } else if (options.f2 && options.o5) {
       fetch(
-        `http://localhost:3001/alimentos/proximoscaducados/alfaB?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/proximoscaducados/alfaB?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -637,7 +641,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos disponibles alfaB
     } else if (options.f3 && options.o5) {
       fetch(
-        `http://localhost:3001/alimentos/disponibles/alfaB?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/disponibles/alfaB?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -654,7 +658,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }); // mostrar solo alimentos nodisponibles alfaB
     } else if (options.f4 && options.o5) {
       fetch(
-        `http://localhost:3001/alimentos/nodisponibles/alfaB?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/nodisponibles/alfaB?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -678,7 +682,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       !options.o5
     ) {
       fetch(
-        `http://localhost:3001/alimentos/caducados?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/caducados?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -702,7 +706,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       !options.o5
     ) {
       fetch(
-        `http://localhost:3001/alimentos/proximoscaducados?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/proximoscaducados?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -726,7 +730,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       !options.o5
     ) {
       fetch(
-        `http://localhost:3001/alimentos/disponibles?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/disponibles?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -750,7 +754,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       !options.o5
     ) {
       fetch(
-        `http://localhost:3001/alimentos/nodisponibles?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/nodisponibles?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -773,7 +777,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       options.o1
     ) {
       fetch(
-        `http://localhost:3001/alimentos/ordenados/dCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/ordenados/dCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -796,7 +800,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       options.o2
     ) {
       fetch(
-        `http://localhost:3001/alimentos/ordenados/uCad?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/ordenados/uCad?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -819,7 +823,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       options.o3
     ) {
       fetch(
-        `http://localhost:3001/alimentos/ordenados/dEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/ordenados/dEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -842,7 +846,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       options.o4
     ) {
       fetch(
-        `http://localhost:3001/alimentos/ordenados/uEnt?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/ordenados/uEnt?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -865,7 +869,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
       options.o5
     ) {
       fetch(
-        `http://localhost:3001/alimentos/ordenados/alfaB?page=${currentPage}&pageSize=${pageSize}`
+        `http://${API_HOST}:${API_PORT}/alimentos/ordenados/alfaB?page=${currentPage}&pageSize=${pageSize}`
       )
         .then((response) => {
           if (response.ok) {
@@ -887,7 +891,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
     //set pages according to alimentos
 
     if (options.f1) {
-      fetch(`http://localhost:3001/alimentos/count/caducados`)
+      fetch(`http://${API_HOST}:${API_PORT}/alimentos/count/caducados`)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -902,7 +906,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           console.error("Error:", error.message);
         });
     } else if (options.f2) {
-      fetch(`http://localhost:3001/alimentos/count/proximoscaducados`)
+      fetch(`http://${API_HOST}:${API_PORT}/alimentos/count/proximoscaducados`)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -917,7 +921,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           console.error("Error:", error.message);
         });
     } else if (options.f3) {
-      fetch(`http://localhost:3001/alimentos/count/disponibles`)
+      fetch(`http://${API_HOST}:${API_PORT}/alimentos/count/disponibles`)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -932,7 +936,7 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
           console.error("Error:", error.message);
         });
     } else if (options.f4) {
-      fetch(`http://localhost:3001/alimentos/count/nodisponibles`)
+      fetch(`http://${API_HOST}:${API_PORT}/alimentos/count/nodisponibles`)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -1069,26 +1073,33 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
             Caducidad
           </button>
         </div>
-        {filteredAlimentos.map((alimento) => (
-          <RowAdminPage
-            showWithoutStock={showWithoutStock}
-            key={alimento.a_id}
-            id={alimento.a_id}
-            product={alimento.a_nombre}
-            amount={alimento.a_cantidad}
-            unit={alimento.um_id}
-            brand={alimento.m_nombre == null ? "Sin marca" : alimento.m_nombre}
-            stock={alimento.a_stock}
-            cadDate={alimento.a_fechaCaducidad}
-            onChange={handleCheckboxChange}
-            selectedIds={selectedIds}
-            modificationMap={modificationMap}
-            setModificationMap={setModificationMap}
-            savedChanges={savedChanges}
-            setSavedChanges={setSavedChanges}
-            stockResetId={stockResetId}
-          />
-        ))}
+        {filteredAlimentos.map(
+          (alimento) => (
+            console.log("alimento", alimento.a_cantidad),
+            (
+              <RowAdminPage
+                showWithoutStock={showWithoutStock}
+                key={alimento.a_id}
+                id={alimento.a_id}
+                product={alimento.a_nombre}
+                amount={convertAmount(alimento.a_cantidad)}
+                unit={alimento.um_id}
+                brand={
+                  alimento.m_nombre == null ? "Sin marca" : alimento.m_nombre
+                }
+                stock={alimento.a_stock}
+                cadDate={alimento.a_fechaCaducidad}
+                onChange={handleCheckboxChange}
+                selectedIds={selectedIds}
+                modificationMap={modificationMap}
+                setModificationMap={setModificationMap}
+                savedChanges={savedChanges}
+                setSavedChanges={setSavedChanges}
+                stockResetId={stockResetId}
+              />
+            )
+          )
+        )}
       </div>
       <div className="paginacion">
         <button

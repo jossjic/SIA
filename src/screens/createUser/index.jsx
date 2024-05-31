@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { ReturnButton } from "../../components/returnButton";
 import { TextInput } from "../../components/textInput";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export const CreateUser = () => {
   const [formData, setFormData] = useState({
     u_id: "",
@@ -71,7 +73,7 @@ export const CreateUser = () => {
     if (!validateForm()) return;
 
     try {
-      const response = await fetch("http://localhost:3001/usuarios", {
+      const response = await fetch(`http://${API_HOST}:${API_PORT}/usuarios`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

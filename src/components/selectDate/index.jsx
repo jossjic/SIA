@@ -9,6 +9,8 @@ import { formatDate } from "../../generalFunctions";
 import { ReturnButton } from "../../components/returnButton";
 import { TextInput } from "../../components/textInput";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export function SelectDate({
   unit,
   amount,
@@ -72,7 +74,7 @@ export function SelectDate({
 
     try {
       console.log(formData);
-      const response = await fetch("http://localhost:3001/alimentos", {
+      const response = await fetch(`http://${API_HOST}:${API_PORT}/alimentos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -111,14 +113,14 @@ export function SelectDate({
             <GeneralButton
               textElement="Confirmar"
               onClick={handleConfirm}
-              color="#4FA725"
+              color="var(--color-green-dark)"
             ></GeneralButton>
           </tr>
           <tr>
             <GeneralButton
               textElement="Cancelar"
               onClick={onCancel}
-              color="#E14040"
+              color="var(--color-red)"
             ></GeneralButton>
           </tr>
           <tr>
@@ -143,7 +145,7 @@ export function SelectDate({
             <GeneralButton
               textElement="Agregar Caducidad"
               onClick={handleSubmit}
-              color="#5982C0"
+              color="var(--color-button-blue)"
             ></GeneralButton>
           </tr>
         </td>
@@ -245,7 +247,7 @@ export function SelectDateAddDate({
 
     try {
       console.log(formData);
-      const response = await fetch("http://localhost:3001/alimentos", {
+      const response = await fetch(`http://${API_HOST}:${API_PORT}/alimentos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -284,14 +286,14 @@ export function SelectDateAddDate({
             <GeneralButton
               textElement="Confirmar"
               onClick={handleConfirm}
-              color="#4FA725"
+              color="var(--color-green-dark)"
             ></GeneralButton>
           </tr>
           <tr>
             <GeneralButton
               textElement="Cancelar"
               onClick={onCancel}
-              color="#E14040"
+              color="var(--color-red)"
             ></GeneralButton>
           </tr>
           <tr>
@@ -316,7 +318,7 @@ export function SelectDateAddDate({
             <GeneralButton
               textElement="Agregar Caducidad"
               onClick={handleSubmit}
-              color="#5982C0"
+              color="var(--color-button-blue)"
             ></GeneralButton>
           </tr>
         </td>

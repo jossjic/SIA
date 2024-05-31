@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   border: none;
-  background-color: #e0e0e0;
+  background-color: var(--color-gray);
 
   cursor: pointer;
   font-size: 20px; /* Modificado para que sea más legible */

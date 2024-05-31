@@ -5,6 +5,8 @@ import addIcon from "../../assets/img/addIcon.svg";
 import trashIcon from "../../assets/img/trashIcon.svg";
 import { ConfirmationPopUp } from "../confirmationPopUp";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export function DropDown({
   value,
   onChange,
@@ -27,7 +29,7 @@ export function DropDown({
   const [optionToRemove, setOptionToRemove] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:3001/${tableName}`)
+    fetch(`http://${API_HOST}:${API_PORT}/${tableName}`)
       .then((response) => response.json())
       .then((data) => {
         if (optional) {
@@ -94,7 +96,7 @@ export function DropDown({
       [label]: formattedInputValue,
     };
     setOptions([...options, newOption]);
-    fetch(`http://localhost:3001/${tableName}`, {
+    fetch(`http://${API_HOST}:${API_PORT}/${tableName}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -103,7 +105,7 @@ export function DropDown({
     }).then((response) => {
       if (response.ok) {
         console.log("New option added successfully");
-        fetch(`http://localhost:3001/${tableName}`)
+        fetch(`http://${API_HOST}:${API_PORT}/${tableName}`)
           .then((response) => response.json())
           .then((data) => {
             if (optional) {
@@ -120,9 +122,12 @@ export function DropDown({
     setOptions(
       options.filter((option) => option[name] !== optionToRemove[name])
     );
-    fetch(`http://localhost:3001/${tableName}/${optionToRemove[name]}`, {
-      method: "DELETE",
-    }).then((response) => {
+    fetch(
+      `http://${API_HOST}:${API_PORT}/${tableName}/${optionToRemove[name]}`,
+      {
+        method: "DELETE",
+      }
+    ).then((response) => {
       if (response.ok) {
         console.log("Option removed successfully");
       }

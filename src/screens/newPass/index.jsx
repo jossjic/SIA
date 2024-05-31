@@ -5,6 +5,8 @@ import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import "./NewPass.css";
 import { useNavigate } from "react-router-dom";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export const NewPass = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -33,7 +35,7 @@ export const NewPass = () => {
     try {
       const email = sessionStorage.getItem("email");
       const response = await fetch(
-        `http://localhost:3001/usuarios/${email}/pass`,
+        `http://${API_HOST}:${API_PORT}/usuarios/${email}/pass`,
         {
           method: "PUT",
           headers: {
@@ -88,7 +90,7 @@ export const NewPass = () => {
             <GeneralButton
               textElement="Confirmar"
               type="submit"
-              color="#4FA725"
+              color="var(--color-green-dark)"
             />
             <GeneralButton textElement="Cancelar" path="/login" />
           </div>

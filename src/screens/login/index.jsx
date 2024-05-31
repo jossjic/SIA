@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 import "./login.css";
 
+const API_HOST = import.meta.env.VITE_API_HOST;
+const API_PORT = import.meta.env.VITE_API_PORT;
 export const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +24,7 @@ export const Login = () => {
       return;
     }
 
-    fetch("http://localhost:3001/login", {
+    fetch(`http://${API_HOST}:${API_PORT}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

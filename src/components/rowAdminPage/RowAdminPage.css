@@ -15,7 +15,7 @@
 }
 
 .rowChecked p {
-  color: #e14040 !important;
+  color: var(--color-red) !important;
 }
 
 .rowAdminPage .checkBox {
@@ -61,7 +61,7 @@
 
 .rowChecked .stockBar input {
   background: none;
-  color: #e14040;
+  color: var(--color-red);
   border: none;
   width: 100%;
 }
@@ -97,9 +97,9 @@
 }
 
 .rowAdminPage.red p {
-  color: #e14040;
+  color: var(--color-red);
 }
 
 .rowAdminPage.green p {
-  color: #4fa725;
+  color: var(--color-green-dark);
 }
