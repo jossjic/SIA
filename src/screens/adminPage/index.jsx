@@ -6,6 +6,7 @@ import { ConfirmationPopUp } from "../../components/confirmationPopUp";
 import { SearchBar } from "../../components/search";
 import { SlidingSideBar } from "../../components/slidingSideBar";
 import saveIcon from "../../assets/img/saveIcon.svg";
+import excelIcon from "../../assets/img/excelIcon.svg";
 import "./AdminPage.css";
 import { useNavigate } from "react-router-dom";
 
@@ -999,6 +1000,29 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
     }
   };
 
+  const handleSaveToXLSX = () => {
+    fetch(`http://${API_HOST}:${API_PORT}/alimentos/xlsx`, {
+      method: "GET",
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.blob();
+        } else {
+          throw new Error("Error al descargar el archivo");
+        }
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "alimentos.xlsx");
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
   return (
     <div className="adminPage">
       <ReturnButton />
@@ -1190,6 +1214,10 @@ export const AdminPage = ({ selectedIds, setSelectedIds }) => {
         }
       >
         <img src={saveIcon}></img>
+      </button>
+
+      <button onClick={handleSaveToXLSX} className="saveButtonXLSX">
+        <img src={excelIcon}></img>
       </button>
     </div>
   );

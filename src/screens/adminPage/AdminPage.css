@@ -169,6 +169,23 @@
   cursor: pointer;
 }
 
+.saveButtonXLSX {
+  position: fixed;
+  top: 70px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  background-color: #185c37;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.saveButtonXLSX img {
+  width: 100%;
+  height: 100%;
+}
+
 .saveButton img {
   width: 50px;
   height: 50px;
