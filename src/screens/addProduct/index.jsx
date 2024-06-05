@@ -55,6 +55,8 @@ export function AddProduct() {
     }));
   }
 
+  //useffect for formdata fecha caducidad si es "" se pone null
+
   useEffect(() => {
     if (isModalOpenRemove || isModalOpen || isModalOpenCRD) {
       setShowCRD(false);
@@ -277,16 +279,25 @@ export function AddProduct() {
   };
 
   const handleSubmit = async () => {
+    // Crear una copia de formData y ajustar a_fechaCaducidad si está vacío
+    const adjustedFormData = {
+      ...formData,
+      a_fechaCaducidad:
+        formData.a_fechaCaducidad == "" ? null : formData.a_fechaCaducidad,
+    };
+
     if (!validateForm()) {
       return;
     }
+
+    console.log("Formulario válido:", adjustedFormData);
     try {
       const response = await fetch(`http://${API_HOST}:${API_PORT}/alimentos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(adjustedFormData),
       });
 
       if (response.ok) {
@@ -301,7 +312,6 @@ export function AddProduct() {
       console.error("Error al agregar el alimento:", error);
     }
   };
-
   return (
     <div className="addProduct">
       <div className="addProductTitle">

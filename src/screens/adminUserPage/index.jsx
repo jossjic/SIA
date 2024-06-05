@@ -173,52 +173,55 @@ export const UserPage = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user) => (
-              <tr key={user.id}>
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={selectedUserIds.includes(user.id)}
-                    onChange={(e) => handleCheckboxChange(e, user.id)}
-                    className="checkboxLarge"
-                  />
-                </td>
-                <td>{user.id}</td>
-                <td>{user.email}</td>
-                <td>
-                  <GeneralButton
-                    textElement=" Ver "
-                    color="var(--color-green-dark)"
-                    className="generalButton"
-                    onClick={() => handleViewUser(user.id)}
-                  />
-                  <GeneralButton
-                    textElement=" Editar "
-                    color="var(--color-button-blue)"
-                    className="generalButton"
-                    onClick={() => handleEditUser(user.id)}
-                  />
-                  <GeneralButton
-                    textElement=" Eliminar "
-                    color="var(--color-red)"
-                    className="generalButton"
-                    onClick={() => setIsModalOpen(user.id)}
-                  />
-                  {isModalOpen === user.id && (
-                    <div className="modalOverlay">
-                      <ConfirmationPopUp
-                        message="¿Seguro que quieres eliminar al usuario de forma permanente?"
-                        answer1="Si"
-                        answer2="No"
-                        funct={() => handleDelete(user.id)}
-                        isOpen={isModalOpen === user.id}
-                        closeModal={() => setIsModalOpen(null)}
+            {filteredUsers.map(
+              (user) =>
+                user.id !== "ManejadorEventos" && (
+                  <tr key={user.id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedUserIds.includes(user.id)}
+                        onChange={(e) => handleCheckboxChange(e, user.id)}
+                        className="checkboxLarge"
                       />
-                    </div>
-                  )}
-                </td>
-              </tr>
-            ))}
+                    </td>
+                    <td>{user.id}</td>
+                    <td>{user.email}</td>
+                    <td>
+                      <GeneralButton
+                        textElement=" Ver "
+                        color="var(--color-green-dark)"
+                        className="generalButton"
+                        onClick={() => handleViewUser(user.id)}
+                      />
+                      <GeneralButton
+                        textElement=" Editar "
+                        color="var(--color-button-blue)"
+                        className="generalButton"
+                        onClick={() => handleEditUser(user.id)}
+                      />
+                      <GeneralButton
+                        textElement=" Eliminar "
+                        color="var(--color-red)"
+                        className="generalButton"
+                        onClick={() => setIsModalOpen(user.id)}
+                      />
+                      {isModalOpen === user.id && (
+                        <div className="modalOverlay">
+                          <ConfirmationPopUp
+                            message="¿Seguro que quieres eliminar al usuario de forma permanente?"
+                            answer1="Si"
+                            answer2="No"
+                            funct={() => handleDelete(user.id)}
+                            isOpen={isModalOpen === user.id}
+                            closeModal={() => setIsModalOpen(null)}
+                          />
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                )
+            )}
           </tbody>
         </table>
       </div>
