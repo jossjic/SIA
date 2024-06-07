@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../generalFunctions";
+import { logout } from "../../generalFunctions";
 
 export const ProtectedRoute = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,6 +13,7 @@ export const ProtectedRoute = ({ children }) => {
       setIsLoading(false);
 
       if (!isAuthenticated) {
+        // Aquí puedes manejar la lógica para cuando el usuario no está autenticado
         navigate("/login");
       } else {
         const userCookieValue = getCookieValue("userCookieSIA");
