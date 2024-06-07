@@ -25,13 +25,11 @@
 
 .dropDownContainer select {
   background-color: white;
-  color: blue;
   height: 40px;
   border: none;
 }
 
 .dropDownContainer select:focus {
-  outline: solid 2px blue;
   background-color: #f9f9f9;
 }
 

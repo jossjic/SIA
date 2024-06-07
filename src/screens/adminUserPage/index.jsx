@@ -200,12 +200,16 @@ export const UserPage = () => {
                         className="generalButton"
                         onClick={() => handleEditUser(user.id)}
                       />
-                      <GeneralButton
-                        textElement=" Eliminar "
-                        color="var(--color-red)"
-                        className="generalButton"
-                        onClick={() => setIsModalOpen(user.id)}
-                      />
+
+                      {/* Si el usuario es SAdmin, no se puede eliminar */}
+                      {user.id !== "SAdmin" && (
+                        <GeneralButton
+                          textElement=" Eliminar "
+                          color="var(--color-red)"
+                          className="generalButton"
+                          onClick={() => setIsModalOpen(user.id)}
+                        />
+                      )}
                       {isModalOpen === user.id && (
                         <div className="modalOverlay">
                           <ConfirmationPopUp
